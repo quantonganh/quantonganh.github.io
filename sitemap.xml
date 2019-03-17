@@ -13,6 +13,18 @@
   </url>
   
   <url>
+    <loc>https://quantonganh.github.io/tags/hello/</loc>
+    <lastmod>2019-03-17T05:03:36+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://quantonganh.github.io/categories/hugo/</loc>
+    <lastmod>2019-03-17T05:03:36+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://quantonganh.github.io/</loc>
     <lastmod>2019-03-17T05:03:36+07:00</lastmod>
     <priority>0</priority>
@@ -26,6 +38,19 @@
   
   <url>
     <loc>https://quantonganh.github.io/tags/</loc>
+    <lastmod>2019-03-17T05:03:36+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://quantonganh.github.io/tags/test/</loc>
+    <lastmod>2019-03-17T05:03:36+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://quantonganh.github.io/categories/test/</loc>
+    <lastmod>2019-03-17T05:03:36+07:00</lastmod>
     <priority>0</priority>
   </url>
   

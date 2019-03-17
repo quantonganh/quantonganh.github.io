@@ -10,5 +10,23 @@
 	<atom:link href="https://quantonganh.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Hugo</title>
+      <link>https://quantonganh.github.io/categories/hugo/</link>
+      <pubDate>Sun, 17 Mar 2019 05:03:36 +0700</pubDate>
+      
+      <guid>https://quantonganh.github.io/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://quantonganh.github.io/categories/test/</link>
+      <pubDate>Sun, 17 Mar 2019 05:03:36 +0700</pubDate>
+      
+      <guid>https://quantonganh.github.io/categories/test/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
