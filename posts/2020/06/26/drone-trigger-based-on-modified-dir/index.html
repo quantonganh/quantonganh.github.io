@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to trigger build steps based on modified directory?</title>
+  <meta name="description"
+    content="How Drone could handle monorepo?">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>How to trigger build steps based on modified directory?</h3>
+<p class="text-secondary">2020-06-26</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+    
+</p>
+
+<p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
+
+<p>To do that, we can use <code>git diff</code> to show changes between commits:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
+</span></span><span style="display:flex;"><span>    most_recent_before=&#34;origin/${DRONE_TARGET_BRANCH}&#34;
+</span></span><span style="display:flex;"><span>  elif [[ &#34;${DRONE_BUILD_EVENT}&#34; = &#34;push&#34; &amp;&amp; (&#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;master&#34; || &#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;release-&#34;*) ]]; then
+</span></span><span style="display:flex;"><span>    if [[ &#34;${DRONE_COMMIT_BEFORE}&#34; = &#34;$zero&#34; ]]; then
+</span></span><span style="display:flex;"><span>      exit 0
+</span></span><span style="display:flex;"><span>    else
+</span></span><span style="display:flex;"><span>      most_recent_before=&#34;${DRONE_COMMIT_BEFORE}&#34;
+</span></span><span style="display:flex;"><span>    fi
+</span></span><span style="display:flex;"><span>  fi
+</span></span><span style="display:flex;"><span>  modified_files=$(git --no-pager diff --name-only &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34;);
+</span></span></code></pre>
+<p>Moreover, if <code>go.mod</code> is changed, all affected modules should be re-tested:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if echo &#34;$modified_files&#34; | grep -q &#34;go.mod&#34;; then
+</span></span><span style="display:flex;"><span>    modified_deps=$(git diff --unified=0 &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34; go.mod | tail +6 | grep &#39;^[+-]&#39; | awk &#39;{ print $2 }&#39; | uniq)
+</span></span><span style="display:flex;"><span>    while read -r module; do
+</span></span><span style="display:flex;"><span>      if go list -f &#39;{{ join .Deps &#34;\n&#34; }}&#39; &#34;./${module}&#34; | grep -qf &lt;(echo &#34;${modified_deps}&#34;); then
+</span></span><span style="display:flex;"><span>        echo &#34;$module&#34;
+</span></span><span style="display:flex;"><span>      fi
+</span></span><span style="display:flex;"><span>    done &lt; &lt;(echo &#34;$all_modules_in_cluster&#34;)
+</span></span><span style="display:flex;"><span>  fi
+</span></span></code></pre>
+<p>Run this script, we will have a list of modified services:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">local</span><span style="color:#fff"> </span><span style="color:#6639ba">listModifiedModules</span><span style="color:#1f2328">(</span><span style="color:#953800">cluster</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#fff"></span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#953800">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">l</span><span style="color:#0a3069">i</span><span style="color:#0a3069">s</span><span style="color:#0a3069">t</span><span style="color:#0a3069">-</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">i</span><span style="color:#0a3069">f</span><span style="color:#0a3069">i</span><span style="color:#0a3069">e</span><span style="color:#0a3069">d</span><span style="color:#0a3069">-</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">u</span><span style="color:#0a3069">l</span><span style="color:#0a3069">e</span><span style="color:#0a3069">s</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#953800">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#953800">golang</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#953800">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#953800">mounts</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">commands</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	    </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">.</span><span style="color:#0a3069">/</span><span style="color:#0a3069">s</span><span style="color:#0a3069">c</span><span style="color:#0a3069">r</span><span style="color:#0a3069">i</span><span style="color:#0a3069">p</span><span style="color:#0a3069">t</span><span style="color:#0a3069">s</span><span style="color:#0a3069">/</span><span style="color:#0a3069">s</span><span style="color:#0a3069">h</span><span style="color:#0a3069">o</span><span style="color:#0a3069">w</span><span style="color:#0a3069">_</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">i</span><span style="color:#0a3069">f</span><span style="color:#0a3069">i</span><span style="color:#0a3069">e</span><span style="color:#0a3069">d</span><span style="color:#0a3069">_</span><span style="color:#0a3069">f</span><span style="color:#0a3069">o</span><span style="color:#0a3069">l</span><span style="color:#0a3069">d</span><span style="color:#0a3069">e</span><span style="color:#0a3069">r</span><span style="color:#0a3069">s</span><span style="color:#0a3069">.</span><span style="color:#0a3069">s</span><span style="color:#0a3069">h</span><span style="color:#0a3069"> </span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#953800">cluster</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069"> </span><span style="color:#0a3069">&gt;</span><span style="color:#0a3069"> </span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#953800">cluster</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">/</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">i</span><span style="color:#0a3069">f</span><span style="color:#0a3069">i</span><span style="color:#0a3069">e</span><span style="color:#0a3069">d</span><span style="color:#0a3069">_</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">u</span><span style="color:#0a3069">l</span><span style="color:#0a3069">e</span><span style="color:#0a3069">s</span><span style="color:#0a3069">.</span><span style="color:#0a3069">t</span><span style="color:#0a3069">x</span><span style="color:#0a3069">t</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Then the lint/test/build step can be run on that list:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">local</span><span style="color:#fff"> </span><span style="color:#6639ba">lint</span><span style="color:#1f2328">(</span><span style="color:#953800">cluster</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#fff"></span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">l</span><span style="color:#0a3069">i</span><span style="color:#0a3069">n</span><span style="color:#0a3069">t</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#953800">golangci</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#953800">mounts</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">environment</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	    </span><span style="color:#953800">&#34;</span><span style="color:#953800">GOPACKAGESPRINTGOLISTERRORS&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">commands</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">.</span><span style="color:#0a3069">/</span><span style="color:#0a3069">s</span><span style="color:#0a3069">c</span><span style="color:#0a3069">r</span><span style="color:#0a3069">i</span><span style="color:#0a3069">p</span><span style="color:#0a3069">t</span><span style="color:#0a3069">s</span><span style="color:#0a3069">/</span><span style="color:#0a3069">l</span><span style="color:#0a3069">i</span><span style="color:#0a3069">n</span><span style="color:#0a3069">t</span><span style="color:#0a3069">e</span><span style="color:#0a3069">r</span><span style="color:#0a3069">.</span><span style="color:#0a3069">s</span><span style="color:#0a3069">h</span><span style="color:#0a3069"> </span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#953800">cluster</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">/</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">i</span><span style="color:#0a3069">f</span><span style="color:#0a3069">i</span><span style="color:#0a3069">e</span><span style="color:#0a3069">d</span><span style="color:#0a3069">_</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">u</span><span style="color:#0a3069">l</span><span style="color:#0a3069">e</span><span style="color:#0a3069">s</span><span style="color:#0a3069">.</span><span style="color:#0a3069">t</span><span style="color:#0a3069">x</span><span style="color:#0a3069">t</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">depends_on</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">l</span><span style="color:#0a3069">i</span><span style="color:#0a3069">s</span><span style="color:#0a3069">t</span><span style="color:#0a3069">-</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">i</span><span style="color:#0a3069">f</span><span style="color:#0a3069">i</span><span style="color:#0a3069">e</span><span style="color:#0a3069">d</span><span style="color:#0a3069">-</span><span style="color:#0a3069">m</span><span style="color:#0a3069">o</span><span style="color:#0a3069">d</span><span style="color:#0a3069">u</span><span style="color:#0a3069">l</span><span style="color:#0a3069">e</span><span style="color:#0a3069">s</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>The last step we need to do is publish only changed services by using <a href="https://github.com/meltwater/drone-convert-pathschanged">drone-convert-pathschanged</a> conversion extension:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">local</span><span style="color:#fff"> </span><span style="color:#6639ba">publishPush</span><span style="color:#1f2328">(</span><span style="color:#953800">cluster</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#953800">module</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#fff"></span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">p</span><span style="color:#0a3069">u</span><span style="color:#0a3069">b</span><span style="color:#0a3069">l</span><span style="color:#0a3069">i</span><span style="color:#0a3069">s</span><span style="color:#0a3069">h</span><span style="color:#0a3069">-</span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#953800">module</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#953800">docker</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">settings</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">depends_on</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">b</span><span style="color:#0a3069">u</span><span style="color:#0a3069">i</span><span style="color:#0a3069">l</span><span style="color:#0a3069">d</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#953800">when</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#953800">branch</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">m</span><span style="color:#0a3069">a</span><span style="color:#0a3069">s</span><span style="color:#0a3069">t</span><span style="color:#0a3069">e</span><span style="color:#0a3069">r</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">r</span><span style="color:#0a3069">e</span><span style="color:#0a3069">l</span><span style="color:#0a3069">e</span><span style="color:#0a3069">a</span><span style="color:#0a3069">s</span><span style="color:#0a3069">e</span><span style="color:#0a3069">-</span><span style="color:#0a3069">*</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#953800">event</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		    </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">p</span><span style="color:#0a3069">u</span><span style="color:#0a3069">s</span><span style="color:#0a3069">h</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#953800">paths</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		    </span><span style="color:#953800">include</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		        </span><span style="color:#953800">cluster</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">/</span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#953800">module</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">/</span><span style="color:#0a3069">*</span><span style="color:#0a3069">*</span><span style="color:#0a3069">/</span><span style="color:#0a3069">*</span><span style="color:#0a3069">.</span><span style="color:#0a3069">g</span><span style="color:#0a3069">o</span><span style="color:#0a3069">&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		    </span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span></code></pre>
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/drone" role="button">
+        <i class="bi bi-tag"></i>
+        drone
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/ci" role="button">
+        <i class="bi bi-tag"></i>
+        ci
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/monorepo" role="button">
+        <i class="bi bi-tag"></i>
+        monorepo
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/06/26/drone-trigger-based-on-modified-dir"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

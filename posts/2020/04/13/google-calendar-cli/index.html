@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Google Calendar CLI</title>
+  <meta name="description"
+    content="A simple tool to access Google Calendar API from CLI.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>Google Calendar CLI</h3>
+<p class="text-secondary">2020-04-13</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
+
+<p>I created this tool to run it from CLI.</p>
+
+<p>First, take a look at this <a href="https://developers.google.com/calendar/quickstart/go">quickstart</a>.</p>
+
+<p>Create initical code by running:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra init
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tree -L 2
+</span></span><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── LICENSE
+</span></span><span style="display:flex;"><span>├── cmd
+</span></span><span style="display:flex;"><span>│   └── root.go
+</span></span><span style="display:flex;"><span>├── main.go
+</span></span></code></pre>
+<p>Create <code>event</code> command:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra add event
+</span></span><span style="display:flex;"><span>$ cobra add insert -p &#39;eventCmd&#39;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tree -L 2
+</span></span><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── LICENSE
+</span></span><span style="display:flex;"><span>├── cmd
+</span></span><span style="display:flex;"><span>│   ├── event.go
+</span></span><span style="display:flex;"><span>│   ├── event_insert.go
+</span></span><span style="display:flex;"><span>│   └── root.go
+</span></span><span style="display:flex;"><span>├── main.go
+</span></span></code></pre>
+<p>Create a new Calendar service:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">newCalendar</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Service</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">b</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">ioutil</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to read client secret file: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">config</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">google</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFromJSON</span><span style="color:#1f2328">(</span><span style="color:#1f2328">b</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">CalendarReadonlyScope</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to parse client secret file from config: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">client</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">getClient</span><span style="color:#1f2328">(</span><span style="color:#1f2328">config</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#6639ba">New</span><span style="color:#1f2328">(</span><span style="color:#1f2328">client</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to retrieve calendar client: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Get calendar ID from summary:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">getCalendarID</span><span style="color:#1f2328">(</span><span style="color:#1f2328">srv</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Service</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#cf222e">string</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">defaultCalendar</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarID</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">.</span><span style="color:#1f2328">CalendarList</span><span style="color:#1f2328">.</span><span style="color:#6639ba">List</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Do</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Cannot get calendars list: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#cf222e">range</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Items</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Summary</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">calendarID</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Id</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">break</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">pageToken</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">.</span><span style="color:#1f2328">NextPageToken</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">pageToken</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">break</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Get flag values:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;calendar&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get value of calendar flag: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">getCalendarID</span><span style="color:#1f2328">(</span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get calendar ID of %s: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">eventTitle</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;title&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get value of title flag: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>And create an event:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">event</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Event</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">Summary</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">eventTitle</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">event</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Events</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Insert</span><span style="color:#1f2328">(</span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">event</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Do</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to create event: %v\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Whenever I want to WFH, just run:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ gcal event insert -c &#34;Company&#34; -t &#34;Quan Tong - WFH&#34;
+</span></span></code></pre>
+<p>GitHub repository: <a href="https://github.com/quantonganh/gcal">https://github.com/quantonganh/gcal</a></p>
+
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+        <i class="bi bi-tag"></i>
+        golang
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/cobra" role="button">
+        <i class="bi bi-tag"></i>
+        cobra
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/04/13/google-calendar-cli"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

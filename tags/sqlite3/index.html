@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
+        <p class="text-secondary">2019-10-16</p>
+        <p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">db</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Open</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sqlite3&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;./books.db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Created table books successfully&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Life is a joke&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;The Javna brothers&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">123456789</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Inserted first book into db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">rows</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Query</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;SELECT id, name, author FROM books&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#fff"> </span><span style="color:#1f2328">Book</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Next</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Scan</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

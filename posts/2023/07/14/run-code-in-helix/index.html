@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How I run code in Helix editor?</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>How I run code in Helix editor?</h3>
+<p class="text-secondary">2023-07-14</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+    
+</p>
+
+<p>In my <a href="../../05/06/how-I-setup-new-macbook">previous post</a>, I mentioned that I&rsquo;ve made the switch to <a href="https://wezfurlong.org/wezterm/">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a>,
+and today I want to share how I run my code in this setup.</p>
+
+<p>Previously, I would split Wezterm into two panes and run the code in a new pane.
+However, I found it cumbersome to type different commands for each programming language (Go, C, Racket, and so on).
+While auto-completion helped to some extent, or using <code>control-p</code> to run the previous command, it still took up a little time.</p>
+
+<p>That&rsquo;s when I started exploring the possibility of running my code directly from Helix based on the file extension.
+Unfortunately, Helix didn&rsquo;t have a variable for the current filename, I have to compile <a href="https://github.com/helix-editor/helix/pull/6979">a specific PR</a> to use <code>%val{filename}</code>.</p>
+
+<p>To streamline the process, I created a script that executes different commands based on the file extension:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">#!/bin/sh
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">pane_id</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>wezterm cli get-pane-direction down<span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#0550ae">[</span> -z <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">pane_id</span><span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span><span style="color:#0550ae">]</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">then</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#953800">pane_id</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>wezterm cli split-pane<span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">filename</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">basedir</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>dirname <span style="color:#0a3069">&#34;</span><span style="color:#953800">$filename</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">basename</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>basename <span style="color:#0a3069">&#34;</span><span style="color:#953800">$filename</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">basename_without_extension</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">basename</span><span style="color:#1f2328">%.*</span><span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">extension</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">filename</span><span style="color:#1f2328">##*.</span><span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">case</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$extension</span><span style="color:#0a3069">&#34;</span> in
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;c&#34;</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">run_command</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">clang -Wall -g -O3 </span><span style="color:#953800">$filename</span><span style="color:#0a3069"> -o </span><span style="color:#953800">$basedir</span><span style="color:#0a3069">/</span><span style="color:#953800">$basename_without_extension</span><span style="color:#0a3069"> &amp;&amp; </span><span style="color:#953800">$basedir</span><span style="color:#0a3069">/</span><span style="color:#953800">$basename_without_extension</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;go&#34;</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">run_command</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">go run </span><span style="color:#953800">$filename</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;rkt&#34;</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#953800">run_command</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">racket </span><span style="color:#953800">$filename</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">esac</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">${</span><span style="color:#953800">run_command</span><span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span> <span style="color:#1f2328">|</span> wezterm cli send-text --pane-id <span style="color:#953800">$pane_id</span> --no-paste
+</span></span></code></pre>
+<p>Then I made the following addition to the Helix&rsquo;s config file:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">keys</span><span style="color:#1f2328">.</span><span style="color:#1f2328">normal</span><span style="color:#1f2328">.</span><span style="color:#0a3069">&#34;;&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">r</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;:sh run.sh %val{filename}&#34;</span>
+</span></span></code></pre>
+<p>With this setup, you can now simply press <code>;</code>, followed by <code>r</code> to run your code directly from Helix.</p>
+
+<p>Additionally, I enabled auto-save by adding the following lines to <code>~/.config/helix/config.toml</code></p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">editor</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">auto-save</span><span style="color:#1f2328">=</span><span style="color:#cf222e">true</span>
+</span></span></code></pre>
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/helix" role="button">
+        <i class="bi bi-tag"></i>
+        helix
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/wezterm" role="button">
+        <i class="bi bi-tag"></i>
+        wezterm
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/07/14/run-code-in-helix"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

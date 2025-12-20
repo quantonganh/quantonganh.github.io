@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to add full text search to my static website?</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>How to add full text search to my static website?</h3>
+<p class="text-secondary">2020-12-30</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<p>After building the website, I want to add search function.
+There are some ways to do it:</p>
+
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html">ElasticSearch</a>: setup and maintenance cost</li>
+<li><a href="https://docs.mongodb.com/manual/text-search/">MongoDB</a>: have to insert posts into database</li>
+<li><a href="https://programmablesearchengine.google.com/about/">Google Custom Search Engine</a>: ads?</li>
+</ul>
+
+<p>So, is there any search engine written in Go?</p>
+
+<ul>
+<li><a href="https://github.com/blevesearch/bleve">Bleve</a></li>
+<li><a href="https://github.com/go-ego/riot">riot</a></li>
+</ul>
+
+<p><code>Bleve</code> has more star and be maintained more often than <code>riot</code>, I would like to give it a try first.</p>
+
+<h3>Backend</h3>
+
+<p>Looking at the <a href="https://blevesearch.com/docs/Getting%20Started/">documentation</a>, there are three steps to add search to your website:</p>
+
+<ul>
+<li><a href="https://github.com/quantonganh/blog/blob/144fdd13e62faa0aa74f488967c187c0a8e52cc4/markdown/search.go#L38-L55">Open a new index</a>:</li>
+</ul>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">createOrOpenIndex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">posts</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">indexPath</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Index</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Index</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Stat</span><span style="color:#1f2328">(</span><span style="color:#1f2328">indexPath</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">IsNotExist</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">index</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewUsing</span><span style="color:#1f2328">(</span><span style="color:#1f2328">indexPath</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewIndexMapping</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">scorch</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">scorch</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to create index at %s: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">indexPath</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">index</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">OpenUsing</span><span style="color:#1f2328">(</span><span style="color:#1f2328">indexPath</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to open index at %s: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">indexPath</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">deletePostsFromIndex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">posts</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Index will be created when starting, so it must be updated if there is a post has been deleted:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">deletePostsFromIndex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">posts</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Index</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">count</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#1f2328">.</span><span style="color:#6639ba">DocCount</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to get number of documents in the index: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">query</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewMatchAllQuery</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">searchRequest</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewSearchRequest</span><span style="color:#1f2328">(</span><span style="color:#1f2328">query</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">searchRequest</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Size</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#6639ba">int</span><span style="color:#1f2328">(</span><span style="color:#1f2328">count</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">searchResults</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Search</span><span style="color:#1f2328">(</span><span style="color:#1f2328">searchRequest</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to find all documents in the index: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#fff"> </span><span style="color:#1f2328">&lt;</span><span style="color:#fff"> </span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span><span style="color:#1f2328">searchResults</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Hits</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#0550ae">++</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">uri</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">searchResults</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Hits</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ID</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">!</span><span style="color:#6639ba">isContains</span><span style="color:#1f2328">(</span><span style="color:#1f2328">posts</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">uri</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">index</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Delete</span><span style="color:#1f2328">(</span><span style="color:#1f2328">uri</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<ul>
+<li><a href="https://github.com/quantonganh/blog/blob/144fdd13e62faa0aa74f488967c187c0a8e52cc4/markdown/search.go#L17-L36">Index posts</a>:</li>
+</ul>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">indexPost</span><span style="color:#1f2328">(</span><span style="color:#1f2328">post</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">batch</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Batch</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">doc</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">document</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Document</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">ID</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">post</span><span style="color:#1f2328">.</span><span style="color:#1f2328">URI</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewIndexMapping</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">MapDocument</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">doc</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">post</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to map document: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">b</span><span style="color:#fff"> </span><span style="color:#1f2328">bytes</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Buffer</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">enc</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">gob</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewEncoder</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">b</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">enc</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Encode</span><span style="color:#1f2328">(</span><span style="color:#1f2328">post</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to encode post: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">field</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">document</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewTextFieldWithIndexingOptions</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;_source&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">b</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Bytes</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">document</span><span style="color:#1f2328">.</span><span style="color:#1f2328">StoreField</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">batch</span><span style="color:#1f2328">.</span><span style="color:#6639ba">IndexAdvanced</span><span style="color:#1f2328">(</span><span style="color:#1f2328">doc</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AddField</span><span style="color:#1f2328">(</span><span style="color:#1f2328">field</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to add index to the batch: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<ul>
+<li><a href="https://github.com/quantonganh/blog/blob/144fdd13e62faa0aa74f488967c187c0a8e52cc4/markdown/search.go#L92-L113">Search</a>:</li>
+</ul>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#1f2328">ps</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">postService</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#6639ba">Search</span><span style="color:#1f2328">(</span><span style="color:#1f2328">value</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">query</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewMatchQuery</span><span style="color:#1f2328">(</span><span style="color:#1f2328">value</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">request</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bleve</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewSearchRequest</span><span style="color:#1f2328">(</span><span style="color:#1f2328">query</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">request</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Fields</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#cf222e">string</span><span style="color:#1f2328">{</span><span style="color:#0a3069">&#34;_source&#34;</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">searchResults</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">ps</span><span style="color:#1f2328">.</span><span style="color:#1f2328">index</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Search</span><span style="color:#1f2328">(</span><span style="color:#1f2328">request</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to execute a search request: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">searchPosts</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">result</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#cf222e">range</span><span style="color:#fff"> </span><span style="color:#1f2328">searchResults</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Hits</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">post</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">blog</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Post</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">b</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">bytes</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewBuffer</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#6639ba">byte</span><span style="color:#1f2328">(</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Sprintf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;%v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">result</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Fields</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;_source&#34;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">dec</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">gob</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewDecoder</span><span style="color:#1f2328">(</span><span style="color:#1f2328">b</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">dec</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Decode</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">post</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to decode post: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">searchPosts</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#6639ba">append</span><span style="color:#1f2328">(</span><span style="color:#1f2328">searchPosts</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">post</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">searchPosts</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p><a href="https://blevesearch.com/docs/bleve/">bleve CLI</a> can be used to query the index:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ bleve query posts.bleve <span style="color:#0a3069">&#34;linux&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">5</span> matches, showing <span style="color:#0550ae">1</span> through 5, took 625.866µs
+</span></span><span style="display:flex;"><span>    1. 2019/09/19/about <span style="color:#0550ae">(</span>0.318970<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>	Content
+</span></span><span style="display:flex;"><span>		…developer. Then my passionate on Linux and open <span style="color:#6639ba">source</span> led me to a different direction, a system administrator.
+</span></span><span style="display:flex;"><span>With a strong background in Linux system administration, I was gradually moving to backe…
+</span></span><span style="display:flex;"><span>    2. 2019/10/30/docker-exited-127 <span style="color:#0550ae">(</span>0.233462<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>	Content
+</span></span><span style="display:flex;"><span>		…/span&gt;
+</span></span><span style="display:flex;"><span>&lt;span <span style="color:#953800">style</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050&#34;</span>&gt;5&lt;/span&gt;COPY build/linux/<span style="color:#1f2328">&amp;</span>lt<span style="color:#1f2328">;</span>binary<span style="color:#1f2328">&amp;</span>gt<span style="color:#1f2328">;</span> .
+</span></span><span style="display:flex;"><span>&lt;span <span style="color:#953800">style</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050&#34;</span>&gt;6&lt;/span&gt;
+</span></span><span style="display:flex;"><span>…
+</span></span></code></pre>
+<h3>Frontend</h3>
+
+<p>Add a search box using <a href="https://getbootstrap.com/docs/4.6/components/forms/">forms</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">form</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;form-inline my-2 my-lg-0&#34;</span> <span style="color:#1f2328">action</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/search&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">input</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;form-control mr-sm-2&#34;</span> <span style="color:#1f2328">type</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;search&#34;</span> <span style="color:#1f2328">placeholder</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Search&#34;</span> <span style="color:#1f2328">aria-label</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Search&#34;</span> <span style="color:#1f2328">name</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;q&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">button</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;btn btn-outline-success my-2 my-sm-0&#34;</span> <span style="color:#1f2328">type</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;submit&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>Search<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">button</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">form</span><span style="color:#1f2328">&gt;</span>
+</span></span></code></pre>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-action">action</a> attribute defines <a href="https://github.com/quantonganh/blog/blob/665f775620c8df1922fa1a48c6a6ffb78ffb4759/http/server.go#L106">where the data gets sent</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">s</span><span style="color:#1f2328">.</span><span style="color:#1f2328">router</span><span style="color:#1f2328">.</span><span style="color:#6639ba">HandleFunc</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;/search&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">s</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#1f2328">s</span><span style="color:#1f2328">.</span><span style="color:#1f2328">searchHandler</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p><a href="https://github.com/quantonganh/blog/blob/8d16352ce5f562f28f0665b993a8650ca2992f86/http/search.go#L7-L32">searchHandler</a> will:</p>
+
+<ul>
+<li>parse form</li>
+<li>get the form value</li>
+<li>perform search</li>
+<li>render posts</li>
+</ul>
+
+<p>References:</p>
+
+<ul>
+<li><a href="https://artem.krylysov.com/blog/2020/07/28/lets-build-a-full-text-search-engine/">Let&rsquo;s build a Full-Text Search engine</a></li>
+<li><a href="https://gist.github.com/michaeljs1990/25f9949c10ab64d971422dda44feea0e">Bleve _source example</a></li>
+</ul>
+
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/bleve" role="button">
+        <i class="bi bi-tag"></i>
+        bleve
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/full-text%20search" role="button">
+        <i class="bi bi-tag"></i>
+        full-text search
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+        <i class="bi bi-tag"></i>
+        golang
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/12/30/search-static-site"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

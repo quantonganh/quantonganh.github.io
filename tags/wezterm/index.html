@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2024/10/10/helix-golang-ide">Helix as my Golang IDE: powering up with WezTerm and CLI tools</a></h3>
+        <p class="text-secondary">2024-10-10</p>
+        <p>It&rsquo;s has been one year from my last post.
+Today I would like to show you how I use Helix as my Golang IDE.</p>
+
+<p>Regarding the file explorer workaround in the last post, I show you how to use <code>nnn</code> or <code>broot</code> to open a file tree in the sidebar but actually I&rsquo;m using the PR <a href="https://github.com/helix-editor/helix/pull/5768">#5768</a>. The reason is I would like to have a bottom pane for the terminal, and there is no way to just hide it and keep the sidebar (file explorer) and the main pane (helix).</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2024/10/10/helix-golang-ide">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
+        <p class="text-secondary">2023-08-19</p>
+        <p><img src="/2023/08/19/hx-ide.gif" alt="Helix as IDE" /></p>
+
+<p>This post recaps previous series of posts about Helix.</p>
+
+<ol>
+<li><a href="#running-code">Running code</a></li>
+<li><a href="#jumping-to-build-errors">Jumping to build errors</a></li>
+<li><a href="#quickly-select-a-command-and-open-it-in-a-new-pane">Quickly select a command and open it in a new pane</a></li>
+<li><a href="#testing-a-single-function">Testing a single function</a></li>
+<li><a href="#git-integration">Git integration</a></li>
+<li><a href="#file-tree">File tree</a></li>
+<li><a href="#creating-snippets">Creating snippets</a></li>
+<li><a href="#how-to-debug">How to debug?</a></li>
+<li><a href="#interactive-global-search">Interactive global search</a></li>
+<li><a href="#opening-file-in-github">Opening file in GitHub</a></li>
+</ol>
+
+<h4 id="running-code-1">1. Running code</h4>
+
+<p>In my <a href="/2023/07/14/run-code-in-helix.md">previous post</a>, I shared a method for running code from within Helix by using <a href="https://github.com/helix-editor/helix/pull/6979">this PR</a>.</p>
+
+<p>I later discovered another useful trick <a href="https://www.reddit.com/r/HelixEditor/comments/13x9a3z/integrating_fuzzylive_grepping_into_helix_my/">here</a>. We can use <a href="https://wezfurlong.org/wezterm/cli/cli/get-text.html">wezterm cli get-text</a> command to extract the filename and line number from the status line:</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/08/19/turn-helix-into-ide">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/08/04/quick-select-wezterm">WezTerm: quickly select a command and open it in a new pane</a></h3>
+        <p class="text-secondary">2023-08-04</p>
+        <p>In my previous post, <a href="../../07/21/jump-to-build-error-helix">jump to build errors with WezTerm</a>, I demostrated how to navigate to build error using <a href="https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks">hyperlinks</a>.
+One limitation of that approach is that it requires a mouse click.</p>
+
+<p>In this post, I explore how to achieve the same functionality using a shortcut key in WezTerm,
+thanks to <a href="https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html">QuickSelectArgs</a> feature.</p>
+
+<p>WezTerm&rsquo;s <code>QuickSelectArgs</code> allows us to bind a shortcut key to select specific patterns and perform actions on the selected text.
+Let&rsquo;s say we have the following warning:</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/08/04/quick-select-wezterm">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Open same file in already running instance of Helix</a></h3>
+        <p class="text-secondary">2023-08-02</p>
+        <p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
+
+<blockquote>
+<p>I find that I have occasionally (frequently!) made the mistake of two instances of helix in different terminals editing the same file.
+This causes me a problem, because I will then have changes in one of the instances overwrite changes that are made in another.
+The worst case is when I accidentally switch back to an instance that has an older version of the file open.</p>
+</blockquote>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
+        <p class="text-secondary">2023-08-02</p>
+        <p><img src="/2023/08/02/nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
+
+<p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
+
+<p>If, for some reasons, you cannot use <a href="https://github.com/helix-editor/helix/pull/5768">the PR #5768</a>,
+here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://github.com/jarun/nnn">nnn</a></p>
+
+<p>The idea here is to implement <a href="https://github.com/jarun/nnn/wiki/Advanced-use-cases#cli-only-opener">a custom opener</a> in <code>nnn.</code>
+When navigating to a file, it will be opened using <code>hx</code> in the right pane.
+When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/08/01/disable-ligatures-in-wezterm">How to disable ligatures in WezTerm?</a></h3>
+        <p class="text-secondary">2023-08-01</p>
+        <p>As you may know, I switched to <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a> a few months ago.</p>
+
+<p>What surprised me is when I type <code>!=</code> in Helix, it is rendered as <code>≠</code>.
+This behaviour also occurs with other character combinations, for example:</p>
+
+<ul>
+<li><code>&lt;=</code> becomes rendered as <code>≤</code></li>
+<li><code>-&gt;</code> becomes rendered as <code>→</code></li>
+<li><code>===</code> becomes rendered as <code>≡</code></li>
+</ul>
+
+<p>My first guess was that Helix had something to do with the font rendering but I encountered the same issue when typing directly into terminal.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/08/01/disable-ligatures-in-wezterm">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/07/25/auto-reload-helix">Reload Helix automatically after switching from lazygit</a></h3>
+        <p class="text-secondary">2023-07-25</p>
+        <p>This is a continuation of the Helix series.
+In the previous posts, I shared methods to:</p>
+
+<ul>
+<li><a href="../14/run-code-in-helix">Run the code from within Helix</a></li>
+<li><a href="../21/jump-to-build-error-helix">Jump to the build errors from the terminal output</a></li>
+</ul>
+
+<p>I also have a script to call <a href="https://github.com/jesseduffield/lazygit">lazygit</a> from within Helix:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">#!/bin/sh
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">source</span> wezterm-split-pane.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#953800">program</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>wezterm cli list <span style="color:#1f2328">|</span> awk -v <span style="color:#953800">pane_id</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$pane_id</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#39;$3==pane_id { print $6 }&#39;</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#0550ae">[</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$program</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;lazygit&#34;</span> <span style="color:#0550ae">]</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">then</span>
+</span></span><span style="display:flex;"><span>    wezterm cli activate-pane-direction down
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;lazygit&#34;</span> <span style="color:#1f2328">|</span> wezterm cli send-text --pane-id <span style="color:#953800">$pane_id</span> --no-paste
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">fi</span>
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2023/07/25/auto-reload-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/07/21/jump-to-build-error-helix">Helix: How to jump to the build error from the terminal output?</a></h3>
+        <p class="text-secondary">2023-07-21</p>
+        <p>In my <a href="../14/run-code-in-helix">previous post</a>, I shared how I run code in Helix, and today I&rsquo;ve taken things a step further by integrating WezTerm into Helix.
+Now, after running the code, if I encountered errors or warnings, I can simply click on the corresponding file to open it in Helix at the specific line and column number.</p>
+
+<p>Previously, I had to either look at the line number and navigate to that specific line or manually copy the file path and open it in Helix, which was somewhat cumbersome.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/07/21/jump-to-build-error-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/07/14/run-code-in-helix">How I run code in Helix editor?</a></h3>
+        <p class="text-secondary">2023-07-14</p>
+        <p>In my <a href="../../05/06/how-I-setup-new-macbook">previous post</a>, I mentioned that I&rsquo;ve made the switch to <a href="https://wezfurlong.org/wezterm/">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a>,
+and today I want to share how I run my code in this setup.</p>
+
+<p>Previously, I would split Wezterm into two panes and run the code in a new pane.
+However, I found it cumbersome to type different commands for each programming language (Go, C, Racket, and so on).
+While auto-completion helped to some extent, or using <code>control-p</code> to run the previous command, it still took up a little time.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/07/14/run-code-in-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/05/06/how-I-setup-new-macbook">How I setup a new Macbook in 2023</a></h3>
+        <p class="text-secondary">2023-05-06</p>
+        <p>I purchased my first MacBook Pro in 2013 prior to transitioning to remote work.
+In my job, we were using <a href="https://github.com/saltstack/salt">saltstack</a> to build <a href="https://www.robotinfra.com/">an automation tool</a>.
+In order to delve deeper into Salt, I decided to configure my Macbook using it, and I documented the process <a href="https://github.com/quantonganh/salt-osx">here</a>.</p>
+
+<p>I also utilized this method to set up another Macbook for my older sister.</p>
+
+<p>In 2018, due to work requirements, 8GB of memory proved insufficient to run Windows on VirtualBox, prompting me to acquire a second hand MacBook with 16GB of RAM.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/05/06/how-I-setup-new-macbook">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

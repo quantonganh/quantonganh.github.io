@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2025/08/14/jdtls-wrapper">Helix returns &#34;No definition found&#34; when going to a definition</a></h3>
+        <p class="text-secondary">2025-08-14</p>
+        <p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
+Since I recently switched to a project that uses Java, I&rsquo;m trying to configure Helix as my Java editor.</p>
+
+<p>The default language server for Java is <a href="https://github.com/eclipse-jdtls/eclipse.jdt.ls">jdtls</a> which can be installed easily on macOS by running:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew install jdtls
+</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>hx --health java
+</span></span><span style="display:flex;"><span>Configured language servers:
+</span></span><span style="display:flex;"><span>  ✓ jdtls: /opt/homebrew/bin/jdtls
+</span></span><span style="display:flex;"><span>Configured debug adapter: None
+</span></span><span style="display:flex;"><span>Configured formatter: None
+</span></span><span style="display:flex;"><span>Tree-sitter parser: ✓
+</span></span><span style="display:flex;"><span>Highlight queries: ✓
+</span></span><span style="display:flex;"><span>Textobject queries: ✓
+</span></span><span style="display:flex;"><span>Indent queries: ✓
+</span></span><span style="display:flex;"><span>Tags queries: ✓
+</span></span><span style="display:flex;"><span>Rainbow queries: ✓
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2025/08/14/jdtls-wrapper">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/07/31/create-snippets-in-helix">How to create snippets in Helix?</a></h3>
+        <p class="text-secondary">2023-07-31</p>
+        <p><a href="https://github.com/helix-editor/helix/issues/395">Helix currently does not support snippets</a>.
+However, there is a workaround to insert snippets using <code>:insert-output</code> to run a shell command.
+Still, this might not feel like the most natural way to work with snippets.</p>
+
+<p>For instance, in GoLand, a similar feature called <a href="https://www.jetbrains.com/help/go/using-live-templates.html#live_templates_types">live templates</a>
+allows you to type <code>err</code> and expand it into the following:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>I wonder if I can archieve the same functionality in Helix by creating a simple language server</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/07/31/create-snippets-in-helix">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">A terminal UI for Taskwarrior</a></h3>
+        <p class="text-secondary">2023-04-21</p>
+        <p>When I first started using Linux, I came across <a href="https://taskwarrior.org/">Taskwarrior</a>, a command line tool for managing to-do lists.
+However, I never got around to using it extensively, mainly because there was no Android app available at the time, making it difficult to sync tasks from my phone.</p>
+
+<p>I did experiment with <a href="https://github.com/coddingtonbear/taskwarrior-pomodoro">taskwarrior-pomodoro</a> but unfortunately, it wasn&rsquo;t as effective as I had hoped.</p>
+
+<p>Recently, though, I stumbled upon <a href="https://github.com/bgregos/foreground">foreground</a>, a new discovery that reignited my interest in Taskwarrior,</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/04/01/terminal-ui-for-chatgpt">A simple terminal UI for ChatGPT</a></h3>
+        <p class="text-secondary">2023-04-01</p>
+        <p>When I started learning Linux, I immediately fell in love with the terminal.
+I still remember the feeling of typing commands into the terminal, pressing Enter and seeing if I got the expected result.
+As a system administrator and DevOps engineer, I always wanted to do everything on the terminal.</p>
+
+<p>The reasons are simple: it allowed me know what was happening behind the scenes,
+and it was faster than switching to other tools, and then back to the terminal to continue working.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/04/01/terminal-ui-for-chatgpt">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2023/01/09/learning-how-to-code">Learning how to code</a></h3>
+        <p class="text-secondary">2023-01-09</p>
+        <p>If you find yourself doing the same task repeatedly, consider learning how to code.</p>
+
+<p>For instance, a friend of mine had to perform the following tasks on daily basis:</p>
+
+<ul>
+<li>logging into a internal portal</li>
+<li>selecting certain menus</li>
+<li>exporting some <code>.xlsx</code> reports</li>
+<li>opening various excel files</li>
+<li>clicking on the &ldquo;Refresh All&rdquo; button to update external data</li>
+<li>sending an email</li>
+</ul>
+
+<p>Here&rsquo;s the code that I assisted him with: <a href="https://github.com/quantonganh/ims">https://github.com/quantonganh/ims</a></p>
+
+<p>The initial steps can be done by using <a href="https://github.com/chromedp/chromedp">chromedp</a>.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2023/01/09/learning-how-to-code">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">gocloud - writing data to a bucket: 403</a></h3>
+        <p class="text-secondary">2022-12-23</p>
+        
+<h4>Problem</h4>
+
+<p>We are writing some integration test using <a href="https://gocloud.dev/">Go CDK</a>.
+After writing some data to a bucket:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">writer</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">buckOut</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewWriter</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fileDst</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">logger</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to write to fileDst: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#1f2328">writer</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Close</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>we got an error when reading:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>(code=NotFound): storage: object doesn&#39;t exist
+</span></span></code></pre>
+<p>By reading <a href="https://gocloud.dev/howto/blob/#writing">the documentation</a>, I pay attention to this:</p>
+
+<blockquote>
+<p>Closing the writer commits the write to the provider, flushing any buffers, and releases any resources used while writing, so you must always check the error of Close.</p>
+</blockquote>
+
+        
+        <p class="text-right">
+            <a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Terraform failed to acquire state lock: 403: Access denied., forbidden</a></h3>
+        <p class="text-secondary">2022-11-17</p>
+        
+<h4>Problem</h4>
+
+<p>We stored Terraform state in <a href="https://developer.hashicorp.com/terraform/language/settings/backends/gcs">gcs</a>.
+For some reasons, we got this error randomly when running on BitBucket pipelines:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╷</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">acquiring</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">message</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">2</span> <span style="color:#1f2328">errors</span> <span style="color:#1f2328">occurred</span><span style="color:#0550ae">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">writing</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">gs://bucket/path/to/default.tflock</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">failed</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">googleapi</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#0550ae">403</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Access</span> <span style="color:#1f2328">denied</span><span style="color:#1f2328">.</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">forbidden</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">storage</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">object</span> <span style="color:#1f2328">doesn</span><span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#1f2328">t</span> <span style="color:#1f2328">exist</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Terraform</span> <span style="color:#1f2328">acquires</span> <span style="color:#1f2328">a</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span> <span style="color:#1f2328">to</span> <span style="color:#1f2328">protect</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">from</span> <span style="color:#1f2328">being</span> <span style="color:#1f2328">written</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">by</span> <span style="color:#1f2328">multiple</span> <span style="color:#1f2328">users</span> <span style="color:#1f2328">at</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">same</span> <span style="color:#1f2328">time</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">Please</span> <span style="color:#1f2328">resolve</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">issue</span> <span style="color:#1f2328">above</span> <span style="color:#1f2328">and</span> <span style="color:#6639ba">try</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">again</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">For</span> <span style="color:#1f2328">most</span> <span style="color:#1f2328">commands</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">you</span> <span style="color:#6639ba">can</span> <span style="color:#1f2328">disable</span> <span style="color:#1f2328">locking</span> <span style="color:#1f2328">with</span> <span style="color:#1f2328">the</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">-lock=false</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">flag</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">but</span> <span style="color:#1f2328">this</span> <span style="color:#1f2328">is</span> <span style="color:#1f2328">not</span> <span style="color:#1f2328">recommended</span><span style="color:#1f2328">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╵</span>
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2022/11/04/the-King-of-Vietnamese-language">The King of Vietnamese language game show</a></h3>
+        <p class="text-secondary">2022-11-04</p>
+        <p>My family likes to watch &ldquo;The King of Vietnamese language&rdquo; game show together.
+I want to encourage our son to love Vietnamese.
+At the end of the game, the player has to find 7 complex words from the letters, for e.g,</p>
+
+<blockquote>
+<p>đ / ă / n / g / c / a / y</p>
+</blockquote>
+
+<p>One evening a few weeks ago, while we were watching the final round,
+my wife suddenly came up with an idea: this game could be programmed.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2022/11/04/the-King-of-Vietnamese-language">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
+        <p class="text-secondary">2021-01-07</p>
+        <p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
+
+<p>We are running <a href="/2020/09/29/integration-test-golang">integration test</a> by triggering a downstream build when a PR is merged into specific branches.
+In the downstream repository, we pull all the docker images which has been built and pushed from upstream.
+The thing is we also used the <a href="https://github.com/meltwater/drone-convert-pathschanged">drone-convert-pathschanged</a> to <a href="../../2020/06/drone-trigger-based-on-modified-dir.md">only publish what modules has been changed</a>.</p>
+
+<p>So, what happens when pushing to a new <code>release-*</code> branch?</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/12/30/search-static-site">How to add full text search to my static website?</a></h3>
+        <p class="text-secondary">2020-12-30</p>
+        <p>After building the website, I want to add search function.
+There are some ways to do it:</p>
+
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html">ElasticSearch</a>: setup and maintenance cost</li>
+<li><a href="https://docs.mongodb.com/manual/text-search/">MongoDB</a>: have to insert posts into database</li>
+<li><a href="https://programmablesearchengine.google.com/about/">Google Custom Search Engine</a>: ads?</li>
+</ul>
+
+<p>So, is there any search engine written in Go?</p>
+
+<ul>
+<li><a href="https://github.com/blevesearch/bleve">Bleve</a></li>
+<li><a href="https://github.com/go-ego/riot">riot</a></li>
+</ul>
+
+<p><code>Bleve</code> has more star and be maintained more often than <code>riot</code>, I would like to give it a try first.</p>
+
+<h3>Backend</h3>
+
+<p>Looking at the <a href="https://blevesearch.com/docs/Getting%20Started/">documentation</a>, there are three steps to add search to your website:</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2020/12/30/search-static-site">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+<ul class="pagination justify-content-center">
+        
+    <li class="page-item disabled"><a class="page-link">First</a></li>
+    <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
+        
+        
+    <li class="page-item active">
+        <a class="page-link" href="/">1</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/2/">2</a>
+    </li>
+        
+        
+    <li class="page-item"><a class="page-link" href="/page/2/">&raquo;</a></li>
+    <li class="page-item"><a class="page-link" href="/page/2/">Last</a></li>
+        
+</ul>
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

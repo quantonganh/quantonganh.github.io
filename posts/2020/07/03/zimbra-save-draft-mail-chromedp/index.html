@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Save draft mail in Zimbra web client using ChromeDP</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>Save draft mail in Zimbra web client using ChromeDP</h3>
+<p class="text-secondary">2020-07-03</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<p>As an engineer, I want to automate everything as much as possible.
+This CLI tool is created to save a draft mail in Zimbra web client.</p>
+
+<p>Read config file:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">initConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">cfgFile</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Use config file from the flag.</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cfgFile</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Find home directory.</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">home</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">homedir</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exit</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AddConfigPath</span><span style="color:#1f2328">(</span><span style="color:#1f2328">home</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigName</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;.zwc&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AutomaticEnv</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#57606a">// read in environment variables that match</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#57606a">// If a config file is found, read it in.</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadInConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Using config file:&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Create a new chromedp context:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">allocCtx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">cancel</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewExecAllocator</span><span style="color:#1f2328">(</span><span style="color:#1f2328">context</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Background</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">append</span><span style="color:#1f2328">(</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">DefaultExecAllocatorOptions</span><span style="color:#1f2328">[</span><span style="color:#1f2328">:</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flag</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;headless&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">...</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#6639ba">cancel</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">cancel</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewContext</span><span style="color:#1f2328">(</span><span style="color:#1f2328">allocCtx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WithDebugf</span><span style="color:#1f2328">(</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Printf</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#6639ba">cancel</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Get flag values:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">subject</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;subject&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">attachFile</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;attach&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>And save draft mail:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">zwcSaveDraft</span><span style="color:#1f2328">(</span><span style="color:#1f2328">subject</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">attachFile</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Tasks</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">selName</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0a3069">`</span><span style="color:#0a3069">//input[@id=&#34;username&#34;]</span><span style="color:#0a3069">`</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">selPass</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0a3069">`</span><span style="color:#0a3069">//input[@id=&#34;password&#34;]</span><span style="color:#0a3069">`</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Tasks</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Navigate</span><span style="color:#1f2328">(</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;url&#34;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WaitVisible</span><span style="color:#1f2328">(</span><span style="color:#1f2328">selPass</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SendKeys</span><span style="color:#1f2328">(</span><span style="color:#1f2328">selName</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;username&#34;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SendKeys</span><span style="color:#1f2328">(</span><span style="color:#1f2328">selPass</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;password&#34;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Submit</span><span style="color:#1f2328">(</span><span style="color:#1f2328">selPass</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WaitVisible</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//div[@id=&#34;z_userName&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Click</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//div[@title=&#34;Compose&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WaitVisible</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//div[@id=&#34;zb__App__tab_COMPOSE-1&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SendKeys</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//input[@id=&#34;zv__COMPOSE-1_subject_control&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">subject</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SendKeys</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//input[@type=&#34;file&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">attachFile</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">NodeVisible</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WaitVisible</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//a[@class=&#34;AttLink&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Click</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">//div[@id=&#34;zb__COMPOSE-1__SAVE_DRAFT&#34;]</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>GitHub repository: <a href="https://github.com/quantonganh/zwc">https://github.com/quantonganh/zwc</a></p>
+
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/chromedp" role="button">
+        <i class="bi bi-tag"></i>
+        chromedp
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+        <i class="bi bi-tag"></i>
+        golang
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/cobra" role="button">
+        <i class="bi bi-tag"></i>
+        cobra
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/07/03/zimbra-save-draft-mail-chromedp"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

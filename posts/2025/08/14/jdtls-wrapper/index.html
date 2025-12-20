@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Helix returns &#34;No definition found&#34; when going to a definition</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>Helix returns &#34;No definition found&#34; when going to a definition</h3>
+<p class="text-secondary">2025-08-14</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
+Since I recently switched to a project that uses Java, I&rsquo;m trying to configure Helix as my Java editor.</p>
+
+<p>The default language server for Java is <a href="https://github.com/eclipse-jdtls/eclipse.jdt.ls">jdtls</a> which can be installed easily on macOS by running:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew install jdtls
+</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>hx --health java
+</span></span><span style="display:flex;"><span>Configured language servers:
+</span></span><span style="display:flex;"><span>  ✓ jdtls: /opt/homebrew/bin/jdtls
+</span></span><span style="display:flex;"><span>Configured debug adapter: None
+</span></span><span style="display:flex;"><span>Configured formatter: None
+</span></span><span style="display:flex;"><span>Tree-sitter parser: ✓
+</span></span><span style="display:flex;"><span>Highlight queries: ✓
+</span></span><span style="display:flex;"><span>Textobject queries: ✓
+</span></span><span style="display:flex;"><span>Indent queries: ✓
+</span></span><span style="display:flex;"><span>Tags queries: ✓
+</span></span><span style="display:flex;"><span>Rainbow queries: ✓
+</span></span></code></pre>
+<p>However, when I press <code>gd</code> (Go to definition) on a standard library or third-party class, Helix just returns &ldquo;No definition found&rdquo;.
+Even when starting Helix in verbose mode (<code>-vv</code>), the logs don&rsquo;t help much:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>2025-08-08T14:33:15.162 helix_lsp::transport [INFO] jdtls -&gt; {&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;textDocument/definition&#34;,&#34;params&#34;:{&#34;position&#34;:{&#34;character&#34;:17,&#34;line&#34;:0},&#34;textDocument&#34;:{&#34;uri&#34;:&#34;file:///Users/quantong/Code/personal/Exercism/java/diamond/src/main/java/DiamondPrinter.java&#34;}},&#34;id&#34;:2}
+</span></span><span style="display:flex;"><span>2025-08-08T14:33:15.259 helix_lsp::transport [INFO] jdtls &lt;- {&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;id&#34;:2,&#34;result&#34;:[]}
+</span></span><span style="display:flex;"><span>2025-08-08T14:33:15.259 helix_view::editor [DEBUG] editor error: No definition found.
+</span></span></code></pre>
+<p>It took me a few hours to realize that the client must enable <code>classFileContentsSupport</code> during initialization:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">language-server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">jdtls</span><span style="color:#1f2328">.</span><span style="color:#1f2328">config</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">extendedClientCapabilities</span><span style="color:#1f2328">.</span><span style="color:#1f2328">classFileContentsSupport</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
+</span></span></code></pre>
+<p>After enabling it, Helix finally revealed the real error:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>2025-08-08T16:36:55.027 helix_term::commands::lsp [WARN] discarding invalid or unsupported URI: unsupported scheme &#39;jdt&#39; in URL jdt://contents/java.base/java.util/ArrayList.class?=diamond/%5C/opt%5C/homebrew%5C/Cellar%5C/openjdk%5C@21%5C/21.0.7%5C/libexec%5C/openjdk.jdk%5C/Contents%5C/Home%5C/lib%5C/jrt-fs.jar%60java.base=/javadoc_location=/https:%5C/%5C/docs.oracle.com%5C/en%5C/java%5C/javase%5C/21%5C/docs%5C/api%5C/=/%3Cjava.util(ArrayList.class
+</span></span><span style="display:flex;"><span>2025-08-08T16:36:55.027 helix_view::editor [DEBUG] editor error: No definition found.
+</span></span></code></pre>
+<p>So the problem is the response uses <code>jdt://</code> URL scheme which currently <a href="https://github.com/helix-editor/helix/blob/f4a433f855880667eb7888557c2e8a4b6d2c6dd3/helix-core/src/uri.rs?plain=1#L83">Helix does not support</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">convert_url_to_uri</span><span style="color:#1f2328">(</span>url: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">url</span>::Url<span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span>Uri<span style="color:#1f2328">,</span><span style="color:#fff"> </span>UrlConversionErrorKind<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>url<span style="color:#1f2328">.</span>scheme<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">file</span><span style="color:#0a3069">&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>url<span style="color:#1f2328">.</span>to_file_path<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">.</span>map<span style="color:#1f2328">(</span><span style="color:#0550ae">|</span>path<span style="color:#0550ae">|</span><span style="color:#fff"> </span>Uri::File<span style="color:#1f2328">(</span>helix_stdx::path::normalize<span style="color:#1f2328">(</span>path<span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>into<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">.</span>map_err<span style="color:#1f2328">(</span><span style="color:#0550ae">|</span>_<span style="color:#0550ae">|</span><span style="color:#fff"> </span>UrlConversionErrorKind::UnableToConvert<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Err</span><span style="color:#1f2328">(</span>UrlConversionErrorKind::UnsupportedScheme<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>fmt::Display<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>UrlConversionError<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">fmt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>f: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">mut</span><span style="color:#fff"> </span>fmt::Formatter<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">&#39;_</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">fmt</span>::<span style="color:#6639ba">Result</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>kind<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>UrlConversionErrorKind::UnsupportedScheme<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#6639ba">write!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>f<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">unsupported scheme &#39;{}&#39; in URL {}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>source<span style="color:#1f2328">.</span>scheme<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>source<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>UrlConversionErrorKind::UnableToConvert<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#6639ba">write!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>f<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">unable to convert URL to file path: {}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>source<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Fortunately, we can write a custom LSP server that sits between Helix and jdtls, translates <code>jdt://</code> to <code>file://</code> and displays the decompiled class file.</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">cmd</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">exec</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Command</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;jdtls&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Args</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span><span style="color:#1f2328">]</span><span style="color:#0550ae">...</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">serverStdin</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">StdinPipe</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;connect to the stdin: %w&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">serverStdout</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">StdoutPipe</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;connect to the stdout: %w&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">serverStderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">StderrPipe</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;connect to the stderr: %w&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Start</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;start: %w&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>If the response scheme is <code>jdt://</code>, translate it to <code>file://</code>, write to a temp file, and return it back:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">uri</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Scheme</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;jdt&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">newID</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">id</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">classReq</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#cf222e">map</span><span style="color:#1f2328">[</span><span style="color:#cf222e">string</span><span style="color:#1f2328">]</span><span style="color:#cf222e">any</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;id&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff">      </span><span style="color:#1f2328">newID</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;jsonrpc&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;2.0&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;method&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff">  </span><span style="color:#0a3069">&#34;java/classFileContents&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#0a3069">&#34;params&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">map</span><span style="color:#1f2328">[</span><span style="color:#cf222e">string</span><span style="color:#1f2328">]</span><span style="color:#cf222e">any</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#0a3069">&#34;uri&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">definitionResult</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">URI</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">data</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">json</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Marshal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">classReq</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintln</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;[jdtls-wrapper]&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">pending</span><span style="color:#1f2328">[</span><span style="color:#1f2328">newID</span><span style="color:#1f2328">]</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#cf222e">func</span><span style="color:#1f2328">(</span><span style="color:#1f2328">resp</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">jdtResponse</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintln</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;[jdtls-wrapper]&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">string</span><span style="color:#1f2328">(</span><span style="color:#1f2328">resp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Result</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">result</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">strconv</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Unquote</span><span style="color:#1f2328">(</span><span style="color:#6639ba">string</span><span style="color:#1f2328">(</span><span style="color:#1f2328">resp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Result</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintln</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;[jdtls-wrapper]&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">result</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReplaceAll</span><span style="color:#1f2328">(</span><span style="color:#1f2328">result</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">`</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">`</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;\n&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">result</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReplaceAll</span><span style="color:#1f2328">(</span><span style="color:#1f2328">result</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">`</span><span style="color:#0a3069">\t</span><span style="color:#0a3069">`</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;\t&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">tmpFileName</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;/tmp&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">TrimSuffix</span><span style="color:#1f2328">(</span><span style="color:#1f2328">uri</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Path</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;.class&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;.java&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">targetURI</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;file://&#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#1f2328">tmpFileName</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">m</span><span style="color:#1f2328">[</span><span style="color:#1f2328">targetURI</span><span style="color:#1f2328">]</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">uri</span><span style="color:#1f2328">.</span><span style="color:#6639ba">String</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">MkdirAll</span><span style="color:#1f2328">(</span><span style="color:#1f2328">filepath</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tmpFileName</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0755</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintln</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;[jdtls-wrapper]&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WriteFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tmpFileName</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#6639ba">byte</span><span style="color:#1f2328">(</span><span style="color:#1f2328">result</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0400</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintln</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stderr</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;[jdtls-wrapper]&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Error</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">targetRange</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">Range</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">Start</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">Position</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">Line</span><span style="color:#1f2328">:</span><span style="color:#fff">      </span><span style="color:#1f2328">definitionResult</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Range</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Start</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Line</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">Character</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">definitionResult</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Range</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Start</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Character</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">End</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">Position</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">Line</span><span style="color:#1f2328">:</span><span style="color:#fff">      </span><span style="color:#1f2328">definitionResult</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Range</span><span style="color:#1f2328">.</span><span style="color:#1f2328">End</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Line</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">Character</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">definitionResult</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Range</span><span style="color:#1f2328">.</span><span style="color:#1f2328">End</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Character</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">stdResp</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">stdResponse</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">Jsonrpc</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;2.0&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">ID</span><span style="color:#1f2328">:</span><span style="color:#fff">      </span><span style="color:#6639ba">int64</span><span style="color:#1f2328">(</span><span style="color:#1f2328">id</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">Result</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#1f2328">stdResult</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#1f2328">TargetURI</span><span style="color:#1f2328">:</span><span style="color:#fff">            </span><span style="color:#1f2328">targetURI</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#1f2328">TargetRange</span><span style="color:#1f2328">:</span><span style="color:#fff">          </span><span style="color:#1f2328">targetRange</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#1f2328">TargetSelectionRange</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">targetRange</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">data</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">json</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Marshal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">stdResp</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintf</span><span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Stdout</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Content-Length: %d\r\n\r\n%s&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fprintf</span><span style="color:#1f2328">(</span><span style="color:#1f2328">serverStdin</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Content-Length: %d\r\n\r\n%s&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>More details can be found <a href="https://github.com/quantonganh/jdtls-wrapper">here</a>.</p>
+
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/helix" role="button">
+        <i class="bi bi-tag"></i>
+        helix
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/java" role="button">
+        <i class="bi bi-tag"></i>
+        java
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/lsp" role="button">
+        <i class="bi bi-tag"></i>
+        lsp
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+        <i class="bi bi-tag"></i>
+        golang
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2025/08/14/jdtls-wrapper"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">plugins/docker failed to resolve Keycloak hostname?</a></h3>
+        <p class="text-secondary">2021-01-27</p>
+        <p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
+
+<p>The full error message is:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
+</span></span></code></pre>
+<p><code>sso.domain.com</code> is a local hostname which can be resolved on the host. How can I make it resolvable inside the <code>plugins/docker</code> container?</p>
+
+<p>I found some similar issues:</p>
+
+<ul>
+<li><a href="https://discourse.drone.io/t/dns-lookup-fails-inside-plugins-docker-build/501/5">https://discourse.drone.io/t/dns-lookup-fails-inside-plugins-docker-build/501/5</a></li>
+<li><a href="https://github.com/drone-plugins/drone-docker/issues/193">https://github.com/drone-plugins/drone-docker/issues/193</a></li>
+</ul>
+
+<p>but they are slightly differences.</p>
+
+<p>Look at this: <a href="http://plugins.drone.io/drone-plugins/drone-docker/">http://plugins.drone.io/drone-plugins/drone-docker/</a></p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
+        <p class="text-secondary">2021-01-07</p>
+        <p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
+
+<p>We are running <a href="/2020/09/29/integration-test-golang">integration test</a> by triggering a downstream build when a PR is merged into specific branches.
+In the downstream repository, we pull all the docker images which has been built and pushed from upstream.
+The thing is we also used the <a href="https://github.com/meltwater/drone-convert-pathschanged">drone-convert-pathschanged</a> to <a href="../../2020/06/drone-trigger-based-on-modified-dir.md">only publish what modules has been changed</a>.</p>
+
+<p>So, what happens when pushing to a new <code>release-*</code> branch?</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
+        <p class="text-secondary">2020-09-29</p>
+        <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">steps</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>trigger<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/downstream:linux-amd64<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">params</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repositories</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- repo/integration-test@${DRONE_COMMIT_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">server</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https://drone.example.com<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">token</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone_token<span style="color:#fff">
+</span></span></span></code></pre>
+<p>It can be separated with unit tests by using <a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">build tags</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>// +build integration
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>package webserver_test
+</span></span></code></pre>
+<p>Then we can write code to perform integration test as usual.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
+        <p class="text-secondary">2020-06-26</p>
+        <p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
+
+<p>To do that, we can use <code>git diff</code> to show changes between commits:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
+</span></span><span style="display:flex;"><span>    most_recent_before=&#34;origin/${DRONE_TARGET_BRANCH}&#34;
+</span></span><span style="display:flex;"><span>  elif [[ &#34;${DRONE_BUILD_EVENT}&#34; = &#34;push&#34; &amp;&amp; (&#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;master&#34; || &#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;release-&#34;*) ]]; then
+</span></span><span style="display:flex;"><span>    if [[ &#34;${DRONE_COMMIT_BEFORE}&#34; = &#34;$zero&#34; ]]; then
+</span></span><span style="display:flex;"><span>      exit 0
+</span></span><span style="display:flex;"><span>    else
+</span></span><span style="display:flex;"><span>      most_recent_before=&#34;${DRONE_COMMIT_BEFORE}&#34;
+</span></span><span style="display:flex;"><span>    fi
+</span></span><span style="display:flex;"><span>  fi
+</span></span><span style="display:flex;"><span>  modified_files=$(git --no-pager diff --name-only &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34;);
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
+        <p class="text-secondary">2020-05-06</p>
+        <p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
+
+<p>But if I go to <a href="https://git-tea.dynu.net/quanta/blog/settings/hooks/1">Settings -&gt; Webhooks</a>, then click &ldquo;Test Delivery&rdquo; -&gt; build pipeline will be executed. Why?</p>
+
+<p>First, look at the &ldquo;Recent Deliveries&rdquo; to see if a webhook is triggerd here when you pushing code.
+In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
+
+<p>By pay close attention to the git output when pushing:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Counting objects: 4, done.
+</span></span><span style="display:flex;"><span>Delta compression using up to 4 threads.
+</span></span><span style="display:flex;"><span>Compressing objects: 100% (4/4), done.
+</span></span><span style="display:flex;"><span>Writing objects: 100% (4/4), 2.02 KiB | 2.02 MiB/s, done.
+</span></span><span style="display:flex;"><span>Total 4 (delta 2), reused 0 (delta 0)
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/pre-receive&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/update&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/post-receive&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>To gitea.pi:quanta/blog.git
+</span></span><span style="display:flex;"><span> + d29f63d...47e9ed3 master -&gt; master (forced update)
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

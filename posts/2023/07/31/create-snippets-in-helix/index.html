@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to create snippets in Helix?</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>How to create snippets in Helix?</h3>
+<p class="text-secondary">2023-07-31</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+    
+</p>
+
+<p><a href="https://github.com/helix-editor/helix/issues/395">Helix currently does not support snippets</a>.
+However, there is a workaround to insert snippets using <code>:insert-output</code> to run a shell command.
+Still, this might not feel like the most natural way to work with snippets.</p>
+
+<p>For instance, in GoLand, a similar feature called <a href="https://www.jetbrains.com/help/go/using-live-templates.html#live_templates_types">live templates</a>
+allows you to type <code>err</code> and expand it into the following:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>I wonder if I can archieve the same functionality in Helix by creating a simple language server
+using the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>.</p>
+
+<p>After exploring different <a href="https://microsoft.github.io/language-server-protocol/implementors/sdks/">SDKs for the LSP</a>
+I decided to give <a href="https://github.com/TobiasYin/go-lsp">go-lsp</a> a try, as I am most familiar with Golang.</p>
+
+<p><a href="https://github.com/quantonganh/snippets-ls">Here</a>&rsquo;s what I came up with. Initially, I encountered and error during the first attempt:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;jsonrpc&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;id&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;result&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;capabilities&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;textDocumentSync&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;completionProvider&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;triggerCharacters&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#0a3069">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;error&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">null</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>2023-07-31T17:12:56.162 helix_lsp::transport [ERROR] snippets-ls err: &lt;- Parse(Error(&#34;data did not match any variant of untagged enum ServerMessage&#34;, line: 0, column: 0))
+</span></span></code></pre>
+<p>However, I was able to resolve the issue by <a href="https://github.com/TobiasYin/go-lsp/pull/6">passing the jsonrpc version in the response</a>.</p>
+
+<p>To test this feature, you can create a configuration file like this:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">main</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">|-</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  func main() {
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      $1
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">err</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">|-</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  if err != nil {
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      $1
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Then add the following into <code>~/.config/helix/languages.toml</code>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">[</span><span style="color:#1f2328">language</span><span style="color:#1f2328">]</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">name</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;go&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">formatter</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">command</span> <span style="color:#1f2328">=</span> <span style="color:#0a3069">&#34;goimports&#34;</span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">language-servers</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;gopls&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;snippets-ls&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">language-server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">snippets-ls</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">args</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;-config&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;/Users/quantong/.config/helix/go-snippets.yaml&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">command</span><span style="color:#1f2328">=</span><span style="color:#0a3069">&#34;snippets-ls&#34;</span>
+</span></span></code></pre>
+<p>Now, when we open a <code>.go</code> file in Helix, the editor forks a process to start the language server:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ pstree -p <span style="color:#0550ae">818</span>
+</span></span><span style="display:flex;"><span>-+<span style="color:#0550ae">=</span> <span style="color:#0550ae">00001</span> root /sbin/launchd
+</span></span><span style="display:flex;"><span> <span style="color:#0a3069">\-</span>+<span style="color:#0550ae">=</span> <span style="color:#0550ae">00440</span> quantong /Applications/WezTerm.app/Contents/MacOS/wezterm-gui
+</span></span><span style="display:flex;"><span>   <span style="color:#0a3069">\-</span>+<span style="color:#0550ae">=</span> <span style="color:#0550ae">00487</span> quantong -fish
+</span></span><span style="display:flex;"><span>     <span style="color:#0a3069">\-</span>+<span style="color:#0550ae">=</span> <span style="color:#0550ae">00818</span> quantong hx .
+</span></span><span style="display:flex;"><span>       <span style="color:#1f2328">|</span>--- <span style="color:#0550ae">00855</span> quantong /opt/homebrew/bin/gopls
+</span></span><span style="display:flex;"><span>       <span style="color:#0a3069">\-</span>-- <span style="color:#0550ae">00856</span> quantong /Users/quantong/go/bin/snippets-ls -config /Users/quantong/.config/helix/go-snippets.yaml
+</span></span></code></pre>
+<p>Next, you can type <code>err</code> and press tab, Helix will send a <code>textDocument/completion</code> request to the language server:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;jsonrpc&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;2.0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;method&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;textDocument/completion&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;params&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;position&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;character&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;line&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">25</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;textDocument&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;uri&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;file:///Users/quantong/Code/personal/snippets-ls/main.go&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;id&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre>
+<p>and the server will respond with the result:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;jsonrpc&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;2.0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;id&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;result&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;label&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;main&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;kind&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">15</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;insertText&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;func main() {\n    $1\n}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;label&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;err&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;kind&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">15</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;insertText&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;if err != nil {\n    $1\n}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">]</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;error&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">null</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre>
+<p>With this setup, you should be able to use snippets in Helix just like in GoLand, enhancing your coding productivity.</p>
+
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/helix" role="button">
+        <i class="bi bi-tag"></i>
+        helix
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/lsp" role="button">
+        <i class="bi bi-tag"></i>
+        lsp
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+        <i class="bi bi-tag"></i>
+        golang
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/07/31/create-snippets-in-helix"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

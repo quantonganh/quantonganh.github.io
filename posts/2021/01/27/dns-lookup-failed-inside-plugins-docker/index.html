@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>plugins/docker failed to resolve Keycloak hostname?</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>plugins/docker failed to resolve Keycloak hostname?</h3>
+<p class="text-secondary">2021-01-27</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+    
+</p>
+
+<p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
+
+<p>The full error message is:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
+</span></span></code></pre>
+<p><code>sso.domain.com</code> is a local hostname which can be resolved on the host. How can I make it resolvable inside the <code>plugins/docker</code> container?</p>
+
+<p>I found some similar issues:</p>
+
+<ul>
+<li><a href="https://discourse.drone.io/t/dns-lookup-fails-inside-plugins-docker-build/501/5">https://discourse.drone.io/t/dns-lookup-fails-inside-plugins-docker-build/501/5</a></li>
+<li><a href="https://github.com/drone-plugins/drone-docker/issues/193">https://github.com/drone-plugins/drone-docker/issues/193</a></li>
+</ul>
+
+<p>but they are slightly differences.</p>
+
+<p>Look at this: <a href="http://plugins.drone.io/drone-plugins/drone-docker/">http://plugins.drone.io/drone-plugins/drone-docker/</a></p>
+
+<p><code>custom_dns</code> will be passed to the Docker daemon inside <code>plugins/docker</code>, something like this:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>/usr/local/bin/dockerd --data-root /var/lib/docker --host<span style="color:#0550ae">=</span>unix:///var/run/docker.sock --dns 10.100.101.5 --dns 8.8.8.8
+</span></span></code></pre>
+<p>while <code>add_host</code> will be passed to the <code>docker build</code> steps:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ docker build -h
+</span></span><span style="display:flex;"><span>Flag shorthand -h has been deprecated, please use --help
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Usage:  docker build <span style="color:#0550ae">[</span>OPTIONS<span style="color:#0550ae">]</span> PATH <span style="color:#1f2328">|</span> URL <span style="color:#1f2328">|</span> -
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Build an image from a Dockerfile
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Options:
+</span></span><span style="display:flex;"><span>      --add-host list           Add a custom host-to-IP mapping <span style="color:#0550ae">(</span>host:ip<span style="color:#0550ae">)</span>
+</span></span></code></pre>
+<p>They are the latter steps. Our case failed early when authenticating with docker registry.</p>
+
+<p>I tried to add <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#network_mode"><code>network_mode: host</code></a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>publish<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/docker:19.03<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">debug</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">network_mode</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>host<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">registry</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker.domain.com<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repo</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker.domain.com/owner/repo<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">tags</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- ${DRONE_SOURCE_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">username</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker_username<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">password</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker_password<span style="color:#fff">
+</span></span></span></code></pre>
+<p>but it didn&rsquo;t help, the error still stands:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host<span style="color:#0a3069">&#34;</span><span style="color:#0a3069">
+</span></span></span></code></pre>
+<p>Why <code>plugins/docker</code> still uses <a href="https://docs.docker.com/config/containers/container-networking/#dns-services">embedded DNS</a>?</p>
+
+<p>OK, I tried to debug locally by using <code>drone exec</code> and still got the same error message.</p>
+
+<p>Then I tried again with a simple example to see what happens:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>steps:
+</span></span><span style="display:flex;"><span>  - name: alpine
+</span></span><span style="display:flex;"><span>    image: alpine:3.13
+</span></span><span style="display:flex;"><span>    network_mode: host
+</span></span><span style="display:flex;"><span>    commands:
+</span></span><span style="display:flex;"><span>      - cat /etc/resolv.conf
+</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ drone <span style="color:#6639ba">exec</span>
+</span></span><span style="display:flex;"><span>2021/01/27 10:34:12 linter: untrusted repositories cannot configure network_mode
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ drone <span style="color:#6639ba">exec</span> --trusted
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>alpine:0<span style="color:#0550ae">]</span> + cat /etc/resolv.conf
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>alpine:1<span style="color:#0550ae">]</span> <span style="color:#57606a"># This file is fetched from the host via vpnkit-bridge</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>alpine:2<span style="color:#0550ae">]</span> nameserver 192.168.65.1
+</span></span></code></pre>
+<p>But wait. Why drone linter does not force me to trust the build when running publish step?
+Turned out that <code>network_mode</code> is put in wrong place. It&rsquo;s a service configuration, not <code>plugins/docker</code>&rsquo;s settings:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>publish<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/docker:19.03<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">network_mode</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>host<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">debug</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">registry</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker.domain.com<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repo</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker.domain.com/owner/repo<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">tags</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- ${DRONE_SOURCE_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">username</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker_username<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">password</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker_password<span style="color:#fff">
+</span></span></span></code></pre>
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/drone" role="button">
+        <i class="bi bi-tag"></i>
+        drone
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/ci" role="button">
+        <i class="bi bi-tag"></i>
+        ci
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/docker" role="button">
+        <i class="bi bi-tag"></i>
+        docker
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/dns" role="button">
+        <i class="bi bi-tag"></i>
+        dns
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/01/27/dns-lookup-failed-inside-plugins-docker"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

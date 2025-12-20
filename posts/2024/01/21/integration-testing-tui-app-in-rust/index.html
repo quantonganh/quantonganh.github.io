@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Integration testing TUI applications in Rust</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>Integration testing TUI applications in Rust</h3>
+<p class="text-secondary">2024-01-21</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<p>In building games with any language, there will be a loop to handle the key events. In case of <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>, it&rsquo;s <a href="https://docs.rs/crossterm/latest/crossterm/event/fn.read.html">event::read</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>poll<span style="color:#1f2328">(</span>Duration::from_millis<span style="color:#1f2328">(</span><span style="color:#0550ae">10</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>read<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>code<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>state: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>kind<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>modifiers: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>kind<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>KeyEventKind::Press<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>clone<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>code<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#fff"> </span>KeyCode::Left<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span>tetromino<span style="color:#1f2328">.</span>move_left<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>stdout<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>tetromino<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>To make this code testable, we can add a <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Trait</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">trait</span><span style="color:#fff"> </span>Terminal<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">poll_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>duration: <span style="color:#1f2328">Duration</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">bool</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">read_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span>Event<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>and implement it for the real terminal:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">RealTerminal</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Terminal<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>RealTerminal<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">poll_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>duration: <span style="color:#1f2328">Duration</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">bool</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>poll<span style="color:#1f2328">(</span>duration<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">read_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span>Event<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>read<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Now the <code>Game</code> struct can be modified to:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">Game</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>terminal: <span style="color:#6639ba">Box</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">dyn</span><span style="color:#fff"> </span>Terminal<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>terminal<span style="color:#1f2328">.</span>poll_event<span style="color:#1f2328">(</span>Duration::from_millis<span style="color:#1f2328">(</span><span style="color:#0550ae">10</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>event<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>terminal<span style="color:#1f2328">.</span>read_event<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>code<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>state: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>kind<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>modifiers: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>kind<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>KeyEventKind::Press<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>clone<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>code<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#fff"> </span>KeyCode::Left<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                            </span>tetromino<span style="color:#1f2328">.</span>move_left<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>stdout<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                            </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>tetromino<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>When writing integration test, we can create <code>MockTerminal</code> struct with a field to mock the key code:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">MockTerminal</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>mock_key_code: <span style="color:#6639ba">Option</span><span style="color:#0550ae">&lt;</span>Receiver<span style="color:#0550ae">&lt;</span>KeyCode<span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Terminal<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>MockTerminal<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">poll_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>duration: <span style="color:#1f2328">Duration</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">bool</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>thread::sleep<span style="color:#1f2328">(</span>duration<span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">read_event</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span>Event<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>mock_key_code<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>mock_key_code<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>code<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>mock_key_code<span style="color:#1f2328">.</span>recv<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#6639ba">println!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span><span style="color:#fff"></span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">Received: </span><span style="color:#0a3069">{:?}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>code<span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>code<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>modifiers: <span style="color:#1f2328">KeyModifiers</span>::empty<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>kind: <span style="color:#1f2328">KeyEventKind</span>::Press<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>state: <span style="color:#1f2328">KeyEventState</span>::empty<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>code: <span style="color:#1f2328">KeyCode</span>::Null<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>modifiers: <span style="color:#1f2328">KeyModifiers</span>::empty<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>kind: <span style="color:#1f2328">KeyEventKind</span>::em<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>state: <span style="color:#1f2328">KeyEventState</span>::empty<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Here, we use <a href="https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html">mpsc::channel</a> to drive the main thread. On the receiver side, we wait for a value and return the corresponding <a href="https://docs.rs/crossterm/latest/crossterm/event/struct.KeyEvent.html">KeyEvent</a>.</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">#[</span><span style="color:#57606a">test</span><span style="color:#57606a">]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">clear_lines</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>tx<span style="color:#1f2328">,</span><span style="color:#fff"> </span>rx<span style="color:#1f2328">)</span>: <span style="color:#1f2328">(</span>Sender<span style="color:#0550ae">&lt;</span>KeyCode<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>Receiver<span style="color:#0550ae">&lt;</span>KeyCode<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>channel<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>game<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Game::new<span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Box</span>::new<span style="color:#1f2328">(</span>MockTerminal::new<span style="color:#1f2328">(</span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>rx<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>tetromino_spawner<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>sqlite_highscore_repository<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">40</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">20</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>play_grid_tx<span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>receiver<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>thread::spawn<span style="color:#1f2328">(</span><span style="color:#cf222e">move</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#0550ae">|</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>game<span style="color:#1f2328">.</span>start<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>previous_col<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>game<span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>position<span style="color:#1f2328">.</span>col<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>game<span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>position<span style="color:#1f2328">.</span>col<span style="color:#1f2328">,</span><span style="color:#fff"> </span>previous_col<span style="color:#fff"> </span><span style="color:#0550ae">-</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Upon running <code>cargo test</code>, I encountered an error:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>error[E0382]: borrow of moved value: `game`
+</span></span><span style="display:flex;"><span>   --&gt; tests/integration_test.rs:146:24
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>129 |     let mut game = Game::new(
+</span></span><span style="display:flex;"><span>    |         -------- move occurs because `game` has type `Game`, which does not implement the `Copy` trait
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>142 |     let receiver = thread::spawn(move || {
+</span></span><span style="display:flex;"><span>    |                                  ------- value moved into closure here
+</span></span><span style="display:flex;"><span>143 |         game.start().unwrap();
+</span></span><span style="display:flex;"><span>    |         ---- variable moved due to use in closure
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>146 |     let previous_col = game.current_tetromino.position.col;
+</span></span><span style="display:flex;"><span>    |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ value borrowed here after move
+</span></span></code></pre>
+<p>As indicated by the compiler, since Game is started in a separate thread, its value cannot be borrowed after move.
+To address this, I tried using <code>Arc&lt;Mutex&lt;T&gt;&gt;</code> to share Game state between multiple threads:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>game<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Arc::new<span style="color:#1f2328">(</span>Mutex::new<span style="color:#1f2328">(</span>Game::new<span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">Box</span>::new<span style="color:#1f2328">(</span>MockTerminal::new<span style="color:#1f2328">(</span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>rx<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tetromino_spawner<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>sqlite_highscore_repository<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">40</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">20</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>receiver<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>thread::spawn<span style="color:#1f2328">(</span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>game<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Arc::clone<span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>game<span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">move</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#0550ae">|</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>game_lock<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>game<span style="color:#1f2328">.</span>lock<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>game_lock<span style="color:#1f2328">.</span>start<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>game_lock<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>game<span style="color:#1f2328">.</span>lock<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>previous_col<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>game_lock<span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>position<span style="color:#1f2328">.</span>col<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>game_lock<span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>position<span style="color:#1f2328">.</span>col<span style="color:#1f2328">,</span><span style="color:#fff"> </span>previous_col<span style="color:#fff"> </span><span style="color:#0550ae">-</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>receiver<span style="color:#1f2328">.</span>join<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>Upon re-running <code>cargo test -- --nocapture</code>, I got another error:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Running tests/integration_test.rs (target/debug/deps/integration_test-81597c4542f1a01f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>running 1 test
+</span></span><span style="display:flex;"><span>thread &#39;clear_lines&#39; panicked at tests/integration_test.rs:155:5:
+</span></span><span style="display:flex;"><span>assertion `left == right` failed
+</span></span><span style="display:flex;"><span>  left: 3
+</span></span><span style="display:flex;"><span> right: 2
+</span></span><span style="display:flex;"><span>note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</span></span><span style="display:flex;"><span>thread &#39;&lt;unnamed&gt;&#39; panicked at tests/integration_test.rs:147:45:
+</span></span><span style="display:flex;"><span>called `Result::unwrap()` on an `Err` value: PoisonError { .. }
+</span></span><span style="display:flex;"><span>test clear_lines ... FAILED
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>failures:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>failures:
+</span></span><span style="display:flex;"><span>    clear_lines
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</span></span></code></pre>
+<p>However, I realized that the assertion is performed before the game thread is completed, resulting in the tetromino position column not being updated. Furthermore, if I send <code>q</code> (quit), then <code>y</code> (confirm) to terminate the game thread, then there is&hellip; nothing to assert. This situation has left me in a dilemma.</p>
+
+<p>After <a href="https://users.rust-lang.org/t/simulate-key-presses-to-test-the-game-loop/105428">seeking advice on the Rust forum</a> and receiving guidance from <a href="https://users.rust-lang.org/t/simulate-key-presses-to-test-the-game-loop/105428/10">parasyte</a>:</p>
+
+<blockquote>
+<p>What I meant with the &ldquo;return channel&rdquo; was literally passing the state back through the channel for assertions. It&rsquo;s very easy to do if you don&rsquo;t mind cloning the state for your tests.</p>
+</blockquote>
+
+<p>I decided to pass the play grid state back through the channel for assertions after the tetromino reaches the bottom:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">Game</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>terminal: <span style="color:#6639ba">Box</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">dyn</span><span style="color:#fff"> </span>Terminal<span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#6639ba">Send</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">..</span><span style="color:#1f2328">.</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// This is only used for integration testing purposes
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>state_sender: <span style="color:#6639ba">Option</span><span style="color:#0550ae">&lt;</span>Sender<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>Cell<span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Game<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">lock_and_move_to_next</span><span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">&amp;</span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>tetromino: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">Tetromino</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>stdout: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">mut</span><span style="color:#fff"> </span>io::Stdout<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>lock_tetromino<span style="color:#1f2328">(</span>tetromino<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// When performing integration testing, Game instance is started in a spawned thread
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// This sends the play grid state to the main thread, so it can be asserted.
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>state_sender<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>state_sender<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>state_sender<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>play_grid<span style="color:#1f2328">.</span>clone<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>move_to_next<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_game_over<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>handle_game_over<span style="color:#1f2328">(</span>stdout<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">#[</span><span style="color:#57606a">test</span><span style="color:#57606a">]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">clear_lines</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>tetromino_spawner<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6639ba">Box</span>::new<span style="color:#1f2328">(</span>ITetromino<span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>conn<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Connection::open_in_memory<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sqlite_highscore_repository<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6639ba">Box</span>::new<span style="color:#1f2328">(</span>HighScoreRepo<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff"> </span>conn<span style="color:#fff"> </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>tx<span style="color:#1f2328">,</span><span style="color:#fff"> </span>rx<span style="color:#1f2328">)</span>: <span style="color:#1f2328">(</span>Sender<span style="color:#0550ae">&lt;</span>KeyCode<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>Receiver<span style="color:#0550ae">&lt;</span>KeyCode<span style="color:#0550ae">&gt;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>channel<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>play_grid_tx<span style="color:#1f2328">,</span><span style="color:#fff"> </span>play_grid_rx<span style="color:#1f2328">)</span>: <span style="color:#1f2328">(</span>Sender<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>Cell<span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>Receiver<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>Cell<span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>channel<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>game<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Game::new<span style="color:#1f2328">(</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Box</span>::new<span style="color:#1f2328">(</span>MockTerminal::new<span style="color:#1f2328">(</span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>rx<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>tetromino_spawner<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>sqlite_highscore_repository<span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">40</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">20</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">None</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">Some</span><span style="color:#1f2328">(</span>play_grid_tx<span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>receiver<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>thread::spawn<span style="color:#1f2328">(</span><span style="color:#cf222e">move</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#0550ae">|</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>game<span style="color:#1f2328">.</span>start<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Clear a line by placing 4 I tetrominoes like this ____||____
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Move the first I tetromino to the left border
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;j&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>play_grid_rx<span style="color:#1f2328">.</span>recv<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>col<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#0550ae">..</span><span style="color:#0550ae">4</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span><span style="color:#0550ae">19</span><span style="color:#1f2328">]</span><span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">I_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// // Move the 2nd I tetromino to the right border
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;l&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;l&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;l&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;j&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>play_grid_rx<span style="color:#1f2328">.</span>recv<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>col<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#0550ae">..</span><span style="color:#0550ae">10</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span><span style="color:#0550ae">19</span><span style="color:#1f2328">]</span><span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">I_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Rotate the 3rd I tetromino, move left one column, then hard drop
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39; &#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;j&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>play_grid_rx<span style="color:#1f2328">.</span>recv<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>row<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">16</span><span style="color:#0550ae">..</span><span style="color:#0550ae">20</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span>row<span style="color:#1f2328">]</span><span style="color:#1f2328">[</span><span style="color:#0550ae">4</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">I_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Rotate the 4th I tetromino, then hard drop to fill a line
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39; &#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;j&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>play_grid_rx<span style="color:#1f2328">.</span>recv<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>col<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#0550ae">..</span><span style="color:#0550ae">4</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span><span style="color:#0550ae">19</span><span style="color:#1f2328">]</span><span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">EMPTY_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>col<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#0550ae">..</span><span style="color:#0550ae">10</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span><span style="color:#0550ae">19</span><span style="color:#1f2328">]</span><span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">EMPTY_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>row<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">18</span><span style="color:#0550ae">..</span><span style="color:#0550ae">20</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>col<span style="color:#fff"> </span><span style="color:#cf222e">in</span><span style="color:#fff"> </span><span style="color:#0550ae">4</span><span style="color:#0550ae">..</span><span style="color:#0550ae">6</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#6639ba">assert_eq!</span><span style="color:#fff"></span><span style="color:#1f2328">(</span>play_grid<span style="color:#1f2328">[</span>row<span style="color:#1f2328">]</span><span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">I_CELL</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;q&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>tx<span style="color:#1f2328">.</span>send<span style="color:#1f2328">(</span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;y&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>receiver<span style="color:#1f2328">.</span>join<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span>unwrap<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+<p>and <code>cargo test -- --nocapture</code> worked like a charm:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running tests/integration_test.rs (target/debug/deps/integration_test-81597c4542f1a01f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>running 1 test
+</span></span><span style="display:flex;"><span>Received: Char(&#39;h&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;h&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;h&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;j&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;l&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;l&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;l&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;j&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39; &#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;h&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;j&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39; &#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;j&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;q&#39;)
+</span></span><span style="display:flex;"><span>Received: Char(&#39;y&#39;)
+</span></span></code></pre>
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/integration-testing" role="button">
+        <i class="bi bi-tag"></i>
+        integration-testing
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/rust" role="button">
+        <i class="bi bi-tag"></i>
+        rust
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2024/01/21/integration-testing-tui-app-in-rust"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

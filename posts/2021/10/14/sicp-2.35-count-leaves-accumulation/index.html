@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SICP Exercise 2.35: Counting leaves of a tree</title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+<h3>SICP Exercise 2.35: Counting leaves of a tree</h3>
+<p class="text-secondary">2021-10-14</p>
+
+<p>
+    Categories:
+    
+    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+    
+</p>
+
+<blockquote>
+<p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.35">Exercise 2.35</a>: Redefine count-leaves from section <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.2">2.2.2</a> as an accumulation:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves t<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>accumulate &lt;??&gt; &lt;??&gt; <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> &lt;??&gt; &lt;??&gt;<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre></blockquote>
+
+<p>The <code>count-leaves</code> procedure from section 2.2.2:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves x<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">null?</span> x<span style="color:#1f2328">)</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">not</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">pair?</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">+</span> <span style="color:#1f2328">(</span>count-leaves <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span>count-leaves <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>The <code>accumulate</code> procedure from section 2.2.3:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>accumulate op initial sequence<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">null?</span> sequence<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        initial
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span>op <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> sequence<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span>accumulate op initial <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> sequence<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>The first thing comes to my mind is: to count leaves of a tree, we need to flatten out that tree.
+Recall the <code>fringe</code> produce from exercise <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%25_thm_2.28">2.28</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>fringe x<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">null?</span> x<span style="color:#1f2328">)</span> <span style="color:#6639ba">null</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">pair?</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span><span style="color:#6639ba">append</span> <span style="color:#1f2328">(</span>fringe <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>fringe <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span><span style="color:#6639ba">cons</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> x<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>fringe <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>Let&rsquo;s see what is the output if we apply <code>fringe</code> function to each element of the input list:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> t <span style="color:#1f2328">(</span><span style="color:#6639ba">cons</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> fringe t<span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.35-count-leaves-accumulation.rkt
+</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fringe <span style="color:#0a3069">&#39;(1 2))
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; (fringe 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &#39;</span><span style="color:#0550ae">(</span>1<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>fringe <span style="color:#0a3069">&#39;(2))
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt;(fringe 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt;&#39;</span><span style="color:#0550ae">(</span>2<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>fringe <span style="color:#0a3069">&#39;())
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#0a3069">&#39;(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fringe 3<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#0a3069">&#39;(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt;(fringe 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt;&#39;</span><span style="color:#0550ae">(</span>4<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span>3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span>4<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span></code></pre>
+<p>Now we can just compute the length of each element:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves t<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>accumulate <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>x y<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#1f2328">(</span><span style="color:#6639ba">+</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">length</span> x<span style="color:#1f2328">)</span> y<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> fringe t<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> t <span style="color:#1f2328">(</span><span style="color:#6639ba">cons</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> fringe t<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span>count-leaves t<span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>Test:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.35-count-leaves-accumulation.rkt
+</span></span><span style="display:flex;"><span><span style="color:#0a3069">&#39;((1 2) (3) (4))
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt;(accumulate #&lt;procedure:...es-accumulation.rkt:15:16&gt; 0 &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span>3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span>4<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:...es-accumulation.rkt:15:16&gt; 0 &#39;((3) (4)))</span>
+</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:...es-accumulation.rkt:15:16&gt; 0 &#39;((4)))</span>
+</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:...es-accumulation.rkt:15:16&gt; 0 &#39;())</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#0550ae">2</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span>
+</span></span></code></pre>
+<p>After coming up with this solution, I <a href="https://billthelizard.blogspot.com/2011/04/sicp-235-counting-leaves-of-tree.html">looked</a> <a href="http://jots-jottings.blogspot.com/2011/10/sicp-exercise-235-counting-leaves-again.html">around</a> to see if there is a better way.
+So, instead of applying <code>fringe</code> to each element of the input list (<code>map fringe t</code>), what function can be used to apply to the entire list?</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> &lt;??&gt; <span style="color:#1f2328">(</span>fringe t<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>Let&rsquo;s print the output of <code>fringe t</code>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> t <span style="color:#1f2328">(</span><span style="color:#6639ba">cons</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span>fringe t<span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.35-count-leaves-accumulation.rkt
+</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fringe <span style="color:#0a3069">&#39;((1 2) 3 4))
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; (fringe &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>fringe 1<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0a3069">&#39;(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt;(fringe &#39;</span><span style="color:#0550ae">(</span>2<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>fringe 2<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; (fringe &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;()
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt;&#39;</span><span style="color:#0550ae">(</span>2<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#0a3069">&#39;(1 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; (fringe &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 4<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>fringe 3<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0a3069">&#39;(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt;(fringe &#39;</span><span style="color:#0550ae">(</span>4<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>fringe 4<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; (fringe &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;()
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt;&#39;</span><span style="color:#0550ae">(</span>4<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#0a3069">&#39;(3 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span> <span style="color:#0550ae">3</span> 4<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span> <span style="color:#0550ae">3</span> 4<span style="color:#0550ae">)</span>
+</span></span></code></pre>
+<p>This is a flattened list. To count leaves, we can just simply return 1 for each element:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves t<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>accumulate <span style="color:#6639ba">+</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>x<span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>fringe t<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span></span></code></pre>
+<p>Test:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.35-count-leaves-accumulation.rkt
+</span></span><span style="display:flex;"><span><span style="color:#0a3069">&#39;(1 2 3 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt;(accumulate #&lt;procedure:+&gt; 0 &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:+&gt; 0 &#39;(1 1 1))</span>
+</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:+&gt; 0 &#39;(1 1))</span>
+</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:+&gt; 0 &#39;(1))</span>
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>accumulate <span style="color:#57606a">#&lt;procedure:+&gt; 0 &#39;())</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0550ae">2</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#0550ae">3</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span>
+</span></span></code></pre>
+
+<p>
+    Tags:
+    
+    <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
+        <i class="bi bi-tag"></i>
+        sicp
+    </a>
+    
+    <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
+        <i class="bi bi-tag"></i>
+        scheme
+    </a>
+    
+</p>
+
+<div class="d-flex flex-row-reverse">
+    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/10/14/sicp-2.35-count-leaves-accumulation"
+        title="Edit this page on GitHub" target="_blank" rel="noopener">
+        <i class="bi bi-pencil"></i>
+        Edit on GitHub
+    </a>
+</div>
+<hr />
+
+<table>
+    <tr>
+        
+        <td>
+            <div class="d-md-flex">
+                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+                    <span aria-hidden="true">&laquo;</span>
+                    Previous
+                </a>
+            </div>
+        </td>
+        
+        
+    </tr>
+</table>
+<script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
+    crossorigin="anonymous" async>
+    </script>
+
+    
+    
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

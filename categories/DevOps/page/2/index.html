@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <meta name="description"
+    content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
+        <p class="text-secondary">2020-09-29</p>
+        <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">steps</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>trigger<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/downstream:linux-amd64<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">params</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repositories</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- repo/integration-test@${DRONE_COMMIT_BRANCH}<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">server</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https://drone.example.com<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">token</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone_token<span style="color:#fff">
+</span></span></span></code></pre>
+<p>It can be separated with unit tests by using <a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">build tags</a>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>// +build integration
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>package webserver_test
+</span></span></code></pre>
+<p>Then we can write code to perform integration test as usual.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
+        <p class="text-secondary">2020-06-26</p>
+        <p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
+
+<p>To do that, we can use <code>git diff</code> to show changes between commits:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
+</span></span><span style="display:flex;"><span>    most_recent_before=&#34;origin/${DRONE_TARGET_BRANCH}&#34;
+</span></span><span style="display:flex;"><span>  elif [[ &#34;${DRONE_BUILD_EVENT}&#34; = &#34;push&#34; &amp;&amp; (&#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;master&#34; || &#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;release-&#34;*) ]]; then
+</span></span><span style="display:flex;"><span>    if [[ &#34;${DRONE_COMMIT_BEFORE}&#34; = &#34;$zero&#34; ]]; then
+</span></span><span style="display:flex;"><span>      exit 0
+</span></span><span style="display:flex;"><span>    else
+</span></span><span style="display:flex;"><span>      most_recent_before=&#34;${DRONE_COMMIT_BEFORE}&#34;
+</span></span><span style="display:flex;"><span>    fi
+</span></span><span style="display:flex;"><span>  fi
+</span></span><span style="display:flex;"><span>  modified_files=$(git --no-pager diff --name-only &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34;);
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
+        <p class="text-secondary">2020-05-06</p>
+        <p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
+
+<p>But if I go to <a href="https://git-tea.dynu.net/quanta/blog/settings/hooks/1">Settings -&gt; Webhooks</a>, then click &ldquo;Test Delivery&rdquo; -&gt; build pipeline will be executed. Why?</p>
+
+<p>First, look at the &ldquo;Recent Deliveries&rdquo; to see if a webhook is triggerd here when you pushing code.
+In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
+
+<p>By pay close attention to the git output when pushing:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Counting objects: 4, done.
+</span></span><span style="display:flex;"><span>Delta compression using up to 4 threads.
+</span></span><span style="display:flex;"><span>Compressing objects: 100% (4/4), done.
+</span></span><span style="display:flex;"><span>Writing objects: 100% (4/4), 2.02 KiB | 2.02 MiB/s, done.
+</span></span><span style="display:flex;"><span>Total 4 (delta 2), reused 0 (delta 0)
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/pre-receive&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/update&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>hint: The &#39;hooks/post-receive&#39; hook was ignored because it&#39;s not set as executable.
+</span></span><span style="display:flex;"><span>hint: You can disable this warning with `git config advice.ignoredHook false`.
+</span></span><span style="display:flex;"><span>To gitea.pi:quanta/blog.git
+</span></span><span style="display:flex;"><span> + d29f63d...47e9ed3 master -&gt; master (forced update)
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/05/06/grpc-length-prefixed-framing">How a gRPC message uses length-prefixed framing?</a></h3>
+        <p class="text-secondary">2020-05-06</p>
+        <p>Once we have the encoded data to send to the other end, we need to package the data in a way that other end can easily extract the information. gRPC uses a message framing technique called length-prefixed framing.</p>
+
+<p>Filter gRPC messages:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;grpc&#39;
+</span></span></code></pre>
+<p>Find out a <code>stream: DATA</code>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>216 923.033355    127.0.0.1 → 127.0.0.1    GRPC 108 DATA[1] (GRPC) (PROTOBUF)
+</span></span></code></pre>
+<p>and show the packet details:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 216&#34; -V
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/05/06/grpc-length-prefixed-framing">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/05/05/grpc-http2-headers">How to show all HTTP2 headers using tshark?</a></h3>
+        <p class="text-secondary">2020-05-05</p>
+        <p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
+
+<p>First, find the frame number based on method:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
+</span></span><span style="display:flex;"><span>214 923.033174    127.0.0.1 → 127.0.0.1    HTTP2 150 HEADERS[1]: POST /book.BookInfo/getBook
+</span></span></code></pre>
+<p>and then show the packet details:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 214&#34; -V
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>HyperText Transfer Protocol 2
+</span></span><span style="display:flex;"><span>    Stream: HEADERS, Stream ID: 1, Length 85, POST /book.BookInfo/getBook
+</span></span><span style="display:flex;"><span>        Length: 85
+</span></span><span style="display:flex;"><span>        Type: HEADERS (1)
+</span></span><span style="display:flex;"><span>        Flags: 0x04
+</span></span><span style="display:flex;"><span>            .... ...0 = End Stream: False
+</span></span><span style="display:flex;"><span>            .... .1.. = End Headers: True
+</span></span><span style="display:flex;"><span>            .... 0... = Padded: False
+</span></span><span style="display:flex;"><span>            ..0. .... = Priority: False
+</span></span><span style="display:flex;"><span>            00.0 ..0. = Unused: 0x00
+</span></span><span style="display:flex;"><span>        0... .... .... .... .... .... .... .... = Reserved: 0x0
+</span></span><span style="display:flex;"><span>        .000 0000 0000 0000 0000 0000 0000 0001 = Stream Identifier: 1
+</span></span><span style="display:flex;"><span>        [Pad Length: 0]
+</span></span><span style="display:flex;"><span>        Header Block Fragment: 8386459162339faaf74e7eb92a94ec4c54dd39faff418b08…
+</span></span><span style="display:flex;"><span>        [Header Length: 216]
+</span></span><span style="display:flex;"><span>        [Header Count: 8]
+</span></span><span style="display:flex;"><span>        Header: :method: POST
+</span></span><span style="display:flex;"><span>            Name Length: 7
+</span></span><span style="display:flex;"><span>            Name: :method
+</span></span><span style="display:flex;"><span>            Value Length: 4
+</span></span><span style="display:flex;"><span>            Value: POST
+</span></span><span style="display:flex;"><span>            :method: POST
+</span></span><span style="display:flex;"><span>            [Unescaped: POST]
+</span></span><span style="display:flex;"><span>            Representation: Indexed Header Field
+</span></span><span style="display:flex;"><span>            Index: 3
+</span></span><span style="display:flex;"><span>        Header: :scheme: http
+</span></span><span style="display:flex;"><span>            Name Length: 7
+</span></span><span style="display:flex;"><span>            Name: :scheme
+</span></span><span style="display:flex;"><span>            Value Length: 4
+</span></span><span style="display:flex;"><span>            Value: http
+</span></span><span style="display:flex;"><span>            :scheme: http
+</span></span><span style="display:flex;"><span>            [Unescaped: http]
+</span></span><span style="display:flex;"><span>            Representation: Indexed Header Field
+</span></span><span style="display:flex;"><span>            Index: 6
+</span></span><span style="display:flex;"><span>        Header: :path: /book.BookInfo/getBook
+</span></span><span style="display:flex;"><span>            Name Length: 5
+</span></span><span style="display:flex;"><span>            Name: :path
+</span></span><span style="display:flex;"><span>            Value Length: 22
+</span></span><span style="display:flex;"><span>            Value: /book.BookInfo/getBook
+</span></span><span style="display:flex;"><span>            :path: /book.BookInfo/getBook
+</span></span><span style="display:flex;"><span>            [Unescaped: /book.BookInfo/getBook]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - Indexed Name
+</span></span><span style="display:flex;"><span>            Index: 5
+</span></span><span style="display:flex;"><span>        Header: :authority: 127.0.0.1:50051
+</span></span><span style="display:flex;"><span>            Name Length: 10
+</span></span><span style="display:flex;"><span>            Name: :authority
+</span></span><span style="display:flex;"><span>            Value Length: 15
+</span></span><span style="display:flex;"><span>            Value: 127.0.0.1:50051
+</span></span><span style="display:flex;"><span>            :authority: 127.0.0.1:50051
+</span></span><span style="display:flex;"><span>            [Unescaped: 127.0.0.1:50051]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - Indexed Name
+</span></span><span style="display:flex;"><span>            Index: 1
+</span></span><span style="display:flex;"><span>        Header: content-type: application/grpc
+</span></span><span style="display:flex;"><span>            Name Length: 12
+</span></span><span style="display:flex;"><span>            Name: content-type
+</span></span><span style="display:flex;"><span>            Value Length: 16
+</span></span><span style="display:flex;"><span>            Value: application/grpc
+</span></span><span style="display:flex;"><span>            content-type: application/grpc
+</span></span><span style="display:flex;"><span>            [Unescaped: application/grpc]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - Indexed Name
+</span></span><span style="display:flex;"><span>            Index: 31
+</span></span><span style="display:flex;"><span>        Header: user-agent: grpc-go/1.24.0
+</span></span><span style="display:flex;"><span>            Name Length: 10
+</span></span><span style="display:flex;"><span>            Name: user-agent
+</span></span><span style="display:flex;"><span>            Value Length: 14
+</span></span><span style="display:flex;"><span>            Value: grpc-go/1.24.0
+</span></span><span style="display:flex;"><span>            user-agent: grpc-go/1.24.0
+</span></span><span style="display:flex;"><span>            [Unescaped: grpc-go/1.24.0]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - Indexed Name
+</span></span><span style="display:flex;"><span>            Index: 58
+</span></span><span style="display:flex;"><span>        Header: te: trailers
+</span></span><span style="display:flex;"><span>            Name Length: 2
+</span></span><span style="display:flex;"><span>            Name: te
+</span></span><span style="display:flex;"><span>            Value Length: 8
+</span></span><span style="display:flex;"><span>            Value: trailers
+</span></span><span style="display:flex;"><span>            [Unescaped: trailers]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - New Name
+</span></span><span style="display:flex;"><span>        Header: grpc-client: evans
+</span></span><span style="display:flex;"><span>            Name Length: 11
+</span></span><span style="display:flex;"><span>            Name: grpc-client
+</span></span><span style="display:flex;"><span>            Value Length: 5
+</span></span><span style="display:flex;"><span>            Value: evans
+</span></span><span style="display:flex;"><span>            [Unescaped: evans]
+</span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - New Name
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2020/05/05/grpc-http2-headers">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2020/04/25/brew-info-gets-stuck">brew info gets stuck</a></h3>
+        <p class="text-secondary">2020-04-25</p>
+        <p>I <a href="https://github.com/quantonganh/salt-osx">managed my Mac with SaltStack</a>.</p>
+
+<p>For some reasons, it gets stuck when running <code>brew</code> state:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[INFO    ] Executing command &#39;/usr/local/bin/brew info --json=v1 --installed&#39; as user &#39;quanta&#39; in directory &#39;/Users/quanta&#39;
+</span></span></code></pre>
+<p>As usual, whenever you get a problem, let&rsquo;s enable debug mode to see what happens:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew info --json=v1 --installed -d
+</span></span></code></pre>
+<p>Now I can see that it stucked at <a href="https://github.com/drone/homebrew-drone">drone/drone</a> repo.
+By just untap this repo, and it&rsquo;s solved.</p>
+
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/30/docker-exited-127">Why my golang docker container exits immediately (code 127)?</a></h3>
+        <p class="text-secondary">2019-10-30</p>
+        <p>To trim the binary size, I used <code>LDFLAGS='-w -s'</code>, pack with <code>upx</code>, then build from scratch. The thing is when starting, it exited immediately with code 127. Why?</p>
+
+<p>My Dockerfile:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>FROM scratch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WORKDIR /app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>COPY build/linux/&lt;binary&gt; .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENTRYPOINT [ &#34;/app/&lt;binary&gt;&#34; ]
+</span></span></code></pre>
+<p>When starting:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>0fbce782a9bd        quantonganh/&lt;binary&gt;:T276-dockerize                              &#34;/app/&lt;binary&gt;&#34;           6 seconds ago       Exited (127) 4 seconds ago                                           relaxed_thompson
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/30/docker-exited-127">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/09/26/cli-autocomplete-for-go-doc">Command-line autocomplete for Go documentation</a></h3>
+        <p class="text-secondary">2019-09-26</p>
+        <p>Go has a great, well documented standard library. You may find yourself spending a fairly significant chunk of your Go programming time digging in stdlib docs, which is reasonable to expect at least for novice Go coders.</p>
+
+<blockquote>
+<p><a href="https://eli.thegreenplace.net/2018/command-line-autocomplete-for-go-documentation/">https://eli.thegreenplace.net/2018/command-line-autocomplete-for-go-documentation/</a></p>
+</blockquote>
+
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Auto reload your Go webserver with Gulp</a></h3>
+        <p class="text-secondary">2019-09-20</p>
+        <p>When you developp a webserver with Go, you must compile each time you do an update in your code. Well.. this is redundant. With Gulp you can automatize this task… Indeed, when a go file is modified, a task compile the application in the “bin” folder (“gopath/bin”) then another launch the executable (the webserver).</p>
+
+<blockquote>
+<p><a href="https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d">https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d</a></p>
+</blockquote>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">gulp</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">util</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp-util&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">notifier</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;node-notifier&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">child</span>    <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;child_process&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">os</span>       <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;os&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">path</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;path&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;null&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">build</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;install&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">server</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">!=</span> <span style="color:#0a3069">&#39;null&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">kill</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">process</span><span style="color:#1f2328">.</span><span style="color:#1f2328">cwd</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#1f2328">split</span><span style="color:#1f2328">(</span><span style="color:#1f2328">path</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sep</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">length</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">.</span><span style="color:#1f2328">length</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">app</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">[</span><span style="color:#1f2328">length</span> <span style="color:#0550ae">-</span> <span style="color:#6639ba">parseInt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">]</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">platform</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#39;win32&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span> <span style="color:#0550ae">+</span> <span style="color:#0a3069">&#39;.exe&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span> <span style="color:#cf222e">else</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">series</span><span style="color:#1f2328">(</span><span style="color:#1f2328">build</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;*.go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;**/*.go&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">serve</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">serve</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">watch</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#cf222e">default</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">parallel</span><span style="color:#1f2328">(</span><span style="color:#1f2328">serve</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">)</span>
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+<ul class="pagination justify-content-center">
+        
+    <li class="page-item"><a class="page-link" href="/">First</a></li>
+    <li class="page-item"><a class="page-link" href="/">&laquo;</a></li>
+        
+        
+    <li class="page-item">
+        <a class="page-link" href="/">1</a>
+    </li>
+        
+    <li class="page-item active">
+        <a class="page-link" href="/page/2/">2</a>
+    </li>
+        
+        
+    <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
+    <li class="page-item disabled"><a class="page-link">Last</a></li>
+        
+</ul>
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

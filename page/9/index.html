@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A place to share my gained knowledge and experience</title>
+  <meta name="description"
+    content="DevOps - Programming - Travel - Photography">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    integrity="sha384-tKLJeE1ALTUwtXlaGjJYM3sejfssWdAaWR2s97axw4xkiAdMzQjtOjgcyw0Y50KU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/basic.css">
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"
+    integrity="sha384-YnGSHPPWEUDKMHFPOVmNP7Xyfwx5G0CHet6IoNgiX6CbFZS8gCeIfEgB1MgPwjdI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <article>
+    <header class="text-center">
+      <div class="title">
+        <a href="/">
+          <img class="quanface" src="/static/images/quanface.png" />
+          Quan Tong
+        </a>
+      </div>
+      <i>"Life is all about sharing. If we are good at something, pass it on." - Mary Berry</i>
+      <div class="navi">
+        <ul>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+          <li>
+            <a href="/photos">Photos</a>
+          </li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" id="categoriesMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <a class="dropdown-item" href="/categories/Cu%e1%bb%99c%20s%e1%bb%91ng">Cuộc sống (12)</a>
+              
+              <a class="dropdown-item" href="/categories/DevOps">DevOps (19)</a>
+              
+              <a class="dropdown-item" href="/categories/Development%20Environment">Development Environment (15)</a>
+              
+              <a class="dropdown-item" href="/categories/Du%20l%e1%bb%8bch">Du lịch (11)</a>
+              
+              <a class="dropdown-item" href="/categories/Networking">Networking (4)</a>
+              
+              <a class="dropdown-item" href="/categories/Operating%20System">Operating System (1)</a>
+              
+              <a class="dropdown-item" href="/categories/Programming">Programming (30)</a>
+              
+            </div>
+          </li>
+          <li>
+            <a href="/tags">Tags</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <hr>
+    
+    
+        <h3><a href="/posts/2019/10/30/docker-exited-127">Why my golang docker container exits immediately (code 127)?</a></h3>
+        <p class="text-secondary">2019-10-30</p>
+        <p>To trim the binary size, I used <code>LDFLAGS='-w -s'</code>, pack with <code>upx</code>, then build from scratch. The thing is when starting, it exited immediately with code 127. Why?</p>
+
+<p>My Dockerfile:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>FROM scratch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WORKDIR /app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>COPY build/linux/&lt;binary&gt; .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENTRYPOINT [ &#34;/app/&lt;binary&gt;&#34; ]
+</span></span></code></pre>
+<p>When starting:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>0fbce782a9bd        quantonganh/&lt;binary&gt;:T276-dockerize                              &#34;/app/&lt;binary&gt;&#34;           6 seconds ago       Exited (127) 4 seconds ago                                           relaxed_thompson
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/30/docker-exited-127">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/22/go-no-packages-found">go/packages.Load: no packages found</a></h3>
+        <p class="text-secondary">2019-10-22</p>
+        <p>I have a mono-repo, structure like this:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>repo
+</span></span><span style="display:flex;"><span>├── service1
+</span></span><span style="display:flex;"><span>├── service2
+</span></span><span style="display:flex;"><span>├── go.mod
+</span></span></code></pre>
+<p>I often open the root folder from the command line by using <code>code .</code>. After that I open a file in <code>service1</code>, and cannot go to definition. Here&rsquo;s the logs from <code>gopls</code>:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[Info  - 5:49:28 AM] 2019/10/22 05:49:28 20.675656ms for GOROOT=/usr/local/Cellar/go/1.13/libexec GOPATH=/Users/quanta/go GO111MODULE=auto PWD=/Users/quanta/go/src/github.com/owner/repo go &#34;list&#34; &#34;-e&#34; &#34;-json&#34; &#34;-compiled=true&#34; &#34;-test=true&#34; &#34;-export=false&#34; &#34;-deps=true&#34; &#34;-find=false&#34; &#34;--&#34; &#34;/Users/quanta/go/src/github.com/owner/repo/a/b/c&#34;, stderr: &lt;&lt;go: directory a/b/c is outside main module
+</span></span><span style="display:flex;"><span>&gt;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[Error - 5:49:32 AM] Request textDocument/definition failed.
+</span></span><span style="display:flex;"><span>  Message: go/packages.Load: no packages found for /Users/quanta/go/src/github.com/owner/repo/a/b/c/file.go
+</span></span><span style="display:flex;"><span>  Code: 0 
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/22/go-no-packages-found">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/21/pick-up-child-early">Bằng về sớm với ba</a></h3>
+        <p class="text-secondary">2019-10-21</p>
+        <p>Bốn giờ con tan học<br />
+Ùa ra như bầy ong<br />
+Chạy xuống sân đá bóng<br />
+Mới năm giờ đã xong.</p>
+
+<p>Bởi lần lượt các bạn<br />
+Được bố mẹ đón đi<br />
+Còn mỗi con ở lại<br />
+Nằm dài xem tivi.</p>
+
+<p>Xem một lúc chán quá<br />
+Lang thang đi tìm ba<br />
+Gọi mãi mà chẳng thấy<br />
+Ba vẫn còn ở xa.</p>
+
+<p>Năm rưỡi ba gập máy<br />
+Quyết định nhấc cái mông<br />
+Vành đai ba thì tắc<br />
+Biết bao giờ mới thông.</p>
+
+<p>Sáu giờ mười đến cổng<br />
+Thấy con đang ngóng trông</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/21/pick-up-child-early">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
+        <p class="text-secondary">2019-10-16</p>
+        <p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">db</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Open</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sqlite3&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;./books.db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Created table books successfully&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Life is a joke&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;The Javna brothers&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">123456789</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Inserted first book into db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">rows</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Query</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;SELECT id, name, author FROM books&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#fff"> </span><span style="color:#1f2328">Book</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Next</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Scan</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/14/wien-hauptbahnhof-austria">Lên xuống dòng đời</a></h3>
+        <p class="text-secondary">2019-10-14</p>
+        <p><img src="wien-hauptbahnhof-austria.jpg" alt="Wien Hauptbahnhof Austria" />
+<em>Wien Hauptbahnhof, Austria.</em></p>
+
+<p>Vừa đáp chuyến tàu đêm từ Zurich sang. May mà lần này mỗi khi tàu dừng, điều hoà không tắt thì phải. Cuốc bộ tiếp 1,5 km nữa để về khách sạn. Hồn nhiên đưa mail booking cho nhân viên, đang định hỏi xem có cho check in sớm không.</p>
+
+<ul>
+<li>Ơ, cái này là mày đặt cho đêm mai mà?</li>
+<li>Ặc, mình nhầm ngày à.</li>
+<li>Chỗ mày có cho gửi đồ không?</li>
+</ul>
+
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/14/wien-hauptbahnhof-austria">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/10/11/how-do-I-build-this-blog">How do I build this blog?</a></h3>
+        <p class="text-secondary">2019-10-11</p>
+        <p><img src="/2019/10/11/pi4.jpg" alt="Raspberry Pi 4" /></p>
+
+<p>Recently, I decided to find a new job as a Golang developer. So, I updated my resume, sent to my friends to ask for review. Then I submitted it enclosed herewith a cover letter to recruiters. Some didn&rsquo;t reply, and the other replied with a message like this &ldquo;You are so good, but I&rsquo;m so sorry&hellip;&rdquo;.</p>
+
+<p>What is the reason?</p>
+
+<p>As you can see in <a href="resume">my resume</a>, I started my career as a .NET developer, then my passionate on Linux and open source lead me to a different direction: system administrator. I dedicated myself to this role for a significant period before transitioning back to work as a Golang developer 2 years ago.</p>
+
+        
+        <p class="text-right">
+            <a href="/posts/2019/10/11/how-do-I-build-this-blog">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/resume">Resume</a></h3>
+        <p class="text-secondary">2019-09-30</p>
+        
+<h1>Quan Tong Anh</h1>
+
+<p><a href="mailto:quantonganh@gmail.com">quantonganh@gmail.com</a> | <a href="https://github.com/quantonganh">github.com/quantonganh</a></p>
+
+<h2>Software Engineer / DevOps Engineer</h2>
+
+<p>I am an experienced and versatile software and DevOps engineer with over a decade of expertise in the industry, including exposure to Golang, gRPC, PostgreSQL and MongoDB.</p>
+
+<p>As a passionate advocate for Go, I appreciate its native concurrency support, streamlined compilation process, and the power behind its simplicity and extensive standard library, enabling the development of scalable, high-performance, and robust backend systems.</p>
+
+        
+        <p class="text-right">
+            <a href="/resume">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/09/26/cli-autocomplete-for-go-doc">Command-line autocomplete for Go documentation</a></h3>
+        <p class="text-secondary">2019-09-26</p>
+        <p>Go has a great, well documented standard library. You may find yourself spending a fairly significant chunk of your Go programming time digging in stdlib docs, which is reasonable to expect at least for novice Go coders.</p>
+
+<blockquote>
+<p><a href="https://eli.thegreenplace.net/2018/command-line-autocomplete-for-go-documentation/">https://eli.thegreenplace.net/2018/command-line-autocomplete-for-go-documentation/</a></p>
+</blockquote>
+
+        
+        <hr>
+    
+        <h3><a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Auto reload your Go webserver with Gulp</a></h3>
+        <p class="text-secondary">2019-09-20</p>
+        <p>When you developp a webserver with Go, you must compile each time you do an update in your code. Well.. this is redundant. With Gulp you can automatize this task… Indeed, when a go file is modified, a task compile the application in the “bin” folder (“gopath/bin”) then another launch the executable (the webserver).</p>
+
+<blockquote>
+<p><a href="https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d">https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d</a></p>
+</blockquote>
+<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">gulp</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">util</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp-util&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">notifier</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;node-notifier&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">child</span>    <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;child_process&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">os</span>       <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;os&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">path</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;path&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;null&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">build</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;install&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">server</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">!=</span> <span style="color:#0a3069">&#39;null&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">kill</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">process</span><span style="color:#1f2328">.</span><span style="color:#1f2328">cwd</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#1f2328">split</span><span style="color:#1f2328">(</span><span style="color:#1f2328">path</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sep</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">length</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">.</span><span style="color:#1f2328">length</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">app</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">[</span><span style="color:#1f2328">length</span> <span style="color:#0550ae">-</span> <span style="color:#6639ba">parseInt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">]</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">platform</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#39;win32&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span> <span style="color:#0550ae">+</span> <span style="color:#0a3069">&#39;.exe&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span> <span style="color:#cf222e">else</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">series</span><span style="color:#1f2328">(</span><span style="color:#1f2328">build</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;*.go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;**/*.go&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">serve</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">serve</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">watch</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#cf222e">default</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">parallel</span><span style="color:#1f2328">(</span><span style="color:#1f2328">serve</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">)</span>
+</span></span></code></pre>
+        
+        <p class="text-right">
+            <a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Read More...</a>
+        </p>
+        
+        <hr>
+    
+        <h3><a href="/about">About</a></h3>
+        <p class="text-secondary">2019-09-19</p>
+        <p>Hi, I&rsquo;m Quan.</p>
+
+<p>I began my career as a .NET developer, but my passion for Linux and open-source software led me to pursue a career in system administration.
+Over the years, I gained extensive Linux experience and eventually transitioned into software engineering.
+In my spare time, I enjoy teaching my wife how to program to <a href="../../../2021/06/10/automate-office-tasks">optimize her office tasks</a>.</p>
+
+<p>I am motivated by roles that make a positive impact on people&rsquo;s lives or offer opportunities to help others.</p>
+
+        
+        <p class="text-right">
+            <a href="/about">Read More...</a>
+        </p>
+        
+        <hr>
+    
+
+    
+    
+<ul class="pagination justify-content-center">
+        
+    <li class="page-item"><a class="page-link" href="/">First</a></li>
+    <li class="page-item"><a class="page-link" href="/page/8/">&laquo;</a></li>
+        
+        
+    <li class="page-item">
+        <a class="page-link" href="/">1</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/2/">2</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/3/">3</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/4/">4</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/5/">5</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/6/">6</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/7/">7</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/8/">8</a>
+    </li>
+        
+    <li class="page-item active">
+        <a class="page-link" href="/page/9/">9</a>
+    </li>
+        
+    <li class="page-item">
+        <a class="page-link" href="/page/10/">10</a>
+    </li>
+        
+        
+    <li class="page-item"><a class="page-link" href="/page/10/">&raquo;</a></li>
+    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+        
+</ul>
+    
+
+  </article>
+
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        let forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <footer class="text-center mt-auto">
+    <div class="navi">
+      <ul>
+        <li>
+          <a href="/archives">Archives</a>
+        </li>
+        <li>
+          <a href="/sitemap.xml">Sitemap</a>
+        </li>
+        <li>
+          <a href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>
