@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,20 +81,25 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/05/05/grpc-http2-headers">How to show all HTTP2 headers using tshark?</a></h3>
-        <p class="text-secondary">2020-05-05</p>
-        <p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
+
+<h3><a href="/posts/2020/05/05/grpc-http2-headers">How to show all HTTP2 headers using tshark?</a></h3>
+<p class="text-secondary">2020-05-05</p>
+<p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
 
 <p>First, find the frame number based on method:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
 </span></span><span style="display:flex;"><span>214 923.033174    127.0.0.1 → 127.0.0.1    HTTP2 150 HEADERS[1]: POST /book.BookInfo/getBook
 </span></span></code></pre>
 <p>and then show the packet details:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 214&#34; -V
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 214&#34; -V
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>HyperText Transfer Protocol 2
 </span></span><span style="display:flex;"><span>    Stream: HEADERS, Stream ID: 1, Length 85, POST /book.BookInfo/getBook
@@ -181,39 +186,39 @@
 </span></span><span style="display:flex;"><span>            [Unescaped: evans]
 </span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - New Name
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/05/grpc-http2-headers">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/04/25/brew-info-gets-stuck">brew info gets stuck</a></h3>
-        <p class="text-secondary">2020-04-25</p>
-        <p>I <a href="https://github.com/quantonganh/salt-osx">managed my Mac with SaltStack</a>.</p>
+
+<p class="text-right">
+  <a href="/posts/2020/05/05/grpc-http2-headers">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/04/25/brew-info-gets-stuck">brew info gets stuck</a></h3>
+<p class="text-secondary">2020-04-25</p>
+<p>I <a href="https://github.com/quantonganh/salt-osx">managed my Mac with SaltStack</a>.</p>
 
 <p>For some reasons, it gets stuck when running <code>brew</code> state:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[INFO    ] Executing command &#39;/usr/local/bin/brew info --json=v1 --installed&#39; as user &#39;quanta&#39; in directory &#39;/Users/quanta&#39;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[INFO    ] Executing command &#39;/usr/local/bin/brew info --json=v1 --installed&#39; as user &#39;quanta&#39; in directory &#39;/Users/quanta&#39;
 </span></span></code></pre>
 <p>As usual, whenever you get a problem, let&rsquo;s enable debug mode to see what happens:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew info --json=v1 --installed -d
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>brew info --json=v1 --installed -d
 </span></span></code></pre>
 <p>Now I can see that it stucked at <a href="https://github.com/drone/homebrew-drone">drone/drone</a> repo.
 By just untap this repo, and it&rsquo;s solved.</p>
 
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
-        <p class="text-secondary">2020-04-13</p>
-        <p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
+
+<hr>
+
+<h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
+<p class="text-secondary">2020-04-13</p>
+<p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
 
 <p>I created this tool to run it from CLI.</p>
 
 <p>First, take a look at this <a href="https://developers.google.com/calendar/quickstart/go">quickstart</a>.</p>
 
 <p>Create initical code by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra init
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra init
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
 </span></span><span style="display:flex;"><span>.
@@ -223,7 +228,7 @@ By just untap this repo, and it&rsquo;s solved.</p>
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
 <p>Create <code>event</code> command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra add event
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra add event
 </span></span><span style="display:flex;"><span>$ cobra add insert -p &#39;eventCmd&#39;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
@@ -235,16 +240,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 </span></span><span style="display:flex;"><span>│   └── root.go
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/04/12/idea-machine-2-wanted-apps">Kể tên 10 ứng dụng mà bạn muốn có</a></h3>
-        <p class="text-secondary">2020-04-12</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/04/12/idea-machine-2-wanted-apps">Kể tên 10 ứng dụng mà bạn muốn có</a></h3>
+<p class="text-secondary">2020-04-12</p>
+
 <ol>
 <li>Tổng hợp các co-working spaces ở Hà Nội, gửi mail khi có khuyến mại</li>
 <li>Ước lượng thời gian đi từ A đến B, kết hợp với tình hình thời tiết xem có nên đi không</li>
@@ -253,16 +258,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 <li>Ứng dụng cho phép mọi người ghi lại những khó khăn trong công việc hàng ngày để người khác hoặc chính họ tìm cách giải quyết</li>
 </ol>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/04/12/idea-machine-2-wanted-apps">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/03/12/goland-free-evaluation">Đầu tư</a></h3>
-        <p class="text-secondary">2020-03-12</p>
-        <p><img src="/2020/03/12/goland-free-evaluation.png" alt="Goland free evaluation" /></p>
+
+<p class="text-right">
+  <a href="/posts/2020/04/12/idea-machine-2-wanted-apps">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/03/12/goland-free-evaluation">Đầu tư</a></h3>
+<p class="text-secondary">2020-03-12</p>
+<p><img src="goland-free-evaluation.png" alt="Goland free evaluation" /></p>
 
 <p>Nghĩ nhiều khi cũng lạ.</p>
 
@@ -279,16 +284,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 <li>Nếu bạn định dùng thứ gì đó &gt;= 5 năm, hãy mua thứ tốt nhất có thể.</li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/03/12/goland-free-evaluation">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/01/20/36-things-I-learned-before-turning-37">36 things I learned before turning 37</a></h3>
-        <p class="text-secondary">2020-01-20</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2020/03/12/goland-free-evaluation">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/01/20/36-things-I-learned-before-turning-37">36 things I learned before turning 37</a></h3>
+<p class="text-secondary">2020-01-20</p>
+
 <ol>
 <li><p>Đọc sách chưa biết bổ ngang dọc ở đâu nhưng góc nhìn rộng hơn, tính tình thuần hơn. </p></li>
 
@@ -301,16 +306,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 <li><p>Kể cả bạn không có ý định nhảy việc thì 2, 3 năm cũng nên thử đi phỏng vấn để biết xem mình đang yếu, thiếu gì và thị trường đang cần gì. </p></li>
 </ol>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/01/20/36-things-I-learned-before-turning-37">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/12/03/activities-to-be-happy">Activities to be happy</a></h3>
-        <p class="text-secondary">2019-12-03</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2020/01/20/36-things-I-learned-before-turning-37">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/12/03/activities-to-be-happy">Activities to be happy</a></h3>
+<p class="text-secondary">2019-12-03</p>
+
 <ul>
 <li>engage in sports activity</li>
 <li>spend time with friends and family</li>
@@ -319,12 +324,12 @@ By just untap this repo, and it&rsquo;s solved.</p>
 <li>take up the challenges of life: the bitterness of failure will sweeten your success</li>
 </ul>
 
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/11/28/tamsui-taiwan">Đạm Thủy (Tamsui)</a></h3>
-        <p class="text-secondary">2019-11-28</p>
-        <p><img src="/2019/11/28/tamsui-taiwan.jpg" alt="Tamsui Taiwan" />
+
+<hr>
+
+<h3><a href="/posts/2019/11/28/tamsui-taiwan">Đạm Thủy (Tamsui)</a></h3>
+<p class="text-secondary">2019-11-28</p>
+<p><img src="tamsui-taiwan.jpg" alt="Tamsui Taiwan" />
 <em>Tamsui, Taiwan.</em></p>
 
 <p>Đáp MRT từ suối nước nóng Beitou về không kịp.</p>
@@ -341,16 +346,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 
 <p>Google cho biết gần đây có một quán ăn mà lúc nhỏ một ca sĩ nổi tiếng của Đài Loan hay đến ăn. Vì thế, chủ quán đã dùng tên của anh để đặt cho phần ăn này (có lẽ từ đó mà quán này cũng nổi tiếng luôn 😃).</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2019/11/28/tamsui-taiwan">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/11/27/idea-machine-1-positive-thinking">Giải quyết 10 vấn đề khó khăn trong cuộc sống bằng thái độ biết ơn</a></h3>
-        <p class="text-secondary">2019-11-27</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2019/11/28/tamsui-taiwan">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/11/27/idea-machine-1-positive-thinking">Giải quyết 10 vấn đề khó khăn trong cuộc sống bằng thái độ biết ơn</a></h3>
+<p class="text-secondary">2019-11-27</p>
+
 <ol>
 <li>Lạc đường khi đi chơi -&gt; sau này nhớ lại mới có chuyện để nói chứ.</li>
 <li>Tắc đường khi đi làm về -&gt; có thời gian để nghĩ về các ý tưởng.</li>
@@ -361,16 +366,16 @@ By just untap this repo, and it&rsquo;s solved.</p>
 <li>Phỏng vấn tạch -&gt; biết kiến thức của mình còn hổng ở đâu.</li>
 </ol>
 
-        
-        <p class="text-right">
-            <a href="/posts/2019/11/27/idea-machine-1-positive-thinking">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/11/01/sun-yat-sen-university">Những người tốt quanh ta</a></h3>
-        <p class="text-secondary">2019-11-01</p>
-        <p><img src="sun-yat-sen-university.jpg" alt="Sun Yat-sen University" />
+
+<p class="text-right">
+  <a href="/posts/2019/11/27/idea-machine-1-positive-thinking">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/11/01/sun-yat-sen-university">Những người tốt quanh ta</a></h3>
+<p class="text-secondary">2019-11-01</p>
+<p><img src="sun-yat-sen-university.jpg" alt="Sun Yat-sen University" />
 <em>On the way go to Sun Yat-sen university.</em></p>
 
 <p>Xuống xe buýt.</p>
@@ -388,68 +393,68 @@ By just untap this repo, and it&rsquo;s solved.</p>
 
 <p>Bạn xuống xe, đi bộ cùng cả nhà. Vừa đi, vừa nói chuyện. Bạn học ĐHQG, đang làm TS toán tối ưu bên này. Bạn vừa dẫn đi vừa giới thiệu lịch sử, &hellip; Rồi còn chụp ảnh giúp.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2019/11/01/sun-yat-sen-university">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2019/11/01/sun-yat-sen-university">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/7/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/9/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/7/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/9/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -485,6 +490,20 @@ By just untap this repo, and it&rsquo;s solved.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

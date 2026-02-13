@@ -81,27 +81,32 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2024/10/10/helix-golang-ide">Helix as my Golang IDE: powering up with WezTerm and CLI tools</a></h3>
-        <p class="text-secondary">2024-10-10</p>
-        <p>It&rsquo;s has been one year from my last post.
+
+<h3><a href="/posts/2024/10/10/helix-golang-ide">Helix as my Golang IDE: powering up with WezTerm and CLI tools</a></h3>
+<p class="text-secondary">2024-10-10</p>
+<p>It&rsquo;s has been one year from my last post.
 Today I would like to show you how I use Helix as my Golang IDE.</p>
 
 <p>Regarding the file explorer workaround in the last post, I show you how to use <code>nnn</code> or <code>broot</code> to open a file tree in the sidebar but actually I&rsquo;m using the PR <a href="https://github.com/helix-editor/helix/pull/5768">#5768</a>. The reason is I would like to have a bottom pane for the terminal, and there is no way to just hide it and keep the sidebar (file explorer) and the main pane (helix).</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2024/10/10/helix-golang-ide">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
-        <p class="text-secondary">2023-08-19</p>
-        <p><img src="/2023/08/19/hx-ide.gif" alt="Helix as IDE" /></p>
+
+<p class="text-right">
+  <a href="/posts/2024/10/10/helix-golang-ide">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
+<p class="text-secondary">2023-08-19</p>
+<p><img src="hx-ide.gif" alt="Helix as IDE" /></p>
 
 <p>This post recaps previous series of posts about Helix.</p>
 
@@ -124,16 +129,16 @@ Today I would like to show you how I use Helix as my Golang IDE.</p>
 
 <p>I later discovered another useful trick <a href="https://www.reddit.com/r/HelixEditor/comments/13x9a3z/integrating_fuzzylive_grepping_into_helix_my/">here</a>. We can use <a href="https://wezfurlong.org/wezterm/cli/cli/get-text.html">wezterm cli get-text</a> command to extract the filename and line number from the status line:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/19/turn-helix-into-ide">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
-        <p class="text-secondary">2023-08-11</p>
-        <p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
+
+<p class="text-right">
+  <a href="/posts/2023/08/19/turn-helix-into-ide">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
+<p class="text-secondary">2023-08-11</p>
+<p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
 I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">codelldb</a> to address the <a href="https://github.com/helix-editor/helix/issues/7007">visualization issue related to string variables</a> within <code>lldb-vscode</code>.</p>
 
 <p>However, the usage of <code>codelldb</code> presents some challenges:</p>
@@ -144,24 +149,24 @@ I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">co
 <li>The Helix theme breaks when listing variables</li>
 </ul>
 
-<p><img src="/2023/08/11/codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
+<p><img src="codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
 
 <p>In my quest for an improved debugging experience, I found <a href="https://github.com/rust-lang/rust/blob/master/src/etc/rust-lldb">rust-lldb</a>,
 which impressively manages to display the contents of string variables:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/10/debug-rust-helix">How to debug Rust in Helix?</a></h3>
-        <p class="text-secondary">2023-08-10</p>
-        <p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
+
+<p class="text-right">
+  <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/10/debug-rust-helix">How to debug Rust in Helix?</a></h3>
+<p class="text-secondary">2023-08-10</p>
+<p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
 However, there is an issue where <a href="https://github.com/helix-editor/helix/issues/7007">string variables are displayed as memory addresses</a> instead of their actual values:</p>
 
-<p><img src="/2023/08/10/lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
+<p><img src="lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
 
 <p>Noticing that <a href="https://github.com/vadimcn/codelldb/blob/master/MANUAL.md#rust-language-support">CodeLLDB natively supports visualization of most common Rust data types</a>,
 I would like to give it a try.</p>
@@ -169,46 +174,46 @@ I would like to give it a try.</p>
 <p>Here&rsquo;s the step-by-step process:</p>
 
 <p>Download the CodeLLDB extension:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#6639ba">cd</span> ~/Downloads/
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cd ~/Downloads/
 </span></span><span style="display:flex;"><span>$ wget https://github.com/vadimcn/codelldb/releases/download/v1.9.2/codelldb-aarch64-darwin.vsix
 </span></span></code></pre>
 <p>Setup the extension:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ mkdir -p ~/.local
-</span></span><span style="display:flex;"><span>$ <span style="color:#6639ba">set</span> fish_user_paths /Users/quantong/.local/extension/adapter <span style="color:#953800">$fish_user_paths</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ mkdir -p ~/.local
+</span></span><span style="display:flex;"><span>$ set fish_user_paths /Users/quantong/.local/extension/adapter $fish_user_paths
 </span></span><span style="display:flex;"><span>$ codelldb
 </span></span></code></pre>
 <p>If you encountered this error:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/10/debug-rust-helix">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">nnn: wcswidth returns different values for same Unicode code point between macOS and Linux</a></h3>
-        <p class="text-secondary">2023-08-09</p>
-        <p>When attempting to <a href="/2023/08/02/file-tree-workaround-for-helix.md">integrate <code>nnn</code> with Helix</a>, I encountered <a href="https://github.com/jarun/nnn/issues/1692">an interesting issue</a> that resulted in duplicate first characters in the filename:</p>
 
-<p><img src="/2023/08/09/nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
+<p class="text-right">
+  <a href="/posts/2023/08/10/debug-rust-helix">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">nnn: wcswidth returns different values for same Unicode code point between macOS and Linux</a></h3>
+<p class="text-secondary">2023-08-09</p>
+<p>When attempting to <a href="/2023/08/02/file-tree-workaround-for-helix.md">integrate <code>nnn</code> with Helix</a>, I encountered <a href="https://github.com/jarun/nnn/issues/1692">an interesting issue</a> that resulted in duplicate first characters in the filename:</p>
+
+<p><img src="nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
 
 <p>What&rsquo;s interesting is that this issue doesn&rsquo;t occur on Linux:</p>
 
-<p><img src="/2023/08/09/nnn-linux.png" alt="nnn on Linux" /></p>
+<p><img src="nnn-linux.png" alt="nnn on Linux" /></p>
 
 <p>I&rsquo;ve spent several days troubleshooting this problem but haven&rsquo;t been able to identify the root cause.
 The only solution I could come up with is <a href="https://github.com/jarun/nnn/pull/1711">a workaround</a>, and I must admit, I&rsquo;m still not entirely satisfied with it.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/04/quick-select-wezterm">WezTerm: quickly select a command and open it in a new pane</a></h3>
-        <p class="text-secondary">2023-08-04</p>
-        <p>In my previous post, <a href="../../07/21/jump-to-build-error-helix">jump to build errors with WezTerm</a>, I demostrated how to navigate to build error using <a href="https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks">hyperlinks</a>.
+
+<p class="text-right">
+  <a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/04/quick-select-wezterm">WezTerm: quickly select a command and open it in a new pane</a></h3>
+<p class="text-secondary">2023-08-04</p>
+<p>In my previous post, <a href="../../07/21/jump-to-build-error-helix">jump to build errors with WezTerm</a>, I demostrated how to navigate to build error using <a href="https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks">hyperlinks</a>.
 One limitation of that approach is that it requires a mouse click.</p>
 
 <p>In this post, I explore how to achieve the same functionality using a shortcut key in WezTerm,
@@ -217,16 +222,16 @@ thanks to <a href="https://wezfurlong.org/wezterm/config/lua/keyassignment/Quick
 <p>WezTerm&rsquo;s <code>QuickSelectArgs</code> allows us to bind a shortcut key to select specific patterns and perform actions on the selected text.
 Let&rsquo;s say we have the following warning:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/04/quick-select-wezterm">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Open same file in already running instance of Helix</a></h3>
-        <p class="text-secondary">2023-08-02</p>
-        <p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
+
+<p class="text-right">
+  <a href="/posts/2023/08/04/quick-select-wezterm">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Open same file in already running instance of Helix</a></h3>
+<p class="text-secondary">2023-08-02</p>
+<p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
 
 <blockquote>
 <p>I find that I have occasionally (frequently!) made the mistake of two instances of helix in different terminals editing the same file.
@@ -234,16 +239,16 @@ This causes me a problem, because I will then have changes in one of the instanc
 The worst case is when I accidentally switch back to an instance that has an older version of the file open.</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
-        <p class="text-secondary">2023-08-02</p>
-        <p><img src="/2023/08/02/nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
+
+<p class="text-right">
+  <a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
+<p class="text-secondary">2023-08-02</p>
+<p><img src="nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
 
 <p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
 
@@ -254,16 +259,16 @@ here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlon
 When navigating to a file, it will be opened using <code>hx</code> in the right pane.
 When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/01/disable-ligatures-in-wezterm">How to disable ligatures in WezTerm?</a></h3>
-        <p class="text-secondary">2023-08-01</p>
-        <p>As you may know, I switched to <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a> a few months ago.</p>
+
+<p class="text-right">
+  <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/01/disable-ligatures-in-wezterm">How to disable ligatures in WezTerm?</a></h3>
+<p class="text-secondary">2023-08-01</p>
+<p>As you may know, I switched to <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a> a few months ago.</p>
 
 <p>What surprised me is when I type <code>!=</code> in Helix, it is rendered as <code>≠</code>.
 This behaviour also occurs with other character combinations, for example:</p>
@@ -276,57 +281,57 @@ This behaviour also occurs with other character combinations, for example:</p>
 
 <p>My first guess was that Helix had something to do with the font rendering but I encountered the same issue when typing directly into terminal.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/01/disable-ligatures-in-wezterm">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/07/31/create-snippets-in-helix">How to create snippets in Helix?</a></h3>
-        <p class="text-secondary">2023-07-31</p>
-        <p><a href="https://github.com/helix-editor/helix/issues/395">Helix currently does not support snippets</a>.
+
+<p class="text-right">
+  <a href="/posts/2023/08/01/disable-ligatures-in-wezterm">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/07/31/create-snippets-in-helix">How to create snippets in Helix?</a></h3>
+<p class="text-secondary">2023-07-31</p>
+<p><a href="https://github.com/helix-editor/helix/issues/395">Helix currently does not support snippets</a>.
 However, there is a workaround to insert snippets using <code>:insert-output</code> to run a shell command.
 Still, this might not feel like the most natural way to work with snippets.</p>
 
 <p>For instance, in GoLand, a similar feature called <a href="https://www.jetbrains.com/help/go/using-live-templates.html#live_templates_types">live templates</a>
 allows you to type <code>err</code> and expand it into the following:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
 <p>I wonder if I can archieve the same functionality in Helix by creating a simple language server</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/07/31/create-snippets-in-helix">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/07/31/create-snippets-in-helix">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item disabled"><a class="page-link">First</a></li>
-    <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
-        
-        
-    <li class="page-item active">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/2/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/2/">Last</a></li>
-        
+  
+  <li class="page-item disabled"><a class="page-link">First</a></li>
+  <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
+  
+  
+  <li class="page-item active">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/2/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/2/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -362,6 +367,20 @@ allows you to type <code>err</code> and expand it into the following:</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

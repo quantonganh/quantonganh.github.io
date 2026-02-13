@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Docker rootless keeps restarting?</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2023-07-12</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
 </p>
 
 <p>As some of you may know, this blog is hosted on Raspberry Pi.
@@ -102,23 +107,23 @@ However, after making this change, I started receiving notifications indicating 
 
 <p>Whenever this happens, I ssh into my Pi and run the command <code>docker ps</code> to list the running containers.
 Strangely, I noticed that the container was only up for less than a second:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ docker ps
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ docker ps
 </span></span><span style="display:flex;"><span>CONTAINER ID   IMAGE                                 COMMAND                  CREATED       STATUS                  PORTS                                                                                                                 NAMES
-</span></span><span style="display:flex;"><span>9bd3ad610e97   ghcr.io/quantonganh/blog:master       <span style="color:#0a3069">&#34;./blog -config conf…&#34;</span>   <span style="color:#0550ae">3</span> hours ago   Up Less than a second   80/tcp                                                     
+</span></span><span style="display:flex;"><span>9bd3ad610e97   ghcr.io/quantonganh/blog:master       <span style="color:#6a8759">&#34;./blog -config conf…&#34;</span>   <span style="color:#6897bb">3</span> hours ago   Up Less than a second   80/tcp                                                     
 </span></span></code></pre>
 <p>Additionally, I checked the status of the Docker service using the following command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>● docker.service - Docker Application Container Engine <span style="color:#0550ae">(</span>Rootless<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     Loaded: loaded <span style="color:#0550ae">(</span>/home/pi/.config/systemd/user/docker.service<span style="color:#1f2328">;</span> enabled<span style="color:#1f2328">;</span> vendor preset: enabled<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     Active: active <span style="color:#0550ae">(</span>running<span style="color:#0550ae">)</span> since Wed 2023-07-12 09:33:17 BST<span style="color:#1f2328">;</span> 56s ago
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>● docker.service - Docker Application Container Engine (Rootless)
+</span></span><span style="display:flex;"><span>     Loaded: loaded (/home/pi/.config/systemd/user/docker.service; enabled; vendor preset: enabled)
+</span></span><span style="display:flex;"><span>     Active: active (running) since Wed 2023-07-12 09:33:17 BST; 56s ago
 </span></span><span style="display:flex;"><span>       Docs: https://docs.docker.com/go/rootless/
-</span></span><span style="display:flex;"><span>   Main PID: <span style="color:#0550ae">2313</span> <span style="color:#0550ae">(</span>rootlesskit<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>      Tasks: <span style="color:#0550ae">214</span>
+</span></span><span style="display:flex;"><span>   Main PID: <span style="color:#6897bb">2313</span> (rootlesskit)
+</span></span><span style="display:flex;"><span>      Tasks: <span style="color:#6897bb">214</span>
 </span></span><span style="display:flex;"><span>        CPU: 13.395s
 </span></span></code></pre>
 <p>I was surprised by the fact that the Docker service showed an active state only 56s ago.</p>
 
 <p>While analyzing the logs, I paid particular attention to these lines:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Jul 12 09:31:06 raspberrypi systemd[1]: Stopping User Manager for UID 1000...
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Jul 12 09:31:06 raspberrypi systemd[1]: Stopping User Manager for UID 1000...
 </span></span><span style="display:flex;"><span>Jul 12 09:31:06 raspberrypi systemd[627]: Stopping libcontainer container e0296500d5f75ef63f66686559c5122ed7bd4da2e88210c19f9ab0b352155554.
 </span></span><span style="display:flex;"><span>Jul 12 09:31:06 raspberrypi systemd[627]: Stopping Docker Application Container Engine (Rootless)...
 </span></span><span style="display:flex;"><span>Jul 12 09:31:06 raspberrypi dockerd-rootless.sh[921]: time=&#34;2023-07-12T09:31:06.720404072+01:00&#34; level=info msg=&#34;Processing signal &#39;terminated&#39;&#34;
@@ -135,73 +140,73 @@ I wondered why this was happening.</p>
 <p>This led me to suspect that <code>docker.service</code> was being terminated when my SSH session is ended.</p>
 
 <p>To confirm my hypothesis, I checked the linger status using the following command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ loginctl user-status <span style="color:#cf222e">$(</span>whoami<span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>pi <span style="color:#0550ae">(</span>1000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>           Since: Wed 2023-07-12 09:33:10 BST<span style="color:#1f2328">;</span> 57min ago
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ loginctl user-status <span style="color:#cc7832">$(</span>whoami<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>pi (1000)
+</span></span><span style="display:flex;"><span>           Since: Wed 2023-07-12 09:33:10 BST; 57min ago
 </span></span><span style="display:flex;"><span>           State: active
-</span></span><span style="display:flex;"><span>        Sessions: <span style="color:#0550ae">14</span> <span style="color:#0550ae">9</span> <span style="color:#0550ae">8</span> *4
+</span></span><span style="display:flex;"><span>        Sessions: <span style="color:#6897bb">14</span> <span style="color:#6897bb">9</span> <span style="color:#6897bb">8</span> *4
 </span></span><span style="display:flex;"><span>          Linger: no
 </span></span></code></pre>
 <p>Indeed, the output showed that lingering was disabled for my user.
 Therefore, I enabled lingering for my user:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ loginctl enable-linger <span style="color:#cf222e">$(</span>whoami<span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>$ loginctl user-status <span style="color:#cf222e">$(</span>whoami<span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>pi <span style="color:#0550ae">(</span>1000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>           Since: Wed 2023-07-12 09:33:10 BST<span style="color:#1f2328">;</span> 1h 0min ago
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ loginctl enable-linger <span style="color:#cc7832">$(</span>whoami<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>$ loginctl user-status <span style="color:#cc7832">$(</span>whoami<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>pi (1000)
+</span></span><span style="display:flex;"><span>           Since: Wed 2023-07-12 09:33:10 BST; 1h 0min ago
 </span></span><span style="display:flex;"><span>           State: active
-</span></span><span style="display:flex;"><span>        Sessions: <span style="color:#0550ae">14</span> <span style="color:#0550ae">9</span> <span style="color:#0550ae">8</span> *4
+</span></span><span style="display:flex;"><span>        Sessions: <span style="color:#6897bb">14</span> <span style="color:#6897bb">9</span> <span style="color:#6897bb">8</span> *4
 </span></span><span style="display:flex;"><span>          Linger: yes
 </span></span></code></pre>
 <p>Enabling lingering ensured that the Docker service would continue running even after my SSH session was closed.</p>
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/docker" role="button">
-        <i class="bi bi-tag"></i>
-        docker
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/rootless" role="button">
-        <i class="bi bi-tag"></i>
-        rootless
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/systemd" role="button">
-        <i class="bi bi-tag"></i>
-        systemd
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/docker" role="button">
+    <i class="bi bi-tag"></i>
+    docker
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/rootless" role="button">
+    <i class="bi bi-tag"></i>
+    rootless
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/systemd" role="button">
+    <i class="bi bi-tag"></i>
+    systemd
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/07/12/docker-rootless-keeps-restarting"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2023/07/12/docker-rootless-keeps-restarting"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -239,6 +244,20 @@ Therefore, I enabled lingering for my user:</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

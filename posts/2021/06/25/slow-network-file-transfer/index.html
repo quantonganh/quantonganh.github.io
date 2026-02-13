@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,35 +93,35 @@
 <p class="text-secondary">2021-06-25</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
+  
 </p>
 
 <p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
 
 <p>The first tool that comes to mind is <a href="https://github.com/esnet/iperf">iperf3</a>. After installing, I run <code>iperf3 -s</code> then <code>iperf3 -c</code>. While other servers have bandwidth &gt; 900 Mbits/sec, the slow ones are just:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr  Cwnd
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">170</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#0550ae">102</span>    <span style="color:#0550ae">154</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#0550ae">3</span>    <span style="color:#0550ae">157</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">165</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">168</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+</span></span><span style="display:flex;"><span>[  4]   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">170</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#6897bb">102</span>    <span style="color:#6897bb">154</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#6897bb">3</span>    <span style="color:#6897bb">157</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">165</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">168</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
 </span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - -
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">108</span> MBytes  90.4 Mbits/sec  <span style="color:#0550ae">105</span>             sender
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">107</span> MBytes  89.5 Mbits/sec                  receiver
+</span></span><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">108</span> MBytes  90.4 Mbits/sec  <span style="color:#6897bb">105</span>             sender
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">107</span> MBytes  89.5 Mbits/sec                  receiver
 </span></span></code></pre>
 <p>Hell, why is that?</p>
 
 <p>I wonder is there any way to know which switch port connected to these servers? A quick Google search lead me to: <a href="https://www.lazysystemadmin.com/2011/09/find-out-which-switch-port-connected.html">https://www.lazysystemadmin.com/2011/09/find-out-which-switch-port-connected.html</a></p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a"># tcpdump -v -i eno1 -s 1500 -c 1 &#39;(ether[20:2]=0x2000 or ether[12:2]=0x88cc)&#39;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#808080"># tcpdump -v -i eno1 -s 1500 -c 1 &#39;(ether[20:2]=0x2000 or ether[12:2]=0x88cc)&#39;</span>
 </span></span></code></pre>
 <ul>
 <li><p><code>ether[20:2]=0x2000</code></p>
@@ -137,58 +142,58 @@
 </ul>
 
 <p>Normal server:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>        Platform <span style="color:#0550ae">(</span>0x06<span style="color:#0550ae">)</span>, value length: <span style="color:#0550ae">20</span> bytes: <span style="color:#0a3069">&#39;cisco WS-C3560G-48TS&#39;</span>
-</span></span><span style="display:flex;"><span>        Port-ID <span style="color:#0550ae">(</span>0x03<span style="color:#0550ae">)</span>, value length: <span style="color:#0550ae">18</span> bytes: <span style="color:#0a3069">&#39;GigabitEthernet0/6&#39;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>        Platform (0x06), value length: <span style="color:#6897bb">20</span> bytes: <span style="color:#6a8759">&#39;cisco WS-C3560G-48TS&#39;</span>
+</span></span><span style="display:flex;"><span>        Port-ID (0x03), value length: <span style="color:#6897bb">18</span> bytes: <span style="color:#6a8759">&#39;GigabitEthernet0/6&#39;</span>
 </span></span></code></pre>
 <p>Slow one:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>        Platform <span style="color:#0550ae">(</span>0x06<span style="color:#0550ae">)</span>, value length: <span style="color:#0550ae">19</span> bytes: <span style="color:#0a3069">&#39;cisco WS-C3560-48TS&#39;</span>
-</span></span><span style="display:flex;"><span>        Port-ID <span style="color:#0550ae">(</span>0x03<span style="color:#0550ae">)</span>, value length: <span style="color:#0550ae">15</span> bytes: <span style="color:#0a3069">&#39;FastEthernet0/5&#39;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>        Platform (0x06), value length: <span style="color:#6897bb">19</span> bytes: <span style="color:#6a8759">&#39;cisco WS-C3560-48TS&#39;</span>
+</span></span><span style="display:flex;"><span>        Port-ID (0x03), value length: <span style="color:#6897bb">15</span> bytes: <span style="color:#6a8759">&#39;FastEthernet0/5&#39;</span>
 </span></span></code></pre>
 <p>Do you see the difference?</p>
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/iperf3" role="button">
-        <i class="bi bi-tag"></i>
-        iperf3
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/tcpdump" role="button">
-        <i class="bi bi-tag"></i>
-        tcpdump
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/iperf3" role="button">
+    <i class="bi bi-tag"></i>
+    iperf3
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/tcpdump" role="button">
+    <i class="bi bi-tag"></i>
+    tcpdump
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/06/25/slow-network-file-transfer"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2021/06/25/slow-network-file-transfer"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -226,6 +231,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

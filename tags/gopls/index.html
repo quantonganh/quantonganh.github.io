@@ -81,36 +81,41 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2019/10/22/go-no-packages-found">go/packages.Load: no packages found</a></h3>
-        <p class="text-secondary">2019-10-22</p>
-        <p>I have a mono-repo, structure like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>repo
+
+<h3><a href="/posts/2019/10/22/go-no-packages-found">go/packages.Load: no packages found</a></h3>
+<p class="text-secondary">2019-10-22</p>
+<p>I have a mono-repo, structure like this:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>repo
 </span></span><span style="display:flex;"><span>├── service1
 </span></span><span style="display:flex;"><span>├── service2
 </span></span><span style="display:flex;"><span>├── go.mod
 </span></span></code></pre>
 <p>I often open the root folder from the command line by using <code>code .</code>. After that I open a file in <code>service1</code>, and cannot go to definition. Here&rsquo;s the logs from <code>gopls</code>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[Info  - 5:49:28 AM] 2019/10/22 05:49:28 20.675656ms for GOROOT=/usr/local/Cellar/go/1.13/libexec GOPATH=/Users/quanta/go GO111MODULE=auto PWD=/Users/quanta/go/src/github.com/owner/repo go &#34;list&#34; &#34;-e&#34; &#34;-json&#34; &#34;-compiled=true&#34; &#34;-test=true&#34; &#34;-export=false&#34; &#34;-deps=true&#34; &#34;-find=false&#34; &#34;--&#34; &#34;/Users/quanta/go/src/github.com/owner/repo/a/b/c&#34;, stderr: &lt;&lt;go: directory a/b/c is outside main module
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[Info  - 5:49:28 AM] 2019/10/22 05:49:28 20.675656ms for GOROOT=/usr/local/Cellar/go/1.13/libexec GOPATH=/Users/quanta/go GO111MODULE=auto PWD=/Users/quanta/go/src/github.com/owner/repo go &#34;list&#34; &#34;-e&#34; &#34;-json&#34; &#34;-compiled=true&#34; &#34;-test=true&#34; &#34;-export=false&#34; &#34;-deps=true&#34; &#34;-find=false&#34; &#34;--&#34; &#34;/Users/quanta/go/src/github.com/owner/repo/a/b/c&#34;, stderr: &lt;&lt;go: directory a/b/c is outside main module
 </span></span><span style="display:flex;"><span>&gt;&gt;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>[Error - 5:49:32 AM] Request textDocument/definition failed.
 </span></span><span style="display:flex;"><span>  Message: go/packages.Load: no packages found for /Users/quanta/go/src/github.com/owner/repo/a/b/c/file.go
 </span></span><span style="display:flex;"><span>  Code: 0 
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2019/10/22/go-no-packages-found">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2019/10/22/go-no-packages-found">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -146,6 +151,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -81,41 +81,46 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/06/25/slow-network-file-transfer">Troubleshooting slow network file transfer</a></h3>
-        <p class="text-secondary">2021-06-25</p>
-        <p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
+
+<h3><a href="/posts/2021/06/25/slow-network-file-transfer">Troubleshooting slow network file transfer</a></h3>
+<p class="text-secondary">2021-06-25</p>
+<p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
 
 <p>The first tool that comes to mind is <a href="https://github.com/esnet/iperf">iperf3</a>. After installing, I run <code>iperf3 -s</code> then <code>iperf3 -c</code>. While other servers have bandwidth &gt; 900 Mbits/sec, the slow ones are just:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr  Cwnd
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">170</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#0550ae">102</span>    <span style="color:#0550ae">154</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#0550ae">3</span>    <span style="color:#0550ae">157</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">165</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">168</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+</span></span><span style="display:flex;"><span>[  4]   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">170</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#6897bb">102</span>    <span style="color:#6897bb">154</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#6897bb">3</span>    <span style="color:#6897bb">157</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">165</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">168</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
 </span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - -
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">108</span> MBytes  90.4 Mbits/sec  <span style="color:#0550ae">105</span>             sender
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">107</span> MBytes  89.5 Mbits/sec                  receiver
+</span></span><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">108</span> MBytes  90.4 Mbits/sec  <span style="color:#6897bb">105</span>             sender
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">107</span> MBytes  89.5 Mbits/sec                  receiver
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/06/25/slow-network-file-transfer">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2021/06/25/slow-network-file-transfer">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -151,6 +156,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

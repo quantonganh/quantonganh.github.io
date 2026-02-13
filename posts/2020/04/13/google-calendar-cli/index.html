@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2020-04-13</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
@@ -101,7 +106,7 @@
 <p>First, take a look at this <a href="https://developers.google.com/calendar/quickstart/go">quickstart</a>.</p>
 
 <p>Create initical code by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra init
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra init
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
 </span></span><span style="display:flex;"><span>.
@@ -111,7 +116,7 @@
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
 <p>Create <code>event</code> command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra add event
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra add event
 </span></span><span style="display:flex;"><span>$ cobra add insert -p &#39;eventCmd&#39;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
@@ -124,126 +129,126 @@
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
 <p>Create a new Calendar service:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">newCalendar</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Service</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">b</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">ioutil</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to read client secret file: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">config</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">google</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFromJSON</span><span style="color:#1f2328">(</span><span style="color:#1f2328">b</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">CalendarReadonlyScope</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to parse client secret file from config: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">client</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">getClient</span><span style="color:#1f2328">(</span><span style="color:#1f2328">config</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#6639ba">New</span><span style="color:#1f2328">(</span><span style="color:#1f2328">client</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;unable to retrieve calendar client: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">newCalendar</span>() (*calendar.Service, <span style="color:#cc7832">error</span>) {
+</span></span><span style="display:flex;"><span>	b, err := ioutil.<span style="color:#ffc66d">ReadFile</span>(viper.<span style="color:#ffc66d">ConfigFileUsed</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> <span style="color:#cc7832">nil</span>, fmt.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;unable to read client secret file: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	config, err := google.<span style="color:#ffc66d">ConfigFromJSON</span>(b, calendar.CalendarReadonlyScope)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> <span style="color:#cc7832">nil</span>, fmt.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;unable to parse client secret file from config: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	client := <span style="color:#ffc66d">getClient</span>(config)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	srv, err := calendar.<span style="color:#ffc66d">New</span>(client)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> <span style="color:#cc7832">nil</span>, fmt.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;unable to retrieve calendar client: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">return</span> srv, <span style="color:#cc7832">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
 <p>Get calendar ID from summary:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">getCalendarID</span><span style="color:#1f2328">(</span><span style="color:#1f2328">srv</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Service</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#cf222e">string</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">error</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">defaultCalendar</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarID</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">.</span><span style="color:#1f2328">CalendarList</span><span style="color:#1f2328">.</span><span style="color:#6639ba">List</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Do</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Cannot get calendars list: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#cf222e">range</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Items</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Summary</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">calendarID</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">item</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Id</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">break</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">pageToken</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarList</span><span style="color:#1f2328">.</span><span style="color:#1f2328">NextPageToken</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">pageToken</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">break</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">getCalendarID</span>(srv *calendar.Service, calendarSummary <span style="color:#cc7832">string</span>) (<span style="color:#cc7832">string</span>, <span style="color:#cc7832">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> calendarSummary == <span style="color:#6a8759">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> defaultCalendar, <span style="color:#cc7832">nil</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">var</span> calendarID <span style="color:#cc7832">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">for</span> {
+</span></span><span style="display:flex;"><span>		calendarList, err := srv.CalendarList.<span style="color:#ffc66d">List</span>().<span style="color:#ffc66d">Do</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">return</span> <span style="color:#6a8759">&#34;&#34;</span>, fmt.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;Cannot get calendars list: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">for</span> _, item := <span style="color:#cc7832">range</span> calendarList.Items {
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">if</span> item.Summary == calendarSummary {
+</span></span><span style="display:flex;"><span>				calendarID = item.Id
+</span></span><span style="display:flex;"><span>				<span style="color:#cc7832">break</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		pageToken := calendarList.NextPageToken
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> pageToken == <span style="color:#6a8759">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">break</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">return</span> calendarID, <span style="color:#cc7832">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
 <p>Get flag values:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;calendar&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get value of calendar flag: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">getCalendarID</span><span style="color:#1f2328">(</span><span style="color:#1f2328">srv</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get calendar ID of %s: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">calendarSummary</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">eventTitle</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Flags</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetString</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;title&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to get value of title flag: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>		calendarSummary, err := cmd.<span style="color:#ffc66d">Flags</span>().<span style="color:#ffc66d">GetString</span>(<span style="color:#6a8759">&#34;calendar&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Fatalf</span>(<span style="color:#6a8759">&#34;Unable to get value of calendar flag: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		calendarID, err := <span style="color:#ffc66d">getCalendarID</span>(srv, calendarSummary)
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Fatalf</span>(<span style="color:#6a8759">&#34;Unable to get calendar ID of %s: %v&#34;</span>, calendarSummary, err)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		eventTitle, err := cmd.<span style="color:#ffc66d">Flags</span>().<span style="color:#ffc66d">GetString</span>(<span style="color:#6a8759">&#34;title&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Fatalf</span>(<span style="color:#6a8759">&#34;Unable to get value of title flag: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre>
 <p>And create an event:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">event</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">calendar</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Event</span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">Summary</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">eventTitle</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">event</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">srv</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Events</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Insert</span><span style="color:#1f2328">(</span><span style="color:#1f2328">calendarID</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">event</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Do</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatalf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Unable to create event: %v\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>		event := &amp;calendar.Event{
+</span></span><span style="display:flex;"><span>			Summary: eventTitle,
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		event, err = srv.Events.<span style="color:#ffc66d">Insert</span>(calendarID, event).<span style="color:#ffc66d">Do</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Fatalf</span>(<span style="color:#6a8759">&#34;Unable to create event: %v\n&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span></code></pre>
 <p>Whenever I want to WFH, just run:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ gcal event insert -c &#34;Company&#34; -t &#34;Quan Tong - WFH&#34;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ gcal event insert -c &#34;Company&#34; -t &#34;Quan Tong - WFH&#34;
 </span></span></code></pre>
 <p>GitHub repository: <a href="https://github.com/quantonganh/gcal">https://github.com/quantonganh/gcal</a></p>
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
-        <i class="bi bi-tag"></i>
-        golang
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/cobra" role="button">
-        <i class="bi bi-tag"></i>
-        cobra
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+    <i class="bi bi-tag"></i>
+    golang
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/cobra" role="button">
+    <i class="bi bi-tag"></i>
+    cobra
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/04/13/google-calendar-cli"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2020/04/13/google-calendar-cli"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -281,6 +286,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

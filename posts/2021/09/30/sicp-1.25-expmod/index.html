@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SICP Exercise 1.25: A simpler expmod?</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,188 +93,188 @@
 <p class="text-secondary">2021-09-30</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.6">Exercise 1.25</a>: Alyssa P. Hacker complains that we went to a lot of extra work in writing <code>expmod</code>.
 After all, she says, since we already know how to compute exponentials, we could have simply written:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expmod base <span style="color:#6639ba">exp</span> m<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span> <span style="color:#1f2328">(</span>fast-expt base <span style="color:#6639ba">exp</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expmod base exp m)
+</span></span><span style="display:flex;"><span>    (remainder (fast-expt base exp) m))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>Is she correct? Would this procedure serve as well for our fast prime tester? Explain.</p>
 </blockquote>
 
 <p>First, look at the original algorithm:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span> <span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expmod base <span style="color:#6639ba">exp</span> m<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">even?</span> <span style="color:#6639ba">exp</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span>square <span style="color:#1f2328">(</span>expmod base <span style="color:#1f2328">(</span><span style="color:#6639ba">/</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> base <span style="color:#1f2328">(</span>expmod base <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span> (<span style="color:#cc7832">define</span> (expmod base exp m)
+</span></span><span style="display:flex;"><span>     (<span style="color:#cc7832">cond</span> ((= exp <span style="color:#6897bb">0</span>) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>         ((even? exp)
+</span></span><span style="display:flex;"><span>             (remainder
+</span></span><span style="display:flex;"><span>                 (square (expmod base (/ exp <span style="color:#6897bb">2</span>) m))
+</span></span><span style="display:flex;"><span>                 m))
+</span></span><span style="display:flex;"><span>         (<span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>             (remainder
+</span></span><span style="display:flex;"><span>                 (* base (expmod base (- exp <span style="color:#6897bb">1</span>) m))
+</span></span><span style="display:flex;"><span>                 m))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>Trying to run both:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 1.25-expmod.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">10</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">5</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">4</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">2</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">1</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">0</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#0550ae">1</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0550ae">2</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0550ae">6</span>
-</span></span><span style="display:flex;"><span>&lt; <span style="color:#0550ae">2</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span>
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 1.25-expmod-fast-expt.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">10</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 1.25-expmod.scm
+</span></span><span style="display:flex;"><span>&gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">10</span> 10)
+</span></span><span style="display:flex;"><span>&gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">5</span> 10)
+</span></span><span style="display:flex;"><span>&gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">4</span> 10)
+</span></span><span style="display:flex;"><span>&gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">2</span> 10)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">1</span> 10)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">0</span> 10)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6897bb">2</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#6897bb">6</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#6897bb">2</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">4</span>
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 1.25-expmod-fast-expt.scm
+</span></span><span style="display:flex;"><span>&gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">10</span> 10)
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">4</span>
 </span></span></code></pre>
 <p>Looks like she is correct.</p>
 
 <p>But there is a problem: instead of breaking down the problem into smaller numbers, she tries to fully compute <code>expt</code> before computing <code>remainder</code>.</p>
 
 <p>Let&rsquo;s see what happens with a large number:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">100000000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">50000000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">25000000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">12500000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">6250000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">3125000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">1562500</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">781250</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; &gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">390625</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; &gt; <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">390624</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>10<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">195312</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>11<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">97656</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>12<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">48828</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>13<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">24414</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>14<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">12207</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>15<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">12206</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>16<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">6103</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>17<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">6102</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>18<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">3051</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>19<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">3050</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>20<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">1525</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>21<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">1524</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>22<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">762</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>23<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">381</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>24<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">380</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>25<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">190</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>26<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">95</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>27<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">94</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>28<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">47</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>29<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">46</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>30<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">23</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>31<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">22</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>32<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">11</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>33<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">10</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>34<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">5</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>35<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">4</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>36<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">2</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>37<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">1</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;<span style="color:#0550ae">[</span>38<span style="color:#0550ae">]</span> <span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">0</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>38<span style="color:#0550ae">]</span> <span style="color:#0550ae">1</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>37<span style="color:#0550ae">]</span> <span style="color:#0550ae">2</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>36<span style="color:#0550ae">]</span> <span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>35<span style="color:#0550ae">]</span> <span style="color:#0550ae">16</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>34<span style="color:#0550ae">]</span> <span style="color:#0550ae">32</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>33<span style="color:#0550ae">]</span> <span style="color:#0550ae">1024</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>32<span style="color:#0550ae">]</span> <span style="color:#0550ae">2048</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>31<span style="color:#0550ae">]</span> <span style="color:#0550ae">4194304</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>30<span style="color:#0550ae">]</span> <span style="color:#0550ae">8388608</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>29<span style="color:#0550ae">]</span> <span style="color:#0550ae">44177664</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>28<span style="color:#0550ae">]</span> <span style="color:#0550ae">88355328</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>27<span style="color:#0550ae">]</span> <span style="color:#0550ae">85987584</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>26<span style="color:#0550ae">]</span> <span style="color:#0550ae">71975168</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>25<span style="color:#0550ae">]</span> <span style="color:#0550ae">8628224</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>24<span style="color:#0550ae">]</span> <span style="color:#0550ae">49394176</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>23<span style="color:#0550ae">]</span> <span style="color:#0550ae">98788352</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>22<span style="color:#0550ae">]</span> <span style="color:#0550ae">90875904</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>21<span style="color:#0550ae">]</span> <span style="color:#0550ae">27817216</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>20<span style="color:#0550ae">]</span> <span style="color:#0550ae">55634432</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>19<span style="color:#0550ae">]</span> <span style="color:#0550ae">23962624</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>18<span style="color:#0550ae">]</span> <span style="color:#0550ae">47925248</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>17<span style="color:#0550ae">]</span> <span style="color:#0550ae">95861504</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>16<span style="color:#0550ae">]</span> <span style="color:#0550ae">91723008</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>15<span style="color:#0550ae">]</span> <span style="color:#0550ae">96568064</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>14<span style="color:#0550ae">]</span> <span style="color:#0550ae">93136128</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>13<span style="color:#0550ae">]</span> <span style="color:#0550ae">38832384</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>12<span style="color:#0550ae">]</span> <span style="color:#0550ae">47123456</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>11<span style="color:#0550ae">]</span> <span style="color:#0550ae">5383936</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">[</span>10<span style="color:#0550ae">]</span> <span style="color:#0550ae">66852096</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; &lt; <span style="color:#0550ae">39593216</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; &lt;<span style="color:#0550ae">79186432</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; <span style="color:#0550ae">12890624</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt; <span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#0a3069">&#34;racket 1.25-expmod.scm&#34;</span>
-</span></span><span style="display:flex;"><span>	User <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 0.26
-</span></span><span style="display:flex;"><span>	System <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 0.07
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod.scm
+</span></span><span style="display:flex;"><span>&gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">100000000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">50000000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">25000000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">12500000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">6250000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">3125000</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">1562500</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">781250</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; &gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">390625</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt; &gt; (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">390624</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[10] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">195312</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[11] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">97656</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[12] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">48828</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[13] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">24414</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[14] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">12207</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[15] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">12206</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[16] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">6103</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[17] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">6102</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[18] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">3051</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[19] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">3050</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[20] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">1525</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[21] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">1524</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[22] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">762</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[23] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">381</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[24] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">380</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[25] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">190</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[26] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">95</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[27] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">94</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[28] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">47</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[29] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">46</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[30] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">23</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[31] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">22</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[32] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">11</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[33] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">10</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[34] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">5</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[35] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">4</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[36] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">2</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[37] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">1</span> 100000000)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; &gt;[38] (expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">0</span> 100000000)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[38] <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[37] <span style="color:#6897bb">2</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[36] <span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[35] <span style="color:#6897bb">16</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[34] <span style="color:#6897bb">32</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[33] <span style="color:#6897bb">1024</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[32] <span style="color:#6897bb">2048</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[31] <span style="color:#6897bb">4194304</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[30] <span style="color:#6897bb">8388608</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[29] <span style="color:#6897bb">44177664</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[28] <span style="color:#6897bb">88355328</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[27] <span style="color:#6897bb">85987584</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[26] <span style="color:#6897bb">71975168</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[25] <span style="color:#6897bb">8628224</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[24] <span style="color:#6897bb">49394176</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[23] <span style="color:#6897bb">98788352</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[22] <span style="color:#6897bb">90875904</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[21] <span style="color:#6897bb">27817216</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[20] <span style="color:#6897bb">55634432</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[19] <span style="color:#6897bb">23962624</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[18] <span style="color:#6897bb">47925248</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[17] <span style="color:#6897bb">95861504</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[16] <span style="color:#6897bb">91723008</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[15] <span style="color:#6897bb">96568064</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[14] <span style="color:#6897bb">93136128</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[13] <span style="color:#6897bb">38832384</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[12] <span style="color:#6897bb">47123456</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[11] <span style="color:#6897bb">5383936</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;[10] <span style="color:#6897bb">66852096</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; &lt; <span style="color:#6897bb">39593216</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; &lt;<span style="color:#6897bb">79186432</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt; <span style="color:#6897bb">12890624</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; &lt;<span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#6a8759">&#34;racket 1.25-expmod.scm&#34;</span>
+</span></span><span style="display:flex;"><span>	User time (seconds): 0.26
+</span></span><span style="display:flex;"><span>	System time (seconds): 0.07
 </span></span><span style="display:flex;"><span>	Percent of CPU this job got: 95%
-</span></span><span style="display:flex;"><span>	Elapsed <span style="color:#0550ae">(</span>wall clock<span style="color:#0550ae">)</span> <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>h:mm:ss or m:ss<span style="color:#0550ae">)</span>: 0:00.35
-</span></span><span style="display:flex;"><span>	Average shared text size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average unshared data size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average stack size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average total size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Maximum resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">87988</span>
-</span></span><span style="display:flex;"><span>	Average resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Major <span style="color:#0550ae">(</span>requiring I/O<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Minor <span style="color:#0550ae">(</span>reclaiming a frame<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">27796</span>
-</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#0550ae">385</span>
-</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Page size <span style="color:#0550ae">(</span>bytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">4096</span>
-</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#0550ae">0</span>
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod-fast-expt.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">100000000</span> 100000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">87109376</span>
-</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#0a3069">&#34;racket 1.25-expmod-fast-expt.scm&#34;</span>
-</span></span><span style="display:flex;"><span>	User <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 0.37
-</span></span><span style="display:flex;"><span>	System <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 0.12
+</span></span><span style="display:flex;"><span>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.35
+</span></span><span style="display:flex;"><span>	Average shared text size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average unshared data size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average stack size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average total size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Maximum resident set size (kbytes): <span style="color:#6897bb">87988</span>
+</span></span><span style="display:flex;"><span>	Average resident set size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Major (requiring I/O) page faults: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Minor (reclaiming a frame) page faults: <span style="color:#6897bb">27796</span>
+</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#6897bb">385</span>
+</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Page size (bytes): <span style="color:#6897bb">4096</span>
+</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#6897bb">0</span>
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod-fast-expt.scm
+</span></span><span style="display:flex;"><span>&gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">100000000</span> 100000000)
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">87109376</span>
+</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#6a8759">&#34;racket 1.25-expmod-fast-expt.scm&#34;</span>
+</span></span><span style="display:flex;"><span>	User time (seconds): 0.37
+</span></span><span style="display:flex;"><span>	System time (seconds): 0.12
 </span></span><span style="display:flex;"><span>	Percent of CPU this job got: 96%
-</span></span><span style="display:flex;"><span>	Elapsed <span style="color:#0550ae">(</span>wall clock<span style="color:#0550ae">)</span> <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>h:mm:ss or m:ss<span style="color:#0550ae">)</span>: 0:00.51
-</span></span><span style="display:flex;"><span>	Average shared text size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average unshared data size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average stack size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average total size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Maximum resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">151672</span>
-</span></span><span style="display:flex;"><span>	Average resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Major <span style="color:#0550ae">(</span>requiring I/O<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Minor <span style="color:#0550ae">(</span>reclaiming a frame<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">56633</span>
-</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#0550ae">439</span>
-</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Page size <span style="color:#0550ae">(</span>bytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">4096</span>
-</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.51
+</span></span><span style="display:flex;"><span>	Average shared text size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average unshared data size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average stack size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average total size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Maximum resident set size (kbytes): <span style="color:#6897bb">151672</span>
+</span></span><span style="display:flex;"><span>	Average resident set size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Major (requiring I/O) page faults: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Minor (reclaiming a frame) page faults: <span style="color:#6897bb">56633</span>
+</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#6897bb">439</span>
+</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Page size (bytes): <span style="color:#6897bb">4096</span>
+</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#6897bb">0</span>
 </span></span></code></pre>
 <p>So, her version:</p>
 
@@ -279,33 +284,33 @@ After all, she says, since we already know how to compute exponentials, we could
 </ul>
 
 <p>Trying with a larger number, it took&hellip; &gt; 2 minutes and 10 GB to run:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod-fast-expt.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>expmod <span style="color:#0550ae">2</span> <span style="color:#0550ae">100000000000</span> 100000000000<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">81787109376</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">81787109376</span>
-</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#0a3069">&#34;racket 1.25-expmod-fast-expt.scm&#34;</span>
-</span></span><span style="display:flex;"><span>	User <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 122.83
-</span></span><span style="display:flex;"><span>	System <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>seconds<span style="color:#0550ae">)</span>: 99.90
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ gtime -v racket 1.25-expmod-fast-expt.scm
+</span></span><span style="display:flex;"><span>&gt;(expmod <span style="color:#6897bb">2</span> <span style="color:#6897bb">100000000000</span> 100000000000)
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">81787109376</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">81787109376</span>
+</span></span><span style="display:flex;"><span>	Command being timed: <span style="color:#6a8759">&#34;racket 1.25-expmod-fast-expt.scm&#34;</span>
+</span></span><span style="display:flex;"><span>	User time (seconds): 122.83
+</span></span><span style="display:flex;"><span>	System time (seconds): 99.90
 </span></span><span style="display:flex;"><span>	Percent of CPU this job got: 86%
-</span></span><span style="display:flex;"><span>	Elapsed <span style="color:#0550ae">(</span>wall clock<span style="color:#0550ae">)</span> <span style="color:#6639ba">time</span> <span style="color:#0550ae">(</span>h:mm:ss or m:ss<span style="color:#0550ae">)</span>: 4:17.10
-</span></span><span style="display:flex;"><span>	Average shared text size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average unshared data size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average stack size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Average total size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Maximum resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">10491416</span>
-</span></span><span style="display:flex;"><span>	Average resident <span style="color:#6639ba">set</span> size <span style="color:#0550ae">(</span>kbytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Major <span style="color:#0550ae">(</span>requiring I/O<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Minor <span style="color:#0550ae">(</span>reclaiming a frame<span style="color:#0550ae">)</span> page faults: <span style="color:#0550ae">60640485</span>
-</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#0550ae">45</span>
-</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#0550ae">598751</span>
-</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#0550ae">0</span>
-</span></span><span style="display:flex;"><span>	Page size <span style="color:#0550ae">(</span>bytes<span style="color:#0550ae">)</span>: <span style="color:#0550ae">4096</span>
-</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:17.10
+</span></span><span style="display:flex;"><span>	Average shared text size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average unshared data size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average stack size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Average total size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Maximum resident set size (kbytes): <span style="color:#6897bb">10491416</span>
+</span></span><span style="display:flex;"><span>	Average resident set size (kbytes): <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Major (requiring I/O) page faults: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Minor (reclaiming a frame) page faults: <span style="color:#6897bb">60640485</span>
+</span></span><span style="display:flex;"><span>	Voluntary context switches: <span style="color:#6897bb">45</span>
+</span></span><span style="display:flex;"><span>	Involuntary context switches: <span style="color:#6897bb">598751</span>
+</span></span><span style="display:flex;"><span>	Swaps: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system inputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	File system outputs: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages sent: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Socket messages received: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Signals delivered: <span style="color:#6897bb">0</span>
+</span></span><span style="display:flex;"><span>	Page size (bytes): <span style="color:#6897bb">4096</span>
+</span></span><span style="display:flex;"><span>	Exit status: <span style="color:#6897bb">0</span>
 </span></span></code></pre>
 <p>References:</p>
 
@@ -315,47 +320,47 @@ After all, she says, since we already know how to compute exponentials, we could
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
-        <i class="bi bi-tag"></i>
-        sicp
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
-        <i class="bi bi-tag"></i>
-        scheme
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
+    <i class="bi bi-tag"></i>
+    sicp
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
+    <i class="bi bi-tag"></i>
+    scheme
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/09/30/sicp-1.25-expmod"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2021/09/30/sicp-1.25-expmod"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -393,6 +398,20 @@ After all, she says, since we already know how to compute exponentials, we could
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

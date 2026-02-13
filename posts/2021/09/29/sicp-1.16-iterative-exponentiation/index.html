@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SICP Exercise 1.16: Iterative Exponentiation</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2021-09-29</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <p>I am reading <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html">SICP</a>.</p>
@@ -99,37 +104,37 @@
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4">Section 1.2.4</a> talks about the problem of computing the exponential of a given number.</p>
 
 <p>The authors start with a recursive procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> n <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt b n)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">if</span> (= n <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>        (* b (expt b (- n <span style="color:#6897bb">1</span>)))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>This requires O(n) steps and O(n) space.</p>
 
 <p>then an iterative procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>expt-iter b n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt b n)
+</span></span><span style="display:flex;"><span>    (expt-iter b n <span style="color:#6897bb">1</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expt-iter b counter product<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> counter <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt-iter b counter product)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">if</span> (= counter <span style="color:#6897bb">0</span>)
 </span></span><span style="display:flex;"><span>        product
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span>expt-iter b
-</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> counter <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b product<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>        (expt-iter b
+</span></span><span style="display:flex;"><span>                   (- counter <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>                   (* b product))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>This version requires O(n) steps and O(1) space.</p>
 
 <p>and finally he suggests a procedure which requires fewer steps by using successive squaring:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>fast-expt b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> n <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">even?</span> n<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>square <span style="color:#1f2328">(</span>fast-expt b <span style="color:#1f2328">(</span><span style="color:#6639ba">/</span> n <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b <span style="color:#1f2328">(</span>fast-expt b <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (fast-expt b n)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">cond</span> ((= n <span style="color:#6897bb">0</span>) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>        ((even? n) (square (fast-expt b (/ n <span style="color:#6897bb">2</span>))))
+</span></span><span style="display:flex;"><span>        (<span style="color:#cc7832">else</span> (* b (fast-expt b (- n <span style="color:#6897bb">1</span>))))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>This only requires O(log n) steps.</p>
 
@@ -143,52 +148,52 @@ In general, the technique of defining an invariant quantity that remains unchang
 </blockquote>
 
 <p>Here&rsquo;s my solution:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>fast-expt b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>fast-expt-iter b n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (fast-expt b n)
+</span></span><span style="display:flex;"><span>    (fast-expt-iter b n <span style="color:#6897bb">1</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>fast-expt-iter b counter product<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> counter <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            product<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">even?</span> counter<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span>fast-expt-iter <span style="color:#1f2328">(</span>square b<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                            <span style="color:#1f2328">(</span><span style="color:#6639ba">/</span> counter <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                            product<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span>fast-expt-iter b
-</span></span><span style="display:flex;"><span>                            <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> counter <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                            <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b product<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (fast-expt-iter b counter product)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">cond</span> ((= counter <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>            product)
+</span></span><span style="display:flex;"><span>        ((even? counter)
+</span></span><span style="display:flex;"><span>            (fast-expt-iter (square b)
+</span></span><span style="display:flex;"><span>                            (/ counter <span style="color:#6897bb">2</span>)
+</span></span><span style="display:flex;"><span>                            product))
+</span></span><span style="display:flex;"><span>        (<span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>            (fast-expt-iter b
+</span></span><span style="display:flex;"><span>                            (- counter <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>                            (* b product)))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>Let&rsquo;s see what is the difference between recursive and iterative version?</p>
 
 <p>Enable <a href="https://docs.racket-lang.org/reference/debugging.html">debugging</a> and run the recursive version:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 1.16-fast-expt-recursive.scm 
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 5<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 2<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt; <span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#0550ae">1</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0550ae">2</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0550ae">16</span>
-</span></span><span style="display:flex;"><span>&lt; <span style="color:#0550ae">32</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">1024</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">1024</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 1.16-fast-expt-recursive.scm 
+</span></span><span style="display:flex;"><span>&gt;(fast-expt <span style="color:#6897bb">2</span> 10)
+</span></span><span style="display:flex;"><span>&gt; (fast-expt <span style="color:#6897bb">2</span> 5)
+</span></span><span style="display:flex;"><span>&gt; &gt;(fast-expt <span style="color:#6897bb">2</span> 4)
+</span></span><span style="display:flex;"><span>&gt; &gt; (fast-expt <span style="color:#6897bb">2</span> 2)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(fast-expt <span style="color:#6897bb">2</span> 1)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt; (fast-expt <span style="color:#6897bb">2</span> 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt; <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6897bb">2</span>
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#6897bb">16</span>
+</span></span><span style="display:flex;"><span>&lt; <span style="color:#6897bb">32</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">1024</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">1024</span>
 </span></span></code></pre>
 <p>then the iterative version:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 1.16-fast-expt-iterative.scm
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt <span style="color:#0550ae">2</span> 10<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">2</span> <span style="color:#0550ae">10</span> 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">4</span> <span style="color:#0550ae">5</span> 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">4</span> <span style="color:#0550ae">4</span> 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">16</span> <span style="color:#0550ae">2</span> 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">256</span> <span style="color:#0550ae">1</span> 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>fast-expt-iter <span style="color:#0550ae">256</span> <span style="color:#0550ae">0</span> 1024<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0550ae">1024</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">1024</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 1.16-fast-expt-iterative.scm
+</span></span><span style="display:flex;"><span>&gt;(fast-expt <span style="color:#6897bb">2</span> 10)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">2</span> <span style="color:#6897bb">10</span> 1)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">4</span> <span style="color:#6897bb">5</span> 1)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">4</span> <span style="color:#6897bb">4</span> 4)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">16</span> <span style="color:#6897bb">2</span> 4)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">256</span> <span style="color:#6897bb">1</span> 4)
+</span></span><span style="display:flex;"><span>&gt;(fast-expt-iter <span style="color:#6897bb">256</span> <span style="color:#6897bb">0</span> 1024)
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6897bb">1024</span>
+</span></span><span style="display:flex;"><span><span style="color:#6897bb">1024</span>
 </span></span></code></pre>
 <p>The first thing you can easily spot is the recursive version requires more space.</p>
 
@@ -203,18 +208,18 @@ In general, the technique of defining an invariant quantity that remains unchang
 <p>In the iterative version, Scheme doesn&rsquo;t have to remember anything: after it is done, it just returns the <code>product</code>.</p>
 
 <p>Moreover, the iterative version also saves time:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#6639ba">time</span> racket 1.16-fast-expt-recursive.scm
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ time racket 1.16-fast-expt-recursive.scm
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>________________________________________________________
 </span></span><span style="display:flex;"><span>Executed in  540.91 millis    fish           external
-</span></span><span style="display:flex;"><span>   usr <span style="color:#6639ba">time</span>  407.01 millis    0.25 millis  406.77 millis
-</span></span><span style="display:flex;"><span>   sys <span style="color:#6639ba">time</span>  119.54 millis    1.84 millis  117.70 millis
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#6639ba">time</span> racket 1.16-fast-expt-iterative.scm 
+</span></span><span style="display:flex;"><span>   usr time  407.01 millis    0.25 millis  406.77 millis
+</span></span><span style="display:flex;"><span>   sys time  119.54 millis    1.84 millis  117.70 millis
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ time racket 1.16-fast-expt-iterative.scm 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>________________________________________________________
 </span></span><span style="display:flex;"><span>Executed in  518.87 millis    fish           external
-</span></span><span style="display:flex;"><span>   usr <span style="color:#6639ba">time</span>  389.04 millis    0.12 millis  388.92 millis
-</span></span><span style="display:flex;"><span>   sys <span style="color:#6639ba">time</span>  116.15 millis    1.09 millis  115.06 millis
+</span></span><span style="display:flex;"><span>   usr time  389.04 millis    0.12 millis  388.92 millis
+</span></span><span style="display:flex;"><span>   sys time  116.15 millis    1.09 millis  115.06 millis
 </span></span></code></pre>
 <p>References:</p>
 
@@ -225,62 +230,62 @@ In general, the technique of defining an invariant quantity that remains unchang
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
-        <i class="bi bi-tag"></i>
-        sicp
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
-        <i class="bi bi-tag"></i>
-        scheme
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/recursion" role="button">
-        <i class="bi bi-tag"></i>
-        recursion
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/tail-recursion" role="button">
-        <i class="bi bi-tag"></i>
-        tail-recursion
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/iteration" role="button">
-        <i class="bi bi-tag"></i>
-        iteration
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
+    <i class="bi bi-tag"></i>
+    sicp
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
+    <i class="bi bi-tag"></i>
+    scheme
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/recursion" role="button">
+    <i class="bi bi-tag"></i>
+    recursion
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/tail-recursion" role="button">
+    <i class="bi bi-tag"></i>
+    tail-recursion
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/iteration" role="button">
+    <i class="bi bi-tag"></i>
+    iteration
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/09/29/sicp-1.16-iterative-exponentiation"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2021/09/29/sicp-1.16-iterative-exponentiation"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -318,6 +323,20 @@ In general, the technique of defining an invariant quantity that remains unchang
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

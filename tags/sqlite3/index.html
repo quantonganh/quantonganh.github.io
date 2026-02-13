@@ -81,49 +81,54 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
-        <p class="text-secondary">2019-10-16</p>
-        <p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">db</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Open</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sqlite3&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;./books.db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Created table books successfully&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Life is a joke&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;The Javna brothers&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">123456789</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Inserted first book into db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">rows</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Query</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;SELECT id, name, author FROM books&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#fff"> </span><span style="color:#1f2328">Book</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Next</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Scan</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
+<p class="text-secondary">2019-10-16</p>
+<p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>db, err := sql.<span style="color:#ffc66d">Open</span>(<span style="color:#6a8759">&#34;sqlite3&#34;</span>, <span style="color:#6a8759">&#34;./books.db&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>statement, err := db.<span style="color:#ffc66d">Prepare</span>(<span style="color:#6a8759">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>} <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Created table books successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>statement.<span style="color:#ffc66d">Exec</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>statement, err = db.<span style="color:#ffc66d">Prepare</span>(<span style="color:#6a8759">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>statement.<span style="color:#ffc66d">Exec</span>(<span style="color:#6a8759">&#34;Life is a joke&#34;</span>, <span style="color:#6a8759">&#34;The Javna brothers&#34;</span>, <span style="color:#6897bb">123456789</span>)
+</span></span><span style="display:flex;"><span>log.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Inserted first book into db&#34;</span>)
+</span></span><span style="display:flex;"><span>rows, err := db.<span style="color:#ffc66d">Query</span>(<span style="color:#6a8759">&#34;SELECT id, name, author FROM books&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">var</span> tempBook Book
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> rows.<span style="color:#ffc66d">Next</span>() {
+</span></span><span style="display:flex;"><span>	rows.<span style="color:#ffc66d">Scan</span>(&amp;tempBook.id, &amp;tempBook.name, &amp;tempBook.author)
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Printf</span>(<span style="color:#6a8759">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span>, tempBook.id, tempBook.name, tempBook.author)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -159,6 +164,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

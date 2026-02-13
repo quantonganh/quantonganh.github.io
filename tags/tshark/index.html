@@ -81,20 +81,25 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/05/05/grpc-http2-headers">How to show all HTTP2 headers using tshark?</a></h3>
-        <p class="text-secondary">2020-05-05</p>
-        <p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
+
+<h3><a href="/posts/2020/05/05/grpc-http2-headers">How to show all HTTP2 headers using tshark?</a></h3>
+<p class="text-secondary">2020-05-05</p>
+<p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
 
 <p>First, find the frame number based on method:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
 </span></span><span style="display:flex;"><span>214 923.033174    127.0.0.1 → 127.0.0.1    HTTP2 150 HEADERS[1]: POST /book.BookInfo/getBook
 </span></span></code></pre>
 <p>and then show the packet details:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 214&#34; -V
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 214&#34; -V
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>HyperText Transfer Protocol 2
 </span></span><span style="display:flex;"><span>    Stream: HEADERS, Stream ID: 1, Length 85, POST /book.BookInfo/getBook
@@ -181,16 +186,16 @@
 </span></span><span style="display:flex;"><span>            [Unescaped: evans]
 </span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - New Name
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/05/grpc-http2-headers">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/05/05/grpc-http2-headers">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -226,6 +231,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

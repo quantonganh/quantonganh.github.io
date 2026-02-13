@@ -81,26 +81,31 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">gocloud - writing data to a bucket: 403</a></h3>
-        <p class="text-secondary">2022-12-23</p>
-        
+
+<h3><a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">gocloud - writing data to a bucket: 403</a></h3>
+<p class="text-secondary">2022-12-23</p>
+
 <h4>Problem</h4>
 
 <p>We are writing some integration test using <a href="https://gocloud.dev/">Go CDK</a>.
 After writing some data to a bucket:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">writer</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">buckOut</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewWriter</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fileDst</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">logger</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to write to fileDst: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#1f2328">writer</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Close</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	writer, err := buckOut.<span style="color:#ffc66d">NewWriter</span>(ctx, fileDst, <span style="color:#cc7832">nil</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		logger.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;failed to write to fileDst: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">defer</span> writer.<span style="color:#ffc66d">Close</span>()
+</span></span></code></pre>
 <p>we got an error when reading:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>(code=NotFound): storage: object doesn&#39;t exist
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(code=NotFound): storage: object doesn&#39;t exist
 </span></span></code></pre>
 <p>By reading <a href="https://gocloud.dev/howto/blob/#writing">the documentation</a>, I pay attention to this:</p>
 
@@ -108,47 +113,47 @@ After writing some data to a bucket:</p>
 <p>Closing the writer commits the write to the provider, flushing any buffers, and releases any resources used while writing, so you must always check the error of Close.</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Terraform failed to acquire state lock: 403: Access denied., forbidden</a></h3>
-        <p class="text-secondary">2022-11-17</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Terraform failed to acquire state lock: 403: Access denied., forbidden</a></h3>
+<p class="text-secondary">2022-11-17</p>
+
 <h4>Problem</h4>
 
 <p>We stored Terraform state in <a href="https://developer.hashicorp.com/terraform/language/settings/backends/gcs">gcs</a>.
 For some reasons, we got this error randomly when running on BitBucket pipelines:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╷</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">acquiring</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">message</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">2</span> <span style="color:#1f2328">errors</span> <span style="color:#1f2328">occurred</span><span style="color:#0550ae">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">writing</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">gs://bucket/path/to/default.tflock</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">failed</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">googleapi</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#0550ae">403</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Access</span> <span style="color:#1f2328">denied</span><span style="color:#1f2328">.</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">forbidden</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">storage</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">object</span> <span style="color:#1f2328">doesn</span><span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#1f2328">t</span> <span style="color:#1f2328">exist</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Terraform</span> <span style="color:#1f2328">acquires</span> <span style="color:#1f2328">a</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span> <span style="color:#1f2328">to</span> <span style="color:#1f2328">protect</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">from</span> <span style="color:#1f2328">being</span> <span style="color:#1f2328">written</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">by</span> <span style="color:#1f2328">multiple</span> <span style="color:#1f2328">users</span> <span style="color:#1f2328">at</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">same</span> <span style="color:#1f2328">time</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">Please</span> <span style="color:#1f2328">resolve</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">issue</span> <span style="color:#1f2328">above</span> <span style="color:#1f2328">and</span> <span style="color:#6639ba">try</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">again</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">For</span> <span style="color:#1f2328">most</span> <span style="color:#1f2328">commands</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">you</span> <span style="color:#6639ba">can</span> <span style="color:#1f2328">disable</span> <span style="color:#1f2328">locking</span> <span style="color:#1f2328">with</span> <span style="color:#1f2328">the</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">-lock=false</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">flag</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">but</span> <span style="color:#1f2328">this</span> <span style="color:#1f2328">is</span> <span style="color:#1f2328">not</span> <span style="color:#1f2328">recommended</span><span style="color:#1f2328">.</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╵</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#ff6b68">╷</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Error: Error acquiring the state lock
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Error message: <span style="color:#6897bb">2</span> errors occurred:
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 	* writing
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">gs://bucket/path/to/default.tflock</span><span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> failed: googleapi: Error <span style="color:#6897bb">403</span>: Access denied., forbidden
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 	* storage: object doesn<span style="color:#ff6b68">&#39;</span>t exist
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Terraform acquires a state lock to protect the state from being written
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> by multiple users at the same time. Please resolve the issue above and try
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> again. For most commands, you can disable locking with the <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">-lock=false</span><span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> flag, but this is not recommended.
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">╵</span>
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -184,6 +189,20 @@ For some reasons, we got this error randomly when running on BitBucket pipelines
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

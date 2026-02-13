@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,89 +81,94 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/12/28/traefik-unable-obtain-certificate">Unable to obtain ACME certificate for domains</a></h3>
-        <p class="text-secondary">2020-12-28</p>
-        <p>Lets Encrypt tells me that my domain contains an invalid character. What is it?</p>
+
+<h3><a href="/posts/2020/12/28/traefik-unable-obtain-certificate">Unable to obtain ACME certificate for domains</a></h3>
+<p class="text-secondary">2020-12-28</p>
+<p>Lets Encrypt tells me that my domain contains an invalid character. What is it?</p>
 
 <p><code>remark42</code> is configured like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">remark42</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>umputun/remark42:arm64<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">container_name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;remark42&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">restart</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>always<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">labels</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.enable=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.rule=Host(`${REMARK_URL}`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.entrypoints=https<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.tls.certresolver=le<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.services.remark42.loadbalancer.server.port=8080<span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/12/28/traefik-unable-obtain-certificate">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/12/26/if-then-else-one-line">A &amp;&amp; B || C is not the same as if-then-else</a></h3>
-        <p class="text-secondary">2020-12-26</p>
-        <p>I have been thought that if-then-else statement can be written in one line by using <code>A &amp;&amp; B || C</code> but I was wrong.</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">remark42</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: umputun/remark42:arm64
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">container_name</span>: <span style="color:#6a8759">&#34;remark42&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">labels</span>:
+</span></span><span style="display:flex;"><span>      - traefik.enable=true
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.rule=Host(`${REMARK_URL}`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.entrypoints=https
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.tls.certresolver=le
+</span></span><span style="display:flex;"><span>      - traefik.http.services.remark42.loadbalancer.server.port=8080
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/12/28/traefik-unable-obtain-certificate">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/12/26/if-then-else-one-line">A &amp;&amp; B || C is not the same as if-then-else</a></h3>
+<p class="text-secondary">2020-12-26</p>
+<p>I have been thought that if-then-else statement can be written in one line by using <code>A &amp;&amp; B || C</code> but I was wrong.</p>
 
 <p>To speed up my Drone CI time, I configured the static-check step to only run when there are some <code>.go</code> files have been changed:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>git --no-pager diff --name-only ${DRONE_COMMIT_LINK##*/} | grep -q &#34;\.go$&#34; &amp;&amp; golangci-lint run --deadline 2m -v ./... || true
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>git --no-pager diff --name-only ${DRONE_COMMIT_LINK##*/} | grep -q &#34;\.go$&#34; &amp;&amp; golangci-lint run --deadline 2m -v ./... || true
 </span></span></code></pre>
 <p>I was thought that <code>A &amp;&amp; B || C</code> is the same as:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/12/26/if-then-else-one-line">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
-        <p class="text-secondary">2020-09-29</p>
-        <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">steps</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>trigger<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/downstream:linux-amd64<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">params</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repositories</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- repo/integration-test@${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">server</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https://drone.example.com<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">token</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone_token<span style="color:#fff">
-</span></span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/12/26/if-then-else-one-line">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
+<p class="text-secondary">2020-09-29</p>
+<p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">steps</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: trigger
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: plugins/downstream:linux-amd64
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">settings</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">params</span>:
+</span></span><span style="display:flex;"><span>    - COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">repositories</span>:
+</span></span><span style="display:flex;"><span>    - repo/integration-test@${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">server</span>: https://drone.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">token</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">from_secret</span>: drone_token
+</span></span></code></pre>
 <p>It can be separated with unit tests by using <a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">build tags</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>// +build integration
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>// +build integration
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>package webserver_test
 </span></span></code></pre>
 <p>Then we can write code to perform integration test as usual.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/07/28/Duc-Ba-church">Duc Ba church</a></h3>
-        <p class="text-secondary">2020-07-28</p>
-        <p><img src="Duc-Ba-church.jpg" alt="Duc Ba church" />
+
+<p class="text-right">
+  <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/07/28/Duc-Ba-church">Duc Ba church</a></h3>
+<p class="text-secondary">2020-07-28</p>
+<p><img src="Duc-Ba-church.jpg" alt="Duc Ba church" />
 <em>Duc Ba church, Saigon.</em></p>
 
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/07/15/permanent-record-edward-snowden">Bị theo dõi (Permanent Record) - Edward Snowden</a></h3>
-        <p class="text-secondary">2020-07-15</p>
-        
+
+<hr>
+
+<h3><a href="/posts/2020/07/15/permanent-record-edward-snowden">Bị theo dõi (Permanent Record) - Edward Snowden</a></h3>
+<p class="text-secondary">2020-07-15</p>
+
 <ul>
 <li>6 tuổi: vặn đồng hồ chậm lại để chơi cho đã</li>
 <li>7 tuổi: tháo tung con máy Nintendo ra vì đang chơi Super Mario thì bị hỏng</li>
@@ -172,59 +177,59 @@
 <li>13 tuổi: hack website của Phòng thí nghiệm Quốc gia Los Alamos (sau đó thì được cảm ơn và hẹn liên lạc lại khi nào 18 tuổi)</li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/07/15/permanent-record-edward-snowden">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
-        <p class="text-secondary">2020-07-03</p>
-        <p>As an engineer, I want to automate everything as much as possible.
+
+<p class="text-right">
+  <a href="/posts/2020/07/15/permanent-record-edward-snowden">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
+<p class="text-secondary">2020-07-03</p>
+<p>As an engineer, I want to automate everything as much as possible.
 This CLI tool is created to save a draft mail in Zimbra web client.</p>
 
 <p>Read config file:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">initConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">cfgFile</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Use config file from the flag.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cfgFile</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Find home directory.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">home</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">homedir</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exit</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AddConfigPath</span><span style="color:#1f2328">(</span><span style="color:#1f2328">home</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigName</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;.zwc&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AutomaticEnv</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#57606a">// read in environment variables that match</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#57606a">// If a config file is found, read it in.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadInConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Using config file:&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
-        <p class="text-secondary">2020-06-26</p>
-        <p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">initConfig</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> cfgFile != <span style="color:#6a8759">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Use config file from the flag.</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigFile</span>(cfgFile)
+</span></span><span style="display:flex;"><span>	} <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Find home directory.</span>
+</span></span><span style="display:flex;"><span>		home, err := homedir.<span style="color:#ffc66d">Dir</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			fmt.<span style="color:#ffc66d">Println</span>(err)
+</span></span><span style="display:flex;"><span>			os.<span style="color:#ffc66d">Exit</span>(<span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">AddConfigPath</span>(home)
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigName</span>(<span style="color:#6a8759">&#34;.zwc&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	viper.<span style="color:#ffc66d">AutomaticEnv</span>() <span style="color:#808080">// read in environment variables that match</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#808080">// If a config file is found, read it in.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err := viper.<span style="color:#ffc66d">ReadInConfig</span>(); err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Using config file:&#34;</span>, viper.<span style="color:#ffc66d">ConfigFileUsed</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
+<p class="text-secondary">2020-06-26</p>
+<p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
 
 <p>To do that, we can use <code>git diff</code> to show changes between commits:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
 </span></span><span style="display:flex;"><span>    most_recent_before=&#34;origin/${DRONE_TARGET_BRANCH}&#34;
 </span></span><span style="display:flex;"><span>  elif [[ &#34;${DRONE_BUILD_EVENT}&#34; = &#34;push&#34; &amp;&amp; (&#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;master&#34; || &#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;release-&#34;*) ]]; then
 </span></span><span style="display:flex;"><span>    if [[ &#34;${DRONE_COMMIT_BEFORE}&#34; = &#34;$zero&#34; ]]; then
@@ -235,16 +240,16 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 </span></span><span style="display:flex;"><span>  fi
 </span></span><span style="display:flex;"><span>  modified_files=$(git --no-pager diff --name-only &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34;);
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/05/16/Hanoi-tour">Hanoi tour</a></h3>
-        <p class="text-secondary">2020-05-16</p>
-        <p><img src="the-big-church-hanoi.jpg" alt="The big church" />
+
+<p class="text-right">
+  <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/05/16/Hanoi-tour">Hanoi tour</a></h3>
+<p class="text-secondary">2020-05-16</p>
+<p><img src="the-big-church-hanoi.jpg" alt="The big church" />
 <em>The big church, Hanoi.</em></p>
 
 <p>Hà Nội Tour (nửa ngày, 0 đêm):</p>
@@ -257,16 +262,16 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 <li>7h30: các bạn đang có mặt ở Phan Đình Phùng, một trong những con đường đẹp nhất HN. Tại đây, các bạn thoải mái chụp hình, ngắm lá vàng trong ánh nắng đầu hè dễ chịu.</li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/16/Hanoi-tour">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
-        <p class="text-secondary">2020-05-06</p>
-        <p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
+
+<p class="text-right">
+  <a href="/posts/2020/05/16/Hanoi-tour">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
+<p class="text-secondary">2020-05-06</p>
+<p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
 
 <p>But if I go to <a href="https://git-tea.dynu.net/quanta/blog/settings/hooks/1">Settings -&gt; Webhooks</a>, then click &ldquo;Test Delivery&rdquo; -&gt; build pipeline will be executed. Why?</p>
 
@@ -274,7 +279,7 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
 
 <p>By pay close attention to the git output when pushing:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Counting objects: 4, done.
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Counting objects: 4, done.
 </span></span><span style="display:flex;"><span>Delta compression using up to 4 threads.
 </span></span><span style="display:flex;"><span>Compressing objects: 100% (4/4), done.
 </span></span><span style="display:flex;"><span>Writing objects: 100% (4/4), 2.02 KiB | 2.02 MiB/s, done.
@@ -288,88 +293,88 @@ In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
 </span></span><span style="display:flex;"><span>To gitea.pi:quanta/blog.git
 </span></span><span style="display:flex;"><span> + d29f63d...47e9ed3 master -&gt; master (forced update)
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/05/06/grpc-length-prefixed-framing">How a gRPC message uses length-prefixed framing?</a></h3>
-        <p class="text-secondary">2020-05-06</p>
-        <p>Once we have the encoded data to send to the other end, we need to package the data in a way that other end can easily extract the information. gRPC uses a message framing technique called length-prefixed framing.</p>
+
+<p class="text-right">
+  <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/05/06/grpc-length-prefixed-framing">How a gRPC message uses length-prefixed framing?</a></h3>
+<p class="text-secondary">2020-05-06</p>
+<p>Once we have the encoded data to send to the other end, we need to package the data in a way that other end can easily extract the information. gRPC uses a message framing technique called length-prefixed framing.</p>
 
 <p>Filter gRPC messages:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;grpc&#39;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;grpc&#39;
 </span></span></code></pre>
 <p>Find out a <code>stream: DATA</code>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>216 923.033355    127.0.0.1 → 127.0.0.1    GRPC 108 DATA[1] (GRPC) (PROTOBUF)
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>216 923.033355    127.0.0.1 → 127.0.0.1    GRPC 108 DATA[1] (GRPC) (PROTOBUF)
 </span></span></code></pre>
 <p>and show the packet details:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 216&#34; -V
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>tshark -r grpc.pcapng -Y &#34;frame.number == 216&#34; -V
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/06/grpc-length-prefixed-framing">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/05/06/grpc-length-prefixed-framing">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/6/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/8/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/6/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/8/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -405,6 +410,20 @@ In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

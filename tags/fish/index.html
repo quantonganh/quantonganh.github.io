@@ -81,28 +81,33 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/07/30/fish-shell-high-cpu">fish shell - very high CPU usage</a></h3>
-        <p class="text-secondary">2021-07-30</p>
-        <p>Sometimes my Macbook is loud like a plow, and the culprit is usually <a href="https://github.com/docker/for-mac/issues?q=high+cpu">docker</a>. This time it&rsquo;s different, <code>top -u</code> tells me that <a href="https://fishshell.com/">fish shell</a> is taking up &gt; 100% CPU.</p>
+
+<h3><a href="/posts/2021/07/30/fish-shell-high-cpu">fish shell - very high CPU usage</a></h3>
+<p class="text-secondary">2021-07-30</p>
+<p>Sometimes my Macbook is loud like a plow, and the culprit is usually <a href="https://github.com/docker/for-mac/issues?q=high+cpu">docker</a>. This time it&rsquo;s different, <code>top -u</code> tells me that <a href="https://fishshell.com/">fish shell</a> is taking up &gt; 100% CPU.</p>
 
 <p>I just switched from <a href="https://github.com/zsh-users/zsh">zsh</a> to <a href="https://github.com/fish-shell/fish-shell">fish</a> about a year ago after having problems with <a href="https://stackoverflow.com/questions/62766815/git-completion-in-zsh-git-func-wrap3-not-found">git completion</a>.</p>
 
 <p>My favorite feature about fish is probably <a href="https://fishshell.com/docs/current/tutorial.html#autosuggestions">autosuggestions</a>. Normally, when I want to run a command again, I can <code>control+R</code>, type a few letters to select the command I want to run. With fish shell, I can type that command and then <code>-&gt;</code> or <code>control+F</code> is fine.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/07/30/fish-shell-high-cpu">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2021/07/30/fish-shell-high-cpu">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -138,6 +143,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -81,18 +81,23 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2025/08/14/jdtls-wrapper">Helix returns &#34;No definition found&#34; when going to a definition</a></h3>
-        <p class="text-secondary">2025-08-14</p>
-        <p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
+
+<h3><a href="/posts/2025/08/14/jdtls-wrapper">Helix returns &#34;No definition found&#34; when going to a definition</a></h3>
+<p class="text-secondary">2025-08-14</p>
+<p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
 Since I recently switched to a project that uses Java, I&rsquo;m trying to configure Helix as my Java editor.</p>
 
 <p>The default language server for Java is <a href="https://github.com/eclipse-jdtls/eclipse.jdt.ls">jdtls</a> which can be installed easily on macOS by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew install jdtls
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>hx --health java
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>brew install jdtls
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>hx --health java
 </span></span><span style="display:flex;"><span>Configured language servers:
 </span></span><span style="display:flex;"><span>  ✓ jdtls: /opt/homebrew/bin/jdtls
 </span></span><span style="display:flex;"><span>Configured debug adapter: None
@@ -104,16 +109,16 @@ Since I recently switched to a project that uses Java, I&rsquo;m trying to confi
 </span></span><span style="display:flex;"><span>Tags queries: ✓
 </span></span><span style="display:flex;"><span>Rainbow queries: ✓
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2025/08/14/jdtls-wrapper">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2025/08/14/jdtls-wrapper">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -149,6 +154,20 @@ Since I recently switched to a project that uses Java, I&rsquo;m trying to confi
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

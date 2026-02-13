@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,79 +81,84 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
-        <p class="text-secondary">2021-09-07</p>
-        <p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
+
+<h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
+<p class="text-secondary">2021-09-07</p>
+<p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
 On production, config is loaded from json file by using <a href="https://pypi.org/project/etcd3/">Python</a>.</p>
 
 <p>I&rsquo;m wondering if we can use <a href="https://github.com/stedolan/jq">jq</a> to do that. So, I tried something like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#953800">host</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_HOST</span><span style="color:#cf222e">:-</span><span style="color:#953800">127</span><span style="color:#1f2328">.0.0.1</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">port</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_PORT</span><span style="color:#cf222e">:-</span><span style="color:#953800">2379</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> key in <span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#39;keys[]&#39;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">do</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">value</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">.</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> -c <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">ETCDCTL_API</span><span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> etcdctl --endpoints<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$host</span><span style="color:#0a3069">:</span><span style="color:#953800">$port</span><span style="color:#0a3069">&#34;</span> put <span style="color:#0a3069">&#34;</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$value</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">done</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>host=<span style="color:#6a8759">${</span>ETCD_HOST<span style="color:#cc7832">:-</span>127.0.0.1<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span>port=<span style="color:#6a8759">${</span>ETCD_PORT<span style="color:#cc7832">:-</span>2379<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> key in <span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#39;keys[]&#39;</span> <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>; <span style="color:#cc7832">do</span>
+</span></span><span style="display:flex;"><span>  value=<span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">.</span>$key<span style="color:#6a8759">&#34;</span> -c <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>  ETCDCTL_API=<span style="color:#6897bb">3</span> etcdctl --endpoints=<span style="color:#6a8759">&#34;</span>$host<span style="color:#6a8759">:</span>$port<span style="color:#6a8759">&#34;</span> put <span style="color:#6a8759">&#34;</span>$key<span style="color:#6a8759">&#34;</span> <span style="color:#6a8759">&#34;</span>$value<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">done</span>
 </span></span></code></pre>
 <p>Config is loaded into <code>etcd</code> but some values are not the same as in the JSON file.
 What is going on?</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/07/30/fish-shell-high-cpu">fish shell - very high CPU usage</a></h3>
-        <p class="text-secondary">2021-07-30</p>
-        <p>Sometimes my Macbook is loud like a plow, and the culprit is usually <a href="https://github.com/docker/for-mac/issues?q=high+cpu">docker</a>. This time it&rsquo;s different, <code>top -u</code> tells me that <a href="https://fishshell.com/">fish shell</a> is taking up &gt; 100% CPU.</p>
+
+<p class="text-right">
+  <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/07/30/fish-shell-high-cpu">fish shell - very high CPU usage</a></h3>
+<p class="text-secondary">2021-07-30</p>
+<p>Sometimes my Macbook is loud like a plow, and the culprit is usually <a href="https://github.com/docker/for-mac/issues?q=high+cpu">docker</a>. This time it&rsquo;s different, <code>top -u</code> tells me that <a href="https://fishshell.com/">fish shell</a> is taking up &gt; 100% CPU.</p>
 
 <p>I just switched from <a href="https://github.com/zsh-users/zsh">zsh</a> to <a href="https://github.com/fish-shell/fish-shell">fish</a> about a year ago after having problems with <a href="https://stackoverflow.com/questions/62766815/git-completion-in-zsh-git-func-wrap3-not-found">git completion</a>.</p>
 
 <p>My favorite feature about fish is probably <a href="https://fishshell.com/docs/current/tutorial.html#autosuggestions">autosuggestions</a>. Normally, when I want to run a command again, I can <code>control+R</code>, type a few letters to select the command I want to run. With fish shell, I can type that command and then <code>-&gt;</code> or <code>control+F</code> is fine.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/07/30/fish-shell-high-cpu">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/06/25/slow-network-file-transfer">Troubleshooting slow network file transfer</a></h3>
-        <p class="text-secondary">2021-06-25</p>
-        <p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
+
+<p class="text-right">
+  <a href="/posts/2021/07/30/fish-shell-high-cpu">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/06/25/slow-network-file-transfer">Troubleshooting slow network file transfer</a></h3>
+<p class="text-secondary">2021-06-25</p>
+<p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
 
 <p>The first tool that comes to mind is <a href="https://github.com/esnet/iperf">iperf3</a>. After installing, I run <code>iperf3 -s</code> then <code>iperf3 -c</code>. While other servers have bandwidth &gt; 900 Mbits/sec, the slow ones are just:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr  Cwnd
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">170</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">204</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#0550ae">102</span>    <span style="color:#0550ae">154</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#0550ae">3</span>    <span style="color:#0550ae">157</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">165</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">168</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#0550ae">0</span>    <span style="color:#0550ae">173</span> KBytes
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+</span></span><span style="display:flex;"><span>[  4]   0.00-1.00   sec  11.9 MBytes  99.4 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">170</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   1.00-2.00   sec  11.1 MBytes  93.3 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   2.00-3.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">204</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   3.00-4.00   sec  8.26 MBytes  69.3 Mbits/sec  <span style="color:#6897bb">102</span>    <span style="color:#6897bb">154</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   4.00-5.00   sec  10.9 MBytes  91.8 Mbits/sec    <span style="color:#6897bb">3</span>    <span style="color:#6897bb">157</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   5.00-6.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">165</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   6.00-7.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">168</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   7.00-8.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   8.00-9.00   sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
+</span></span><span style="display:flex;"><span>[  4]   9.00-10.00  sec  10.9 MBytes  91.7 Mbits/sec    <span style="color:#6897bb">0</span>    <span style="color:#6897bb">173</span> KBytes
 </span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - -
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span> ID<span style="color:#0550ae">]</span> Interval           Transfer     Bandwidth       Retr
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">108</span> MBytes  90.4 Mbits/sec  <span style="color:#0550ae">105</span>             sender
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>  4<span style="color:#0550ae">]</span>   0.00-10.00  sec   <span style="color:#0550ae">107</span> MBytes  89.5 Mbits/sec                  receiver
+</span></span><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">108</span> MBytes  90.4 Mbits/sec  <span style="color:#6897bb">105</span>             sender
+</span></span><span style="display:flex;"><span>[  4]   0.00-10.00  sec   <span style="color:#6897bb">107</span> MBytes  89.5 Mbits/sec                  receiver
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/06/25/slow-network-file-transfer">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/06/10/automate-office-tasks">Automate office tasks with Python</a></h3>
-        <p class="text-secondary">2021-06-10</p>
-        <p>Hàng tháng bạn nhận được một file excel về danh sách D. Từ danh sách này bạn cần filter cột C theo tiêu chí T1 để lấy ra danh sách D1. Có được D1 rồi bạn Save As thành t1.xlsx.
+
+<p class="text-right">
+  <a href="/posts/2021/06/25/slow-network-file-transfer">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/06/10/automate-office-tasks">Automate office tasks with Python</a></h3>
+<p class="text-secondary">2021-06-10</p>
+<p>Hàng tháng bạn nhận được một file excel về danh sách D. Từ danh sách này bạn cần filter cột C theo tiêu chí T1 để lấy ra danh sách D1. Có được D1 rồi bạn Save As thành t1.xlsx.
 Làm xong T1, bạn tiếp tục với T2 -&gt; t2.xlsx
 &hellip;
 Làm tiếp cho đến Tn -&gt; tn.xlsx.
@@ -163,16 +168,16 @@ Có được các danh sách t1.xlsx -&gt; tn.xlsx này rồi, giờ bạn cần
 <li>t1.xlsx: gửi cho P1, P2, P3</li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/06/10/automate-office-tasks">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/03/18/the-power-of-praise">The power of praise</a></h3>
-        <p class="text-secondary">2021-03-18</p>
-        <p>K, 9 tuổi.</p>
+
+<p class="text-right">
+  <a href="/posts/2021/06/10/automate-office-tasks">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/03/18/the-power-of-praise">The power of praise</a></h3>
+<p class="text-secondary">2021-03-18</p>
+<p>K, 9 tuổi.</p>
 
 <p>Dạo này đang luyện: cắm cơm, nhặt rau.
 Hôm trước học bài mới: gọt su su.
@@ -186,21 +191,21 @@ Cứ mỗi lần làm xong một miếng, K lại hỏi:</p>
 
 <p>Và đúng là nó đẹp hơn thật. Lời khen đã giúp K làm tốt hơn.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/03/18/the-power-of-praise">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/03/05/docker-compose-depends-on">condition form of depends_on in docker-compose version 3</a></h3>
-        <p class="text-secondary">2021-03-05</p>
-        <p>As version 3 no longer supports the <code>condition</code> form of <code>depends_on</code>, what is the alternative way to wait for a container to be started completely?</p>
+
+<p class="text-right">
+  <a href="/posts/2021/03/18/the-power-of-praise">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/03/05/docker-compose-depends-on">condition form of depends_on in docker-compose version 3</a></h3>
+<p class="text-secondary">2021-03-05</p>
+<p>As version 3 no longer supports the <code>condition</code> form of <code>depends_on</code>, what is the alternative way to wait for a container to be started completely?</p>
 
 <p>From <a href="https://github.com/docker/compose/releases/tag/1.27.0">1.27.0</a>, 2.x and 3.x are merged with <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md">COMPOSE_SPEC</a> schema.</p>
 
 <p><a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#version-top-level-element">version</a> is now optional. So, you can just remove it and specify a <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on">condition</a> as before:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>services:
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>services:
 </span></span><span style="display:flex;"><span>  web:
 </span></span><span style="display:flex;"><span>    build: .
 </span></span><span style="display:flex;"><span>    depends_on:
@@ -214,16 +219,16 @@ Cứ mỗi lần làm xong một miếng, K lại hỏi:</p>
 </span></span><span style="display:flex;"><span>      timeout: 3s
 </span></span><span style="display:flex;"><span>      retries: 30
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/03/05/docker-compose-depends-on">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/02/04/letsencrypt-rate-limits">Let&#39;s Encrypt too many certificates already issued</a></h3>
-        <p class="text-secondary">2021-02-04</p>
-        <p>Traefik is configured to use Let&rsquo;s Encrypt to generate certificate for my blog (and other services) automatically. One day after restarting, I cannot access to my blog via HTTPS anymore (NET::ERR_CERT_AUTHORITY_INVALID). Why?</p>
+
+<p class="text-right">
+  <a href="/posts/2021/03/05/docker-compose-depends-on">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/02/04/letsencrypt-rate-limits">Let&#39;s Encrypt too many certificates already issued</a></h3>
+<p class="text-secondary">2021-02-04</p>
+<p>Traefik is configured to use Let&rsquo;s Encrypt to generate certificate for my blog (and other services) automatically. One day after restarting, I cannot access to my blog via HTTPS anymore (NET::ERR_CERT_AUTHORITY_INVALID). Why?</p>
 
 <p>By looking at the Traefik logs, I found this:</p>
 
@@ -231,19 +236,19 @@ Cứ mỗi lần làm xong một miếng, K lại hỏi:</p>
 <p>time=&ldquo;2021-02-04T01:54:33Z&rdquo; level=error msg=&ldquo;Unable to obtain ACME certificate for domains \&ldquo;quantonganh.com\&rdquo;: unable to generate a certificate for the domains [quantonganh.com]: acme: error: 429 :: POST :: <a href="https://acme-v02.api.letsencrypt.org/acme/new-order">https://acme-v02.api.letsencrypt.org/acme/new-order</a> :: urn:ietf:params:acme:error:rateLimited :: Error creating new order :: too many certificates already issued for exact set of domains: quantonganh.com: see <a href="https://letsencrypt.org/docs/rate-limits/">https://letsencrypt.org/docs/rate-limits/</a>, url: &ldquo; providerName=le.acme routerName=blog-secured@docker rule=&ldquo;Host(<code>quantonganh.com</code>)&rdquo;</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/02/04/letsencrypt-rate-limits">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">plugins/docker failed to resolve Keycloak hostname?</a></h3>
-        <p class="text-secondary">2021-01-27</p>
-        <p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
+
+<p class="text-right">
+  <a href="/posts/2021/02/04/letsencrypt-rate-limits">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">plugins/docker failed to resolve Keycloak hostname?</a></h3>
+<p class="text-secondary">2021-01-27</p>
+<p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
 
 <p>The full error message is:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
 </span></span></code></pre>
 <p><code>sso.domain.com</code> is a local hostname which can be resolved on the host. How can I make it resolvable inside the <code>plugins/docker</code> container?</p>
 
@@ -258,16 +263,16 @@ Cứ mỗi lần làm xong một miếng, K lại hỏi:</p>
 
 <p>Look at this: <a href="http://plugins.drone.io/drone-plugins/drone-docker/">http://plugins.drone.io/drone-plugins/drone-docker/</a></p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
-        <p class="text-secondary">2021-01-07</p>
-        <p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
+
+<p class="text-right">
+  <a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
+<p class="text-secondary">2021-01-07</p>
+<p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
 
 <p>We are running <a href="/2020/09/29/integration-test-golang">integration test</a> by triggering a downstream build when a PR is merged into specific branches.
 In the downstream repository, we pull all the docker images which has been built and pushed from upstream.
@@ -275,16 +280,16 @@ The thing is we also used the <a href="https://github.com/meltwater/drone-conver
 
 <p>So, what happens when pushing to a new <code>release-*</code> branch?</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/12/30/search-static-site">How to add full text search to my static website?</a></h3>
-        <p class="text-secondary">2020-12-30</p>
-        <p>After building the website, I want to add search function.
+
+<p class="text-right">
+  <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/12/30/search-static-site">How to add full text search to my static website?</a></h3>
+<p class="text-secondary">2020-12-30</p>
+<p>After building the website, I want to add search function.
 There are some ways to do it:</p>
 
 <ul>
@@ -306,68 +311,68 @@ There are some ways to do it:</p>
 
 <p>Looking at the <a href="https://blevesearch.com/docs/Getting%20Started/">documentation</a>, there are three steps to add search to your website:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/12/30/search-static-site">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/12/30/search-static-site">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/5/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/7/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/5/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/7/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -403,6 +408,20 @@ There are some ways to do it:</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Learning how to code</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -113,23 +118,23 @@ To help my friend overcome the first obstacle, I explored various Golang librari
 <p>Unfortunately, none of these libraries provided the effective in addressing the issue.</p>
 
 <p>Finally, I discovered that using a <a href="https://github.com/quantonganh/ims/blob/main/cmd/refresh_all.ps1">powershell script</a> to refresh the data:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#953800">$Excel</span><span style="color:#1f2328">=</span><span style="color:#6639ba">New-Object</span> -ComObject Excel<span style="color:#1f2328">.</span>Application
-</span></span><span style="display:flex;"><span><span style="color:#953800">$Excel</span><span style="color:#1f2328">.</span>Visible <span style="color:#1f2328">=</span> <span style="color:#953800">$true</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$Excel=New-Object -ComObject Excel.Application
+</span></span><span style="display:flex;"><span>$Excel.Visible = $true
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#953800">$i</span><span style="color:#1f2328">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328"></span><span style="color:#1f2328">;</span> <span style="color:#953800">$i</span> <span style="color:#0550ae">-lt</span> <span style="color:#953800">$</span><span style="color:#1f2328">(</span><span style="color:#953800">$args</span><span style="color:#1f2328">.</span>Length <span style="color:#1f2328">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328"></span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span> <span style="color:#953800">$i</span><span style="color:#1f2328">+</span><span style="color:#1f2328">+</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#953800">$inputWb</span> <span style="color:#1f2328">=</span> <span style="color:#953800">$Excel</span><span style="color:#1f2328">.</span>Workbooks<span style="color:#1f2328">.</span>Open<span style="color:#1f2328">(</span><span style="color:#953800">$</span><span style="color:#1f2328">(</span><span style="color:#953800">$args</span><span style="color:#1f2328">[</span><span style="color:#953800">$i</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> ($i=<span style="color:#6897bb">0</span>; $i -lt $($args.Length - <span style="color:#6897bb">1</span>); $i++)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $inputWb = $Excel.Workbooks.Open($($args[$i]))
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">$outputWb</span><span style="color:#1f2328">=</span><span style="color:#953800">$Excel</span><span style="color:#1f2328">.</span>Workbooks<span style="color:#1f2328">.</span>Open<span style="color:#1f2328">(</span><span style="color:#953800">$</span><span style="color:#1f2328">(</span><span style="color:#953800">$args</span><span style="color:#1f2328">[</span><span style="color:#953800">$</span><span style="color:#1f2328">(</span><span style="color:#953800">$args</span><span style="color:#1f2328">.</span>Length <span style="color:#1f2328">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328"></span><span style="color:#1f2328">)</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">$outputWb</span><span style="color:#1f2328">.</span>RefreshAll<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">While</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#953800">$outputWb</span><span style="color:#1f2328">.</span>Sheets <span style="color:#1f2328">|</span> <span style="color:#6639ba">ForEach-Object</span> <span style="color:#1f2328">{</span><span style="color:#953800">$_</span><span style="color:#1f2328">.</span>QueryTables <span style="color:#1f2328">|</span> <span style="color:#6639ba">ForEach-Object</span> <span style="color:#1f2328">{</span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#953800">$_</span><span style="color:#1f2328">.</span>QueryTable<span style="color:#1f2328">.</span>Refreshing<span style="color:#1f2328">)</span><span style="color:#1f2328">{</span><span style="color:#953800">$true</span><span style="color:#1f2328">}</span><span style="color:#1f2328">}</span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">Start-Sleep</span> -Seconds <span style="color:#0550ae">1</span><span style="color:#1f2328"></span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">$outputWb</span><span style="color:#1f2328">.</span>Save<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">$outputWb</span><span style="color:#1f2328">.</span>Close<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">$Excel</span><span style="color:#1f2328">.</span>Quit<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>$outputWb=$Excel.Workbooks.Open($($args[$($args.Length - <span style="color:#6897bb">1</span>)]))
+</span></span><span style="display:flex;"><span>$outputWb.RefreshAll()
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">While</span> (($outputWb.Sheets | ForEach-Object {$_.QueryTables | ForEach-Object {<span style="color:#cc7832">if</span>($_.QueryTable.Refreshing){$true}}}))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Start-Sleep -Seconds <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$outputWb.Save()
+</span></span><span style="display:flex;"><span>$outputWb.Close()
+</span></span><span style="display:flex;"><span>$Excel.Quit()
 </span></span></code></pre>
 <p>as well as <a href="https://github.com/quantonganh/ims/blob/f10be5ea49ed48e0ce77e371cc1c8e3c68fbbd04/cmd/formula.go#L245">calling this from Golang</a> was an effective solution.</p>
 
@@ -138,81 +143,81 @@ In order to address this issue, I utilized the <code>netsh</code> command to <a 
 that could be used to send the email, and then switch back.</p>
 
 <p>Additionally, I employed a technique to ensure a connection to the SMTP port prior to sending the email:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#6639ba">retry</span><span style="color:#1f2328">(</span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Second</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">30</span><span style="color:#0550ae">*</span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Second</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">func</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">bool</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">address</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">net</span><span style="color:#1f2328">.</span><span style="color:#6639ba">JoinHostPort</span><span style="color:#1f2328">(</span><span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">SMTP</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Host</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">strconv</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Itoa</span><span style="color:#1f2328">(</span><span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">SMTP</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Port</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;connecting to the %s&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">address</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">net</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dial</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;tcp&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">address</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">retry</span><span style="color:#1f2328">(</span><span style="color:#1f2328">interval</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">timeout</span><span style="color:#fff"> </span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Duration</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">f</span><span style="color:#fff"> </span><span style="color:#cf222e">func</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#cf222e">bool</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">ticker</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewTicker</span><span style="color:#1f2328">(</span><span style="color:#1f2328">interval</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#1f2328">ticker</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Stop</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">to</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewTimer</span><span style="color:#1f2328">(</span><span style="color:#1f2328">timeout</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#1f2328">to</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Stop</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">select</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">case</span><span style="color:#fff"> </span><span style="color:#0550ae">&lt;-</span><span style="color:#1f2328">ticker</span><span style="color:#1f2328">.</span><span style="color:#1f2328">C</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#6639ba">f</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">return</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">case</span><span style="color:#fff"> </span><span style="color:#0550ae">&lt;-</span><span style="color:#1f2328">to</span><span style="color:#1f2328">.</span><span style="color:#1f2328">C</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Info</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Msgf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;timed out after %s&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">timeout</span><span style="color:#1f2328">.</span><span style="color:#6639ba">String</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">return</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>		<span style="color:#ffc66d">retry</span>(time.Second, <span style="color:#6897bb">30</span>*time.Second, <span style="color:#cc7832">func</span>() <span style="color:#cc7832">bool</span> {
+</span></span><span style="display:flex;"><span>			address := net.<span style="color:#ffc66d">JoinHostPort</span>(conf.SMTP.Host, strconv.<span style="color:#ffc66d">Itoa</span>(conf.SMTP.Port))
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Printf</span>(<span style="color:#6a8759">&#34;connecting to the %s&#34;</span>, address)
+</span></span><span style="display:flex;"><span>			_, err := net.<span style="color:#ffc66d">Dial</span>(<span style="color:#6a8759">&#34;tcp&#34;</span>, address)
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">if</span> err == <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#cc7832">return</span> <span style="color:#cc7832">true</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">return</span> <span style="color:#cc7832">false</span>
+</span></span><span style="display:flex;"><span>		})
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">retry</span>(interval, timeout time.Duration, f <span style="color:#cc7832">func</span>() <span style="color:#cc7832">bool</span>) {
+</span></span><span style="display:flex;"><span>	ticker := time.<span style="color:#ffc66d">NewTicker</span>(interval)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">defer</span> ticker.<span style="color:#ffc66d">Stop</span>()
+</span></span><span style="display:flex;"><span>	to := time.<span style="color:#ffc66d">NewTimer</span>(timeout)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">defer</span> to.<span style="color:#ffc66d">Stop</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">for</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">select</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">case</span> &lt;-ticker.C:
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">if</span> <span style="color:#ffc66d">f</span>() {
+</span></span><span style="display:flex;"><span>				<span style="color:#cc7832">return</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">case</span> &lt;-to.C:
+</span></span><span style="display:flex;"><span>			log.<span style="color:#ffc66d">Info</span>().<span style="color:#ffc66d">Msgf</span>(<span style="color:#6a8759">&#34;timed out after %s&#34;</span>, timeout.<span style="color:#ffc66d">String</span>())
+</span></span><span style="display:flex;"><span>			<span style="color:#cc7832">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
-        <i class="bi bi-tag"></i>
-        golang
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/chromedp" role="button">
-        <i class="bi bi-tag"></i>
-        chromedp
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/powershell" role="button">
-        <i class="bi bi-tag"></i>
-        powershell
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+    <i class="bi bi-tag"></i>
+    golang
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/chromedp" role="button">
+    <i class="bi bi-tag"></i>
+    chromedp
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/powershell" role="button">
+    <i class="bi bi-tag"></i>
+    powershell
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/01/09/learning-how-to-code"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2023/01/09/learning-how-to-code"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -250,6 +255,20 @@ that could be used to send the email, and then switch back.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

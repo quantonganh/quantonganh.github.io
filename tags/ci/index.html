@@ -81,16 +81,21 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">plugins/docker failed to resolve Keycloak hostname?</a></h3>
-        <p class="text-secondary">2021-01-27</p>
-        <p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
+
+<h3><a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">plugins/docker failed to resolve Keycloak hostname?</a></h3>
+<p class="text-secondary">2021-01-27</p>
+<p>After integrating Docker registry with Keycloak, the publishing step failed to authenticate with Docker Registry.</p>
 
 <p>The full error message is:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>time=&#34;2021-01-26T13:44:18.485121053Z&#34; level=error msg=&#34;Handler for POST /v1.40/auth returned error: Get https://docker.domain.com/v2/: Get https://sso.domain.com/auth/realms/application/protocol/docker-v2/auth?account=******&amp;client_id=docker&amp;offline_token=true&amp;service=aws-docker-registry: dial tcp: lookup sso.domain.com on 127.0.0.11:53: no such host&#34;
 </span></span></code></pre>
 <p><code>sso.domain.com</code> is a local hostname which can be resolved on the host. How can I make it resolvable inside the <code>plugins/docker</code> container?</p>
 
@@ -105,16 +110,16 @@
 
 <p>Look at this: <a href="http://plugins.drone.io/drone-plugins/drone-docker/">http://plugins.drone.io/drone-plugins/drone-docker/</a></p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
-        <p class="text-secondary">2021-01-07</p>
-        <p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
+
+<p class="text-right">
+  <a href="/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/01/07/drone-action-condition">How to run a pipeline step only when pushing to a new branch?</a></h3>
+<p class="text-secondary">2021-01-07</p>
+<p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
 
 <p>We are running <a href="/2020/09/29/integration-test-golang">integration test</a> by triggering a downstream build when a PR is merged into specific branches.
 In the downstream repository, we pull all the docker images which has been built and pushed from upstream.
@@ -122,19 +127,19 @@ The thing is we also used the <a href="https://github.com/meltwater/drone-conver
 
 <p>So, what happens when pushing to a new <code>release-*</code> branch?</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
-        <p class="text-secondary">2020-06-26</p>
-        <p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
+
+<p class="text-right">
+  <a href="/posts/2021/01/07/drone-action-condition">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">How to trigger build steps based on modified directory?</a></h3>
+<p class="text-secondary">2020-06-26</p>
+<p>Using monorepo with multiple micro services, every single commit will trigger a full lint/test/build/publish for every service. What can I do to limit the scope?</p>
 
 <p>To do that, we can use <code>git diff</code> to show changes between commits:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  if [[ -n &#34;${DRONE_PULL_REQUEST}&#34; ]]; then
 </span></span><span style="display:flex;"><span>    most_recent_before=&#34;origin/${DRONE_TARGET_BRANCH}&#34;
 </span></span><span style="display:flex;"><span>  elif [[ &#34;${DRONE_BUILD_EVENT}&#34; = &#34;push&#34; &amp;&amp; (&#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;master&#34; || &#34;${DRONE_COMMIT_BRANCH}&#34; = &#34;release-&#34;*) ]]; then
 </span></span><span style="display:flex;"><span>    if [[ &#34;${DRONE_COMMIT_BEFORE}&#34; = &#34;$zero&#34; ]]; then
@@ -145,16 +150,16 @@ The thing is we also used the <a href="https://github.com/meltwater/drone-conver
 </span></span><span style="display:flex;"><span>  fi
 </span></span><span style="display:flex;"><span>  modified_files=$(git --no-pager diff --name-only &#34;${DRONE_COMMIT_SHA}&#34;..&#34;${most_recent_before}&#34;);
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/06/26/drone-trigger-based-on-modified-dir">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -190,6 +195,20 @@ The thing is we also used the <a href="https://github.com/meltwater/drone-conver
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

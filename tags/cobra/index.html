@@ -81,60 +81,65 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
-        <p class="text-secondary">2020-07-03</p>
-        <p>As an engineer, I want to automate everything as much as possible.
+
+<h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
+<p class="text-secondary">2020-07-03</p>
+<p>As an engineer, I want to automate everything as much as possible.
 This CLI tool is created to save a draft mail in Zimbra web client.</p>
 
 <p>Read config file:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">initConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">cfgFile</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Use config file from the flag.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cfgFile</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Find home directory.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">home</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">homedir</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exit</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AddConfigPath</span><span style="color:#1f2328">(</span><span style="color:#1f2328">home</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigName</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;.zwc&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AutomaticEnv</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#57606a">// read in environment variables that match</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#57606a">// If a config file is found, read it in.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadInConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Using config file:&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
-        <p class="text-secondary">2020-04-13</p>
-        <p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">initConfig</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> cfgFile != <span style="color:#6a8759">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Use config file from the flag.</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigFile</span>(cfgFile)
+</span></span><span style="display:flex;"><span>	} <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Find home directory.</span>
+</span></span><span style="display:flex;"><span>		home, err := homedir.<span style="color:#ffc66d">Dir</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			fmt.<span style="color:#ffc66d">Println</span>(err)
+</span></span><span style="display:flex;"><span>			os.<span style="color:#ffc66d">Exit</span>(<span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">AddConfigPath</span>(home)
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigName</span>(<span style="color:#6a8759">&#34;.zwc&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	viper.<span style="color:#ffc66d">AutomaticEnv</span>() <span style="color:#808080">// read in environment variables that match</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#808080">// If a config file is found, read it in.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err := viper.<span style="color:#ffc66d">ReadInConfig</span>(); err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Using config file:&#34;</span>, viper.<span style="color:#ffc66d">ConfigFileUsed</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
+<p class="text-secondary">2020-04-13</p>
+<p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
 
 <p>I created this tool to run it from CLI.</p>
 
 <p>First, take a look at this <a href="https://developers.google.com/calendar/quickstart/go">quickstart</a>.</p>
 
 <p>Create initical code by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra init
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra init
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
 </span></span><span style="display:flex;"><span>.
@@ -144,7 +149,7 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
 <p>Create <code>event</code> command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra add event
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra add event
 </span></span><span style="display:flex;"><span>$ cobra add insert -p &#39;eventCmd&#39;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
@@ -156,16 +161,16 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 </span></span><span style="display:flex;"><span>│   └── root.go
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -201,6 +206,20 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">SICP Exercise 2.77: expected a procedure that can be applied to arguments, given #f</a></h3>
-        <p class="text-secondary">2023-07-13</p>
-        <p><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_sec_2.5.1">2.5.1  Generic Arithmetic Operations</a></p>
+
+<h3><a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">SICP Exercise 2.77: expected a procedure that can be applied to arguments, given #f</a></h3>
+<p class="text-secondary">2023-07-13</p>
+<p><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_sec_2.5.1">2.5.1  Generic Arithmetic Operations</a></p>
 
 <blockquote>
 <p>Louis Reasoner tries to evaluate the expression (magnitude z) where z is the object shown in figure <a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_fig_2.24">2.24</a>.
@@ -95,30 +100,30 @@ To his surprise, instead of the answer 5 he gets an error message from <code>app
 </blockquote>
 
 <p>To simplify the <code>install-complex-package</code> procedure, I made the following changes:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">install-complex-package</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">make-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">get</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;rectangular</span><span style="color:#1f2328">)</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">tag</span> <span style="color:#953800">z</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">attach-tag</span> <span style="color:#032f62">&#39;complex</span> <span style="color:#953800">z</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#6639ba">put</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;complex</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">(</span><span style="color:#cf222e">lambda </span><span style="color:#1f2328">(</span><span style="color:#6639ba">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">tag</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">make-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">install-complex-package</span>)
+</span></span><span style="display:flex;"><span>  (<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">make-from-real-imag</span> x y)
+</span></span><span style="display:flex;"><span>		((<span style="color:#ffc66d">get</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;rectangular</span>) x y))
+</span></span><span style="display:flex;"><span>	(<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">tag</span> z) (<span style="color:#ffc66d">attach-tag</span> <span style="color:#6a8759">&#39;complex</span> z))
+</span></span><span style="display:flex;"><span>	(<span style="color:#ffc66d">put</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;complex</span>
+</span></span><span style="display:flex;"><span>		(<span style="color:#cc7832">lambda </span>(<span style="color:#ffc66d">x</span> y) (<span style="color:#ffc66d">tag</span> (<span style="color:#ffc66d">make-from-real-imag</span> x y))))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">install-complex-package</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ffc66d">install-complex-package</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">trace-define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">make-complex-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">get</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;complex</span><span style="color:#1f2328">)</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ffc66d">trace-define</span> (<span style="color:#ffc66d">make-complex-from-real-imag</span> x y)
+</span></span><span style="display:flex;"><span>	((<span style="color:#ffc66d">get</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;complex</span>) x y))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">magnitude </span><span style="color:#1f2328">(</span><span style="color:#6639ba">make-complex-from-real-imag</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(magnitude (<span style="color:#ffc66d">make-complex-from-real-imag</span> <span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>))
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Docker rootless keeps restarting?</a></h3>
-        <p class="text-secondary">2023-07-12</p>
-        <p>As some of you may know, this blog is hosted on Raspberry Pi.
+
+<p class="text-right">
+  <a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Docker rootless keeps restarting?</a></h3>
+<p class="text-secondary">2023-07-12</p>
+<p>As some of you may know, this blog is hosted on Raspberry Pi.
 To monitor its status, I wrote a script, which you can find <a href="https://github.com/quantonganh/blog/blob/master/scripts/monitor.sh">here</a>.</p>
 
 <p>Recently, I decided to switch the Docker daemon to run in <a href="https://docs.docker.com/engine/security/rootless/">rootless mode</a>.
@@ -126,16 +131,16 @@ However, after making this change, I started receiving notifications indicating 
 
 <p>Whenever this happens, I ssh into my Pi and run the command <code>docker ps</code> to list the running containers.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/05/06/how-I-setup-new-macbook">How I setup a new Macbook in 2023</a></h3>
-        <p class="text-secondary">2023-05-06</p>
-        <p>I purchased my first MacBook Pro in 2013 prior to transitioning to remote work.
+
+<p class="text-right">
+  <a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/05/06/how-I-setup-new-macbook">How I setup a new Macbook in 2023</a></h3>
+<p class="text-secondary">2023-05-06</p>
+<p>I purchased my first MacBook Pro in 2013 prior to transitioning to remote work.
 In my job, we were using <a href="https://github.com/saltstack/salt">saltstack</a> to build <a href="https://www.robotinfra.com/">an automation tool</a>.
 In order to delve deeper into Salt, I decided to configure my Macbook using it, and I documented the process <a href="https://github.com/quantonganh/salt-osx">here</a>.</p>
 
@@ -143,94 +148,94 @@ In order to delve deeper into Salt, I decided to configure my Macbook using it, 
 
 <p>In 2018, due to work requirements, 8GB of memory proved insufficient to run Windows on VirtualBox, prompting me to acquire a second hand MacBook with 16GB of RAM.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/05/06/how-I-setup-new-macbook">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">A terminal UI for Taskwarrior</a></h3>
-        <p class="text-secondary">2023-04-21</p>
-        <p>When I first started using Linux, I came across <a href="https://taskwarrior.org/">Taskwarrior</a>, a command line tool for managing to-do lists.
+
+<p class="text-right">
+  <a href="/posts/2023/05/06/how-I-setup-new-macbook">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">A terminal UI for Taskwarrior</a></h3>
+<p class="text-secondary">2023-04-21</p>
+<p>When I first started using Linux, I came across <a href="https://taskwarrior.org/">Taskwarrior</a>, a command line tool for managing to-do lists.
 However, I never got around to using it extensively, mainly because there was no Android app available at the time, making it difficult to sync tasks from my phone.</p>
 
 <p>I did experiment with <a href="https://github.com/coddingtonbear/taskwarrior-pomodoro">taskwarrior-pomodoro</a> but unfortunately, it wasn&rsquo;t as effective as I had hoped.</p>
 
 <p>Recently, though, I stumbled upon <a href="https://github.com/bgregos/foreground">foreground</a>, a new discovery that reignited my interest in Taskwarrior,</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/04/20/unresponsive-macbook-pro">Load averages approximately 1000 on macOS?</a></h3>
-        <p class="text-secondary">2023-04-20</p>
-        <p>Em &ldquo;vợ&rdquo; ra đời năm 2015, cưới về năm 2018, loa đã rè, pin đã chai.</p>
+
+<p class="text-right">
+  <a href="/posts/2023/04/21/terminal-ui-for-taskwarrior">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/04/20/unresponsive-macbook-pro">Load averages approximately 1000 on macOS?</a></h3>
+<p class="text-secondary">2023-04-20</p>
+<p>Em &ldquo;vợ&rdquo; ra đời năm 2015, cưới về năm 2018, loa đã rè, pin đã chai.</p>
 
 <p>Một ngày đẹp trời bật máy lên và không làm được gì. Load gần&hellip; 1000 (trong ảnh là sau khi đã restart, và hơn 30p sau mới gõ được <code>w</code>):</p>
 
-<p><img src="/2023/04/20/load-averages-600.jpeg" alt="Load Averages 600" /></p>
+<p><img src="load-averages-600.jpeg" alt="Load Averages 600" /></p>
 
 <p>Mình thử khởi động lại thì mất khoảng 5-10p mới đến chỗ gõ password.
 Search thấy có bạn <a href="https://discussions.apple.com/thread/8308724">thay cable ổ cứng thì hết</a> nhưng đời 2015 thì ổ cứng không có cable.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/04/20/unresponsive-macbook-pro">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/04/01/terminal-ui-for-chatgpt">A simple terminal UI for ChatGPT</a></h3>
-        <p class="text-secondary">2023-04-01</p>
-        <p>When I started learning Linux, I immediately fell in love with the terminal.
+
+<p class="text-right">
+  <a href="/posts/2023/04/20/unresponsive-macbook-pro">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/04/01/terminal-ui-for-chatgpt">A simple terminal UI for ChatGPT</a></h3>
+<p class="text-secondary">2023-04-01</p>
+<p>When I started learning Linux, I immediately fell in love with the terminal.
 I still remember the feeling of typing commands into the terminal, pressing Enter and seeing if I got the expected result.
 As a system administrator and DevOps engineer, I always wanted to do everything on the terminal.</p>
 
 <p>The reasons are simple: it allowed me know what was happening behind the scenes,
 and it was faster than switching to other tools, and then back to the terminal to continue working.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/04/01/terminal-ui-for-chatgpt">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/03/20/man-on-fire-trained-or-untrained">Man on fire - trained or untrained?</a></h3>
-        <p class="text-secondary">2023-03-20</p>
-        <p>Hôm trước vừa biên một bài về <a href="/2023/03/14/training-and-receiving-feedback">Nhiều giờ bay và có phản hổi</a>,
+
+<p class="text-right">
+  <a href="/posts/2023/04/01/terminal-ui-for-chatgpt">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/03/20/man-on-fire-trained-or-untrained">Man on fire - trained or untrained?</a></h3>
+<p class="text-secondary">2023-03-20</p>
+<p>Hôm trước vừa biên một bài về <a href="/2023/03/14/training-and-receiving-feedback">Nhiều giờ bay và có phản hổi</a>,
 thì hôm nay ChatGPT lại đưa tôi đến đây:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>You:
-</span></span><span style="display:flex;"><span>  Top <span style="color:#0550ae">10</span> kidnapping movies <span style="color:#0550ae">(</span>with release year<span style="color:#0550ae">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>You:
+</span></span><span style="display:flex;"><span>  Top <span style="color:#6897bb">10</span> kidnapping movies (with release year)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ChatGPT:
-</span></span><span style="display:flex;"><span>  Here are the top <span style="color:#0550ae">10</span> Kidnapping movies with their release year:
+</span></span><span style="display:flex;"><span>  Here are the top <span style="color:#6897bb">10</span> Kidnapping movies with their release year:
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  1. <span style="color:#0a3069">&#34;Taken&#34;</span> <span style="color:#0550ae">(</span>2008<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  2. <span style="color:#0a3069">&#34;Ransom&#34;</span> <span style="color:#0550ae">(</span>1996<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  3. <span style="color:#0a3069">&#34;Man on Fire&#34;</span> <span style="color:#0550ae">(</span>2004<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  4. <span style="color:#0a3069">&#34;Prisoners&#34;</span> <span style="color:#0550ae">(</span>2013<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  5. <span style="color:#0a3069">&#34;Gone Girl&#34;</span> <span style="color:#0550ae">(</span>2014<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  6. <span style="color:#0a3069">&#34;Misery&#34;</span> <span style="color:#0550ae">(</span>1990<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  7. <span style="color:#0a3069">&#34;The Vanishing&#34;</span> <span style="color:#0550ae">(</span>1988<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  8. <span style="color:#0a3069">&#34;Room&#34;</span> <span style="color:#0550ae">(</span>2015<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  9. <span style="color:#0a3069">&#34;The Call&#34;</span> <span style="color:#0550ae">(</span>2013<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>  10. <span style="color:#0a3069">&#34;The Lovely Bones&#34;</span> <span style="color:#0550ae">(</span>2009<span style="color:#0550ae">)</span>
+</span></span><span style="display:flex;"><span>  1. <span style="color:#6a8759">&#34;Taken&#34;</span> (2008)
+</span></span><span style="display:flex;"><span>  2. <span style="color:#6a8759">&#34;Ransom&#34;</span> (1996)
+</span></span><span style="display:flex;"><span>  3. <span style="color:#6a8759">&#34;Man on Fire&#34;</span> (2004)
+</span></span><span style="display:flex;"><span>  4. <span style="color:#6a8759">&#34;Prisoners&#34;</span> (2013)
+</span></span><span style="display:flex;"><span>  5. <span style="color:#6a8759">&#34;Gone Girl&#34;</span> (2014)
+</span></span><span style="display:flex;"><span>  6. <span style="color:#6a8759">&#34;Misery&#34;</span> (1990)
+</span></span><span style="display:flex;"><span>  7. <span style="color:#6a8759">&#34;The Vanishing&#34;</span> (1988)
+</span></span><span style="display:flex;"><span>  8. <span style="color:#6a8759">&#34;Room&#34;</span> (2015)
+</span></span><span style="display:flex;"><span>  9. <span style="color:#6a8759">&#34;The Call&#34;</span> (2013)
+</span></span><span style="display:flex;"><span>  10. <span style="color:#6a8759">&#34;The Lovely Bones&#34;</span> (2009)
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2023/03/20/man-on-fire-trained-or-untrained">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/03/14/training-and-receiving-feedback">Nhiều giờ bay và có phản hồi</a></h3>
-        <p class="text-secondary">2023-03-14</p>
-        <p>Tặng D.</p>
+
+<p class="text-right">
+  <a href="/posts/2023/03/20/man-on-fire-trained-or-untrained">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/03/14/training-and-receiving-feedback">Nhiều giờ bay và có phản hồi</a></h3>
+<p class="text-secondary">2023-03-14</p>
+<p>Tặng D.</p>
 
 <p><a href="https://fb.watch/jfvYJS82XK/">https://fb.watch/jfvYJS82XK/</a></p>
 
@@ -244,16 +249,16 @@ Chú được chú H hàng xóm cho một cái vợt mà quý như vàng.</p>
 Thầy dạy từ những động tác cơ bản nhất: đôi công.
 Góc này có H (5 tuổi) cao ngang mặt bàn.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/03/14/training-and-receiving-feedback">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/01/09/learning-how-to-code">Learning how to code</a></h3>
-        <p class="text-secondary">2023-01-09</p>
-        <p>If you find yourself doing the same task repeatedly, consider learning how to code.</p>
+
+<p class="text-right">
+  <a href="/posts/2023/03/14/training-and-receiving-feedback">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/01/09/learning-how-to-code">Learning how to code</a></h3>
+<p class="text-secondary">2023-01-09</p>
+<p>If you find yourself doing the same task repeatedly, consider learning how to code.</p>
 
 <p>For instance, a friend of mine had to perform the following tasks on daily basis:</p>
 
@@ -270,16 +275,16 @@ Góc này có H (5 tuổi) cao ngang mặt bàn.</p>
 
 <p>The initial steps can be done by using <a href="https://github.com/chromedp/chromedp">chromedp</a>.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/01/09/learning-how-to-code">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/01/07/best-movies-2022">10 phim hay nhất mình xem trong năm 2022</a></h3>
-        <p class="text-secondary">2023-01-07</p>
-        <p>Sắp xếp theo thứ tự ngẫu nhiên:</p>
+
+<p class="text-right">
+  <a href="/posts/2023/01/09/learning-how-to-code">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/01/07/best-movies-2022">10 phim hay nhất mình xem trong năm 2022</a></h3>
+<p class="text-secondary">2023-01-07</p>
+<p>Sắp xếp theo thứ tự ngẫu nhiên:</p>
 
 <ol>
 <li>Argo: <a href="https://www.imdb.com/title/tt1024648/">IMDb</a> | <a href="https://www.youtube.com/watch?v=JW3WfSFgrVY">trailer</a><br />
@@ -291,68 +296,68 @@ Nếu đang &ldquo;midlife crisis&rdquo; bạn có thể xem thử.</li>
 Nếu Noel vừa rồi chưa có gấu thì bạn có thể ngồi nhà, làm ấm trà + bánh đậu xanh để thưởng thức.</li>
 </ol>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/01/07/best-movies-2022">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/01/07/best-movies-2022">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/2/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/4/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/2/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/4/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -388,6 +393,20 @@ Nếu Noel vừa rồi chưa có gấu thì bạn có thể ngồi nhà, làm �
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>libp2p performance benchmarking</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2023-10-27</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <p>I invested some time in studying <a href="https://docs.libp2p.io/concepts/transports/quic/">QUIC</a> and <a href="https://github.com/libp2p/rust-libp2p">libp2p</a>
@@ -103,7 +108,7 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </ul>
 
 <p>Let&rsquo;s print help first:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
 </span></span><span style="display:flex;"><span>Usage: perf [OPTIONS]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Options:
@@ -115,13 +120,13 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </span></span><span style="display:flex;"><span>  -h, --help                             Print help  
 </span></span></code></pre>
 <p>Run in server mode:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --run-server`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --run-server`
 </span></span><span style="display:flex;"><span>[2023-10-27T07:17:09.543Z INFO  libp2p_swarm] Local peer id: 12D3KooWPxXR3Me5pS7UjRg2gPVk9A7Se4nhEVBT9GPifjAwpiWX
 </span></span><span style="display:flex;"><span>[2023-10-27T07:17:09.545Z INFO  perf] Listening on /ip4/127.0.0.1/tcp/8080
 </span></span><span style="display:flex;"><span>[2023-10-27T07:17:09.545Z INFO  perf] Listening on /ip4/127.0.0.1/udp/8080/quic-v1
 </span></span></code></pre>
 <p>In another terminal, try to upload/download 100MB:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
 </span></span><span style="display:flex;"><span>[2023-10-27T07:21:14.922Z INFO  libp2p_swarm] Local peer id: 12D3KooWCwLib8hXRpVYNZFFnjBpQeqdKfFNgQUTj4mpJ2qyGdiZ
 </span></span><span style="display:flex;"><span>[2023-10-27T07:21:14.922Z INFO  perf] start benchmark: custom
 </span></span><span style="display:flex;"><span>[2023-10-27T07:21:14.930Z INFO  perf] established connection in 0.0076 s
@@ -139,88 +144,88 @@ In this article, I will show you how to benchmark the network transfer using <a 
 <p>To simulate network latency and packet loss, we can use <a href="https://man.freebsd.org/cgi/man.cgi?query=pfctl">pfctl</a> and <a href="https://man.freebsd.org/cgi/man.cgi?query=dnctl">dnctl</a></p>
 
 <p>First, enable the packet filter:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>sudo pfctl -E
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>sudo pfctl -E
 </span></span></code></pre>
 <p>Then create a custom anchor in pf:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cat /etc/pf.conf <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;dummynet-anchor \&#34;libp2p\&#34;&#34;</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;anchor \&#34;libp2p\&#34;&#34;</span> <span style="color:#1f2328">|</span> sudo pfctl -f -
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cat /etc/pf.conf &amp;&amp; echo <span style="color:#6a8759">&#34;dummynet-anchor \&#34;libp2p\&#34;&#34;</span> &amp;&amp; echo <span style="color:#6a8759">&#34;anchor \&#34;libp2p\&#34;&#34;</span> | sudo pfctl -f -
 </span></span></code></pre>
 <p>Pipe the traffic to dummynet:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;dummynet in quick proto tcp from any to any port 8080 pipe 1&#34;</span> <span style="color:#1f2328">|</span> sudo pfctl -a libp2p -f -
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ echo <span style="color:#6a8759">&#34;dummynet in quick proto tcp from any to any port 8080 pipe 1&#34;</span> | sudo pfctl -a libp2p -f -
 </span></span></code></pre>
 <p>Simulate the network latency:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ sudo dnctl pipe <span style="color:#0550ae">1</span> config delay 10ms
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ sudo dnctl pipe <span style="color:#6897bb">1</span> config delay 10ms
 </span></span></code></pre>
 <p>Benchmark again:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
 </span></span><span style="display:flex;"><span>[2023-10-27T07:58:43.515Z INFO  perf] uploaded 100.00 MiB in 8.4413 s (94.77 Mbit/s), downloaded 100.00 MiB in 8.2188 s (97.34 Mbit/s)
 </span></span><span style="display:flex;"><span>{&#34;type&#34;:&#34;final&#34;,&#34;timeSeconds&#34;:16.689302458,&#34;uploadBytes&#34;:104857600,&#34;downloadBytes&#34;:104857600}
 </span></span></code></pre>
 <p>Simulate the packet loss:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ sudo dnctl pipe <span style="color:#0550ae">1</span> config plr 0.01
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ sudo dnctl list
-</span></span><span style="display:flex;"><span>00001: unlimited    <span style="color:#0550ae">0</span> ms   <span style="color:#0550ae">50</span> sl.plr 0.010000 <span style="color:#0550ae">1</span> queues <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> buckets<span style="color:#0550ae">)</span> droptail
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ sudo dnctl pipe <span style="color:#6897bb">1</span> config plr 0.01
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ sudo dnctl list
+</span></span><span style="display:flex;"><span>00001: unlimited    <span style="color:#6897bb">0</span> ms   <span style="color:#6897bb">50</span> sl.plr 0.010000 <span style="color:#6897bb">1</span> queues (<span style="color:#6897bb">1</span> buckets) droptail
 </span></span><span style="display:flex;"><span>    mask: 0x00 0x00000000/0x0000 -&gt; 0x00000000/0x0000
 </span></span><span style="display:flex;"><span>BKT Prot ___Source IP/port____ ____Dest. IP/port____ Tot_pkt/bytes Pkt/Byte Drp
 </span></span><span style="display:flex;"><span>    mask: 0x00 0x00000000/0x0000 -&gt; 0x00000000/0x0000
 </span></span><span style="display:flex;"><span>BKT Prot ___Source IP/port____ ____Dest. IP/port____ Tot_pkt/bytes Pkt/Byte Drp
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">0</span> tcp        127.0.0.1/63691       127.0.0.1/8080  <span style="color:#0550ae">1011241</span> <span style="color:#0550ae">490303519</span>  <span style="color:#0550ae">0</span>    <span style="color:#0550ae">0</span> <span style="color:#0550ae">9463</span>
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
+</span></span><span style="display:flex;"><span>  <span style="color:#6897bb">0</span> tcp        127.0.0.1/63691       127.0.0.1/8080  <span style="color:#6897bb">1011241</span> <span style="color:#6897bb">490303519</span>  <span style="color:#6897bb">0</span>    <span style="color:#6897bb">0</span> <span style="color:#6897bb">9463</span>
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Running `rust-libp2p/target/debug/perf --server-address &#39;127.0.0.1:8080&#39; --transport tcp --upload-bytes 104857600 --download-bytes 104857600`
 </span></span><span style="display:flex;"><span>[2023-10-27T08:33:58.098Z INFO  perf] uploaded 100.00 MiB in 9.1012 s (87.90 Mbit/s), downloaded 100.00 MiB in 2.2653 s (353.16 Mbit/s)
 </span></span><span style="display:flex;"><span>{&#34;type&#34;:&#34;final&#34;,&#34;timeSeconds&#34;:11.3747555,&#34;uploadBytes&#34;:104857600,&#34;downloadBytes&#34;:104857600}
 </span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/libp2p" role="button">
-        <i class="bi bi-tag"></i>
-        libp2p
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/rust" role="button">
-        <i class="bi bi-tag"></i>
-        rust
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/dnctl" role="button">
-        <i class="bi bi-tag"></i>
-        dnctl
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/pfctl" role="button">
-        <i class="bi bi-tag"></i>
-        pfctl
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/libp2p" role="button">
+    <i class="bi bi-tag"></i>
+    libp2p
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/rust" role="button">
+    <i class="bi bi-tag"></i>
+    rust
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/dnctl" role="button">
+    <i class="bi bi-tag"></i>
+    dnctl
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/pfctl" role="button">
+    <i class="bi bi-tag"></i>
+    pfctl
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/10/27/libp2p-perf-benchmark"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2023/10/27/libp2p-perf-benchmark"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -258,6 +263,20 @@ In this article, I will show you how to benchmark the network transfer using <a 
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

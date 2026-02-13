@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,26 +81,31 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">gocloud - writing data to a bucket: 403</a></h3>
-        <p class="text-secondary">2022-12-23</p>
-        
+
+<h3><a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">gocloud - writing data to a bucket: 403</a></h3>
+<p class="text-secondary">2022-12-23</p>
+
 <h4>Problem</h4>
 
 <p>We are writing some integration test using <a href="https://gocloud.dev/">Go CDK</a>.
 After writing some data to a bucket:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">writer</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">buckOut</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewWriter</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">fileDst</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">logger</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Errorf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;failed to write to fileDst: %v&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">defer</span><span style="color:#fff"> </span><span style="color:#1f2328">writer</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Close</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	writer, err := buckOut.<span style="color:#ffc66d">NewWriter</span>(ctx, fileDst, <span style="color:#cc7832">nil</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		logger.<span style="color:#ffc66d">Errorf</span>(<span style="color:#6a8759">&#34;failed to write to fileDst: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">defer</span> writer.<span style="color:#ffc66d">Close</span>()
+</span></span></code></pre>
 <p>we got an error when reading:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>(code=NotFound): storage: object doesn&#39;t exist
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(code=NotFound): storage: object doesn&#39;t exist
 </span></span></code></pre>
 <p>By reading <a href="https://gocloud.dev/howto/blob/#writing">the documentation</a>, I pay attention to this:</p>
 
@@ -108,47 +113,47 @@ After writing some data to a bucket:</p>
 <p>Closing the writer commits the write to the provider, flushing any buffers, and releases any resources used while writing, so you must always check the error of Close.</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Terraform failed to acquire state lock: 403: Access denied., forbidden</a></h3>
-        <p class="text-secondary">2022-11-17</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Terraform failed to acquire state lock: 403: Access denied., forbidden</a></h3>
+<p class="text-secondary">2022-11-17</p>
+
 <h4>Problem</h4>
 
 <p>We stored Terraform state in <a href="https://developer.hashicorp.com/terraform/language/settings/backends/gcs">gcs</a>.
 For some reasons, we got this error randomly when running on BitBucket pipelines:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╷</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">acquiring</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Error</span> <span style="color:#1f2328">message</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">2</span> <span style="color:#1f2328">errors</span> <span style="color:#1f2328">occurred</span><span style="color:#0550ae">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">writing</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">gs://bucket/path/to/default.tflock</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">failed</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">googleapi</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Error</span> <span style="color:#0550ae">403</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">Access</span> <span style="color:#1f2328">denied</span><span style="color:#1f2328">.</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">forbidden</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 	<span style="color:#0550ae">*</span> <span style="color:#1f2328">storage</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">object</span> <span style="color:#1f2328">doesn</span><span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#1f2328">t</span> <span style="color:#1f2328">exist</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> 
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">Terraform</span> <span style="color:#1f2328">acquires</span> <span style="color:#1f2328">a</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">lock</span> <span style="color:#1f2328">to</span> <span style="color:#1f2328">protect</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">state</span> <span style="color:#1f2328">from</span> <span style="color:#1f2328">being</span> <span style="color:#1f2328">written</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">by</span> <span style="color:#1f2328">multiple</span> <span style="color:#1f2328">users</span> <span style="color:#1f2328">at</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">same</span> <span style="color:#1f2328">time</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">Please</span> <span style="color:#1f2328">resolve</span> <span style="color:#1f2328">the</span> <span style="color:#1f2328">issue</span> <span style="color:#1f2328">above</span> <span style="color:#1f2328">and</span> <span style="color:#6639ba">try</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">again</span><span style="color:#1f2328">.</span> <span style="color:#1f2328">For</span> <span style="color:#1f2328">most</span> <span style="color:#1f2328">commands</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">you</span> <span style="color:#6639ba">can</span> <span style="color:#1f2328">disable</span> <span style="color:#1f2328">locking</span> <span style="color:#1f2328">with</span> <span style="color:#1f2328">the</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">-lock=false</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">│</span> <span style="color:#1f2328">flag</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">but</span> <span style="color:#1f2328">this</span> <span style="color:#1f2328">is</span> <span style="color:#1f2328">not</span> <span style="color:#1f2328">recommended</span><span style="color:#1f2328">.</span>
-</span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">╵</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#ff6b68">╷</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Error: Error acquiring the state lock
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Error message: <span style="color:#6897bb">2</span> errors occurred:
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 	* writing
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">gs://bucket/path/to/default.tflock</span><span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> failed: googleapi: Error <span style="color:#6897bb">403</span>: Access denied., forbidden
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 	* storage: object doesn<span style="color:#ff6b68">&#39;</span>t exist
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> Terraform acquires a state lock to protect the state from being written
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> by multiple users at the same time. Please resolve the issue above and try
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> again. For most commands, you can disable locking with the <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">-lock=false</span><span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">│</span> flag, but this is not recommended.
+</span></span><span style="display:flex;"><span><span style="color:#ff6b68">╵</span>
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/11/04/the-King-of-Vietnamese-language">The King of Vietnamese language game show</a></h3>
-        <p class="text-secondary">2022-11-04</p>
-        <p>My family likes to watch &ldquo;The King of Vietnamese language&rdquo; game show together.
+
+<p class="text-right">
+  <a href="/posts/2022/11/17/terraform-acquire-state-lock-403">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/11/04/the-King-of-Vietnamese-language">The King of Vietnamese language game show</a></h3>
+<p class="text-secondary">2022-11-04</p>
+<p>My family likes to watch &ldquo;The King of Vietnamese language&rdquo; game show together.
 I want to encourage our son to love Vietnamese.
 At the end of the game, the player has to find 7 complex words from the letters, for e.g,</p>
 
@@ -159,16 +164,16 @@ At the end of the game, the player has to find 7 complex words from the letters,
 <p>One evening a few weeks ago, while we were watching the final round,
 my wife suddenly came up with an idea: this game could be programmed.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/11/04/the-King-of-Vietnamese-language">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/08/08/traffic-jam-in-autumn">Mùa thu</a></h3>
-        <p class="text-secondary">2022-08-08</p>
-        <p><img src="/2016/09/16/Letage-cafe.jpeg" alt="Letage cafe" /></p>
+
+<p class="text-right">
+  <a href="/posts/2022/11/04/the-King-of-Vietnamese-language">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/08/08/traffic-jam-in-autumn">Mùa thu</a></h3>
+<p class="text-secondary">2022-08-08</p>
+<p><img src="Letage-cafe.jpeg" alt="Letage cafe" /></p>
 
 <p>Trời đẹp thật đấy nhưng sẽ đẹp hơn nếu nhà bạn loanh quanh chỗ&hellip; Hàng Bài, và đi làm ở Trần Hưng Đạo, Lý Thường Kiệt, &hellip; 😃.</p>
 
@@ -176,39 +181,39 @@ my wife suddenly came up with an idea: this game could be programmed.</p>
 
 <p>Đang bon bon dọc sông Tô Lịch thì nhìn thấy ùn ứ từ xa. Rẽ vào ngõ cũng không khá hơn, ai cũng tính cao như mình.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/08/08/traffic-jam-in-autumn">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/05/22/send-http-request-without-curl">How to send an HTTP request without using curl?</a></h3>
-        <p class="text-secondary">2022-05-22</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2022/08/08/traffic-jam-in-autumn">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/05/22/send-http-request-without-curl">How to send an HTTP request without using curl?</a></h3>
+<p class="text-secondary">2022-05-22</p>
+
 <h4>Problem</h4>
 
 <p>We are using <a href="https://www.krakend.io/docs/authorization/jwt-validation/">JWT validation</a>.
 For some reasons, when testing on staging, we got 401 error:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[GIN] 2022/05/20 - 14:20:57 | 401 |    2.588128ms |       127.0.0.1 | POST     &#34;/v1/endpoint&#34;
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[GIN] 2022/05/20 - 14:20:57 | 401 |    2.588128ms |       127.0.0.1 | POST     &#34;/v1/endpoint&#34;
 </span></span></code></pre>
 <h4>Troubleshooting</h4>
 
 <p>After looking at the <a href="https://github.com/devopsfaith/krakend-jose/blob/master/gin/jose.go#L129-L154">source code</a>,
 we need to set the <a href="https://www.krakend.io/docs/authorization/jwt-validation/#jwt-validation-settings">operation_debug</a> to true
 to see what caused that error:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>2022/05/20 08:31:26 KRAKEND ERROR: [ENDPOINT: /v1/endpoint][JWTValidator] Unable to validate the token: should have a JSON content type for JWKS endpoint
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>2022/05/20 08:31:26 KRAKEND ERROR: [ENDPOINT: /v1/endpoint][JWTValidator] Unable to validate the token: should have a JSON content type for JWKS endpoint
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2022/05/22/send-http-request-without-curl">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/02/10/million-years-ago">Adele - Million years ago</a></h3>
-        <p class="text-secondary">2022-02-10</p>
-        <p>Vừa lên xe thì nghe được đoạn guitar hay quá, vội lấy điện thoại ra ghi âm lại (sợ về nhà không Gúc ra bài gì).
+
+<p class="text-right">
+  <a href="/posts/2022/05/22/send-http-request-without-curl">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/02/10/million-years-ago">Adele - Million years ago</a></h3>
+<p class="text-secondary">2022-02-10</p>
+<p>Vừa lên xe thì nghe được đoạn guitar hay quá, vội lấy điện thoại ra ghi âm lại (sợ về nhà không Gúc ra bài gì).
 25 tuổi mà bạn ấy viết lời hay thật đấy!</p>
 
 <p><a href="https://www.youtube.com/watch?v=riEAnLur96c"><img src="https://img.youtube.com/vi/riEAnLur96c/0.jpg" alt="Adele - Million Years Ago (Acoustic Cover by Emir Taha)" /></a></p>
@@ -221,16 +226,16 @@ When I was young</p>
 <p>Deep down, I must have always known<br />
 That this would be inevitable</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/02/10/million-years-ago">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/02/06/the-taste-of-Tet">Mùi Tết</a></h3>
-        <p class="text-secondary">2022-02-06</p>
-        <p><img src="/2022/02/06/Chung-cake.jpg" alt="Chung cake" />
+
+<p class="text-right">
+  <a href="/posts/2022/02/10/million-years-ago">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/02/06/the-taste-of-Tet">Mùi Tết</a></h3>
+<p class="text-secondary">2022-02-06</p>
+<p><img src="Chung-cake.jpg" alt="Chung cake" />
 <em>Bánh Chưng rán&hellip; nước lọc.</em></p>
 
 <p><strong>Sáng 29</strong></p>
@@ -239,16 +244,16 @@ That this would be inevitable</p>
 
 <p>Có năm còn nhờ U đi chợ mua một ít hạt kê, về ngâm nước ấm rồi đem rải ở dưới gốc. Chúng nảy mầm, mọc cao khoảng 1, 2 cm nhìn như cỏ thật.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/02/06/the-taste-of-Tet">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2022/01/20/prevent-neck-pain">Đau cổ</a></h3>
-        <p class="text-secondary">2022-01-20</p>
-        <p><a href="https://www.upliftdesk.com/ergonomic-calculator/">https://www.upliftdesk.com/ergonomic-calculator/</a></p>
+
+<p class="text-right">
+  <a href="/posts/2022/02/06/the-taste-of-Tet">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2022/01/20/prevent-neck-pain">Đau cổ</a></h3>
+<p class="text-secondary">2022-01-20</p>
+<p><a href="https://www.upliftdesk.com/ergonomic-calculator/">https://www.upliftdesk.com/ergonomic-calculator/</a></p>
 
 <p>Tôi ước có ai đó đã nói với mình những điều này ngay từ khi bắt đầu dùng máy tính.
 Nhưng thường là khi có dấu hiệu đau ở đâu đó thì mới đi tìm hiểu nguyên nhân.</p>
@@ -259,23 +264,23 @@ Nếu bạn dùng máy bàn ở cơ quan, đừng ngại kiếm mấy quyển s�
 Nếu bạn dùng laptop đừng tiếc xèng đầu tư một cái giá đỡ + bàn phím ngoài.</li>
 </ol>
 
-        
-        <p class="text-right">
-            <a href="/posts/2022/01/20/prevent-neck-pain">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/11/30/kat">Kat</a></h3>
-        <p class="text-secondary">2021-11-30</p>
-        <p><img src="/2021/11/30/Kat.jpg" alt="Kat" /></p>
 
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</a></h3>
-        <p class="text-secondary">2021-11-02</p>
-        
+<p class="text-right">
+  <a href="/posts/2022/01/20/prevent-neck-pain">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/11/30/kat">Kat</a></h3>
+<p class="text-secondary">2021-11-30</p>
+<p><img src="Kat.jpg" alt="Kat" /></p>
+
+
+<hr>
+
+<h3><a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</a></h3>
+<p class="text-secondary">2021-11-02</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.43">Exercise 2.43</a>:
 Louis Reasoner is having a terrible time doing <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%25_thm_2.42">exercise 2.42</a>.
@@ -284,68 +289,68 @@ His queens procedure seems to work, but it runs extremely slowly.
 When Louis asks Eva Lu Ator for help, she points out that he has interchanged the order of the nested mappings in the flatmap, writing it as</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/3/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/5/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/3/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/5/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -381,6 +386,20 @@ When Louis asks Eva Lu Ator for help, she points out that he has interchanged th
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Open same file in already running instance of Helix</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2023-08-02</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+  
 </p>
 
 <p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
@@ -114,68 +119,68 @@ The worst case is when I accidentally switch back to an instance that has an old
 </ul>
 
 <p>Here&rsquo;s the script I&rsquo;ve come up with:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">#!/usr/bin/env sh
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#bbb529">#!/usr/bin/env sh
 </span></span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">tty</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>tty<span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">hostname</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>hostname <span style="color:#1f2328">|</span> tr <span style="color:#0a3069">&#39;[:upper:]&#39;</span> <span style="color:#0a3069">&#39;[:lower:]&#39;</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">pwd</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span><span style="color:#6639ba">pwd</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">file_path</span><span style="color:#0550ae">=</span><span style="color:#953800">$1</span>
+</span></span><span style="display:flex;"><span>tty=<span style="color:#cc7832">$(</span>tty<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>hostname=<span style="color:#cc7832">$(</span>hostname | tr <span style="color:#6a8759">&#39;[:upper:]&#39;</span> <span style="color:#6a8759">&#39;[:lower:]&#39;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>pwd=<span style="color:#cc7832">$(</span>pwd<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>file_path=$1
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">pane_id</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>wezterm cli list --format json <span style="color:#1f2328">|</span> jq --arg tty <span style="color:#0a3069">&#34;</span><span style="color:#953800">$tty</span><span style="color:#0a3069">&#34;</span> --arg opening_cwd <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">file://</span><span style="color:#953800">$hostname</span><span style="color:#953800">$pwd</span><span style="color:#0a3069">&#34;</span> --arg file_path <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">file://</span><span style="color:#953800">$hostname</span><span style="color:#953800">$file_path</span><span style="color:#0a3069">&#34;</span> -r <span style="color:#0a3069">&#39;.[] | .cwd as $running_cwd | select((.tty_name != $tty) and (.title | startswith(&#34;hx&#34;)) and (($opening_cwd | contains($running_cwd)) or ($file_path | contains($running_cwd)))) | .pane_id&#39;</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#0550ae">[</span> -z <span style="color:#0a3069">&#34;</span><span style="color:#953800">$pane_id</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">]</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">then</span>
-</span></span><span style="display:flex;"><span>    ~/.cargo/bin/hx <span style="color:#953800">$1</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#0550ae">[</span> -n <span style="color:#0a3069">&#34;</span><span style="color:#953800">$file_path</span><span style="color:#0a3069">&#34;</span> <span style="color:#0550ae">]</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">then</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">:open </span><span style="color:#0a3069">${</span><span style="color:#953800">file_path</span><span style="color:#0a3069">}</span><span style="color:#0a3069">\r</span><span style="color:#0a3069">&#34;</span> <span style="color:#1f2328">|</span> wezterm cli send-text --pane-id <span style="color:#953800">$pane_id</span> --no-paste
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">echo</span> <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">:open </span><span style="color:#0a3069">${</span><span style="color:#953800">pwd</span><span style="color:#0a3069">}</span><span style="color:#0a3069">\r</span><span style="color:#0a3069">&#34;</span> <span style="color:#1f2328">|</span> wezterm cli send-text --pane-id <span style="color:#953800">$pane_id</span> --no-paste
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">fi</span>
-</span></span><span style="display:flex;"><span>    wezterm cli activate-pane --pane-id <span style="color:#953800">$pane_id</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">fi</span>
+</span></span><span style="display:flex;"><span>pane_id=<span style="color:#cc7832">$(</span>wezterm cli list --format json | jq --arg tty <span style="color:#6a8759">&#34;</span>$tty<span style="color:#6a8759">&#34;</span> --arg opening_cwd <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">file://</span>$hostname$pwd<span style="color:#6a8759">&#34;</span> --arg file_path <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">file://</span>$hostname$file_path<span style="color:#6a8759">&#34;</span> -r <span style="color:#6a8759">&#39;.[] | .cwd as $running_cwd | select((.tty_name != $tty) and (.title | startswith(&#34;hx&#34;)) and (($opening_cwd | contains($running_cwd)) or ($file_path | contains($running_cwd)))) | .pane_id&#39;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> [ -z <span style="color:#6a8759">&#34;</span>$pane_id<span style="color:#6a8759">&#34;</span> ]; <span style="color:#cc7832">then</span>
+</span></span><span style="display:flex;"><span>    ~/.cargo/bin/hx $1
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> [ -n <span style="color:#6a8759">&#34;</span>$file_path<span style="color:#6a8759">&#34;</span> ]; <span style="color:#cc7832">then</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">:open </span><span style="color:#6a8759">${</span>file_path<span style="color:#6a8759">}</span><span style="color:#6a8759">\r</span><span style="color:#6a8759">&#34;</span> | wezterm cli send-text --pane-id $pane_id --no-paste
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">:open </span><span style="color:#6a8759">${</span>pwd<span style="color:#6a8759">}</span><span style="color:#6a8759">\r</span><span style="color:#6a8759">&#34;</span> | wezterm cli send-text --pane-id $pane_id --no-paste
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">fi</span>
+</span></span><span style="display:flex;"><span>    wezterm cli activate-pane --pane-id $pane_id
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">fi</span>
 </span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/helix" role="button">
-        <i class="bi bi-tag"></i>
-        helix
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/wezterm" role="button">
-        <i class="bi bi-tag"></i>
-        wezterm
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/helix" role="button">
+    <i class="bi bi-tag"></i>
+    helix
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/wezterm" role="button">
+    <i class="bi bi-tag"></i>
+    wezterm
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/08/02/open-same-file-in-already-running-helix"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2023/08/02/open-same-file-in-already-running-helix"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -213,6 +218,20 @@ The worst case is when I accidentally switch back to an instance that has an old
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

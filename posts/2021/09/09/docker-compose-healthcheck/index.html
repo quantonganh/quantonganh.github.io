@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Docker Compose healthcheck</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,141 +93,141 @@
 <p class="text-secondary">2021-09-09</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
 </p>
 
 <p>The most important thing when running integration test using docker-compose is ensured that one container is started completely before others.</p>
 
 <p>Sometime <a href="https://github.com/vishnubob/wait-for-it">wait-for-it</a> is not enough:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>bitnami/cassandra:latest<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">ports</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0a3069">&#39;7000:7000&#39;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0a3069">&#39;9042:9042&#39;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- /path/to/init-scripts:/docker-entrypoint-initdb.d<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">wait-for-cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>willwill/wait-for-it<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">command</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>cassandra:9042 -t 60<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">depends_on</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0550ae">cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">cassandra</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: bitnami/cassandra:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#6a8759">&#39;7000:7000&#39;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#6a8759">&#39;9042:9042&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>      - /path/to/init-scripts:/docker-entrypoint-initdb.d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">wait-for-cassandra</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: willwill/wait-for-it
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">command</span>: cassandra:9042 -t 60
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e8bf6a">cassandra</span>:
+</span></span></code></pre>
 <p>We need a way to <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck">check if <code>cassandra</code> is really healthy</a>.</p>
 
 <p>Since I <a href="https://cassandra.apache.org/doc/latest/cassandra/cql/ddl.html">CREATE KEYSPACE</a> in the init script:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>CREATE KEYSPACE IF NOT EXISTS test WITH replication = {&#39;class&#39;:&#39;SimpleStrategy&#39;, &#39;replication_factor&#39; : 1};
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>CREATE KEYSPACE IF NOT EXISTS test WITH replication = {&#39;class&#39;:&#39;SimpleStrategy&#39;, &#39;replication_factor&#39; : 1};
 </span></span></code></pre>
 <p>I want to make sure that keyspace &lsquo;test&rsquo; exist before starting others:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>bitnami/cassandra:latest<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">ports</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0a3069">&#39;7000:7000&#39;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0a3069">&#39;9042:9042&#39;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- /path/to/init-scripts:/docker-entrypoint-initdb.d<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">healthcheck</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">test</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;CMD&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;cqlsh&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;-u cassandra&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;-p cassandra&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">,</span><span style="color:#0a3069">&#34;-k test&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">]</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">interval</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>5s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">timeout</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>10s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">retries</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">wait-for-cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>willwill/wait-for-it<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">command</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>cassandra:9042 -t 60<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">depends_on</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">cassandra</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">condition</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>service_healthy<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">cassandra</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: bitnami/cassandra:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#6a8759">&#39;7000:7000&#39;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#6a8759">&#39;9042:9042&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>      - /path/to/init-scripts:/docker-entrypoint-initdb.d
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">test</span>: [ <span style="color:#6a8759">&#34;CMD&#34;</span>, <span style="color:#6a8759">&#34;cqlsh&#34;</span>, <span style="color:#6a8759">&#34;-u cassandra&#34;</span>, <span style="color:#6a8759">&#34;-p cassandra&#34;</span> ,<span style="color:#6a8759">&#34;-k test&#34;</span> ]
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">timeout</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">retries</span>: <span style="color:#6897bb">6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">wait-for-cassandra</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: willwill/wait-for-it
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">command</span>: cassandra:9042 -t 60
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">depends_on</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">cassandra</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e8bf6a">condition</span>: service_healthy
+</span></span></code></pre>
 <p>Try to bring up the project:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>ERROR: for wait-for-cassandra  Container &#34;d5a87a961ba1&#34; is unhealthy.
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>ERROR: for wait-for-cassandra  Container &#34;d5a87a961ba1&#34; is unhealthy.
 </span></span></code></pre>
 <p>Why cassandra is unhealthy? <a href="https://stackoverflow.com/questions/42737957/how-to-view-docker-compose-healthcheck-logs">Is there a way to view docker-compose healthcheck logs</a>?</p>
 
 <p>Run <code>docker inspect --format &quot;{{ json .State.Health }}&quot; cassandra_1 | jq</code> and I got:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;Start&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;2021-09-09T00:16:41.5668221Z&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;End&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;2021-09-09T00:16:42.1117382Z&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;ExitCode&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;Output&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Connection error: (&#39;Unable to connect to any servers&#39;, {&#39;127.0.0.1&#39;: AuthenticationFailed(&#39;Failed to authenticate to 127.0.0.1: Error from server: code=0100 [Bad credentials] message=\&#34;Provided username  cassandra and/or password are incorrect\&#34;&#39;,)})\n&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">&#34;Start&#34;</span>: <span style="color:#6a8759">&#34;2021-09-09T00:16:41.5668221Z&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">&#34;End&#34;</span>: <span style="color:#6a8759">&#34;2021-09-09T00:16:42.1117382Z&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">&#34;ExitCode&#34;</span>: <span style="color:#6897bb">1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">&#34;Output&#34;</span>: <span style="color:#6a8759">&#34;Connection error: (&#39;Unable to connect to any servers&#39;, {&#39;127.0.0.1&#39;: AuthenticationFailed(&#39;Failed to authenticate to 127.0.0.1: Error from server: code=0100 [Bad credentials] message=\&#34;Provided username  cassandra and/or password are incorrect\&#34;&#39;,)})\n&#34;</span>
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre>
 <p>Why authentication failed?
 Turned out that there is an extra space before <code>cassandra</code> in the error message:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Provided username  cassandra and/or password are incorrect
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Provided username  cassandra and/or password are incorrect
 </span></span></code></pre>
 <p>So, either you have to remove that space:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">healthcheck</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">test</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;CMD&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;cqlsh&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;-ucassandra&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;-pcassandra&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;-ktest&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">]</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">interval</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>5s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">timeout</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>10s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">retries</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>    <span style="color:#e8bf6a">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">test</span>: [ <span style="color:#6a8759">&#34;CMD&#34;</span>, <span style="color:#6a8759">&#34;cqlsh&#34;</span>, <span style="color:#6a8759">&#34;-ucassandra&#34;</span>, <span style="color:#6a8759">&#34;-pcassandra&#34;</span>, <span style="color:#6a8759">&#34;-ktest&#34;</span> ]
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">timeout</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">retries</span>: <span style="color:#6897bb">6</span>
+</span></span></code></pre>
 <p>or use the long options:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">healthcheck</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">test</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;CMD&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;cqlsh&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;--username&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;cassandra&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;--password&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;cassandra&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;--keyspace&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;test&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">]</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">interval</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>5s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">timeout</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>10s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">retries</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>    <span style="color:#e8bf6a">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">test</span>: [ <span style="color:#6a8759">&#34;CMD&#34;</span>, <span style="color:#6a8759">&#34;cqlsh&#34;</span>, <span style="color:#6a8759">&#34;--username&#34;</span>, <span style="color:#6a8759">&#34;cassandra&#34;</span>, <span style="color:#6a8759">&#34;--password&#34;</span>, <span style="color:#6a8759">&#34;cassandra&#34;</span>, <span style="color:#6a8759">&#34;--keyspace&#34;</span>, <span style="color:#6a8759">&#34;test&#34;</span> ]
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">timeout</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">retries</span>: <span style="color:#6897bb">6</span>
+</span></span></code></pre>
 <p>or use the shell form (if the container has a shell <code>/bin/sh</code>):</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">healthcheck</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">test</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>cqlsh -u cassandra -p cassandra -k test<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">interval</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>5s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">timeout</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>10s<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">retries</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">6</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>    <span style="color:#e8bf6a">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">test</span>: cqlsh -u cassandra -p cassandra -k test
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">timeout</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">retries</span>: <span style="color:#6897bb">6</span>
+</span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/docker-compose" role="button">
-        <i class="bi bi-tag"></i>
-        docker-compose
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/healthcheck" role="button">
-        <i class="bi bi-tag"></i>
-        healthcheck
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/docker" role="button">
-        <i class="bi bi-tag"></i>
-        docker
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/docker-compose" role="button">
+    <i class="bi bi-tag"></i>
+    docker-compose
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/healthcheck" role="button">
+    <i class="bi bi-tag"></i>
+    healthcheck
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/docker" role="button">
+    <i class="bi bi-tag"></i>
+    docker
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/09/09/docker-compose-healthcheck"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2021/09/09/docker-compose-healthcheck"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -260,6 +265,20 @@ Turned out that there is an extra space before <code>cassandra</code> in the err
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

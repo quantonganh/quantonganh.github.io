@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">SICP Exercise 2.77: expected a procedure that can be applied to arguments, given #f</a></h3>
-        <p class="text-secondary">2023-07-13</p>
-        <p><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_sec_2.5.1">2.5.1  Generic Arithmetic Operations</a></p>
+
+<h3><a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">SICP Exercise 2.77: expected a procedure that can be applied to arguments, given #f</a></h3>
+<p class="text-secondary">2023-07-13</p>
+<p><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_sec_2.5.1">2.5.1  Generic Arithmetic Operations</a></p>
 
 <blockquote>
 <p>Louis Reasoner tries to evaluate the expression (magnitude z) where z is the object shown in figure <a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-18.html#%_fig_2.24">2.24</a>.
@@ -95,30 +100,30 @@ To his surprise, instead of the answer 5 he gets an error message from <code>app
 </blockquote>
 
 <p>To simplify the <code>install-complex-package</code> procedure, I made the following changes:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">install-complex-package</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">make-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">get</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;rectangular</span><span style="color:#1f2328">)</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#cf222e">define </span><span style="color:#1f2328">(</span><span style="color:#6639ba">tag</span> <span style="color:#953800">z</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">attach-tag</span> <span style="color:#032f62">&#39;complex</span> <span style="color:#953800">z</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#6639ba">put</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;complex</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">(</span><span style="color:#cf222e">lambda </span><span style="color:#1f2328">(</span><span style="color:#6639ba">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">tag</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">make-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">install-complex-package</span>)
+</span></span><span style="display:flex;"><span>  (<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">make-from-real-imag</span> x y)
+</span></span><span style="display:flex;"><span>		((<span style="color:#ffc66d">get</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;rectangular</span>) x y))
+</span></span><span style="display:flex;"><span>	(<span style="color:#cc7832">define </span>(<span style="color:#ffc66d">tag</span> z) (<span style="color:#ffc66d">attach-tag</span> <span style="color:#6a8759">&#39;complex</span> z))
+</span></span><span style="display:flex;"><span>	(<span style="color:#ffc66d">put</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;complex</span>
+</span></span><span style="display:flex;"><span>		(<span style="color:#cc7832">lambda </span>(<span style="color:#ffc66d">x</span> y) (<span style="color:#ffc66d">tag</span> (<span style="color:#ffc66d">make-from-real-imag</span> x y))))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">install-complex-package</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ffc66d">install-complex-package</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">trace-define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">make-complex-from-real-imag</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">get</span> <span style="color:#032f62">&#39;make-from-real-imag</span> <span style="color:#032f62">&#39;complex</span><span style="color:#1f2328">)</span> <span style="color:#953800">x</span> <span style="color:#953800">y</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ffc66d">trace-define</span> (<span style="color:#ffc66d">make-complex-from-real-imag</span> x y)
+</span></span><span style="display:flex;"><span>	((<span style="color:#ffc66d">get</span> <span style="color:#6a8759">&#39;make-from-real-imag</span> <span style="color:#6a8759">&#39;complex</span>) x y))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">magnitude </span><span style="color:#1f2328">(</span><span style="color:#6639ba">make-complex-from-real-imag</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(magnitude (<span style="color:#ffc66d">make-complex-from-real-imag</span> <span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>))
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</a></h3>
-        <p class="text-secondary">2021-11-02</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2023/07/13/sicp-2.77-not-a-procedure">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</a></h3>
+<p class="text-secondary">2021-11-02</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.43">Exercise 2.43</a>:
 Louis Reasoner is having a terrible time doing <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%25_thm_2.42">exercise 2.42</a>.
@@ -127,16 +132,16 @@ His queens procedure seems to work, but it runs extremely slowly.
 When Louis asks Eva Lu Ator for help, she points out that he has interchanged the order of the nested mappings in the flatmap, writing it as</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/10/29/sicp-2.42-eight-queens">SICP Exercise 2.42: Eight queens puzzle</a></h3>
-        <p class="text-secondary">2021-10-29</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/10/29/sicp-2.42-eight-queens">SICP Exercise 2.42: Eight queens puzzle</a></h3>
+<p class="text-secondary">2021-10-29</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.42">Exercise 2.42</a>:
 The &ldquo;eight-queens puzzle&rdquo; asks how to place eight queens on a chessboard so that no queen is in check from any other (i.e., no two queens are in the same row, column, or diagonal).</p>
@@ -145,171 +150,171 @@ The &ldquo;eight-queens puzzle&rdquo; asks how to place eight queens on a chessb
 Once we have placed <code>k - 1</code> queens, we must place the <code>k</code><sup>th</sup> queen in a position where it does not check any of the queens already on the board.</p>
 </blockquote>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/10/29/sicp-2.42-eight-queens">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/10/18/sicp-2.41-triple-sum">SICP Exercise 2.41: Triple sum</a></h3>
-        <p class="text-secondary">2021-10-18</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/10/29/sicp-2.42-eight-queens">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/10/18/sicp-2.41-triple-sum">SICP Exercise 2.41: Triple sum</a></h3>
+<p class="text-secondary">2021-10-18</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.41">Exercise 2.41</a>: Write a procedure to find all ordered triples of distinct positive integers <code>i</code>, <code>j</code>, and <code>k</code> less than or equal to a given integer <code>n</code> that sum to a given integer <code>s</code>.</p>
 </blockquote>
 
 <p><code>unique-triples</code> can be written easily base on <code>unique-pairs</code> in <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.40">2.40</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>unique-triples n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>flatmap
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>i<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span>flatmap
-</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>j<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>k<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> i j k<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                         <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> j <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> i <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> n<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (unique-triples n)
+</span></span><span style="display:flex;"><span>    (flatmap
+</span></span><span style="display:flex;"><span>        (<span style="color:#cc7832">lambda</span> (i)
+</span></span><span style="display:flex;"><span>            (flatmap
+</span></span><span style="display:flex;"><span>                (<span style="color:#cc7832">lambda</span> (j)
+</span></span><span style="display:flex;"><span>                    (map (<span style="color:#cc7832">lambda</span> (k) (list i j k))
+</span></span><span style="display:flex;"><span>                         (enumerate-interval <span style="color:#6897bb">1</span> (- j <span style="color:#6897bb">1</span>))))
+</span></span><span style="display:flex;"><span>                (enumerate-interval <span style="color:#6897bb">1</span> (- i <span style="color:#6897bb">1</span>))))
+</span></span><span style="display:flex;"><span>        (enumerate-interval <span style="color:#6897bb">1</span> n)))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/10/18/sicp-2.41-triple-sum">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/10/14/sicp-2.35-count-leaves-accumulation">SICP Exercise 2.35: Counting leaves of a tree</a></h3>
-        <p class="text-secondary">2021-10-14</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/10/18/sicp-2.41-triple-sum">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/10/14/sicp-2.35-count-leaves-accumulation">SICP Exercise 2.35: Counting leaves of a tree</a></h3>
+<p class="text-secondary">2021-10-14</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.35">Exercise 2.35</a>: Redefine count-leaves from section <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.2">2.2.2</a> as an accumulation:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves t<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>accumulate &lt;??&gt; &lt;??&gt; <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> &lt;??&gt; &lt;??&gt;<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (count-leaves t)
+</span></span><span style="display:flex;"><span>    (accumulate &lt;??&gt; &lt;??&gt; (map &lt;??&gt; &lt;??&gt;)))<span style="color:#ff6b68">
 </span></span></span></code></pre></blockquote>
 
 <p>The <code>count-leaves</code> procedure from section 2.2.2:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>count-leaves x<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">null?</span> x<span style="color:#1f2328">)</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">not</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">pair?</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">+</span> <span style="color:#1f2328">(</span>count-leaves <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span>count-leaves <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> x<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (count-leaves x)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">cond</span> ((null? x) <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>          ((not (pair? x)) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>          (<span style="color:#cc7832">else</span> (+ (count-leaves (car x))
+</span></span><span style="display:flex;"><span>                   (count-leaves (cdr x))))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/10/14/sicp-2.35-count-leaves-accumulation">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/10/12/sicp-2.27-deep-reverse">SICP Exercise 2.27: Reversing nested lists</a></h3>
-        <p class="text-secondary">2021-10-12</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/10/14/sicp-2.35-count-leaves-accumulation">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/10/12/sicp-2.27-deep-reverse">SICP Exercise 2.27: Reversing nested lists</a></h3>
+<p class="text-secondary">2021-10-12</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.27">Exercise 2.27</a>: Modify your reverse procedure of exercise <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_thm_2.18">2.18</a> to produce a deep-reverse procedure that takes a list as argument and returns as its value the list with its elements reversed and with all sublists deep-reversed as well. For example,</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> x <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> x (list (list <span style="color:#6897bb">1</span> <span style="color:#6897bb">2</span>) (list <span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>)))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>x
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>((<span style="color:#6897bb">1</span> <span style="color:#6897bb">2</span>) (<span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">reverse</span> x<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(reverse x)
+</span></span><span style="display:flex;"><span>((<span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>) (<span style="color:#6897bb">1</span> <span style="color:#6897bb">2</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span>deep-reverse x<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#0550ae">4</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(deep-reverse x)
+</span></span><span style="display:flex;"><span>((<span style="color:#6897bb">4</span> <span style="color:#6897bb">3</span>) (<span style="color:#6897bb">2</span> <span style="color:#6897bb">1</span>))<span style="color:#ff6b68">
 </span></span></span></code></pre></blockquote>
 
 <p>First, look at my <code>reverse</code> procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">racket/base</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">require</span> racket/trace<span style="color:#1f2328">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>racket/base
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">require</span> racket/trace)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">reverse</span> items<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>iter items <span style="color:#6639ba">null</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (reverse items)
+</span></span><span style="display:flex;"><span>    (iter items null))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>iter remaining result<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>trace iter<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">null?</span> remaining<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (iter remaining result)
+</span></span><span style="display:flex;"><span>    (trace iter)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">if</span> (null? remaining)
 </span></span><span style="display:flex;"><span>        result
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span>iter <span style="color:#1f2328">(</span><span style="color:#6639ba">cdr</span> remaining<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">cons</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">car</span> remaining<span style="color:#1f2328">)</span> result<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        (iter (cdr remaining) (cons (car remaining) result))))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span>trace <span style="color:#6639ba">reverse</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">reverse</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> <span style="color:#0550ae">3</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(trace reverse)
+</span></span><span style="display:flex;"><span>(reverse (list (list <span style="color:#6897bb">1</span> <span style="color:#6897bb">2</span>) (list <span style="color:#6897bb">3</span> <span style="color:#6897bb">4</span>)))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/10/12/sicp-2.27-deep-reverse">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/09/30/sicp-1.25-expmod">SICP Exercise 1.25: A simpler expmod?</a></h3>
-        <p class="text-secondary">2021-09-30</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/10/12/sicp-2.27-deep-reverse">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/09/30/sicp-1.25-expmod">SICP Exercise 1.25: A simpler expmod?</a></h3>
+<p class="text-secondary">2021-09-30</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.6">Exercise 1.25</a>: Alyssa P. Hacker complains that we went to a lot of extra work in writing <code>expmod</code>.
 After all, she says, since we already know how to compute exponentials, we could have simply written:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expmod base <span style="color:#6639ba">exp</span> m<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span> <span style="color:#1f2328">(</span>fast-expt base <span style="color:#6639ba">exp</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expmod base exp m)
+</span></span><span style="display:flex;"><span>    (remainder (fast-expt base exp) m))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>Is she correct? Would this procedure serve as well for our fast prime tester? Explain.</p>
 </blockquote>
 
 <p>First, look at the original algorithm:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span> <span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expmod base <span style="color:#6639ba">exp</span> m<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">even?</span> <span style="color:#6639ba">exp</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span>square <span style="color:#1f2328">(</span>expmod base <span style="color:#1f2328">(</span><span style="color:#6639ba">/</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">remainder</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> base <span style="color:#1f2328">(</span>expmod base <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> <span style="color:#6639ba">exp</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 m<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span> (<span style="color:#cc7832">define</span> (expmod base exp m)
+</span></span><span style="display:flex;"><span>     (<span style="color:#cc7832">cond</span> ((= exp <span style="color:#6897bb">0</span>) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>         ((even? exp)
+</span></span><span style="display:flex;"><span>             (remainder
+</span></span><span style="display:flex;"><span>                 (square (expmod base (/ exp <span style="color:#6897bb">2</span>) m))
+</span></span><span style="display:flex;"><span>                 m))
+</span></span><span style="display:flex;"><span>         (<span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>             (remainder
+</span></span><span style="display:flex;"><span>                 (* base (expmod base (- exp <span style="color:#6897bb">1</span>) m))
+</span></span><span style="display:flex;"><span>                 m))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/30/sicp-1.25-expmod">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/09/29/sicp-1.16-iterative-exponentiation">SICP Exercise 1.16: Iterative Exponentiation</a></h3>
-        <p class="text-secondary">2021-09-29</p>
-        <p>I am reading <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html">SICP</a>.</p>
+
+<p class="text-right">
+  <a href="/posts/2021/09/30/sicp-1.25-expmod">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/09/29/sicp-1.16-iterative-exponentiation">SICP Exercise 1.16: Iterative Exponentiation</a></h3>
+<p class="text-secondary">2021-09-29</p>
+<p>I am reading <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html">SICP</a>.</p>
 
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4">Section 1.2.4</a> talks about the problem of computing the exponential of a given number.</p>
 
 <p>The authors start with a recursive procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> n <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt b n)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">if</span> (= n <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>        (* b (expt b (- n <span style="color:#6897bb">1</span>)))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>This requires O(n) steps and O(n) space.</p>
 
 <p>then an iterative procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">#lang </span><span style="color:#24292e">sicp</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">#lang </span>sicp
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">expt</span> b n<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>expt-iter b n <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt b n)
+</span></span><span style="display:flex;"><span>    (expt-iter b n <span style="color:#6897bb">1</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>expt-iter b counter product<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> counter <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (expt-iter b counter product)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">if</span> (= counter <span style="color:#6897bb">0</span>)
 </span></span><span style="display:flex;"><span>        product
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span>expt-iter b
-</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> counter <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                   <span style="color:#1f2328">(</span><span style="color:#6639ba">*</span> b product<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>        (expt-iter b
+</span></span><span style="display:flex;"><span>                   (- counter <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>                   (* b product))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/29/sicp-1.16-iterative-exponentiation">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth">SICP Exercise 1.14: orders of growth of count-change</a></h3>
-        <p class="text-secondary">2021-09-28</p>
-        
+
+<p class="text-right">
+  <a href="/posts/2021/09/29/sicp-1.16-iterative-exponentiation">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth">SICP Exercise 1.14: orders of growth of count-change</a></h3>
+<p class="text-secondary">2021-09-28</p>
+
 <blockquote>
 <p><a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_thm_1.14">Exercise 1.14</a>:
 Draw the tree illustrating the process generated by the <code>count-change</code> procedure of section <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2">1.2.2</a> in making change for 11 cents.
@@ -317,35 +322,35 @@ What are the orders of growth of the space and number of steps used by this proc
 </blockquote>
 
 <p>The <code>count-change</code> procedure:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">(</span>trace-define <span style="color:#1f2328">(</span>count-change amount<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>cc amount <span style="color:#0550ae">5</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>(trace-define (count-change amount)
+</span></span><span style="display:flex;"><span>    (cc amount <span style="color:#6897bb">5</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span>trace-define <span style="color:#1f2328">(</span>cc amount kinds-of-coins<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> amount <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#cf222e">or</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">&lt;</span> amount <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">else</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">+</span> <span style="color:#1f2328">(</span>cc amount
-</span></span><span style="display:flex;"><span>                     <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> kinds-of-coins <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span>cc <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> amount
-</span></span><span style="display:flex;"><span>                        <span style="color:#1f2328">(</span>first-denomination kinds-of-coins<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                     kinds-of-coins<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>(trace-define (cc amount kinds-of-coins)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">cond</span> ((= amount <span style="color:#6897bb">0</span>) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>        ((<span style="color:#cc7832">or</span> (&lt; amount <span style="color:#6897bb">0</span>) (= kinds-of-coins <span style="color:#6897bb">0</span>)) <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#cc7832">else</span> (+ (cc amount
+</span></span><span style="display:flex;"><span>                     (- kinds-of-coins <span style="color:#6897bb">1</span>))
+</span></span><span style="display:flex;"><span>                 (cc (- amount
+</span></span><span style="display:flex;"><span>                        (first-denomination kinds-of-coins))
+</span></span><span style="display:flex;"><span>                     kinds-of-coins)))))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#cf222e">define</span> <span style="color:#1f2328">(</span>first-denomination kinds-of-coins<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">cond</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">5</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">3</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">10</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">25</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#1f2328">(</span><span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> kinds-of-coins <span style="color:#0550ae">5</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">50</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+</span></span><span style="display:flex;"><span>(<span style="color:#cc7832">define</span> (first-denomination kinds-of-coins)
+</span></span><span style="display:flex;"><span>    (<span style="color:#cc7832">cond</span> ((= kinds-of-coins <span style="color:#6897bb">1</span>) <span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>          ((= kinds-of-coins <span style="color:#6897bb">2</span>) <span style="color:#6897bb">5</span>)
+</span></span><span style="display:flex;"><span>          ((= kinds-of-coins <span style="color:#6897bb">3</span>) <span style="color:#6897bb">10</span>)
+</span></span><span style="display:flex;"><span>          ((= kinds-of-coins <span style="color:#6897bb">4</span>) <span style="color:#6897bb">25</span>)
+</span></span><span style="display:flex;"><span>          ((= kinds-of-coins <span style="color:#6897bb">5</span>) <span style="color:#6897bb">50</span>)))<span style="color:#ff6b68">
 </span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -381,6 +386,20 @@ What are the orders of growth of the space and number of steps used by this proc
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

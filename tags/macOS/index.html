@@ -81,75 +81,80 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2025/09/26/launchctl-input-output-error">launchctl: Bootstrap failed: 5: Input/output error</a></h3>
-        <p class="text-secondary">2025-09-26</p>
-        
+
+<h3><a href="/posts/2025/09/26/launchctl-input-output-error">launchctl: Bootstrap failed: 5: Input/output error</a></h3>
+<p class="text-secondary">2025-09-26</p>
+
 <h4>Initial symtoms</h4>
 
 <p>We have an internal service that needs to start a boot. The responsible team wrote a simple launchd script, like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;plist</span> <span style="color:#1f2328">version=</span><span style="color:#0a3069">&#34;1.0&#34;</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;dict</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>Label<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>com.example.watchdog<span style="color:#0550ae">&lt;/string&gt;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#bbb529">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#bbb529">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;plist</span> <span style="color:#9876aa">version=</span><span style="color:#6a8759">&#34;1.0&#34;</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;dict</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>Label<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>com.example.watchdog<span style="color:#e8bf6a">&lt;/string&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>ProgramArguments<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;array</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/usr/local/bin/watchdog<span style="color:#0550ae">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/array&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>ProgramArguments<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;array</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/usr/local/bin/watchdog<span style="color:#e8bf6a">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;/array&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>RunAtLoad<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>RunAtLoad<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>KeepAlive<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>KeepAlive<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>SessionCreate<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>SessionCreate<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>StandardOutPath<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/var/log/watchdog.out<span style="color:#0550ae">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>StandardOutPath<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/var/log/watchdog.out<span style="color:#e8bf6a">&lt;/string&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>StandardErrorPath<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/var/log/watchdog.err<span style="color:#0550ae">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dict&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/plist&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>StandardErrorPath<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/var/log/watchdog.err<span style="color:#e8bf6a">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;/plist&gt;</span>
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2025/09/26/launchctl-input-output-error">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">nnn: wcswidth returns different values for same Unicode code point between macOS and Linux</a></h3>
-        <p class="text-secondary">2023-08-09</p>
-        <p>When attempting to <a href="/2023/08/02/file-tree-workaround-for-helix.md">integrate <code>nnn</code> with Helix</a>, I encountered <a href="https://github.com/jarun/nnn/issues/1692">an interesting issue</a> that resulted in duplicate first characters in the filename:</p>
 
-<p><img src="/2023/08/09/nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
+<p class="text-right">
+  <a href="/posts/2025/09/26/launchctl-input-output-error">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">nnn: wcswidth returns different values for same Unicode code point between macOS and Linux</a></h3>
+<p class="text-secondary">2023-08-09</p>
+<p>When attempting to <a href="/2023/08/02/file-tree-workaround-for-helix.md">integrate <code>nnn</code> with Helix</a>, I encountered <a href="https://github.com/jarun/nnn/issues/1692">an interesting issue</a> that resulted in duplicate first characters in the filename:</p>
+
+<p><img src="nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
 
 <p>What&rsquo;s interesting is that this issue doesn&rsquo;t occur on Linux:</p>
 
-<p><img src="/2023/08/09/nnn-linux.png" alt="nnn on Linux" /></p>
+<p><img src="nnn-linux.png" alt="nnn on Linux" /></p>
 
 <p>I&rsquo;ve spent several days troubleshooting this problem but haven&rsquo;t been able to identify the root cause.
 The only solution I could come up with is <a href="https://github.com/jarun/nnn/pull/1711">a workaround</a>, and I must admit, I&rsquo;m still not entirely satisfied with it.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/05/06/how-I-setup-new-macbook">How I setup a new Macbook in 2023</a></h3>
-        <p class="text-secondary">2023-05-06</p>
-        <p>I purchased my first MacBook Pro in 2013 prior to transitioning to remote work.
+
+<p class="text-right">
+  <a href="/posts/2023/08/09/nnn-wcswith-different-macos-linux">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/05/06/how-I-setup-new-macbook">How I setup a new Macbook in 2023</a></h3>
+<p class="text-secondary">2023-05-06</p>
+<p>I purchased my first MacBook Pro in 2013 prior to transitioning to remote work.
 In my job, we were using <a href="https://github.com/saltstack/salt">saltstack</a> to build <a href="https://www.robotinfra.com/">an automation tool</a>.
 In order to delve deeper into Salt, I decided to configure my Macbook using it, and I documented the process <a href="https://github.com/quantonganh/salt-osx">here</a>.</p>
 
@@ -157,34 +162,34 @@ In order to delve deeper into Salt, I decided to configure my Macbook using it, 
 
 <p>In 2018, due to work requirements, 8GB of memory proved insufficient to run Windows on VirtualBox, prompting me to acquire a second hand MacBook with 16GB of RAM.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/05/06/how-I-setup-new-macbook">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/04/20/unresponsive-macbook-pro">Load averages approximately 1000 on macOS?</a></h3>
-        <p class="text-secondary">2023-04-20</p>
-        <p>Em &ldquo;vợ&rdquo; ra đời năm 2015, cưới về năm 2018, loa đã rè, pin đã chai.</p>
+
+<p class="text-right">
+  <a href="/posts/2023/05/06/how-I-setup-new-macbook">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/04/20/unresponsive-macbook-pro">Load averages approximately 1000 on macOS?</a></h3>
+<p class="text-secondary">2023-04-20</p>
+<p>Em &ldquo;vợ&rdquo; ra đời năm 2015, cưới về năm 2018, loa đã rè, pin đã chai.</p>
 
 <p>Một ngày đẹp trời bật máy lên và không làm được gì. Load gần&hellip; 1000 (trong ảnh là sau khi đã restart, và hơn 30p sau mới gõ được <code>w</code>):</p>
 
-<p><img src="/2023/04/20/load-averages-600.jpeg" alt="Load Averages 600" /></p>
+<p><img src="load-averages-600.jpeg" alt="Load Averages 600" /></p>
 
 <p>Mình thử khởi động lại thì mất khoảng 5-10p mới đến chỗ gõ password.
 Search thấy có bạn <a href="https://discussions.apple.com/thread/8308724">thay cable ổ cứng thì hết</a> nhưng đời 2015 thì ổ cứng không có cable.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/04/20/unresponsive-macbook-pro">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/04/20/unresponsive-macbook-pro">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -220,6 +225,20 @@ Search thấy có bạn <a href="https://discussions.apple.com/thread/8308724">t
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

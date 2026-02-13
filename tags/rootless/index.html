@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Docker rootless keeps restarting?</a></h3>
-        <p class="text-secondary">2023-07-12</p>
-        <p>As some of you may know, this blog is hosted on Raspberry Pi.
+
+<h3><a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Docker rootless keeps restarting?</a></h3>
+<p class="text-secondary">2023-07-12</p>
+<p>As some of you may know, this blog is hosted on Raspberry Pi.
 To monitor its status, I wrote a script, which you can find <a href="https://github.com/quantonganh/blog/blob/master/scripts/monitor.sh">here</a>.</p>
 
 <p>Recently, I decided to switch the Docker daemon to run in <a href="https://docs.docker.com/engine/security/rootless/">rootless mode</a>.
@@ -95,16 +100,16 @@ However, after making this change, I started receiving notifications indicating 
 
 <p>Whenever this happens, I ssh into my Pi and run the command <code>docker ps</code> to list the running containers.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/07/12/docker-rootless-keeps-restarting">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -140,6 +145,20 @@ However, after making this change, I started receiving notifications indicating 
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

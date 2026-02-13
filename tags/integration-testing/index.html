@@ -81,40 +81,45 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Integration testing TUI applications in Rust</a></h3>
-        <p class="text-secondary">2024-01-21</p>
-        <p>In building games with any language, there will be a loop to handle the key events. In case of <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>, it&rsquo;s <a href="https://docs.rs/crossterm/latest/crossterm/event/fn.read.html">event::read</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>poll<span style="color:#1f2328">(</span>Duration::from_millis<span style="color:#1f2328">(</span><span style="color:#0550ae">10</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>read<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>code<span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>state: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>kind<span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>modifiers: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>kind<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>KeyEventKind::Press<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>clone<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>code<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#fff"> </span>KeyCode::Left<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span>tetromino<span style="color:#1f2328">.</span>move_left<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>stdout<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>tetromino<span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<h3><a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Integration testing TUI applications in Rust</a></h3>
+<p class="text-secondary">2024-01-21</p>
+<p>In building games with any language, there will be a loop to handle the key events. In case of <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>, it&rsquo;s <a href="https://docs.rs/crossterm/latest/crossterm/event/fn.read.html">event::read</a>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">if</span> poll(Duration::from_millis(<span style="color:#6897bb">10</span>))? {
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">let</span> event = read()?;
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">match</span> event {
+</span></span><span style="display:flex;"><span>        Event::Key(KeyEvent {
+</span></span><span style="display:flex;"><span>            code,
+</span></span><span style="display:flex;"><span>            state: _,
+</span></span><span style="display:flex;"><span>            kind,
+</span></span><span style="display:flex;"><span>            modifiers: _,
+</span></span><span style="display:flex;"><span>        }) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#cc7832">if</span> kind == KeyEventKind::Press {
+</span></span><span style="display:flex;"><span>                <span style="color:#cc7832">let</span> <span style="color:#cc7832">mut</span> tetromino = self.current_tetromino.clone();
+</span></span><span style="display:flex;"><span>                <span style="color:#cc7832">match</span> code {
+</span></span><span style="display:flex;"><span>                    KeyCode::Char(<span style="color:#6a8759">&#39;h&#39;</span>) | KeyCode::Left =&gt; {
+</span></span><span style="display:flex;"><span>                        tetromino.move_left(self, stdout)?;
+</span></span><span style="display:flex;"><span>                        self.current_tetromino = tetromino;
+</span></span><span style="display:flex;"><span>                    }
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -150,6 +155,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

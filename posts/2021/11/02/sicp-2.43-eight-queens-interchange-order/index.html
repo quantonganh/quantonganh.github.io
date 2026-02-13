@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2021-11-02</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <blockquote>
@@ -100,12 +105,12 @@ Louis Reasoner is having a terrible time doing <a href="https://mitpress.mit.edu
 His queens procedure seems to work, but it runs extremely slowly.
 (Louis never does manage to wait long enough for it to solve even the 6× 6 case.)
 When Louis asks Eva Lu Ator for help, she points out that he has interchanged the order of the nested mappings in the flatmap, writing it as</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span>flatmap
-</span></span><span style="display:flex;"><span>                     <span style="color:#1f2328">(</span>trace-lambda <span style="color:#1f2328">(</span>new-row<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                         <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>rest-of-queens<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                                 <span style="color:#1f2328">(</span>adjoin-position new-row k rest-of-queens<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                              <span style="color:#1f2328">(</span>queen-cols <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> k <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> board-size<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>                 (flatmap
+</span></span><span style="display:flex;"><span>                     (trace-lambda (new-row)
+</span></span><span style="display:flex;"><span>                         (map (<span style="color:#cc7832">lambda</span> (rest-of-queens)
+</span></span><span style="display:flex;"><span>                                 (adjoin-position new-row k rest-of-queens))
+</span></span><span style="display:flex;"><span>                              (queen-cols (- k <span style="color:#6897bb">1</span>))))
+</span></span><span style="display:flex;"><span>                     (enumerate-interval <span style="color:#6897bb">1</span> board-size))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>Explain why this interchange makes the program run slowly.
 Estimate how long it will take Louis&rsquo;s program to solve the eight-queens puzzle,
@@ -113,158 +118,158 @@ assuming that the program in <a href="https://mitpress.mit.edu/sites/default/fil
 </blockquote>
 
 <p>The procedure in 2.42:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     <span style="color:#1f2328">(</span>trace-define <span style="color:#1f2328">(</span>queen-cols k<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> k <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> empty-board<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#1f2328">(</span><span style="color:#6639ba">filter</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>positions<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>safe? k positions<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                 <span style="color:#1f2328">(</span>flatmap
-</span></span><span style="display:flex;"><span>                     <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>rest-of-queens<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                         <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> <span style="color:#1f2328">(</span>trace-lambda <span style="color:#1f2328">(</span>new-row<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                                 <span style="color:#1f2328">(</span>adjoin-position new-row k rest-of-queens<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                              <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> board-size<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#1f2328">(</span>queen-cols <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> k <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     (trace-define (queen-cols k)
+</span></span><span style="display:flex;"><span>         (<span style="color:#cc7832">if</span> (= k <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>             (list empty-board)
+</span></span><span style="display:flex;"><span>             (filter
+</span></span><span style="display:flex;"><span>                 (<span style="color:#cc7832">lambda</span> (positions) (safe? k positions))
+</span></span><span style="display:flex;"><span>                 (flatmap
+</span></span><span style="display:flex;"><span>                     (<span style="color:#cc7832">lambda</span> (rest-of-queens)
+</span></span><span style="display:flex;"><span>                         (map (trace-lambda (new-row)
+</span></span><span style="display:flex;"><span>                                 (adjoin-position new-row k rest-of-queens))
+</span></span><span style="display:flex;"><span>                              (enumerate-interval <span style="color:#6897bb">1</span> board-size)))
+</span></span><span style="display:flex;"><span>                     (queen-cols (- k <span style="color:#6897bb">1</span>))))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>So, for each column <code>k</code>, <code>(queen-cols (- k 1))</code> is called only one time:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.42-eight-queens.rkt <span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>queen 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>queen-cols 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>queen-cols 3<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>queen-cols 2<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>queen-cols 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#0a3069">&#39;(((3 2) (1 1))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">     ((4 2) (1 1))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">     ((4 2) (2 1))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">     ((1 2) (3 1))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">     ((1 2) (4 1))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">     ((2 2) (4 1)))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#0a3069">&#39;(((3 4) (1 3) (4 2) (2 1)) ((2 4) (4 3) (1 2) (3 1)))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 4<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 4<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 3<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 2.42-eight-queens.rkt <span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span>&gt;(queen 4)
+</span></span><span style="display:flex;"><span>&gt;(queen-cols 4)
+</span></span><span style="display:flex;"><span>&gt; (queen-cols 3)
+</span></span><span style="display:flex;"><span>&gt; &gt;(queen-cols 2)
+</span></span><span style="display:flex;"><span>&gt; &gt; (queen-cols 1)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &#39;</span>(((<span style="color:#6897bb">1</span> 1)) ((<span style="color:#6897bb">2</span> 1)) ((<span style="color:#6897bb">3</span> 1)) ((<span style="color:#6897bb">4</span> 1)))
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#6a8759">&#39;(((3 2) (1 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">     ((4 2) (1 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">     ((4 2) (2 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">     ((1 2) (3 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">     ((1 2) (4 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">     ((2 2) (4 1)))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &#39;</span>(((<span style="color:#6897bb">2</span> 3) (<span style="color:#6897bb">4</span> 2) (<span style="color:#6897bb">1</span> 1))
+</span></span><span style="display:flex;"><span>    ((<span style="color:#6897bb">1</span> 3) (<span style="color:#6897bb">4</span> 2) (<span style="color:#6897bb">2</span> 1))
+</span></span><span style="display:flex;"><span>    ((<span style="color:#6897bb">4</span> 3) (<span style="color:#6897bb">1</span> 2) (<span style="color:#6897bb">3</span> 1))
+</span></span><span style="display:flex;"><span>    ((<span style="color:#6897bb">3</span> 3) (<span style="color:#6897bb">1</span> 2) (<span style="color:#6897bb">4</span> 1)))
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#6a8759">&#39;(((3 4) (1 3) (4 2) (2 1)) ((2 4) (4 3) (1 2) (3 1)))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&#39;</span>(((<span style="color:#6897bb">3</span> 4) (<span style="color:#6897bb">1</span> 3) (<span style="color:#6897bb">4</span> 2) (<span style="color:#6897bb">2</span> 1)) ((<span style="color:#6897bb">2</span> 4) (<span style="color:#6897bb">4</span> 3) (<span style="color:#6897bb">1</span> 2) (<span style="color:#6897bb">3</span> 1)))
 </span></span></code></pre>
 <p>In 2.43, since the order of the nested mappings has interchanged:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>    <span style="color:#1f2328">(</span>trace-define <span style="color:#1f2328">(</span>queen-cols k<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">=</span> k <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span> empty-board<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">(</span><span style="color:#6639ba">filter</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>positions<span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>safe? k positions<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">(</span>flatmap
-</span></span><span style="display:flex;"><span>                    <span style="color:#1f2328">(</span>trace-lambda <span style="color:#1f2328">(</span>new-row<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#1f2328">(</span><span style="color:#6639ba">map</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">lambda</span> <span style="color:#1f2328">(</span>rest-of-queens<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                                <span style="color:#1f2328">(</span>adjoin-position new-row k rest-of-queens<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                             <span style="color:#1f2328">(</span>queen-cols <span style="color:#1f2328">(</span><span style="color:#6639ba">-</span> k <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#1f2328">(</span>enumerate-interval <span style="color:#0550ae">1</span> board-size<span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>    (trace-define (queen-cols k)
+</span></span><span style="display:flex;"><span>        (<span style="color:#cc7832">if</span> (= k <span style="color:#6897bb">0</span>)
+</span></span><span style="display:flex;"><span>            (list empty-board)
+</span></span><span style="display:flex;"><span>            (filter
+</span></span><span style="display:flex;"><span>                (<span style="color:#cc7832">lambda</span> (positions) (safe? k positions))
+</span></span><span style="display:flex;"><span>                (flatmap
+</span></span><span style="display:flex;"><span>                    (trace-lambda (new-row)
+</span></span><span style="display:flex;"><span>                        (map (<span style="color:#cc7832">lambda</span> (rest-of-queens)
+</span></span><span style="display:flex;"><span>                                (adjoin-position new-row k rest-of-queens))
+</span></span><span style="display:flex;"><span>                             (queen-cols (- k <span style="color:#6897bb">1</span>))))
+</span></span><span style="display:flex;"><span>                    (enumerate-interval <span style="color:#6897bb">1</span> board-size)))))<span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>For each column <code>k</code>, <code>(queen-cols (- k 1))</code> is called <code>board-size</code> times:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ racket 2.43-eight-queens-interchange-order.rkt <span style="color:#0550ae">4</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>queen 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt;<span style="color:#0550ae">(</span>queen-cols 4<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; <span style="color:#0550ae">(</span>queen-cols 3<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt;<span style="color:#0550ae">(</span>queen-cols 2<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>queen-cols 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;(((1 1)) ((2 1)) ((3 1)) ((4 1)))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; (queen-cols 1)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; <span style="color:#0550ae">(</span>queen-cols 1<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#0a3069">&#39;(((1 1)) ((2 1)) ((3 1)) ((4 1)))
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; (queen-cols 1)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&gt; &gt; &gt;(queen-cols 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &lt;&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&gt; &gt; &gt;<span style="color:#0550ae">(</span>queen-cols 0<span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#0a3069">&#39;(())
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&lt; &lt; &#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#f6f8fa;background-color:#82071e">&#39;</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">3</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">1</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">(</span><span style="color:#0550ae">(</span><span style="color:#0550ae">4</span> 2<span style="color:#0550ae">)</span> <span style="color:#0550ae">(</span><span style="color:#0550ae">2</span> 1<span style="color:#0550ae">)</span><span style="color:#0550ae">)</span><span style="color:#0550ae">)</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ racket 2.43-eight-queens-interchange-order.rkt <span style="color:#6897bb">4</span>
+</span></span><span style="display:flex;"><span>&gt;(queen 4)
+</span></span><span style="display:flex;"><span>&gt;(queen-cols 4)
+</span></span><span style="display:flex;"><span>&gt; (queen-cols 3)
+</span></span><span style="display:flex;"><span>&gt; &gt;(queen-cols 2)
+</span></span><span style="display:flex;"><span>&gt; &gt; (queen-cols 1)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#6a8759">&#39;(((1 1)) ((2 1)) ((3 1)) ((4 1)))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; (queen-cols 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &#39;</span>(((<span style="color:#6897bb">1</span> 1)) ((<span style="color:#6897bb">2</span> 1)) ((<span style="color:#6897bb">3</span> 1)) ((<span style="color:#6897bb">4</span> 1)))
+</span></span><span style="display:flex;"><span>&gt; &gt; (queen-cols 1)
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&lt; &lt; <span style="color:#6a8759">&#39;(((1 1)) ((2 1)) ((3 1)) ((4 1)))
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; (queen-cols 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&gt; &gt; &gt;(queen-cols 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &lt;&#39;</span>(())
+</span></span><span style="display:flex;"><span>&gt; &gt; &gt;(queen-cols 0)
+</span></span><span style="display:flex;"><span>&lt; &lt; &lt;<span style="color:#6a8759">&#39;(())
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">&lt; &lt; &#39;</span>(((<span style="color:#6897bb">1</span> 1)) ((<span style="color:#6897bb">2</span> 1)) ((<span style="color:#6897bb">3</span> 1)) ((<span style="color:#6897bb">4</span> 1)))
+</span></span><span style="display:flex;"><span>&lt; &lt;<span style="color:#ff6b68">&#39;</span>(((<span style="color:#6897bb">1</span> 2) (<span style="color:#6897bb">3</span> 1))
+</span></span><span style="display:flex;"><span>     ((<span style="color:#6897bb">1</span> 2) (<span style="color:#6897bb">4</span> 1))
+</span></span><span style="display:flex;"><span>     ((<span style="color:#6897bb">2</span> 2) (<span style="color:#6897bb">4</span> 1))
+</span></span><span style="display:flex;"><span>     ((<span style="color:#6897bb">3</span> 2) (<span style="color:#6897bb">1</span> 1))
+</span></span><span style="display:flex;"><span>     ((<span style="color:#6897bb">4</span> 2) (<span style="color:#6897bb">1</span> 1))
+</span></span><span style="display:flex;"><span>     ((<span style="color:#6897bb">4</span> 2) (<span style="color:#6897bb">2</span> 1)))
 </span></span><span style="display:flex;"><span> ...
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#cf222e">for</span> size in <span style="color:#0550ae">(</span>seq <span style="color:#0550ae">3</span> 6<span style="color:#0550ae">)</span><span style="color:#1f2328">;</span> <span style="color:#6639ba">echo</span> -n <span style="color:#953800">$size</span><span style="color:#0a3069">&#34;: &#34;</span><span style="color:#1f2328">;</span> racket 2.43-eight-queens-interchange-order.rkt <span style="color:#953800">$size</span> <span style="color:#1f2328">|</span> grep -c <span style="color:#0a3069">&#39;queen-cols 0&#39;</span><span style="color:#1f2328">;</span> end
-</span></span><span style="display:flex;"><span>3: <span style="color:#953800">27</span> <span style="color:#0550ae">=</span> 3^3
-</span></span><span style="display:flex;"><span>4: <span style="color:#953800">256</span> <span style="color:#0550ae">=</span> 4^4
-</span></span><span style="display:flex;"><span>5: <span style="color:#953800">3125</span> <span style="color:#0550ae">=</span> 5^5
-</span></span><span style="display:flex;"><span>6: <span style="color:#953800">46656</span> <span style="color:#0550ae">=</span> 6^6
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ <span style="color:#cc7832">for</span> size in (seq <span style="color:#6897bb">3</span> 6); echo -n $size<span style="color:#6a8759">&#34;: &#34;</span>; racket 2.43-eight-queens-interchange-order.rkt $size | grep -c <span style="color:#6a8759">&#39;queen-cols 0&#39;</span>; end
+</span></span><span style="display:flex;"><span>3: 27 = 3^3
+</span></span><span style="display:flex;"><span>4: 256 = 4^4
+</span></span><span style="display:flex;"><span>5: 3125 = 5^5
+</span></span><span style="display:flex;"><span>6: 46656 = 6^6
 </span></span></code></pre>
 <p>So, if the program in 2.42 solves the eight-queens puzzle in time T, 2.43&rsquo;s version will take roughly T<sup>7</sup> to complete.</p>
 
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
-        <i class="bi bi-tag"></i>
-        sicp
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
-        <i class="bi bi-tag"></i>
-        scheme
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/sicp" role="button">
+    <i class="bi bi-tag"></i>
+    sicp
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/scheme" role="button">
+    <i class="bi bi-tag"></i>
+    scheme
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2021/11/02/sicp-2.43-eight-queens-interchange-order"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2021/11/02/sicp-2.43-eight-queens-interchange-order"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -302,6 +307,20 @@ assuming that the program in <a href="https://mitpress.mit.edu/sites/default/fil
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

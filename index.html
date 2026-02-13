@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A place to share my gained knowledge and experience</title>
+  <title></title>
   <meta name="description"
-    content="DevOps - Programming - Travel - Photography">
+    content="">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,60 +81,65 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2025/09/26/launchctl-input-output-error">launchctl: Bootstrap failed: 5: Input/output error</a></h3>
-        <p class="text-secondary">2025-09-26</p>
-        
+
+<h3><a href="/posts/2025/09/26/launchctl-input-output-error">launchctl: Bootstrap failed: 5: Input/output error</a></h3>
+<p class="text-secondary">2025-09-26</p>
+
 <h4>Initial symtoms</h4>
 
 <p>We have an internal service that needs to start a boot. The responsible team wrote a simple launchd script, like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#57606a">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;plist</span> <span style="color:#1f2328">version=</span><span style="color:#0a3069">&#34;1.0&#34;</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;dict</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>Label<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>com.example.watchdog<span style="color:#0550ae">&lt;/string&gt;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#bbb529">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#bbb529">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;plist</span> <span style="color:#9876aa">version=</span><span style="color:#6a8759">&#34;1.0&#34;</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;dict</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>Label<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>com.example.watchdog<span style="color:#e8bf6a">&lt;/string&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>ProgramArguments<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;array</span><span style="color:#0550ae">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/usr/local/bin/watchdog<span style="color:#0550ae">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;/array&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>ProgramArguments<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;array</span><span style="color:#e8bf6a">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/usr/local/bin/watchdog<span style="color:#e8bf6a">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;/array&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>RunAtLoad<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>RunAtLoad<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>KeepAlive<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>KeepAlive<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>SessionCreate<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;true</span><span style="color:#0550ae">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>SessionCreate<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;true</span><span style="color:#e8bf6a">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>StandardOutPath<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/var/log/watchdog.out<span style="color:#0550ae">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>StandardOutPath<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/var/log/watchdog.out<span style="color:#e8bf6a">&lt;/string&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;key</span><span style="color:#0550ae">&gt;</span>StandardErrorPath<span style="color:#0550ae">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&lt;string</span><span style="color:#0550ae">&gt;</span>/var/log/watchdog.err<span style="color:#0550ae">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dict&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/plist&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;key</span><span style="color:#e8bf6a">&gt;</span>StandardErrorPath<span style="color:#e8bf6a">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">&lt;string</span><span style="color:#e8bf6a">&gt;</span>/var/log/watchdog.err<span style="color:#e8bf6a">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">&lt;/plist&gt;</span>
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2025/09/26/launchctl-input-output-error">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2025/08/14/jdtls-wrapper">Helix returns &#34;No definition found&#34; when going to a definition</a></h3>
-        <p class="text-secondary">2025-08-14</p>
-        <p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
+
+<p class="text-right">
+  <a href="/posts/2025/09/26/launchctl-input-output-error">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2025/08/14/jdtls-wrapper">Helix returns &#34;No definition found&#34; when going to a definition</a></h3>
+<p class="text-secondary">2025-08-14</p>
+<p>If you follow this blog regularly, you know that I&rsquo;m so happy with the combo <a href="https://wezterm.org/index.html">WezTerm</a> (terminal emulator) and <a href="https://helix-editor.com/">Helix</a> (editor).
 Since I recently switched to a project that uses Java, I&rsquo;m trying to configure Helix as my Java editor.</p>
 
 <p>The default language server for Java is <a href="https://github.com/eclipse-jdtls/eclipse.jdt.ls">jdtls</a> which can be installed easily on macOS by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>brew install jdtls
-</span></span></code></pre><pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>hx --health java
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>brew install jdtls
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>hx --health java
 </span></span><span style="display:flex;"><span>Configured language servers:
 </span></span><span style="display:flex;"><span>  ✓ jdtls: /opt/homebrew/bin/jdtls
 </span></span><span style="display:flex;"><span>Configured debug adapter: None
@@ -146,41 +151,41 @@ Since I recently switched to a project that uses Java, I&rsquo;m trying to confi
 </span></span><span style="display:flex;"><span>Tags queries: ✓
 </span></span><span style="display:flex;"><span>Rainbow queries: ✓
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2025/08/14/jdtls-wrapper">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/now">What I&#39;m doing now</a></h3>
-        <p class="text-secondary">2025-03-28</p>
-        <p>After taking some time to refresh myself and going on a road trip through Vietnam, I returned to the office to work as a Platform Engineer for a company in Hanoi. I&rsquo;m learning to <a href="https://os.phil-opp.com/">write an OS in Rust</a> while continuing to read <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP</a>. I&rsquo;m building an all-in-one troubleshooting tool named <a href="https://github.com/quantonganh/diagtree">diagtree</a>, where I turn nearly any command into a tree, helping me quickly debug multiple services across different environments, from local to testing, and production.</p>
 
-        
-        <p class="text-right">
-            <a href="/now">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2024/10/10/helix-golang-ide">Helix as my Golang IDE: powering up with WezTerm and CLI tools</a></h3>
-        <p class="text-secondary">2024-10-10</p>
-        <p>It&rsquo;s has been one year from my last post.
+<p class="text-right">
+  <a href="/posts/2025/08/14/jdtls-wrapper">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/now">What I&#39;m doing now</a></h3>
+<p class="text-secondary">2025-03-28</p>
+<p>After taking some time to refresh myself and going on a road trip through Vietnam, I returned to the office to work as a Platform Engineer for a company in Hanoi. I&rsquo;m learning to <a href="https://os.phil-opp.com/">write an OS in Rust</a> while continuing to read <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP</a>. I&rsquo;m building an all-in-one troubleshooting tool named <a href="https://github.com/quantonganh/diagtree">diagtree</a>, where I turn nearly any command into a tree, helping me quickly debug multiple services across different environments, from local to testing, and production.</p>
+
+
+<p class="text-right">
+  <a href="/now">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2024/10/10/helix-golang-ide">Helix as my Golang IDE: powering up with WezTerm and CLI tools</a></h3>
+<p class="text-secondary">2024-10-10</p>
+<p>It&rsquo;s has been one year from my last post.
 Today I would like to show you how I use Helix as my Golang IDE.</p>
 
 <p>Regarding the file explorer workaround in the last post, I show you how to use <code>nnn</code> or <code>broot</code> to open a file tree in the sidebar but actually I&rsquo;m using the PR <a href="https://github.com/helix-editor/helix/pull/5768">#5768</a>. The reason is I would like to have a bottom pane for the terminal, and there is no way to just hide it and keep the sidebar (file explorer) and the main pane (helix).</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2024/10/10/helix-golang-ide">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/uses">Uses</a></h3>
-        <p class="text-secondary">2024-02-27</p>
-        <p>I found <a href="https://uses.tech/">uses.tech</a> and would like to add myself.</p>
+
+<p class="text-right">
+  <a href="/posts/2024/10/10/helix-golang-ide">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/uses">Uses</a></h3>
+<p class="text-secondary">2024-02-27</p>
+<p>I found <a href="https://uses.tech/">uses.tech</a> and would like to add myself.</p>
 
 <h4>Hardware</h4>
 
@@ -216,43 +221,43 @@ Today I would like to show you how I use Helix as my Golang IDE.</p>
 <li>Container runtimes: <a href="https://github.com/abiosoft/colima">colima</a></li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/uses">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Integration testing TUI applications in Rust</a></h3>
-        <p class="text-secondary">2024-01-21</p>
-        <p>In building games with any language, there will be a loop to handle the key events. In case of <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>, it&rsquo;s <a href="https://docs.rs/crossterm/latest/crossterm/event/fn.read.html">event::read</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>poll<span style="color:#1f2328">(</span>Duration::from_millis<span style="color:#1f2328">(</span><span style="color:#0550ae">10</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>read<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>event<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Event::Key<span style="color:#1f2328">(</span>KeyEvent<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>code<span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>state: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>kind<span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>modifiers: <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>kind<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>KeyEventKind::Press<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#1f2328">.</span>clone<span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#cf222e">match</span><span style="color:#fff"> </span>code<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span>KeyCode::Char<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;h&#39;</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">|</span><span style="color:#fff"> </span>KeyCode::Left<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span>tetromino<span style="color:#1f2328">.</span>move_left<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>stdout<span style="color:#1f2328">)</span><span style="color:#0550ae">?</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>current_tetromino<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>tetromino<span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">                    </span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/10/27/libp2p-perf-benchmark">libp2p performance benchmarking</a></h3>
-        <p class="text-secondary">2023-10-27</p>
-        <p>I invested some time in studying <a href="https://docs.libp2p.io/concepts/transports/quic/">QUIC</a> and <a href="https://github.com/libp2p/rust-libp2p">libp2p</a>
+
+<p class="text-right">
+  <a href="/uses">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Integration testing TUI applications in Rust</a></h3>
+<p class="text-secondary">2024-01-21</p>
+<p>In building games with any language, there will be a loop to handle the key events. In case of <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>, it&rsquo;s <a href="https://docs.rs/crossterm/latest/crossterm/event/fn.read.html">event::read</a>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">if</span> poll(Duration::from_millis(<span style="color:#6897bb">10</span>))? {
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">let</span> event = read()?;
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">match</span> event {
+</span></span><span style="display:flex;"><span>        Event::Key(KeyEvent {
+</span></span><span style="display:flex;"><span>            code,
+</span></span><span style="display:flex;"><span>            state: _,
+</span></span><span style="display:flex;"><span>            kind,
+</span></span><span style="display:flex;"><span>            modifiers: _,
+</span></span><span style="display:flex;"><span>        }) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#cc7832">if</span> kind == KeyEventKind::Press {
+</span></span><span style="display:flex;"><span>                <span style="color:#cc7832">let</span> <span style="color:#cc7832">mut</span> tetromino = self.current_tetromino.clone();
+</span></span><span style="display:flex;"><span>                <span style="color:#cc7832">match</span> code {
+</span></span><span style="display:flex;"><span>                    KeyCode::Char(<span style="color:#6a8759">&#39;h&#39;</span>) | KeyCode::Left =&gt; {
+</span></span><span style="display:flex;"><span>                        tetromino.move_left(self, stdout)?;
+</span></span><span style="display:flex;"><span>                        self.current_tetromino = tetromino;
+</span></span><span style="display:flex;"><span>                    }
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2024/01/21/integration-testing-tui-app-in-rust">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/10/27/libp2p-perf-benchmark">libp2p performance benchmarking</a></h3>
+<p class="text-secondary">2023-10-27</p>
+<p>I invested some time in studying <a href="https://docs.libp2p.io/concepts/transports/quic/">QUIC</a> and <a href="https://github.com/libp2p/rust-libp2p">libp2p</a>
 In this article, I will show you how to benchmark the network transfer using <a href="https://github.com/libp2p/rust-libp2p/tree/master/protocols/perf">perf</a> module for 2 scanerios:</p>
 
 <ul>
@@ -261,7 +266,7 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </ul>
 
 <p>Let&rsquo;s print help first:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
 </span></span><span style="display:flex;"><span>Usage: perf [OPTIONS]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Options:
@@ -272,31 +277,31 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </span></span><span style="display:flex;"><span>      --run-server                       Run in server mode
 </span></span><span style="display:flex;"><span>  -h, --help                             Print help  
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2023/10/27/libp2p-perf-benchmark">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/10/03/tetris-terminal">Learning Rust by building Tetris: my favorite childhood game</a></h3>
-        <p class="text-secondary">2023-10-03</p>
-        <p><img src="tetris-2-player.gif" alt="Play tetris 2-player mode in the terminal" /></p>
+
+<p class="text-right">
+  <a href="/posts/2023/10/27/libp2p-perf-benchmark">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/10/03/tetris-terminal">Learning Rust by building Tetris: my favorite childhood game</a></h3>
+<p class="text-secondary">2023-10-03</p>
+<p><img src="tetris-2-player.gif" alt="Play tetris 2-player mode in the terminal" /></p>
 
 <p>After completing the <a href="https://doc.rust-lang.org/book/">Rust book</a> and working through <a href="https://github.com/rust-lang/rustlings">rustlings</a>, I found myself standing at the crossroads, wondering where to go next. It was then that I had an idea - a project that would allow me to apply my newfound knowledge and create something meaningful. My favorite childhood game, Tetris, became the inspiration for my next coding adventure.</p>
 
 <p>Since I want it to be playable on Windows, I chose the TUI library <a href="https://github.com/crossterm-rs/crossterm">crossterm</a>.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/10/03/tetris-terminal">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
-        <p class="text-secondary">2023-08-19</p>
-        <p><img src="/2023/08/19/hx-ide.gif" alt="Helix as IDE" /></p>
+
+<p class="text-right">
+  <a href="/posts/2023/10/03/tetris-terminal">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
+<p class="text-secondary">2023-08-19</p>
+<p><img src="hx-ide.gif" alt="Helix as IDE" /></p>
 
 <p>This post recaps previous series of posts about Helix.</p>
 
@@ -319,16 +324,16 @@ In this article, I will show you how to benchmark the network transfer using <a 
 
 <p>I later discovered another useful trick <a href="https://www.reddit.com/r/HelixEditor/comments/13x9a3z/integrating_fuzzylive_grepping_into_helix_my/">here</a>. We can use <a href="https://wezfurlong.org/wezterm/cli/cli/get-text.html">wezterm cli get-text</a> command to extract the filename and line number from the status line:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/19/turn-helix-into-ide">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
-        <p class="text-secondary">2023-08-11</p>
-        <p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
+
+<p class="text-right">
+  <a href="/posts/2023/08/19/turn-helix-into-ide">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
+<p class="text-secondary">2023-08-11</p>
+<p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
 I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">codelldb</a> to address the <a href="https://github.com/helix-editor/helix/issues/7007">visualization issue related to string variables</a> within <code>lldb-vscode</code>.</p>
 
 <p>However, the usage of <code>codelldb</code> presents some challenges:</p>
@@ -339,73 +344,73 @@ I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">co
 <li>The Helix theme breaks when listing variables</li>
 </ul>
 
-<p><img src="/2023/08/11/codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
+<p><img src="codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
 
 <p>In my quest for an improved debugging experience, I found <a href="https://github.com/rust-lang/rust/blob/master/src/etc/rust-lldb">rust-lldb</a>,
 which impressively manages to display the contents of string variables:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item disabled"><a class="page-link">First</a></li>
-    <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
-        
-        
-    <li class="page-item active">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/4/">4</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/5/">5</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/6/">6</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/7/">7</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/8/">8</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/9/">9</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/10/">10</a>
-    </li>
-        
-        
-    <li class="page-item"><a class="page-link" href="/page/2/">&raquo;</a></li>
-    <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
-        
+  
+  <li class="page-item disabled"><a class="page-link">First</a></li>
+  <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
+  
+  
+  <li class="page-item active">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/4/">4</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/5/">5</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/6/">6</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/7/">7</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/8/">8</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/9/">9</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/10/">10</a>
+  </li>
+  
+  
+  <li class="page-item"><a class="page-link" href="/page/2/">&raquo;</a></li>
+  <li class="page-item"><a class="page-link" href="/page/10/">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -441,6 +446,20 @@ which impressively manages to display the contents of string variables:</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

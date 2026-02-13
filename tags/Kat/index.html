@@ -81,20 +81,25 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/11/30/kat">Kat</a></h3>
-        <p class="text-secondary">2021-11-30</p>
-        <p><img src="/2021/11/30/Kat.jpg" alt="Kat" /></p>
 
-        
-        <hr>
-    
+<h3><a href="/posts/2021/11/30/kat">Kat</a></h3>
+<p class="text-secondary">2021-11-30</p>
+<p><img src="Kat.jpg" alt="Kat" /></p>
+
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -130,6 +135,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

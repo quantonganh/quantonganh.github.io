@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
-        <p class="text-secondary">2020-05-06</p>
-        <p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
+
+<h3><a href="/posts/2020/05/06/gitea-not-trigger-drone">Drone build is not triggered after pushing code to Gitea?</a></h3>
+<p class="text-secondary">2020-05-06</p>
+<p>I pushed code to Gitea and nothing happens in Drone. Why?</p>
 
 <p>But if I go to <a href="https://git-tea.dynu.net/quanta/blog/settings/hooks/1">Settings -&gt; Webhooks</a>, then click &ldquo;Test Delivery&rdquo; -&gt; build pipeline will be executed. Why?</p>
 
@@ -95,7 +100,7 @@
 In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
 
 <p>By pay close attention to the git output when pushing:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>Counting objects: 4, done.
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>Counting objects: 4, done.
 </span></span><span style="display:flex;"><span>Delta compression using up to 4 threads.
 </span></span><span style="display:flex;"><span>Compressing objects: 100% (4/4), done.
 </span></span><span style="display:flex;"><span>Writing objects: 100% (4/4), 2.02 KiB | 2.02 MiB/s, done.
@@ -109,16 +114,16 @@ In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
 </span></span><span style="display:flex;"><span>To gitea.pi:quanta/blog.git
 </span></span><span style="display:flex;"><span> + d29f63d...47e9ed3 master -&gt; master (forced update)
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/05/06/gitea-not-trigger-drone">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -154,6 +159,20 @@ In my case, it&rsquo;s not. So, looks like the problem is on Gitea side.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

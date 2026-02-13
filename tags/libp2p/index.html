@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2023/10/27/libp2p-perf-benchmark">libp2p performance benchmarking</a></h3>
-        <p class="text-secondary">2023-10-27</p>
-        <p>I invested some time in studying <a href="https://docs.libp2p.io/concepts/transports/quic/">QUIC</a> and <a href="https://github.com/libp2p/rust-libp2p">libp2p</a>
+
+<h3><a href="/posts/2023/10/27/libp2p-perf-benchmark">libp2p performance benchmarking</a></h3>
+<p class="text-secondary">2023-10-27</p>
+<p>I invested some time in studying <a href="https://docs.libp2p.io/concepts/transports/quic/">QUIC</a> and <a href="https://github.com/libp2p/rust-libp2p">libp2p</a>
 In this article, I will show you how to benchmark the network transfer using <a href="https://github.com/libp2p/rust-libp2p/tree/master/protocols/perf">perf</a> module for 2 scanerios:</p>
 
 <ul>
@@ -96,7 +101,7 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </ul>
 
 <p>Let&rsquo;s print help first:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>     Running `rust-libp2p/target/debug/perf -h`
 </span></span><span style="display:flex;"><span>Usage: perf [OPTIONS]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Options:
@@ -107,16 +112,16 @@ In this article, I will show you how to benchmark the network transfer using <a 
 </span></span><span style="display:flex;"><span>      --run-server                       Run in server mode
 </span></span><span style="display:flex;"><span>  -h, --help                             Print help  
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2023/10/27/libp2p-perf-benchmark">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/10/27/libp2p-perf-benchmark">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -152,6 +157,20 @@ In this article, I will show you how to benchmark the network transfer using <a 
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

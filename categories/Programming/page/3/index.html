@@ -81,36 +81,41 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
-        <p class="text-secondary">2021-09-07</p>
-        <p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
+
+<h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
+<p class="text-secondary">2021-09-07</p>
+<p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
 On production, config is loaded from json file by using <a href="https://pypi.org/project/etcd3/">Python</a>.</p>
 
 <p>I&rsquo;m wondering if we can use <a href="https://github.com/stedolan/jq">jq</a> to do that. So, I tried something like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#953800">host</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_HOST</span><span style="color:#cf222e">:-</span><span style="color:#953800">127</span><span style="color:#1f2328">.0.0.1</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">port</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_PORT</span><span style="color:#cf222e">:-</span><span style="color:#953800">2379</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> key in <span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#39;keys[]&#39;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">do</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">value</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">.</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> -c <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">ETCDCTL_API</span><span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> etcdctl --endpoints<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$host</span><span style="color:#0a3069">:</span><span style="color:#953800">$port</span><span style="color:#0a3069">&#34;</span> put <span style="color:#0a3069">&#34;</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$value</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">done</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>host=<span style="color:#6a8759">${</span>ETCD_HOST<span style="color:#cc7832">:-</span>127.0.0.1<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span>port=<span style="color:#6a8759">${</span>ETCD_PORT<span style="color:#cc7832">:-</span>2379<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> key in <span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#39;keys[]&#39;</span> <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>; <span style="color:#cc7832">do</span>
+</span></span><span style="display:flex;"><span>  value=<span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">.</span>$key<span style="color:#6a8759">&#34;</span> -c <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>  ETCDCTL_API=<span style="color:#6897bb">3</span> etcdctl --endpoints=<span style="color:#6a8759">&#34;</span>$host<span style="color:#6a8759">:</span>$port<span style="color:#6a8759">&#34;</span> put <span style="color:#6a8759">&#34;</span>$key<span style="color:#6a8759">&#34;</span> <span style="color:#6a8759">&#34;</span>$value<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">done</span>
 </span></span></code></pre>
 <p>Config is loaded into <code>etcd</code> but some values are not the same as in the JSON file.
 What is going on?</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2021/06/10/automate-office-tasks">Automate office tasks with Python</a></h3>
-        <p class="text-secondary">2021-06-10</p>
-        <p>Hàng tháng bạn nhận được một file excel về danh sách D. Từ danh sách này bạn cần filter cột C theo tiêu chí T1 để lấy ra danh sách D1. Có được D1 rồi bạn Save As thành t1.xlsx.
+
+<p class="text-right">
+  <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2021/06/10/automate-office-tasks">Automate office tasks with Python</a></h3>
+<p class="text-secondary">2021-06-10</p>
+<p>Hàng tháng bạn nhận được một file excel về danh sách D. Từ danh sách này bạn cần filter cột C theo tiêu chí T1 để lấy ra danh sách D1. Có được D1 rồi bạn Save As thành t1.xlsx.
 Làm xong T1, bạn tiếp tục với T2 -&gt; t2.xlsx
 &hellip;
 Làm tiếp cho đến Tn -&gt; tn.xlsx.
@@ -120,16 +125,16 @@ Có được các danh sách t1.xlsx -&gt; tn.xlsx này rồi, giờ bạn cần
 <li>t1.xlsx: gửi cho P1, P2, P3</li>
 </ul>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/06/10/automate-office-tasks">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/12/30/search-static-site">How to add full text search to my static website?</a></h3>
-        <p class="text-secondary">2020-12-30</p>
-        <p>After building the website, I want to add search function.
+
+<p class="text-right">
+  <a href="/posts/2021/06/10/automate-office-tasks">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/12/30/search-static-site">How to add full text search to my static website?</a></h3>
+<p class="text-secondary">2020-12-30</p>
+<p>After building the website, I want to add search function.
 There are some ways to do it:</p>
 
 <ul>
@@ -151,92 +156,92 @@ There are some ways to do it:</p>
 
 <p>Looking at the <a href="https://blevesearch.com/docs/Getting%20Started/">documentation</a>, there are three steps to add search to your website:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/12/30/search-static-site">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
-        <p class="text-secondary">2020-09-29</p>
-        <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">steps</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>trigger<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/downstream:linux-amd64<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">params</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repositories</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- repo/integration-test@${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">server</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https://drone.example.com<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">token</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone_token<span style="color:#fff">
-</span></span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/12/30/search-static-site">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/09/29/integration-test-golang">How to perform integration testing in Go?</a></h3>
+<p class="text-secondary">2020-09-29</p>
+<p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">steps</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: trigger
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: plugins/downstream:linux-amd64
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">settings</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">params</span>:
+</span></span><span style="display:flex;"><span>    - COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">repositories</span>:
+</span></span><span style="display:flex;"><span>    - repo/integration-test@${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">server</span>: https://drone.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">token</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">from_secret</span>: drone_token
+</span></span></code></pre>
 <p>It can be separated with unit tests by using <a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">build tags</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>// +build integration
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>// +build integration
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>package webserver_test
 </span></span></code></pre>
 <p>Then we can write code to perform integration test as usual.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
-        <p class="text-secondary">2020-07-03</p>
-        <p>As an engineer, I want to automate everything as much as possible.
+
+<p class="text-right">
+  <a href="/posts/2020/09/29/integration-test-golang">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Save draft mail in Zimbra web client using ChromeDP</a></h3>
+<p class="text-secondary">2020-07-03</p>
+<p>As an engineer, I want to automate everything as much as possible.
 This CLI tool is created to save a draft mail in Zimbra web client.</p>
 
 <p>Read config file:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">func</span><span style="color:#fff"> </span><span style="color:#6639ba">initConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">cfgFile</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Use config file from the flag.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cfgFile</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Find home directory.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">home</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">homedir</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Dir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exit</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#57606a">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AddConfigPath</span><span style="color:#1f2328">(</span><span style="color:#1f2328">home</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetConfigName</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;.zwc&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">AutomaticEnv</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#57606a">// read in environment variables that match</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#57606a">// If a config file is found, read it in.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadInConfig</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Using config file:&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">viper</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ConfigFileUsed</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
-        <p class="text-secondary">2020-04-13</p>
-        <p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">func</span> <span style="color:#ffc66d">initConfig</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> cfgFile != <span style="color:#6a8759">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Use config file from the flag.</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigFile</span>(cfgFile)
+</span></span><span style="display:flex;"><span>	} <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Find home directory.</span>
+</span></span><span style="display:flex;"><span>		home, err := homedir.<span style="color:#ffc66d">Dir</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>			fmt.<span style="color:#ffc66d">Println</span>(err)
+</span></span><span style="display:flex;"><span>			os.<span style="color:#ffc66d">Exit</span>(<span style="color:#6897bb">1</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#808080">// Search config in home directory with name &#34;.zwc&#34; (without extension).</span>
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">AddConfigPath</span>(home)
+</span></span><span style="display:flex;"><span>		viper.<span style="color:#ffc66d">SetConfigName</span>(<span style="color:#6a8759">&#34;.zwc&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	viper.<span style="color:#ffc66d">AutomaticEnv</span>() <span style="color:#808080">// read in environment variables that match</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#808080">// If a config file is found, read it in.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err := viper.<span style="color:#ffc66d">ReadInConfig</span>(); err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Using config file:&#34;</span>, viper.<span style="color:#ffc66d">ConfigFileUsed</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2020/07/03/zimbra-save-draft-mail-chromedp">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2020/04/13/google-calendar-cli">Google Calendar CLI</a></h3>
+<p class="text-secondary">2020-04-13</p>
+<p>Our company allows us to work from home some days a week. To do that, we have to create an event in Google Calendar.</p>
 
 <p>I created this tool to run it from CLI.</p>
 
 <p>First, take a look at this <a href="https://developers.google.com/calendar/quickstart/go">quickstart</a>.</p>
 
 <p>Create initical code by running:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra init
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra init
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
 </span></span><span style="display:flex;"><span>.
@@ -246,7 +251,7 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
 <p>Create <code>event</code> command:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ cobra add event
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cobra add event
 </span></span><span style="display:flex;"><span>$ cobra add insert -p &#39;eventCmd&#39;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ tree -L 2
@@ -258,75 +263,75 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 </span></span><span style="display:flex;"><span>│   └── root.go
 </span></span><span style="display:flex;"><span>├── main.go
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/10/22/go-no-packages-found">go/packages.Load: no packages found</a></h3>
-        <p class="text-secondary">2019-10-22</p>
-        <p>I have a mono-repo, structure like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>repo
+
+<p class="text-right">
+  <a href="/posts/2020/04/13/google-calendar-cli">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/10/22/go-no-packages-found">go/packages.Load: no packages found</a></h3>
+<p class="text-secondary">2019-10-22</p>
+<p>I have a mono-repo, structure like this:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>repo
 </span></span><span style="display:flex;"><span>├── service1
 </span></span><span style="display:flex;"><span>├── service2
 </span></span><span style="display:flex;"><span>├── go.mod
 </span></span></code></pre>
 <p>I often open the root folder from the command line by using <code>code .</code>. After that I open a file in <code>service1</code>, and cannot go to definition. Here&rsquo;s the logs from <code>gopls</code>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>[Info  - 5:49:28 AM] 2019/10/22 05:49:28 20.675656ms for GOROOT=/usr/local/Cellar/go/1.13/libexec GOPATH=/Users/quanta/go GO111MODULE=auto PWD=/Users/quanta/go/src/github.com/owner/repo go &#34;list&#34; &#34;-e&#34; &#34;-json&#34; &#34;-compiled=true&#34; &#34;-test=true&#34; &#34;-export=false&#34; &#34;-deps=true&#34; &#34;-find=false&#34; &#34;--&#34; &#34;/Users/quanta/go/src/github.com/owner/repo/a/b/c&#34;, stderr: &lt;&lt;go: directory a/b/c is outside main module
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[Info  - 5:49:28 AM] 2019/10/22 05:49:28 20.675656ms for GOROOT=/usr/local/Cellar/go/1.13/libexec GOPATH=/Users/quanta/go GO111MODULE=auto PWD=/Users/quanta/go/src/github.com/owner/repo go &#34;list&#34; &#34;-e&#34; &#34;-json&#34; &#34;-compiled=true&#34; &#34;-test=true&#34; &#34;-export=false&#34; &#34;-deps=true&#34; &#34;-find=false&#34; &#34;--&#34; &#34;/Users/quanta/go/src/github.com/owner/repo/a/b/c&#34;, stderr: &lt;&lt;go: directory a/b/c is outside main module
 </span></span><span style="display:flex;"><span>&gt;&gt;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>[Error - 5:49:32 AM] Request textDocument/definition failed.
 </span></span><span style="display:flex;"><span>  Message: go/packages.Load: no packages found for /Users/quanta/go/src/github.com/owner/repo/a/b/c/file.go
 </span></span><span style="display:flex;"><span>  Code: 0 
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2019/10/22/go-no-packages-found">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
-        <p class="text-secondary">2019-10-16</p>
-        <p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">db</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sql</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Open</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sqlite3&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;./books.db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Created table books successfully&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Prepare</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">statement</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Exec</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Life is a joke&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;The Javna brothers&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">123456789</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Inserted first book into db&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">rows</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">db</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Query</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;SELECT id, name, author FROM books&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#fff"> </span><span style="color:#1f2328">Book</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Next</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">rows</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Scan</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">name</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">tempBook</span><span style="color:#1f2328">.</span><span style="color:#1f2328">author</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/10/11/how-do-I-build-this-blog">How do I build this blog?</a></h3>
-        <p class="text-secondary">2019-10-11</p>
-        <p><img src="/2019/10/11/pi4.jpg" alt="Raspberry Pi 4" /></p>
+
+<p class="text-right">
+  <a href="/posts/2019/10/22/go-no-packages-found">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/10/16/never-ignore-errors">database/sql: never ignore errors</a></h3>
+<p class="text-secondary">2019-10-16</p>
+<p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>db, err := sql.<span style="color:#ffc66d">Open</span>(<span style="color:#6a8759">&#34;sqlite3&#34;</span>, <span style="color:#6a8759">&#34;./books.db&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>statement, err := db.<span style="color:#ffc66d">Prepare</span>(<span style="color:#6a8759">&#34;CREATE TABLE IF NOT EXISTS books (id INTERGER PRIMARY KEY, isbn INTEGER, author VARCHAR(64), name VARCHAR(64) NULL)&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>} <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Created table books successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>statement.<span style="color:#ffc66d">Exec</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>statement, err = db.<span style="color:#ffc66d">Prepare</span>(<span style="color:#6a8759">&#34;INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>statement.<span style="color:#ffc66d">Exec</span>(<span style="color:#6a8759">&#34;Life is a joke&#34;</span>, <span style="color:#6a8759">&#34;The Javna brothers&#34;</span>, <span style="color:#6897bb">123456789</span>)
+</span></span><span style="display:flex;"><span>log.<span style="color:#ffc66d">Println</span>(<span style="color:#6a8759">&#34;Inserted first book into db&#34;</span>)
+</span></span><span style="display:flex;"><span>rows, err := db.<span style="color:#ffc66d">Query</span>(<span style="color:#6a8759">&#34;SELECT id, name, author FROM books&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">var</span> tempBook Book
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> rows.<span style="color:#ffc66d">Next</span>() {
+</span></span><span style="display:flex;"><span>	rows.<span style="color:#ffc66d">Scan</span>(&amp;tempBook.id, &amp;tempBook.name, &amp;tempBook.author)
+</span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Printf</span>(<span style="color:#6a8759">&#34;ID: %d, Book: %s, Author: %s\n&#34;</span>, tempBook.id, tempBook.name, tempBook.author)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+
+<p class="text-right">
+  <a href="/posts/2019/10/16/never-ignore-errors">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/10/11/how-do-I-build-this-blog">How do I build this blog?</a></h3>
+<p class="text-secondary">2019-10-11</p>
+<p><img src="pi4.jpg" alt="Raspberry Pi 4" /></p>
 
 <p>Recently, I decided to find a new job as a Golang developer. So, I updated my resume, sent to my friends to ask for review. Then I submitted it enclosed herewith a cover letter to recruiters. Some didn&rsquo;t reply, and the other replied with a message like this &ldquo;You are so good, but I&rsquo;m so sorry&hellip;&rdquo;.</p>
 
@@ -334,113 +339,113 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
 
 <p>As you can see in <a href="resume">my resume</a>, I started my career as a .NET developer, then my passionate on Linux and open source lead me to a different direction: system administrator. I dedicated myself to this role for a significant period before transitioning back to work as a Golang developer 2 years ago.</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2019/10/11/how-do-I-build-this-blog">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Auto reload your Go webserver with Gulp</a></h3>
-        <p class="text-secondary">2019-09-20</p>
-        <p>When you developp a webserver with Go, you must compile each time you do an update in your code. Well.. this is redundant. With Gulp you can automatize this task… Indeed, when a go file is modified, a task compile the application in the “bin” folder (“gopath/bin”) then another launch the executable (the webserver).</p>
+
+<p class="text-right">
+  <a href="/posts/2019/10/11/how-do-I-build-this-blog">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Auto reload your Go webserver with Gulp</a></h3>
+<p class="text-secondary">2019-09-20</p>
+<p>When you developp a webserver with Go, you must compile each time you do an update in your code. Well.. this is redundant. With Gulp you can automatize this task… Indeed, when a go file is modified, a task compile the application in the “bin” folder (“gopath/bin”) then another launch the executable (the webserver).</p>
 
 <blockquote>
 <p><a href="https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d">https://medium.com/@etiennerouzeaud/autoreload-your-go-webserver-with-gulp-ee5e231d133d</a></p>
 </blockquote>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">gulp</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">util</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;gulp-util&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">notifier</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;node-notifier&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">child</span>    <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;child_process&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">os</span>       <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;os&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">path</span>     <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;path&#39;</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">const</span> gulp     = require(<span style="color:#6a8759">&#39;gulp&#39;</span>),
+</span></span><span style="display:flex;"><span>      util     = require(<span style="color:#6a8759">&#39;gulp-util&#39;</span>),
+</span></span><span style="display:flex;"><span>      notifier = require(<span style="color:#6a8759">&#39;node-notifier&#39;</span>),
+</span></span><span style="display:flex;"><span>      child    = require(<span style="color:#6a8759">&#39;child_process&#39;</span>),
+</span></span><span style="display:flex;"><span>      os       = require(<span style="color:#6a8759">&#39;os&#39;</span>),
+</span></span><span style="display:flex;"><span>      path     = require(<span style="color:#6a8759">&#39;path&#39;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;null&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">var</span> server = <span style="color:#6a8759">&#39;null&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">build</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;install&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">function</span> build() {
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">var</span> build = child.spawn(<span style="color:#6a8759">&#39;go&#39;</span>, [<span style="color:#6a8759">&#39;install&#39;</span>]);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    build.stdout.on(<span style="color:#6a8759">&#39;data&#39;</span>, (data) =&gt; {
+</span></span><span style="display:flex;"><span>        console.log(<span style="color:#6a8759">`</span><span style="color:#6a8759">stdout: </span><span style="color:#6a8759">${</span>data<span style="color:#6a8759">}</span><span style="color:#6a8759">`</span>);
+</span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">build</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    build.stderr.on(<span style="color:#6a8759">&#39;data&#39;</span>, (data) =&gt; {
+</span></span><span style="display:flex;"><span>        console.error(<span style="color:#6a8759">`</span><span style="color:#6a8759">stderr: </span><span style="color:#6a8759">${</span>data<span style="color:#6a8759">}</span><span style="color:#6a8759">`</span>);
+</span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">build</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">return</span> build;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">server</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">server</span> <span style="color:#0550ae">!=</span> <span style="color:#0a3069">&#39;null&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">kill</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">function</span> spawn(done) {
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> (server &amp;&amp; server != <span style="color:#6a8759">&#39;null&#39;</span>) {
+</span></span><span style="display:flex;"><span>        server.kill();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">process</span><span style="color:#1f2328">.</span><span style="color:#1f2328">cwd</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#1f2328">split</span><span style="color:#1f2328">(</span><span style="color:#1f2328">path</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sep</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">length</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">.</span><span style="color:#1f2328">length</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">var</span> <span style="color:#1f2328">app</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">path</span><span style="color:#1f2328">_folder</span><span style="color:#1f2328">[</span><span style="color:#1f2328">length</span> <span style="color:#0550ae">-</span> <span style="color:#6639ba">parseInt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span><span style="color:#1f2328">]</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">var</span> path_folder = process.cwd().split(path.sep)
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">var</span> length = path_folder.length
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">var</span> app = path_folder[length - parseInt(<span style="color:#6897bb">1</span>)];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">os</span><span style="color:#1f2328">.</span><span style="color:#1f2328">platform</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#39;win32&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span> <span style="color:#0550ae">+</span> <span style="color:#0a3069">&#39;.exe&#39;</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span> <span style="color:#cf222e">else</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">server</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">child</span><span style="color:#1f2328">.</span><span style="color:#1f2328">spawn</span><span style="color:#1f2328">(</span><span style="color:#1f2328">app</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> (os.platform() == <span style="color:#6a8759">&#39;win32&#39;</span>) {
+</span></span><span style="display:flex;"><span>        server = child.spawn(app + <span style="color:#6a8759">&#39;.exe&#39;</span>)
+</span></span><span style="display:flex;"><span>    } <span style="color:#cc7832">else</span> {
+</span></span><span style="display:flex;"><span>        server = child.spawn(app)
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stdout</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stdout: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    server.stdout.on(<span style="color:#6a8759">&#39;data&#39;</span>, (data) =&gt; {
+</span></span><span style="display:flex;"><span>        console.log(<span style="color:#6a8759">`</span><span style="color:#6a8759">stdout: </span><span style="color:#6a8759">${</span>data<span style="color:#6a8759">}</span><span style="color:#6a8759">`</span>);
+</span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">server</span><span style="color:#1f2328">.</span><span style="color:#1f2328">stderr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">on</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;data&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`</span><span style="color:#0a3069">stderr: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">data</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    server.stderr.on(<span style="color:#6a8759">&#39;data&#39;</span>, (data) =&gt; {
+</span></span><span style="display:flex;"><span>        console.log(<span style="color:#6a8759">`</span><span style="color:#6a8759">stderr: </span><span style="color:#6a8759">${</span>data<span style="color:#6a8759">}</span><span style="color:#6a8759">`</span>);
+</span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    done();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">series</span><span style="color:#1f2328">(</span><span style="color:#1f2328">build</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">spawn</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">done</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;*.go&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;**/*.go&#39;</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">serve</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">done</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">const</span> serve = gulp.series(build, spawn)
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">function</span> watch(done) {
+</span></span><span style="display:flex;"><span>    gulp.watch([<span style="color:#6a8759">&#39;*.go&#39;</span>, <span style="color:#6a8759">&#39;**/*.go&#39;</span>], serve);
+</span></span><span style="display:flex;"><span>    done();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">serve</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">serve</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#1f2328">watch</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">watch</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">exports</span><span style="color:#1f2328">.</span><span style="color:#cf222e">default</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gulp</span><span style="color:#1f2328">.</span><span style="color:#1f2328">parallel</span><span style="color:#1f2328">(</span><span style="color:#1f2328">serve</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">watch</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>exports.serve = serve
+</span></span><span style="display:flex;"><span>exports.watch = watch
+</span></span><span style="display:flex;"><span>exports.<span style="color:#cc7832">default</span> = gulp.parallel(serve, watch)
 </span></span></code></pre>
-        
-        <p class="text-right">
-            <a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2019/09/20/auto-reload-go-webserver-gulp">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 <ul class="pagination justify-content-center">
-        
-    <li class="page-item"><a class="page-link" href="/">First</a></li>
-    <li class="page-item"><a class="page-link" href="/page/2/">&laquo;</a></li>
-        
-        
-    <li class="page-item">
-        <a class="page-link" href="/">1</a>
-    </li>
-        
-    <li class="page-item">
-        <a class="page-link" href="/page/2/">2</a>
-    </li>
-        
-    <li class="page-item active">
-        <a class="page-link" href="/page/3/">3</a>
-    </li>
-        
-        
-    <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
-    <li class="page-item disabled"><a class="page-link">Last</a></li>
-        
+  
+  <li class="page-item"><a class="page-link" href="/">First</a></li>
+  <li class="page-item"><a class="page-link" href="/page/2/">&laquo;</a></li>
+  
+  
+  <li class="page-item">
+    <a class="page-link" href="/">1</a>
+  </li>
+  
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  
+  <li class="page-item active">
+    <a class="page-link" href="/page/3/">3</a>
+  </li>
+  
+  
+  <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
+  <li class="page-item disabled"><a class="page-link">Last</a></li>
+  
 </ul>
-    
+
 
   </article>
 
@@ -476,6 +481,20 @@ This CLI tool is created to save a draft mail in Zimbra web client.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

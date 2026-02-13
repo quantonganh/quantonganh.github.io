@@ -2,678 +2,581 @@
   <channel>
     <title>A place to share my gained knowledge and experience</title>
     <link>http://localhost</link>
-    <description>DevOps - Programming - Travel - Photography</description>
-    <managingEditor> (Quan Tong)</managingEditor>
+    <description></description>
     <item>
       <title>launchctl: Bootstrap failed: 5: Input/output error</title>
       <link>http://localhost/posts/2025/09/26/launchctl-input-output-error</link>
       <description></description>
-      <guid>http://localhost/posts/2025/09/26/launchctl-input-output-error</guid>
       <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Helix returns &#34;No definition found&#34; when going to a definition</title>
       <link>http://localhost/posts/2025/08/14/jdtls-wrapper</link>
       <description></description>
-      <guid>http://localhost/posts/2025/08/14/jdtls-wrapper</guid>
       <pubDate>Thu, 14 Aug 2025 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>What I&#39;m doing now</title>
       <link>http://localhost/now</link>
       <description></description>
-      <guid>http://localhost/now</guid>
       <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Helix as my Golang IDE: powering up with WezTerm and CLI tools</title>
       <link>http://localhost/posts/2024/10/10/helix-golang-ide</link>
       <description></description>
-      <guid>http://localhost/posts/2024/10/10/helix-golang-ide</guid>
       <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Uses</title>
       <link>http://localhost/uses</link>
       <description></description>
-      <guid>http://localhost/uses</guid>
       <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Integration testing TUI applications in Rust</title>
       <link>http://localhost/posts/2024/01/21/integration-testing-tui-app-in-rust</link>
       <description></description>
-      <guid>http://localhost/posts/2024/01/21/integration-testing-tui-app-in-rust</guid>
       <pubDate>Sun, 21 Jan 2024 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>libp2p performance benchmarking</title>
       <link>http://localhost/posts/2023/10/27/libp2p-perf-benchmark</link>
       <description></description>
-      <guid>http://localhost/posts/2023/10/27/libp2p-perf-benchmark</guid>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Learning Rust by building Tetris: my favorite childhood game</title>
       <link>http://localhost/posts/2023/10/03/tetris-terminal</link>
       <description></description>
-      <guid>http://localhost/posts/2023/10/03/tetris-terminal</guid>
       <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Turning Helix into an IDE with the help of WezTerm and CLI tools</title>
       <link>http://localhost/posts/2023/08/19/turn-helix-into-ide</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/19/turn-helix-into-ide</guid>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Debug Rust in Helix using lldb-vscode: display the contents of local string variables</title>
       <link>http://localhost/posts/2023/08/11/debug-rust-helix-2</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/11/debug-rust-helix-2</guid>
       <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to debug Rust in Helix?</title>
       <link>http://localhost/posts/2023/08/10/debug-rust-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/10/debug-rust-helix</guid>
       <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>nnn: wcswidth returns different values for same Unicode code point between macOS and Linux</title>
       <link>http://localhost/posts/2023/08/09/nnn-wcswith-different-macos-linux</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/09/nnn-wcswith-different-macos-linux</guid>
       <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>WezTerm: quickly select a command and open it in a new pane</title>
       <link>http://localhost/posts/2023/08/04/quick-select-wezterm</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/04/quick-select-wezterm</guid>
       <pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Open same file in already running instance of Helix</title>
       <link>http://localhost/posts/2023/08/02/open-same-file-in-already-running-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/02/open-same-file-in-already-running-helix</guid>
       <pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>File tree workaround for Helix</title>
       <link>http://localhost/posts/2023/08/02/file-tree-workaround-for-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/02/file-tree-workaround-for-helix</guid>
       <pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to disable ligatures in WezTerm?</title>
       <link>http://localhost/posts/2023/08/01/disable-ligatures-in-wezterm</link>
       <description></description>
-      <guid>http://localhost/posts/2023/08/01/disable-ligatures-in-wezterm</guid>
       <pubDate>Tue, 01 Aug 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to create snippets in Helix?</title>
       <link>http://localhost/posts/2023/07/31/create-snippets-in-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/31/create-snippets-in-helix</guid>
       <pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Reload Helix automatically after switching from lazygit</title>
       <link>http://localhost/posts/2023/07/25/auto-reload-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/25/auto-reload-helix</guid>
       <pubDate>Tue, 25 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Helix: How to jump to the build error from the terminal output?</title>
       <link>http://localhost/posts/2023/07/21/jump-to-build-error-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/21/jump-to-build-error-helix</guid>
       <pubDate>Fri, 21 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How I run code in Helix editor?</title>
       <link>http://localhost/posts/2023/07/14/run-code-in-helix</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/14/run-code-in-helix</guid>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.77: expected a procedure that can be applied to arguments, given #f</title>
       <link>http://localhost/posts/2023/07/13/sicp-2.77-not-a-procedure</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/13/sicp-2.77-not-a-procedure</guid>
       <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Docker rootless keeps restarting?</title>
       <link>http://localhost/posts/2023/07/12/docker-rootless-keeps-restarting</link>
       <description></description>
-      <guid>http://localhost/posts/2023/07/12/docker-rootless-keeps-restarting</guid>
       <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How I setup a new Macbook in 2023</title>
       <link>http://localhost/posts/2023/05/06/how-I-setup-new-macbook</link>
       <description></description>
-      <guid>http://localhost/posts/2023/05/06/how-I-setup-new-macbook</guid>
       <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>A terminal UI for Taskwarrior</title>
       <link>http://localhost/posts/2023/04/21/terminal-ui-for-taskwarrior</link>
       <description></description>
-      <guid>http://localhost/posts/2023/04/21/terminal-ui-for-taskwarrior</guid>
       <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Load averages approximately 1000 on macOS?</title>
       <link>http://localhost/posts/2023/04/20/unresponsive-macbook-pro</link>
       <description></description>
-      <guid>http://localhost/posts/2023/04/20/unresponsive-macbook-pro</guid>
       <pubDate>Thu, 20 Apr 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>A simple terminal UI for ChatGPT</title>
       <link>http://localhost/posts/2023/04/01/terminal-ui-for-chatgpt</link>
       <description></description>
-      <guid>http://localhost/posts/2023/04/01/terminal-ui-for-chatgpt</guid>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Man on fire - trained or untrained?</title>
       <link>http://localhost/posts/2023/03/20/man-on-fire-trained-or-untrained</link>
       <description></description>
-      <guid>http://localhost/posts/2023/03/20/man-on-fire-trained-or-untrained</guid>
       <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Nhiều giờ bay và có phản hồi</title>
       <link>http://localhost/posts/2023/03/14/training-and-receiving-feedback</link>
       <description></description>
-      <guid>http://localhost/posts/2023/03/14/training-and-receiving-feedback</guid>
       <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Learning how to code</title>
       <link>http://localhost/posts/2023/01/09/learning-how-to-code</link>
       <description></description>
-      <guid>http://localhost/posts/2023/01/09/learning-how-to-code</guid>
       <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>10 phim hay nhất mình xem trong năm 2022</title>
       <link>http://localhost/posts/2023/01/07/best-movies-2022</link>
       <description></description>
-      <guid>http://localhost/posts/2023/01/07/best-movies-2022</guid>
       <pubDate>Sat, 07 Jan 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>gocloud - writing data to a bucket: 403</title>
       <link>http://localhost/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403</link>
       <description></description>
-      <guid>http://localhost/posts/2022/12/23/gocloud-writing-data-to-a-bucket-403</guid>
       <pubDate>Fri, 23 Dec 2022 08:58:59 +0700</pubDate>
     </item>
     <item>
       <title>Terraform failed to acquire state lock: 403: Access denied., forbidden</title>
       <link>http://localhost/posts/2022/11/17/terraform-acquire-state-lock-403</link>
       <description></description>
-      <guid>http://localhost/posts/2022/11/17/terraform-acquire-state-lock-403</guid>
       <pubDate>Thu, 17 Nov 2022 10:12:50 +0700</pubDate>
     </item>
     <item>
       <title>The King of Vietnamese language game show</title>
       <link>http://localhost/posts/2022/11/04/the-King-of-Vietnamese-language</link>
       <description></description>
-      <guid>http://localhost/posts/2022/11/04/the-King-of-Vietnamese-language</guid>
       <pubDate>Fri, 04 Nov 2022 10:12:50 +0700</pubDate>
     </item>
     <item>
       <title>Mùa thu</title>
       <link>http://localhost/posts/2022/08/08/traffic-jam-in-autumn</link>
       <description></description>
-      <guid>http://localhost/posts/2022/08/08/traffic-jam-in-autumn</guid>
       <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to send an HTTP request without using curl?</title>
       <link>http://localhost/posts/2022/05/22/send-http-request-without-curl</link>
       <description></description>
-      <guid>http://localhost/posts/2022/05/22/send-http-request-without-curl</guid>
       <pubDate>Sun, 22 May 2022 09:16:50 +0700</pubDate>
     </item>
     <item>
       <title>Adele - Million years ago</title>
       <link>http://localhost/posts/2022/02/10/million-years-ago</link>
       <description></description>
-      <guid>http://localhost/posts/2022/02/10/million-years-ago</guid>
       <pubDate>Thu, 10 Feb 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Mùi Tết</title>
       <link>http://localhost/posts/2022/02/06/the-taste-of-Tet</link>
       <description></description>
-      <guid>http://localhost/posts/2022/02/06/the-taste-of-Tet</guid>
       <pubDate>Sun, 06 Feb 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Đau cổ</title>
       <link>http://localhost/posts/2022/01/20/prevent-neck-pain</link>
       <description></description>
-      <guid>http://localhost/posts/2022/01/20/prevent-neck-pain</guid>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Kat</title>
       <link>http://localhost/posts/2021/11/30/kat</link>
       <description></description>
-      <guid>http://localhost/posts/2021/11/30/kat</guid>
       <pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.43: Eight queens: interchange the order of the nested mappings</title>
       <link>http://localhost/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order</link>
       <description></description>
-      <guid>http://localhost/posts/2021/11/02/sicp-2.43-eight-queens-interchange-order</guid>
       <pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.42: Eight queens puzzle</title>
       <link>http://localhost/posts/2021/10/29/sicp-2.42-eight-queens</link>
       <description></description>
-      <guid>http://localhost/posts/2021/10/29/sicp-2.42-eight-queens</guid>
       <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.41: Triple sum</title>
       <link>http://localhost/posts/2021/10/18/sicp-2.41-triple-sum</link>
       <description></description>
-      <guid>http://localhost/posts/2021/10/18/sicp-2.41-triple-sum</guid>
       <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.35: Counting leaves of a tree</title>
       <link>http://localhost/posts/2021/10/14/sicp-2.35-count-leaves-accumulation</link>
       <description></description>
-      <guid>http://localhost/posts/2021/10/14/sicp-2.35-count-leaves-accumulation</guid>
       <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 2.27: Reversing nested lists</title>
       <link>http://localhost/posts/2021/10/12/sicp-2.27-deep-reverse</link>
       <description></description>
-      <guid>http://localhost/posts/2021/10/12/sicp-2.27-deep-reverse</guid>
       <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 1.25: A simpler expmod?</title>
       <link>http://localhost/posts/2021/09/30/sicp-1.25-expmod</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/30/sicp-1.25-expmod</guid>
       <pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 1.16: Iterative Exponentiation</title>
       <link>http://localhost/posts/2021/09/29/sicp-1.16-iterative-exponentiation</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/29/sicp-1.16-iterative-exponentiation</guid>
       <pubDate>Wed, 29 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>SICP Exercise 1.14: orders of growth of count-change</title>
       <link>http://localhost/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/28/sicp-1.14-count-change-orders-of-growth</guid>
       <pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Side Projects</title>
       <link>http://localhost/projects</link>
       <description></description>
-      <guid>http://localhost/projects</guid>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>URI network-path reference</title>
       <link>http://localhost/posts/2021/09/23/uri-network-path-reference</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/23/uri-network-path-reference</guid>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Docker Compose healthcheck</title>
       <link>http://localhost/posts/2021/09/09/docker-compose-healthcheck</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/09/docker-compose-healthcheck</guid>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Do not use jq when working with large number</title>
       <link>http://localhost/posts/2021/09/07/jq-large-number</link>
       <description></description>
-      <guid>http://localhost/posts/2021/09/07/jq-large-number</guid>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>fish shell - very high CPU usage</title>
       <link>http://localhost/posts/2021/07/30/fish-shell-high-cpu</link>
       <description>Today I learned a new command.</description>
-      <guid>http://localhost/posts/2021/07/30/fish-shell-high-cpu</guid>
       <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Troubleshooting slow network file transfer</title>
       <link>http://localhost/posts/2021/06/25/slow-network-file-transfer</link>
       <description>Which switch port connected to a server?</description>
-      <guid>http://localhost/posts/2021/06/25/slow-network-file-transfer</guid>
       <pubDate>Fri, 25 Jun 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Automate office tasks with Python</title>
       <link>http://localhost/posts/2021/06/10/automate-office-tasks</link>
       <description>Lập trình có gì hay?</description>
-      <guid>http://localhost/posts/2021/06/10/automate-office-tasks</guid>
       <pubDate>Thu, 10 Jun 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>The power of praise</title>
       <link>http://localhost/posts/2021/03/18/the-power-of-praise</link>
       <description>Sức mạnh của lời khen</description>
-      <guid>http://localhost/posts/2021/03/18/the-power-of-praise</guid>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>condition form of depends_on in docker-compose version 3</title>
       <link>http://localhost/posts/2021/03/05/docker-compose-depends-on</link>
       <description>How to control startup order in Compose?</description>
-      <guid>http://localhost/posts/2021/03/05/docker-compose-depends-on</guid>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Let&#39;s Encrypt too many certificates already issued</title>
       <link>http://localhost/posts/2021/02/04/letsencrypt-rate-limits</link>
       <description>Why LE issued too many certificates for one domain?</description>
-      <guid>http://localhost/posts/2021/02/04/letsencrypt-rate-limits</guid>
       <pubDate>Thu, 04 Feb 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>plugins/docker failed to resolve Keycloak hostname?</title>
       <link>http://localhost/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker</link>
       <description></description>
-      <guid>http://localhost/posts/2021/01/27/dns-lookup-failed-inside-plugins-docker</guid>
       <pubDate>Wed, 27 Jan 2021 10:07:19 +0700</pubDate>
     </item>
     <item>
       <title>How to run a pipeline step only when pushing to a new branch?</title>
       <link>http://localhost/posts/2021/01/07/drone-action-condition</link>
       <description></description>
-      <guid>http://localhost/posts/2021/01/07/drone-action-condition</guid>
       <pubDate>Thu, 07 Jan 2021 09:55:59 +0700</pubDate>
     </item>
     <item>
       <title>How to add full text search to my static website?</title>
       <link>http://localhost/posts/2020/12/30/search-static-site</link>
       <description></description>
-      <guid>http://localhost/posts/2020/12/30/search-static-site</guid>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Unable to obtain ACME certificate for domains</title>
       <link>http://localhost/posts/2020/12/28/traefik-unable-obtain-certificate</link>
       <description></description>
-      <guid>http://localhost/posts/2020/12/28/traefik-unable-obtain-certificate</guid>
       <pubDate>Mon, 28 Dec 2020 10:30:54 +0700</pubDate>
     </item>
     <item>
       <title>A &amp;&amp; B || C is not the same as if-then-else</title>
       <link>http://localhost/posts/2020/12/26/if-then-else-one-line</link>
       <description></description>
-      <guid>http://localhost/posts/2020/12/26/if-then-else-one-line</guid>
       <pubDate>Sat, 26 Dec 2020 16:06:55 +0700</pubDate>
     </item>
     <item>
       <title>How to perform integration testing in Go?</title>
       <link>http://localhost/posts/2020/09/29/integration-test-golang</link>
       <description></description>
-      <guid>http://localhost/posts/2020/09/29/integration-test-golang</guid>
       <pubDate>Tue, 29 Sep 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Duc Ba church</title>
       <link>http://localhost/posts/2020/07/28/Duc-Ba-church</link>
       <description></description>
-      <guid>http://localhost/posts/2020/07/28/Duc-Ba-church</guid>
       <pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Bị theo dõi (Permanent Record) - Edward Snowden</title>
       <link>http://localhost/posts/2020/07/15/permanent-record-edward-snowden</link>
       <description></description>
-      <guid>http://localhost/posts/2020/07/15/permanent-record-edward-snowden</guid>
       <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Save draft mail in Zimbra web client using ChromeDP</title>
       <link>http://localhost/posts/2020/07/03/zimbra-save-draft-mail-chromedp</link>
       <description></description>
-      <guid>http://localhost/posts/2020/07/03/zimbra-save-draft-mail-chromedp</guid>
       <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to trigger build steps based on modified directory?</title>
       <link>http://localhost/posts/2020/06/26/drone-trigger-based-on-modified-dir</link>
       <description>How Drone could handle monorepo?</description>
-      <guid>http://localhost/posts/2020/06/26/drone-trigger-based-on-modified-dir</guid>
       <pubDate>Fri, 26 Jun 2020 14:11:19 +0700</pubDate>
     </item>
     <item>
       <title>Hanoi tour</title>
       <link>http://localhost/posts/2020/05/16/Hanoi-tour</link>
       <description></description>
-      <guid>http://localhost/posts/2020/05/16/Hanoi-tour</guid>
       <pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Drone build is not triggered after pushing code to Gitea?</title>
       <link>http://localhost/posts/2020/05/06/gitea-not-trigger-drone</link>
       <description></description>
-      <guid>http://localhost/posts/2020/05/06/gitea-not-trigger-drone</guid>
       <pubDate>Wed, 06 May 2020 14:11:01 +0700</pubDate>
     </item>
     <item>
       <title>How a gRPC message uses length-prefixed framing?</title>
       <link>http://localhost/posts/2020/05/06/grpc-length-prefixed-framing</link>
       <description></description>
-      <guid>http://localhost/posts/2020/05/06/grpc-length-prefixed-framing</guid>
       <pubDate>Wed, 06 May 2020 09:18:44 +0700</pubDate>
     </item>
     <item>
       <title>How to show all HTTP2 headers using tshark?</title>
       <link>http://localhost/posts/2020/05/05/grpc-http2-headers</link>
       <description></description>
-      <guid>http://localhost/posts/2020/05/05/grpc-http2-headers</guid>
       <pubDate>Tue, 05 May 2020 08:44:55 +0700</pubDate>
     </item>
     <item>
       <title>brew info gets stuck</title>
       <link>http://localhost/posts/2020/04/25/brew-info-gets-stuck</link>
       <description></description>
-      <guid>http://localhost/posts/2020/04/25/brew-info-gets-stuck</guid>
       <pubDate>Sat, 25 Apr 2020 08:44:15 +0700</pubDate>
     </item>
     <item>
       <title>Google Calendar CLI</title>
       <link>http://localhost/posts/2020/04/13/google-calendar-cli</link>
       <description>A simple tool to access Google Calendar API from CLI.</description>
-      <guid>http://localhost/posts/2020/04/13/google-calendar-cli</guid>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Kể tên 10 ứng dụng mà bạn muốn có</title>
       <link>http://localhost/posts/2020/04/12/idea-machine-2-wanted-apps</link>
       <description></description>
-      <guid>http://localhost/posts/2020/04/12/idea-machine-2-wanted-apps</guid>
       <pubDate>Sun, 12 Apr 2020 11:50:57 +0700</pubDate>
     </item>
     <item>
       <title>Đầu tư</title>
       <link>http://localhost/posts/2020/03/12/goland-free-evaluation</link>
       <description></description>
-      <guid>http://localhost/posts/2020/03/12/goland-free-evaluation</guid>
       <pubDate>Thu, 12 Mar 2020 16:08:39 +0700</pubDate>
     </item>
     <item>
       <title>36 things I learned before turning 37</title>
       <link>http://localhost/posts/2020/01/20/36-things-I-learned-before-turning-37</link>
       <description>...</description>
-      <guid>http://localhost/posts/2020/01/20/36-things-I-learned-before-turning-37</guid>
       <pubDate>Mon, 20 Jan 2020 07:18:30 +0700</pubDate>
     </item>
     <item>
       <title>Activities to be happy</title>
       <link>http://localhost/posts/2019/12/03/activities-to-be-happy</link>
       <description></description>
-      <guid>http://localhost/posts/2019/12/03/activities-to-be-happy</guid>
       <pubDate>Tue, 03 Dec 2019 14:44:57 +0700</pubDate>
     </item>
     <item>
       <title>Đạm Thủy (Tamsui)</title>
       <link>http://localhost/posts/2019/11/28/tamsui-taiwan</link>
       <description></description>
-      <guid>http://localhost/posts/2019/11/28/tamsui-taiwan</guid>
       <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Giải quyết 10 vấn đề khó khăn trong cuộc sống bằng thái độ biết ơn</title>
       <link>http://localhost/posts/2019/11/27/idea-machine-1-positive-thinking</link>
       <description></description>
-      <guid>http://localhost/posts/2019/11/27/idea-machine-1-positive-thinking</guid>
       <pubDate>Wed, 27 Nov 2019 18:46:41 +0700</pubDate>
     </item>
     <item>
       <title>Những người tốt quanh ta</title>
       <link>http://localhost/posts/2019/11/01/sun-yat-sen-university</link>
       <description></description>
-      <guid>http://localhost/posts/2019/11/01/sun-yat-sen-university</guid>
       <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Why my golang docker container exits immediately (code 127)?</title>
       <link>http://localhost/posts/2019/10/30/docker-exited-127</link>
       <description></description>
-      <guid>http://localhost/posts/2019/10/30/docker-exited-127</guid>
       <pubDate>Wed, 30 Oct 2019 10:31:36 +0700</pubDate>
     </item>
     <item>
       <title>go/packages.Load: no packages found</title>
       <link>http://localhost/posts/2019/10/22/go-no-packages-found</link>
       <description>Go to definition does not work in a mono-repo</description>
-      <guid>http://localhost/posts/2019/10/22/go-no-packages-found</guid>
       <pubDate>Tue, 22 Oct 2019 05:23:53 +0700</pubDate>
     </item>
     <item>
       <title>Bằng về sớm với ba</title>
       <link>http://localhost/posts/2019/10/21/pick-up-child-early</link>
       <description></description>
-      <guid>http://localhost/posts/2019/10/21/pick-up-child-early</guid>
       <pubDate>Mon, 21 Oct 2019 08:27:39 +0700</pubDate>
     </item>
     <item>
       <title>database/sql: never ignore errors</title>
       <link>http://localhost/posts/2019/10/16/never-ignore-errors</link>
       <description></description>
-      <guid>http://localhost/posts/2019/10/16/never-ignore-errors</guid>
       <pubDate>Wed, 16 Oct 2019 09:50:28 +0700</pubDate>
     </item>
     <item>
       <title>Lên xuống dòng đời</title>
       <link>http://localhost/posts/2019/10/14/wien-hauptbahnhof-austria</link>
       <description></description>
-      <guid>http://localhost/posts/2019/10/14/wien-hauptbahnhof-austria</guid>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How do I build this blog?</title>
       <link>http://localhost/posts/2019/10/11/how-do-I-build-this-blog</link>
       <description>Why I want to build this blog from ground up instead of using Hugo and GitHub Pages?</description>
-      <guid>http://localhost/posts/2019/10/11/how-do-I-build-this-blog</guid>
       <pubDate>Fri, 11 Oct 2019 09:34:20 +0700</pubDate>
     </item>
     <item>
       <title>Resume</title>
       <link>http://localhost/resume</link>
       <description>My resume</description>
-      <guid>http://localhost/resume</guid>
       <pubDate>Mon, 30 Sep 2019 20:43:10 +0700</pubDate>
     </item>
     <item>
       <title>Command-line autocomplete for Go documentation</title>
       <link>http://localhost/posts/2019/09/26/cli-autocomplete-for-go-doc</link>
       <description></description>
-      <guid>http://localhost/posts/2019/09/26/cli-autocomplete-for-go-doc</guid>
       <pubDate>Thu, 26 Sep 2019 17:17:41 +0700</pubDate>
     </item>
     <item>
       <title>Auto reload your Go webserver with Gulp</title>
       <link>http://localhost/posts/2019/09/20/auto-reload-go-webserver-gulp</link>
       <description></description>
-      <guid>http://localhost/posts/2019/09/20/auto-reload-go-webserver-gulp</guid>
       <pubDate>Fri, 20 Sep 2019 00:07:58 +0700</pubDate>
     </item>
     <item>
       <title>About</title>
       <link>http://localhost/about</link>
       <description></description>
-      <guid>http://localhost/about</guid>
       <pubDate>Thu, 19 Sep 2019 21:48:39 +0700</pubDate>
     </item>
     <item>
       <title>Lavender</title>
       <link>http://localhost/posts/2019/06/17/lavender-provence</link>
       <description></description>
-      <guid>http://localhost/posts/2019/06/17/lavender-provence</guid>
       <pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>France</title>
       <link>http://localhost/posts/2019/06/15/France</link>
       <description></description>
-      <guid>http://localhost/posts/2019/06/15/France</guid>
       <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Hà Nội</title>
       <link>http://localhost/posts/2019/02/01/Ha-Noi</link>
       <description></description>
-      <guid>http://localhost/posts/2019/02/01/Ha-Noi</guid>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Chân ta đi hôn mặt đất nồng ấm</title>
       <link>http://localhost/posts/2016/11/28/hakone-japan</link>
       <description></description>
-      <guid>http://localhost/posts/2016/11/28/hakone-japan</guid>
       <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Kiyomizu-dera Pagoda</title>
       <link>http://localhost/posts/2016/11/26/Kiyomizu-dera-pagoda</link>
       <description></description>
-      <guid>http://localhost/posts/2016/11/26/Kiyomizu-dera-pagoda</guid>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Nam Định</title>
       <link>http://localhost/posts/2010/05/02/Nam-Dinh</link>
       <description></description>
-      <guid>http://localhost/posts/2010/05/02/Nam-Dinh</guid>
       <pubDate>Sun, 02 May 2010 00:00:00 +0000</pubDate>
     </item>
   </channel>

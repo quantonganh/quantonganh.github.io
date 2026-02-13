@@ -81,13 +81,18 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
-        <p class="text-secondary">2023-08-11</p>
-        <p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
+
+<h3><a href="/posts/2023/08/11/debug-rust-helix-2">Debug Rust in Helix using lldb-vscode: display the contents of local string variables</a></h3>
+<p class="text-secondary">2023-08-11</p>
+<p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
 I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">codelldb</a> to address the <a href="https://github.com/helix-editor/helix/issues/7007">visualization issue related to string variables</a> within <code>lldb-vscode</code>.</p>
 
 <p>However, the usage of <code>codelldb</code> presents some challenges:</p>
@@ -98,24 +103,24 @@ I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">co
 <li>The Helix theme breaks when listing variables</li>
 </ul>
 
-<p><img src="/2023/08/11/codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
+<p><img src="codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
 
 <p>In my quest for an improved debugging experience, I found <a href="https://github.com/rust-lang/rust/blob/master/src/etc/rust-lldb">rust-lldb</a>,
 which impressively manages to display the contents of string variables:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
-        </p>
-        
-        <hr>
-    
-        <h3><a href="/posts/2023/08/10/debug-rust-helix">How to debug Rust in Helix?</a></h3>
-        <p class="text-secondary">2023-08-10</p>
-        <p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
+
+<p class="text-right">
+  <a href="/posts/2023/08/11/debug-rust-helix-2">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/10/debug-rust-helix">How to debug Rust in Helix?</a></h3>
+<p class="text-secondary">2023-08-10</p>
+<p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
 However, there is an issue where <a href="https://github.com/helix-editor/helix/issues/7007">string variables are displayed as memory addresses</a> instead of their actual values:</p>
 
-<p><img src="/2023/08/10/lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
+<p><img src="lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
 
 <p>Noticing that <a href="https://github.com/vadimcn/codelldb/blob/master/MANUAL.md#rust-language-support">CodeLLDB natively supports visualization of most common Rust data types</a>,
 I would like to give it a try.</p>
@@ -123,26 +128,26 @@ I would like to give it a try.</p>
 <p>Here&rsquo;s the step-by-step process:</p>
 
 <p>Download the CodeLLDB extension:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ <span style="color:#6639ba">cd</span> ~/Downloads/
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ cd ~/Downloads/
 </span></span><span style="display:flex;"><span>$ wget https://github.com/vadimcn/codelldb/releases/download/v1.9.2/codelldb-aarch64-darwin.vsix
 </span></span></code></pre>
 <p>Setup the extension:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>$ mkdir -p ~/.local
-</span></span><span style="display:flex;"><span>$ <span style="color:#6639ba">set</span> fish_user_paths /Users/quantong/.local/extension/adapter <span style="color:#953800">$fish_user_paths</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ mkdir -p ~/.local
+</span></span><span style="display:flex;"><span>$ set fish_user_paths /Users/quantong/.local/extension/adapter $fish_user_paths
 </span></span><span style="display:flex;"><span>$ codelldb
 </span></span></code></pre>
 <p>If you encountered this error:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2023/08/10/debug-rust-helix">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2023/08/10/debug-rust-helix">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -178,6 +183,20 @@ I would like to give it a try.</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

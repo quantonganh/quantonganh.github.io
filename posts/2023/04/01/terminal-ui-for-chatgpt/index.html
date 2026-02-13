@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>A simple terminal UI for ChatGPT</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,10 +93,10 @@
 <p class="text-secondary">2023-04-01</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <p>When I started learning Linux, I immediately fell in love with the terminal.
@@ -109,15 +114,15 @@ which can be found at: <a href="https://github.com/quantonganh/chatgpt">https://
 <p>By being attentive during your interaction with ChatGPT, you will notice that a conversation title will be generated
 on the left-hand side following the first answer. However, the API for this feature is not available.
 Hence, my strategy involves <a href="https://github.com/quantonganh/chatgpt/blob/215ff7e5361599eb6b2658917580bcb79a1b72eb/main.go#L353">asking ChatGPT to produce the title</a> for us:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">list</span><span style="color:#1f2328">.</span><span style="color:#6639ba">GetItemCount</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#fff"> </span><span style="color:#0550ae">||</span><span style="color:#fff"> </span><span style="color:#1f2328">isNewChat</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#cf222e">go</span><span style="color:#fff"> </span><span style="color:#cf222e">func</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#1f2328">resp</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">createChatCompletion</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#1f2328">Message</span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">						</span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">							</span><span style="color:#1f2328">Role</span><span style="color:#1f2328">:</span><span style="color:#fff">    </span><span style="color:#1f2328">roleUser</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">							</span><span style="color:#1f2328">Content</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">prefixSuggestTitle</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#1f2328">content</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">						</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#1f2328">}</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>			<span style="color:#cc7832">if</span> list.<span style="color:#ffc66d">GetItemCount</span>() == <span style="color:#6897bb">0</span> || isNewChat {
+</span></span><span style="display:flex;"><span>				<span style="color:#cc7832">go</span> <span style="color:#cc7832">func</span>() {
+</span></span><span style="display:flex;"><span>					resp, err := <span style="color:#ffc66d">createChatCompletion</span>([]Message{
+</span></span><span style="display:flex;"><span>						{
+</span></span><span style="display:flex;"><span>							Role:    roleUser,
+</span></span><span style="display:flex;"><span>							Content: prefixSuggestTitle + content,
+</span></span><span style="display:flex;"><span>						},
+</span></span><span style="display:flex;"><span>					}, <span style="color:#cc7832">false</span>)
+</span></span></code></pre>
 <p>And same as the version on the web, I also want to allow to edit the title.
 But I was having trouble showing an <a href="https://github.com/rivo/tview/wiki/InputField">InputField</a>
 at the position of a list item when the <code>e</code> key is pressed.</p>
@@ -125,86 +130,86 @@ at the position of a list item when the <code>e</code> key is pressed.</p>
 <p>Looking at the <a href="https://github.com/rivo/tview/wiki/Modal">Modal</a> feature in <code>tview</code>, an idea came to my mind.</p>
 
 <p>My main layout is something like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">mainFlex</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexColumn</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">button</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">3</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">list</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">textView</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">textArea</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">5</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">3</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">help</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	mainFlex := tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>		<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexColumn).
+</span></span><span style="display:flex;"><span>			<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(button, <span style="color:#6897bb">3</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(list, <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>			<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(textView, <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(textArea, <span style="color:#6897bb">5</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">3</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>		<span style="color:#ffc66d">AddItem</span>(help, <span style="color:#6897bb">1</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>)
+</span></span></code></pre>
 <p>I plan to create a modal on top of this layout, with all items nil except for the one at the list item&rsquo;s position:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">modal</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#cf222e">func</span><span style="color:#1f2328">(</span><span style="color:#1f2328">p</span><span style="color:#fff"> </span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Primitive</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">currentIndex</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Primitive</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexColumn</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">4</span><span style="color:#0550ae">+</span><span style="color:#1f2328">(</span><span style="color:#1f2328">currentIndex</span><span style="color:#0550ae">*</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">p</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewFlex</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#6639ba">SetDirection</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tview</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FlexRow</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">5</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">3</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	modal := <span style="color:#cc7832">func</span>(p tview.Primitive, currentIndex <span style="color:#cc7832">int</span>) tview.Primitive {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>			<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexColumn).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">4</span>+(currentIndex*<span style="color:#6897bb">2</span>), <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(p, <span style="color:#6897bb">1</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">true</span>).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">true</span>).
+</span></span><span style="display:flex;"><span>				<span style="color:#ffc66d">AddItem</span>(tview.<span style="color:#ffc66d">NewFlex</span>().<span style="color:#ffc66d">SetDirection</span>(tview.FlexRow).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">5</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">3</span>, <span style="color:#cc7832">false</span>), <span style="color:#6897bb">0</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">true</span>).
+</span></span><span style="display:flex;"><span>			<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">1</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre>
 <p>The interesting part is:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">4</span><span style="color:#0550ae">+</span><span style="color:#1f2328">(</span><span style="color:#1f2328">currentIndex</span><span style="color:#0550ae">*</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">					</span><span style="color:#6639ba">AddItem</span><span style="color:#1f2328">(</span><span style="color:#1f2328">p</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">)</span><span style="color:#1f2328">.</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(<span style="color:#cc7832">nil</span>, <span style="color:#6897bb">4</span>+(currentIndex*<span style="color:#6897bb">2</span>), <span style="color:#6897bb">1</span>, <span style="color:#cc7832">false</span>).
+</span></span><span style="display:flex;"><span>					<span style="color:#ffc66d">AddItem</span>(p, <span style="color:#6897bb">1</span>, <span style="color:#6897bb">1</span>, <span style="color:#cc7832">true</span>).
+</span></span></code></pre>
 <p>The &ldquo;New chat&rdquo; button has height of 3, so if I want to show an InputField at the position of the first item in the list, it must be at 4.
 Since we have a blank line between each item, the formula to calculate the fixed size is:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>4+(currentIndex*2)
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>4+(currentIndex*2)
 </span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
-        <i class="bi bi-tag"></i>
-        golang
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/tview" role="button">
-        <i class="bi bi-tag"></i>
-        tview
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/chatgpt" role="button">
-        <i class="bi bi-tag"></i>
-        chatgpt
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+    <i class="bi bi-tag"></i>
+    golang
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/tview" role="button">
+    <i class="bi bi-tag"></i>
+    tview
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/chatgpt" role="button">
+    <i class="bi bi-tag"></i>
+    chatgpt
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2023/04/01/terminal-ui-for-chatgpt"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2023/04/01/terminal-ui-for-chatgpt"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -242,6 +247,20 @@ Since we have a blank line between each item, the formula to calculate the fixed
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -81,36 +81,41 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
-        <p class="text-secondary">2021-09-07</p>
-        <p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
+
+<h3><a href="/posts/2021/09/07/jq-large-number">Do not use jq when working with large number</a></h3>
+<p class="text-secondary">2021-09-07</p>
+<p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
 On production, config is loaded from json file by using <a href="https://pypi.org/project/etcd3/">Python</a>.</p>
 
 <p>I&rsquo;m wondering if we can use <a href="https://github.com/stedolan/jq">jq</a> to do that. So, I tried something like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#953800">host</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_HOST</span><span style="color:#cf222e">:-</span><span style="color:#953800">127</span><span style="color:#1f2328">.0.0.1</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#953800">port</span><span style="color:#0550ae">=</span><span style="color:#0a3069">${</span><span style="color:#953800">ETCD_PORT</span><span style="color:#cf222e">:-</span><span style="color:#953800">2379</span><span style="color:#0a3069">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> key in <span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#39;keys[]&#39;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span><span style="color:#1f2328">;</span> <span style="color:#cf222e">do</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">value</span><span style="color:#0550ae">=</span><span style="color:#cf222e">$(</span>jq -r <span style="color:#0a3069">&#34;</span><span style="color:#0a3069">.</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> -c <span style="color:#0a3069">&#34;</span><span style="color:#953800">$1</span><span style="color:#0a3069">&#34;</span><span style="color:#cf222e">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#953800">ETCDCTL_API</span><span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> etcdctl --endpoints<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;</span><span style="color:#953800">$host</span><span style="color:#0a3069">:</span><span style="color:#953800">$port</span><span style="color:#0a3069">&#34;</span> put <span style="color:#0a3069">&#34;</span><span style="color:#953800">$key</span><span style="color:#0a3069">&#34;</span> <span style="color:#0a3069">&#34;</span><span style="color:#953800">$value</span><span style="color:#0a3069">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">done</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>host=<span style="color:#6a8759">${</span>ETCD_HOST<span style="color:#cc7832">:-</span>127.0.0.1<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span>port=<span style="color:#6a8759">${</span>ETCD_PORT<span style="color:#cc7832">:-</span>2379<span style="color:#6a8759">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">for</span> key in <span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#39;keys[]&#39;</span> <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>; <span style="color:#cc7832">do</span>
+</span></span><span style="display:flex;"><span>  value=<span style="color:#cc7832">$(</span>jq -r <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">.</span>$key<span style="color:#6a8759">&#34;</span> -c <span style="color:#6a8759">&#34;</span>$1<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>  ETCDCTL_API=<span style="color:#6897bb">3</span> etcdctl --endpoints=<span style="color:#6a8759">&#34;</span>$host<span style="color:#6a8759">:</span>$port<span style="color:#6a8759">&#34;</span> put <span style="color:#6a8759">&#34;</span>$key<span style="color:#6a8759">&#34;</span> <span style="color:#6a8759">&#34;</span>$value<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">done</span>
 </span></span></code></pre>
 <p>Config is loaded into <code>etcd</code> but some values are not the same as in the JSON file.
 What is going on?</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2021/09/07/jq-large-number">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -146,6 +151,20 @@ What is going on?</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

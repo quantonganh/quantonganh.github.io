@@ -81,29 +81,34 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
-    
-        <h3><a href="/posts/2020/12/26/if-then-else-one-line">A &amp;&amp; B || C is not the same as if-then-else</a></h3>
-        <p class="text-secondary">2020-12-26</p>
-        <p>I have been thought that if-then-else statement can be written in one line by using <code>A &amp;&amp; B || C</code> but I was wrong.</p>
+
+<h3><a href="/posts/2020/12/26/if-then-else-one-line">A &amp;&amp; B || C is not the same as if-then-else</a></h3>
+<p class="text-secondary">2020-12-26</p>
+<p>I have been thought that if-then-else statement can be written in one line by using <code>A &amp;&amp; B || C</code> but I was wrong.</p>
 
 <p>To speed up my Drone CI time, I configured the static-check step to only run when there are some <code>.go</code> files have been changed:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>git --no-pager diff --name-only ${DRONE_COMMIT_LINK##*/} | grep -q &#34;\.go$&#34; &amp;&amp; golangci-lint run --deadline 2m -v ./... || true
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>git --no-pager diff --name-only ${DRONE_COMMIT_LINK##*/} | grep -q &#34;\.go$&#34; &amp;&amp; golangci-lint run --deadline 2m -v ./... || true
 </span></span></code></pre>
 <p>I was thought that <code>A &amp;&amp; B || C</code> is the same as:</p>
 
-        
-        <p class="text-right">
-            <a href="/posts/2020/12/26/if-then-else-one-line">Read More...</a>
-        </p>
-        
-        <hr>
-    
+
+<p class="text-right">
+  <a href="/posts/2020/12/26/if-then-else-one-line">Read More...</a>
+</p>
+
+<hr>
+
 
     
-    
+
 
   </article>
 
@@ -139,6 +144,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,13 +93,13 @@
 <p class="text-secondary">2019-10-11</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
-<p><img src="/2019/10/11/pi4.jpg" alt="Raspberry Pi 4" /></p>
+<p><img src="pi4.jpg" alt="Raspberry Pi 4" /></p>
 
 <p>Recently, I decided to find a new job as a Golang developer. So, I updated my resume, sent to my friends to ask for review. Then I submitted it enclosed herewith a cover letter to recruiters. Some didn&rsquo;t reply, and the other replied with a message like this &ldquo;You are so good, but I&rsquo;m so sorry&hellip;&rdquo;.</p>
 
@@ -127,118 +132,118 @@
 <h2>Parsing metadata and markdown</h2>
 
 <p>An example of metadata:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">title</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Resume<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">date</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Mon Sep 30 20:43:10 +07 2019<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">description</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>My resume<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">tags</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- devops<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- golang<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- resume<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">title</span>: Resume
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">date</span>: Mon Sep 30 20:43:10 +07 2019
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">description</span>: My resume
+</span></span><span style="display:flex;"><span><span style="color:#e8bf6a">tags</span>:
+</span></span><span style="display:flex;"><span>  - devops
+</span></span><span style="display:flex;"><span>  - golang
+</span></span><span style="display:flex;"><span>  - resume
+</span></span></code></pre>
 <p>A blog post struct:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">type</span><span style="color:#fff"> </span><span style="color:#1f2328">Post</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">Title</span><span style="color:#fff">       </span><span style="color:#cf222e">string</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">Date</span><span style="color:#fff">        </span><span style="color:#1f2328">publishDate</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">Description</span><span style="color:#fff"> </span><span style="color:#cf222e">string</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">Content</span><span style="color:#fff">     </span><span style="color:#1f2328">template</span><span style="color:#1f2328">.</span><span style="color:#1f2328">HTML</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">Tags</span><span style="color:#fff">        </span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#cf222e">string</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">File</span><span style="color:#fff">        </span><span style="color:#cf222e">string</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">type</span> Post <span style="color:#cc7832">struct</span> {
+</span></span><span style="display:flex;"><span>	Title       <span style="color:#cc7832">string</span>
+</span></span><span style="display:flex;"><span>	Date        publishDate
+</span></span><span style="display:flex;"><span>	Description <span style="color:#cc7832">string</span>
+</span></span><span style="display:flex;"><span>	Content     template.HTML
+</span></span><span style="display:flex;"><span>	Tags        []<span style="color:#cc7832">string</span>
+</span></span><span style="display:flex;"><span>	File        <span style="color:#cc7832">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
 <p>It can be parsed like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">fileread</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">ioutil</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ReadFile</span><span style="color:#1f2328">(</span><span style="color:#1f2328">f</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Wrap</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;ioutil.ReadFile&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">lines</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Split</span><span style="color:#1f2328">(</span><span style="color:#6639ba">string</span><span style="color:#1f2328">(</span><span style="color:#1f2328">fileread</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;\n&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">var</span><span style="color:#fff"> </span><span style="color:#1f2328">closingMetadataLine</span><span style="color:#fff"> </span><span style="color:#cf222e">int</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">for</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">1</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#fff"> </span><span style="color:#1f2328">&lt;</span><span style="color:#fff"> </span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span><span style="color:#1f2328">lines</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#0550ae">++</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">lines</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#1f2328">yamlDelim</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">closingMetadataLine</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">i</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">metadata</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Join</span><span style="color:#1f2328">(</span><span style="color:#1f2328">lines</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span><span style="color:#1f2328">closingMetadataLine</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;\n&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">p</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">Post</span><span style="color:#1f2328">{</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">yaml</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Unmarshal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#6639ba">byte</span><span style="color:#1f2328">(</span><span style="color:#1f2328">metadata</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">p</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#cf222e">return</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">errors</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Wrap</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;yaml.Unmarshal&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	fileread, err := ioutil.<span style="color:#ffc66d">ReadFile</span>(f)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> <span style="color:#cc7832">nil</span>, errors.<span style="color:#ffc66d">Wrap</span>(err, <span style="color:#6a8759">&#34;ioutil.ReadFile&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	lines := strings.<span style="color:#ffc66d">Split</span>(string(fileread), <span style="color:#6a8759">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">var</span> closingMetadataLine <span style="color:#cc7832">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">for</span> i := <span style="color:#6897bb">1</span>; i &lt; len(lines); i++ {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">if</span> lines[i] == yamlDelim {
+</span></span><span style="display:flex;"><span>			closingMetadataLine = i
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	metadata := strings.<span style="color:#ffc66d">Join</span>(lines[<span style="color:#6897bb">1</span>:closingMetadataLine], <span style="color:#6a8759">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	p := Post{}
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err := yaml.<span style="color:#ffc66d">Unmarshal</span>([]byte(metadata), &amp;p); err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#cc7832">return</span> <span style="color:#cc7832">nil</span>, errors.<span style="color:#ffc66d">Wrap</span>(err, <span style="color:#6a8759">&#34;yaml.Unmarshal&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre>
 <p>and the content can be processed by using <a href="https://github.com/russross/blackfriday">Blackfriday</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">content</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">strings</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Join</span><span style="color:#1f2328">(</span><span style="color:#1f2328">lines</span><span style="color:#1f2328">[</span><span style="color:#1f2328">closingMetadataLine</span><span style="color:#0550ae">+</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span><span style="color:#1f2328">]</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;\n&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Content</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">template</span><span style="color:#1f2328">.</span><span style="color:#6639ba">HTML</span><span style="color:#1f2328">(</span><span style="color:#1f2328">bf</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Run</span><span style="color:#1f2328">(</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">[</span><span style="color:#1f2328">]</span><span style="color:#6639ba">byte</span><span style="color:#1f2328">(</span><span style="color:#1f2328">content</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">bf</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WithRenderer</span><span style="color:#1f2328">(</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">bfchroma</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewRenderer</span><span style="color:#1f2328">(</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">bfchroma</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WithoutAutodetect</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">bfchroma</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ChromaOptions</span><span style="color:#1f2328">(</span><span style="color:#1f2328">html</span><span style="color:#1f2328">.</span><span style="color:#6639ba">WithLineNumbers</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">				</span><span style="color:#1f2328">bfchroma</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ChromaStyle</span><span style="color:#1f2328">(</span><span style="color:#1f2328">styles</span><span style="color:#1f2328">.</span><span style="color:#1f2328">SolarizedDark</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">			</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">)</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	content := strings.<span style="color:#ffc66d">Join</span>(lines[closingMetadataLine+<span style="color:#6897bb">1</span>:], <span style="color:#6a8759">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>	p.Content = template.<span style="color:#ffc66d">HTML</span>(bf.<span style="color:#ffc66d">Run</span>(
+</span></span><span style="display:flex;"><span>		[]byte(content),
+</span></span><span style="display:flex;"><span>		bf.<span style="color:#ffc66d">WithRenderer</span>(
+</span></span><span style="display:flex;"><span>			bfchroma.<span style="color:#ffc66d">NewRenderer</span>(
+</span></span><span style="display:flex;"><span>				bfchroma.<span style="color:#ffc66d">WithoutAutodetect</span>(),
+</span></span><span style="display:flex;"><span>				bfchroma.<span style="color:#ffc66d">ChromaOptions</span>(html.<span style="color:#ffc66d">WithLineNumbers</span>()),
+</span></span><span style="display:flex;"><span>				bfchroma.<span style="color:#ffc66d">ChromaStyle</span>(styles.SolarizedDark),
+</span></span><span style="display:flex;"><span>			),
+</span></span><span style="display:flex;"><span>		),
+</span></span><span style="display:flex;"><span>    ))
+</span></span></code></pre>
 <h2>Pagination</h2>
 
 <p>Based on current page, a <code>paginator</code> template can be created as follows:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>{{ define &#34;paginator&#34; }}
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>{{ define &#34;paginator&#34; }}
 </span></span><span style="display:flex;"><span>{{if .paginator.HasPages}}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">ul</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;pagination pagination&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#e8bf6a">ul</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;pagination pagination&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>    {{if .paginator.HasPrev}}
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;{{.paginator.PageLinkFirst}}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>First<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;{{.paginator.PageLinkPrev}}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#6639ba">&amp;laquo;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span>&gt;&lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;{{.paginator.PageLinkFirst}}&#34;</span>&gt;First&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span>&gt;&lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;{{.paginator.PageLinkPrev}}&#34;</span>&gt;&amp;laquo;&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
 </span></span><span style="display:flex;"><span>    {{else}}
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;disabled&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>First<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;disabled&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#6639ba">&amp;laquo;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;disabled&#34;</span>&gt;&lt;<span style="color:#e8bf6a">a</span>&gt;First&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;disabled&#34;</span>&gt;&lt;<span style="color:#e8bf6a">a</span>&gt;&amp;laquo;&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
 </span></span><span style="display:flex;"><span>    {{end}}
 </span></span><span style="display:flex;"><span>    {{range $_, $page := .paginator.Pages}}
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span><span style="color:#f6f8fa;background-color:#82071e">{</span><span style="color:#f6f8fa;background-color:#82071e">{</span><span style="color:#1f2328">if</span> <span style="color:#f6f8fa;background-color:#82071e">$</span><span style="color:#f6f8fa;background-color:#82071e">.</span><span style="color:#1f2328">paginator</span><span style="color:#f6f8fa;background-color:#82071e">.</span><span style="color:#1f2328">IsActive</span> <span style="color:#f6f8fa;background-color:#82071e">.</span><span style="color:#f6f8fa;background-color:#82071e">}</span><span style="color:#f6f8fa;background-color:#82071e">}</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;active&#34;</span><span style="color:#f6f8fa;background-color:#82071e">{</span><span style="color:#f6f8fa;background-color:#82071e">{</span><span style="color:#1f2328">end</span><span style="color:#f6f8fa;background-color:#82071e">}</span><span style="color:#f6f8fa;background-color:#82071e">}</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;{{$.paginator.PageLink $page}}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>{{$page}}<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span><span style="color:#ff6b68">{</span><span style="color:#ff6b68">{</span><span style="color:#9876aa">if</span> <span style="color:#ff6b68">$</span><span style="color:#ff6b68">.</span><span style="color:#9876aa">paginator</span><span style="color:#ff6b68">.</span><span style="color:#9876aa">IsActive</span> <span style="color:#ff6b68">.</span><span style="color:#ff6b68">}</span><span style="color:#ff6b68">}</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;active&#34;</span><span style="color:#ff6b68">{</span><span style="color:#ff6b68">{</span><span style="color:#9876aa">end</span><span style="color:#ff6b68">}</span><span style="color:#ff6b68">}</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;{{$.paginator.PageLink $page}}&#34;</span>&gt;{{$page}}&lt;/<span style="color:#e8bf6a">a</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#e8bf6a">li</span>&gt;
 </span></span><span style="display:flex;"><span>    {{end}}
 </span></span><span style="display:flex;"><span>    {{if .paginator.HasNext}}
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;{{.paginator.PageLinkNext}}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#6639ba">&amp;raquo;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;{{.paginator.PageLinkLast}}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>Last<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span>&gt;&lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;{{.paginator.PageLinkNext}}&#34;</span>&gt;&amp;raquo;&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span>&gt;&lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;{{.paginator.PageLinkLast}}&#34;</span>&gt;Last&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
 </span></span><span style="display:flex;"><span>    {{else}}
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;disabled&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#6639ba">&amp;raquo;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">li</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;disabled&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>Last<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">li</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;disabled&#34;</span>&gt;&lt;<span style="color:#e8bf6a">a</span>&gt;&amp;raquo;&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#e8bf6a">li</span> <span style="color:#9876aa">class</span>=<span style="color:#6a8759">&#34;disabled&#34;</span>&gt;&lt;<span style="color:#e8bf6a">a</span>&gt;Last&lt;/<span style="color:#e8bf6a">a</span>&gt;&lt;/<span style="color:#e8bf6a">li</span>&gt;
 </span></span><span style="display:flex;"><span>    {{end}}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">ul</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#e8bf6a">ul</span>&gt;
 </span></span><span style="display:flex;"><span>{{end}}
 </span></span><span style="display:flex;"><span>{{ end }}
 </span></span></code></pre>
 <p>then included in the <code>home</code> template:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>{{ define &#34;home&#34; }}
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>{{ define &#34;home&#34; }}
 </span></span><span style="display:flex;"><span>{{ template &#34;header&#34; . }}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">h1</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>QuanTA&#39;s blog<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">h1</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#e8bf6a">h1</span>&gt;QuanTA&#39;s blog&lt;/<span style="color:#e8bf6a">h1</span>&gt;
 </span></span><span style="display:flex;"><span>{{ range .posts }}
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/posts/{{ .File }}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">h2</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>{{ .Title }}<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">h2</span><span style="color:#1f2328">&gt;</span><span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">p</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>{{ .Date | formatDate }}<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">p</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">p</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>Tags:
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;/posts/{{ .File }}&#34;</span>&gt;&lt;<span style="color:#e8bf6a">h2</span>&gt;{{ .Title }}&lt;/<span style="color:#e8bf6a">h2</span>&gt;&lt;/<span style="color:#e8bf6a">a</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#e8bf6a">p</span>&gt;{{ .Date | formatDate }}&lt;/<span style="color:#e8bf6a">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#e8bf6a">p</span>&gt;Tags:
 </span></span><span style="display:flex;"><span>        {{ range $_, $tag := .Tags }}
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">a</span> <span style="color:#1f2328">href</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;/tags/{{ $tag }}&#34;</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>#{{ $tag }}<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">a</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#e8bf6a">a</span> <span style="color:#9876aa">href</span>=<span style="color:#6a8759">&#34;/tags/{{ $tag }}&#34;</span>&gt;#{{ $tag }}&lt;/<span style="color:#e8bf6a">a</span>&gt;
 </span></span><span style="display:flex;"><span>        {{ end }}
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">p</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">p</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>{{ .Description }}<span style="color:#1f2328">&lt;</span><span style="color:#1f2328">/</span><span style="color:#0550ae">p</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">hr</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#e8bf6a">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#e8bf6a">p</span>&gt;{{ .Description }}&lt;/<span style="color:#e8bf6a">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#e8bf6a">hr</span>&gt;
 </span></span><span style="display:flex;"><span>{{ end }}
 </span></span><span style="display:flex;"><span>{{ template &#34;paginator&#34; . }}
 </span></span><span style="display:flex;"><span>{{ template &#34;footer&#34; . }}
 </span></span><span style="display:flex;"><span>{{ end }}
 </span></span></code></pre>
 <p>When executing <code>home</code> template, I need to pass both <code>paginator</code> and <code>posts</code>, so I used <code>pongo2</code> context to do that:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">nums</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span><span style="color:#1f2328">posts</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">paginator</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">pagination</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewPaginator</span><span style="color:#1f2328">(</span><span style="color:#1f2328">r</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">postsPerPage</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">int64</span><span style="color:#1f2328">(</span><span style="color:#1f2328">nums</span><span style="color:#1f2328">)</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">offset</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">paginator</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Offset</span><span style="color:#1f2328">(</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">endPos</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">offset</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span><span style="color:#1f2328">postsPerPage</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">endPos</span><span style="color:#fff"> </span><span style="color:#1f2328">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">nums</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">endPos</span><span style="color:#fff"> </span><span style="color:#1f2328">=</span><span style="color:#fff"> </span><span style="color:#1f2328">nums</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#1f2328">data</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">pongo2</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Context</span><span style="color:#1f2328">{</span><span style="color:#0a3069">&#34;paginator&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">paginator</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;posts&#34;</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">posts</span><span style="color:#1f2328">[</span><span style="color:#1f2328">offset</span><span style="color:#1f2328">:</span><span style="color:#1f2328">endPos</span><span style="color:#1f2328">]</span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">	</span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">templates</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ExecuteTemplate</span><span style="color:#1f2328">(</span><span style="color:#1f2328">w</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;home&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">data</span><span style="color:#1f2328">)</span><span style="color:#1f2328">;</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">		</span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>	nums := len(posts)
+</span></span><span style="display:flex;"><span>	paginator := pagination.<span style="color:#ffc66d">NewPaginator</span>(r, postsPerPage, int64(nums))
+</span></span><span style="display:flex;"><span>	offset := paginator.<span style="color:#ffc66d">Offset</span>()
+</span></span><span style="display:flex;"><span>	endPos := offset + postsPerPage
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> endPos &gt; nums {
+</span></span><span style="display:flex;"><span>		endPos = nums
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	data := pongo2.Context{<span style="color:#6a8759">&#34;paginator&#34;</span>: paginator, <span style="color:#6a8759">&#34;posts&#34;</span>: posts[offset:endPos]}
+</span></span><span style="display:flex;"><span>	<span style="color:#cc7832">if</span> err := templates.<span style="color:#ffc66d">ExecuteTemplate</span>(w, <span style="color:#6a8759">&#34;home&#34;</span>, data); err != <span style="color:#cc7832">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#ffc66d">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre>
 <h2>Adding header, footer</h2>
 
 <p>Every pages should have the same header and footer. So, I added it follow <a href="http://sanatgersappa.blogspot.com/2013/11/creating-master-page-for-your-go-web-app.html">this</a></p>
@@ -261,30 +266,30 @@ Looking around and I found:</p>
 </ul>
 
 <p>I built my own docker image to run on Raspberry Pi 4:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">remark42</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">build</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>.<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>quantonganh/remark42:arm32<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">container_name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;remark42&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">hostname</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;remark42&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">restart</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>always<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">environment</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- REMARK_URL=https://remark42.dynu.net<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- SECRET=xx<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- STORE_BOLT_PATH=/srv/var/db<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- BACKUP_PATH=/srv/var/backup<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- AUTH_GITHUB_CID=&lt;client_id&gt;<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- AUTH_GITHUB_CSEC=&lt;client_secret&gt;<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- ./var:/srv/var<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">labels</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.enable=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.rule=Host(`remark42.dynu.net`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.entrypoints=https<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.remark42.tls.certresolver=le<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.services.remark42.loadbalancer.server.port=8080<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">remark42</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">build</span>: .
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: quantonganh/remark42:arm32
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">container_name</span>: <span style="color:#6a8759">&#34;remark42&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">hostname</span>: <span style="color:#6a8759">&#34;remark42&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">environment</span>:
+</span></span><span style="display:flex;"><span>        - REMARK_URL=https://remark42.dynu.net
+</span></span><span style="display:flex;"><span>        - SECRET=xx
+</span></span><span style="display:flex;"><span>        - STORE_BOLT_PATH=/srv/var/db
+</span></span><span style="display:flex;"><span>        - BACKUP_PATH=/srv/var/backup
+</span></span><span style="display:flex;"><span>        - AUTH_GITHUB_CID=&lt;client_id&gt;
+</span></span><span style="display:flex;"><span>        - AUTH_GITHUB_CSEC=&lt;client_secret&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>        - ./var:/srv/var
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">labels</span>:
+</span></span><span style="display:flex;"><span>      - traefik.enable=true
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.rule=Host(`remark42.dynu.net`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.entrypoints=https
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.remark42.tls.certresolver=le
+</span></span><span style="display:flex;"><span>      - traefik.http.services.remark42.loadbalancer.server.port=8080
+</span></span></code></pre>
 <p>In the frontend side, I just need to something like this at the end of <code>post</code> template:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">script</span><span style="color:#1f2328"></span><span style="color:#1f2328">&gt;</span>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>&lt;<span style="color:#e8bf6a">script</span>&gt;
 </span></span><span style="display:flex;"><span>    var remark_config = {
 </span></span><span style="display:flex;"><span>      host: &#34;https://remark42.dynu.net&#34;,
 </span></span><span style="display:flex;"><span>      site_id: &#39;remark&#39;,
@@ -306,130 +311,130 @@ Looking around and I found:</p>
 </blockquote>
 
 <h1>Continuous Integration</h1>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">gitea</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>quantonganh/gitea:1.9.4-arm32v6<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">container_name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>gitea<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">restart</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>always<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- gitea:/data<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">ports</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0a3069">&#34;222:22&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">environment</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DISABLE_REGISTRATION=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">labels</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.enable=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.services.gitea.loadbalancer.server.port=3000<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea.rule=Host(`git-tea.dynu.net`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea.entrypoints=http<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea.middlewares=https-redirect@file<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea-secured.rule=Host(`git-tea.dynu.net`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea-secured.entrypoints=https<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea-secured.tls=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.gitea-secured.tls.certresolver=le<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">drone</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone/drone:1-linux-arm<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">container_name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">restart</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>always<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- drone:/data<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">environment</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_AGENTS_ENABLED=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_GITEA_SERVER=https://git-tea.dynu.net<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_GITEA_CLIENT_ID=&lt;client_id&gt;<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_GITEA_CLIENT_SECRET=&lt;client_secret&gt;<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_RPC_SECRET=&lt;rpc_secret&gt;<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_SERVER_PROTO=https<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_SERVER_HOST=drone-ci.dynu.net<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- DRONE_USER_CREATE=username:quanta,admin:true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">labels</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.enable=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.services.drone.loadbalancer.server.port=80<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone.rule=Host(`drone-ci.dynu.net`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone.entrypoints=http<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone.middlewares=https-redirect@file<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone-secured.rule=Host(`drone-ci.dynu.net`)<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone-secured.entrypoints=https<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone-secured.tls=true<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- traefik.http.routers.drone-secured.tls.certresolver=le<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">gitea</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: quantonganh/gitea:1.9.4-arm32v6
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">container_name</span>: gitea
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>      - gitea:/data
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#6a8759">&#34;222:22&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">environment</span>:
+</span></span><span style="display:flex;"><span>      - DISABLE_REGISTRATION=true
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">labels</span>:
+</span></span><span style="display:flex;"><span>      - traefik.enable=true
+</span></span><span style="display:flex;"><span>      - traefik.http.services.gitea.loadbalancer.server.port=3000
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea.rule=Host(`git-tea.dynu.net`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea.entrypoints=http
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea.middlewares=https-redirect@file
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea-secured.rule=Host(`git-tea.dynu.net`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea-secured.entrypoints=https
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea-secured.tls=true
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.gitea-secured.tls.certresolver=le
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">drone</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: drone/drone:1-linux-arm
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">container_name</span>: drone
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>      - drone:/data
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">environment</span>:
+</span></span><span style="display:flex;"><span>      - DRONE_AGENTS_ENABLED=true
+</span></span><span style="display:flex;"><span>      - DRONE_GITEA_SERVER=https://git-tea.dynu.net
+</span></span><span style="display:flex;"><span>      - DRONE_GITEA_CLIENT_ID=&lt;client_id&gt;
+</span></span><span style="display:flex;"><span>      - DRONE_GITEA_CLIENT_SECRET=&lt;client_secret&gt;
+</span></span><span style="display:flex;"><span>      - DRONE_RPC_SECRET=&lt;rpc_secret&gt;
+</span></span><span style="display:flex;"><span>      - DRONE_SERVER_PROTO=https
+</span></span><span style="display:flex;"><span>      - DRONE_SERVER_HOST=drone-ci.dynu.net
+</span></span><span style="display:flex;"><span>      - DRONE_USER_CREATE=username:quanta,admin:true
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">labels</span>:
+</span></span><span style="display:flex;"><span>      - traefik.enable=true
+</span></span><span style="display:flex;"><span>      - traefik.http.services.drone.loadbalancer.server.port=80
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone.rule=Host(`drone-ci.dynu.net`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone.entrypoints=http
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone.middlewares=https-redirect@file
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone-secured.rule=Host(`drone-ci.dynu.net`)
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone-secured.entrypoints=https
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone-secured.tls=true
+</span></span><span style="display:flex;"><span>      - traefik.http.routers.drone-secured.tls.certresolver=le
+</span></span></code></pre>
 <p><code>https-redirect</code> middleware is configured like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">http</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">middlewares</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">https-redirect</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">redirectScheme</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">scheme</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">http</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">middlewares</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">https-redirect</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">redirectScheme</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e8bf6a">scheme</span>: https
+</span></span></code></pre>
 <h1>Deploy</h1>
 
 <p><code>Dockerfile</code> is so simple:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#cf222e">FROM</span><span style="color:#fff"> </span><span style="color:#0a3069">arm32v7/alpine:3.10</span><span style="color:#fff"></span><span style="color:#cf222e"></span><span style="color:#fff"></span><span style="color:#0a3069"></span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">RUN</span> mkdir /app<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> assets /app/assets<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> favicon.ico /app<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> posts /app/posts<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> templates/ /app/templates<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">COPY</span> blog /app<span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">WORKDIR</span><span style="color:#fff"> </span><span style="color:#0a3069">/app</span><span style="color:#fff"></span><span style="color:#cf222e"></span><span style="color:#fff"></span><span style="color:#0a3069"></span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">ENTRYPOINT</span> <span style="color:#1f2328">[</span> <span style="color:#0a3069">&#34;/app/blog&#34;</span> <span style="color:#1f2328">]</span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#f6f8fa;background-color:#82071e">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">EXPOSE</span><span style="color:#fff"> </span><span style="color:#0a3069">80</span><span style="color:#fff"></span><span style="color:#cf222e"></span><span style="color:#fff"></span><span style="color:#0a3069"></span><span style="color:#f6f8fa;background-color:#82071e">
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">FROM</span> <span style="color:#6a8759">arm32v7/alpine:3.10</span><span style="color:#cc7832"></span><span style="color:#6a8759"></span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">RUN</span> mkdir /app<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">COPY</span> assets /app/assets<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">COPY</span> favicon.ico /app<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">COPY</span> posts /app/posts<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">COPY</span> templates/ /app/templates<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">COPY</span> blog /app<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">WORKDIR</span> <span style="color:#6a8759">/app</span><span style="color:#cc7832"></span><span style="color:#6a8759"></span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">ENTRYPOINT</span> [ <span style="color:#6a8759">&#34;/app/blog&#34;</span> ]<span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff6b68">
+</span></span></span><span style="display:flex;"><span><span style="color:#cc7832">EXPOSE</span> <span style="color:#6a8759">80</span><span style="color:#cc7832"></span><span style="color:#6a8759"></span><span style="color:#ff6b68">
 </span></span></span></code></pre>
 <p>If you have a local docker registry, you can use <a href="http://plugins.drone.io/drone-plugins/drone-docker/">docker plugin</a> to push it to. Otherwise, you can build and make it avaiable to the host by something like this:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>build-docker<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>quantonganh/docker:19.03.3-rc1-armv7<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">commands</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- docker build -t quantonganh/blog:${DRONE_SOURCE_BRANCH} .<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>docker<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#0550ae">path</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>/var/run/docker.sock<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  - <span style="color:#e8bf6a">name</span>: build-docker
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">image</span>: quantonganh/docker:19.03.3-rc1-armv7
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">commands</span>:
+</span></span><span style="display:flex;"><span>      - docker build -t quantonganh/blog:${DRONE_SOURCE_BRANCH} .
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e8bf6a">name</span>: docker
+</span></span><span style="display:flex;"><span>        <span style="color:#e8bf6a">path</span>: /var/run/docker.sock
+</span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
-        <i class="bi bi-tag"></i>
-        golang
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+    <i class="bi bi-tag"></i>
+    golang
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2019/10/11/how-do-I-build-this-blog"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2019/10/11/how-do-I-build-this-blog"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -467,6 +472,20 @@ Looking around and I found:</p>
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 

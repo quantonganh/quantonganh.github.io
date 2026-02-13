@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How to perform integration testing in Go?</title>
   <meta name="description"
-    content="">
+    content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -81,6 +81,11 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+      </div>
     </header>
     <hr>
     
@@ -88,101 +93,101 @@
 <p class="text-secondary">2020-09-29</p>
 
 <p>
-    Categories:
-    
-    <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-    
-    <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-    
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
 </p>
 
 <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span><span style="color:#0550ae">steps</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>trigger<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plugins/downstream:linux-amd64<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">settings</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">params</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">repositories</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- repo/integration-test@${DRONE_COMMIT_BRANCH}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">server</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>https://drone.example.com<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">token</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">from_secret</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>drone_token<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">steps</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: trigger
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: plugins/downstream:linux-amd64
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">settings</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">params</span>:
+</span></span><span style="display:flex;"><span>    - COMMIT_BRANCH=${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">repositories</span>:
+</span></span><span style="display:flex;"><span>    - repo/integration-test@${DRONE_COMMIT_BRANCH}
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">server</span>: https://drone.example.com
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">token</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">from_secret</span>: drone_token
+</span></span></code></pre>
 <p>It can be separated with unit tests by using <a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">build tags</a>:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>// +build integration
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>// +build integration
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>package webserver_test
 </span></span></code></pre>
 <p>Then we can write code to perform integration test as usual.</p>
 
 <p>In the integration-test, clone the upstream repo:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>clone-upstream<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>alpine/git:v2.24.3<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">commands</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- git clone -b $${COMMIT_BRANCH:-main} https://github.com/owner/upstream.git /upstream<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>upstream<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">path</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>/upstream<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: clone-upstream
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: alpine/git:v2.24.3
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">commands</span>:
+</span></span><span style="display:flex;"><span>  - git clone -b $${COMMIT_BRANCH:-main} https://github.com/owner/upstream.git /upstream
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e8bf6a">name</span>: upstream
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">path</span>: /upstream
+</span></span></code></pre>
 <p>and run integration tests:</p>
-<pre style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>test-something<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">image</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>golang:1.14.7<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">commands</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- cd /path/to/webserver<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- go test -tags integration -v -run TestSomething<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">volumes</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>upstream<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0550ae">path</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>/upstream<span style="color:#fff">
-</span></span></span></code></pre>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: test-something
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: golang:1.14.7
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">commands</span>:
+</span></span><span style="display:flex;"><span>  - cd /path/to/webserver
+</span></span><span style="display:flex;"><span>  - go test -tags integration -v -run TestSomething
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e8bf6a">name</span>: upstream
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">path</span>: /upstream
+</span></span></code></pre>
 
 <p>
-    Tags:
-    
-    <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
-        <i class="bi bi-tag"></i>
-        golang
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/drone" role="button">
-        <i class="bi bi-tag"></i>
-        drone
-    </a>
-    
-    <a class="btn btn-outline-secondary" href="/tags/integration-test" role="button">
-        <i class="bi bi-tag"></i>
-        integration-test
-    </a>
-    
+  Tags:
+  
+  <a class="btn btn-outline-secondary" href="/tags/golang" role="button">
+    <i class="bi bi-tag"></i>
+    golang
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/drone" role="button">
+    <i class="bi bi-tag"></i>
+    drone
+  </a>
+  
+  <a class="btn btn-outline-secondary" href="/tags/integration-test" role="button">
+    <i class="bi bi-tag"></i>
+    integration-test
+  </a>
+  
 </p>
 
 <div class="d-flex flex-row-reverse">
-    <a class="btn btn-outline-info" href="https://github.com/quantonganh/blog/edit/master//posts/2020/09/29/integration-test-golang"
-        title="Edit this page on GitHub" target="_blank" rel="noopener">
-        <i class="bi bi-pencil"></i>
-        Edit on GitHub
-    </a>
+  <a class="btn btn-outline-info" href="https://github.com/quantonganh/ssgo/edit/master//posts/2020/09/29/integration-test-golang"
+    title="Edit this page on GitHub" target="_blank" rel="noopener">
+    <i class="bi bi-pencil"></i>
+    Edit on GitHub
+  </a>
 </div>
 <hr />
 
 <table>
-    <tr>
-        
-        <td>
-            <div class="d-md-flex">
-                <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
-                    <span aria-hidden="true">&laquo;</span>
-                    Previous
-                </a>
-            </div>
-        </td>
-        
-        
-    </tr>
+  <tr>
+    
+    <td>
+      <div class="d-md-flex">
+        <a class="page-link" href="/posts/2025/08/14/jdtls-wrapper">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+        </a>
+      </div>
+    </td>
+    
+    
+  </tr>
 </table>
 <script src="https://utteranc.es/client.js" repo="quantonganh/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
+  crossorigin="anonymous" async>
+  </script>
 
     
     
@@ -220,6 +225,20 @@
         </li>
       </ul>
     </div>
+    <form class="needs-validation ml-auto pb-3 d-flex justify-content-center" method="post" action="/subscriptions"
+      novalidate>
+      <div class="form-row">
+        <div class="col-auto">
+          <input type="text" class="form-control mr-sm-2" id="email82244417f9" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email82244417f9" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <input type="email" class="ohnohoney" autocomplete="off" id="email" placeholder="Enter your email"
+            aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </form>
   </footer>
 </body>
 
