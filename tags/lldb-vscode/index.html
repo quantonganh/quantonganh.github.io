@@ -103,7 +103,7 @@ I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">co
 <li>The Helix theme breaks when listing variables</li>
 </ul>
 
-<p><img src="codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
+<p><img src="/posts/2023/08/11/debug-rust-helix-2/codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
 
 <p>In my quest for an improved debugging experience, I found <a href="https://github.com/rust-lang/rust/blob/master/src/etc/rust-lldb">rust-lldb</a>,
 which impressively manages to display the contents of string variables:</p>
@@ -120,7 +120,7 @@ which impressively manages to display the contents of string variables:</p>
 <p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
 However, there is an issue where <a href="https://github.com/helix-editor/helix/issues/7007">string variables are displayed as memory addresses</a> instead of their actual values:</p>
 
-<p><img src="lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
+<p><img src="/posts/2023/08/10/debug-rust-helix/lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
 
 <p>Noticing that <a href="https://github.com/vadimcn/codelldb/blob/master/MANUAL.md#rust-language-support">CodeLLDB natively supports visualization of most common Rust data types</a>,
 I would like to give it a try.</p>

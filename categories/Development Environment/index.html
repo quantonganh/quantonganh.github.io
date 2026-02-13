@@ -106,7 +106,7 @@ Today I would like to show you how I use Helix as my Golang IDE.</p>
 
 <h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
 <p class="text-secondary">2023-08-19</p>
-<p><img src="hx-ide.gif" alt="Helix as IDE" /></p>
+<p><img src="/posts/2023/08/19/turn-helix-into-ide/hx-ide.gif" alt="Helix as IDE" /></p>
 
 <p>This post recaps previous series of posts about Helix.</p>
 
@@ -149,7 +149,7 @@ I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">co
 <li>The Helix theme breaks when listing variables</li>
 </ul>
 
-<p><img src="codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
+<p><img src="/posts/2023/08/11/debug-rust-helix-2/codelldb-breaks-helix-theme.png" alt="codelldb breaks helix theme" /></p>
 
 <p>In my quest for an improved debugging experience, I found <a href="https://github.com/rust-lang/rust/blob/master/src/etc/rust-lldb">rust-lldb</a>,
 which impressively manages to display the contents of string variables:</p>
@@ -166,7 +166,7 @@ which impressively manages to display the contents of string variables:</p>
 <p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
 However, there is an issue where <a href="https://github.com/helix-editor/helix/issues/7007">string variables are displayed as memory addresses</a> instead of their actual values:</p>
 
-<p><img src="lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
+<p><img src="/posts/2023/08/10/debug-rust-helix/lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
 
 <p>Noticing that <a href="https://github.com/vadimcn/codelldb/blob/master/MANUAL.md#rust-language-support">CodeLLDB natively supports visualization of most common Rust data types</a>,
 I would like to give it a try.</p>
@@ -195,11 +195,11 @@ I would like to give it a try.</p>
 <p class="text-secondary">2023-08-09</p>
 <p>When attempting to <a href="/2023/08/02/file-tree-workaround-for-helix.md">integrate <code>nnn</code> with Helix</a>, I encountered <a href="https://github.com/jarun/nnn/issues/1692">an interesting issue</a> that resulted in duplicate first characters in the filename:</p>
 
-<p><img src="nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
+<p><img src="/posts/2023/08/09/nnn-wcswith-different-macos-linux/nnn-duplicate-first-char-macOS.png" alt="nnn duplicate first character in the filename on macOS" /></p>
 
 <p>What&rsquo;s interesting is that this issue doesn&rsquo;t occur on Linux:</p>
 
-<p><img src="nnn-linux.png" alt="nnn on Linux" /></p>
+<p><img src="/posts/2023/08/09/nnn-wcswith-different-macos-linux/nnn-linux.png" alt="nnn on Linux" /></p>
 
 <p>I&rsquo;ve spent several days troubleshooting this problem but haven&rsquo;t been able to identify the root cause.
 The only solution I could come up with is <a href="https://github.com/jarun/nnn/pull/1711">a workaround</a>, and I must admit, I&rsquo;m still not entirely satisfied with it.</p>
@@ -229,26 +229,6 @@ Let&rsquo;s say we have the following warning:</p>
 
 <hr>
 
-<h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
-<p class="text-secondary">2023-08-02</p>
-<p><img src="nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
-
-<p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
-
-<p>If, for some reasons, you cannot use <a href="https://github.com/helix-editor/helix/pull/5768">the PR #5768</a>,
-here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://github.com/jarun/nnn">nnn</a></p>
-
-<p>The idea here is to implement <a href="https://github.com/jarun/nnn/wiki/Advanced-use-cases#cli-only-opener">a custom opener</a> in <code>nnn.</code>
-When navigating to a file, it will be opened using <code>hx</code> in the right pane.
-When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
-
-
-<p class="text-right">
-  <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
-</p>
-
-<hr>
-
 <h3><a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Open same file in already running instance of Helix</a></h3>
 <p class="text-secondary">2023-08-02</p>
 <p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
@@ -262,6 +242,26 @@ The worst case is when I accidentally switch back to an instance that has an old
 
 <p class="text-right">
   <a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
+<p class="text-secondary">2023-08-02</p>
+<p><img src="/posts/2023/08/02/file-tree-workaround-for-helix/nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
+
+<p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
+
+<p>If, for some reasons, you cannot use <a href="https://github.com/helix-editor/helix/pull/5768">the PR #5768</a>,
+here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://github.com/jarun/nnn">nnn</a></p>
+
+<p>The idea here is to implement <a href="https://github.com/jarun/nnn/wiki/Advanced-use-cases#cli-only-opener">a custom opener</a> in <code>nnn.</code>
+When navigating to a file, it will be opened using <code>hx</code> in the right pane.
+When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
+
+
+<p class="text-right">
+  <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
 </p>
 
 <hr>

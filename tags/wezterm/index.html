@@ -106,7 +106,7 @@ Today I would like to show you how I use Helix as my Golang IDE.</p>
 
 <h3><a href="/posts/2023/08/19/turn-helix-into-ide">Turning Helix into an IDE with the help of WezTerm and CLI tools</a></h3>
 <p class="text-secondary">2023-08-19</p>
-<p><img src="hx-ide.gif" alt="Helix as IDE" /></p>
+<p><img src="/posts/2023/08/19/turn-helix-into-ide/hx-ide.gif" alt="Helix as IDE" /></p>
 
 <p>This post recaps previous series of posts about Helix.</p>
 
@@ -154,26 +154,6 @@ Let&rsquo;s say we have the following warning:</p>
 
 <hr>
 
-<h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
-<p class="text-secondary">2023-08-02</p>
-<p><img src="nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
-
-<p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
-
-<p>If, for some reasons, you cannot use <a href="https://github.com/helix-editor/helix/pull/5768">the PR #5768</a>,
-here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://github.com/jarun/nnn">nnn</a></p>
-
-<p>The idea here is to implement <a href="https://github.com/jarun/nnn/wiki/Advanced-use-cases#cli-only-opener">a custom opener</a> in <code>nnn.</code>
-When navigating to a file, it will be opened using <code>hx</code> in the right pane.
-When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
-
-
-<p class="text-right">
-  <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
-</p>
-
-<hr>
-
 <h3><a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Open same file in already running instance of Helix</a></h3>
 <p class="text-secondary">2023-08-02</p>
 <p>Recently, I came across <a href="https://github.com/helix-editor/helix/issues/2177#issuecomment-1278123316">this issue</a>:</p>
@@ -187,6 +167,26 @@ The worst case is when I accidentally switch back to an instance that has an old
 
 <p class="text-right">
   <a href="/posts/2023/08/02/open-same-file-in-already-running-helix">Read More...</a>
+</p>
+
+<hr>
+
+<h3><a href="/posts/2023/08/02/file-tree-workaround-for-helix">File tree workaround for Helix</a></h3>
+<p class="text-secondary">2023-08-02</p>
+<p><img src="/posts/2023/08/02/file-tree-workaround-for-helix/nnn-hx.jpeg" alt="nnn as a file tree workaround for Helix" /></p>
+
+<p>Many people have expressed that the absence of a file tree is what prevents them from using Helix.</p>
+
+<p>If, for some reasons, you cannot use <a href="https://github.com/helix-editor/helix/pull/5768">the PR #5768</a>,
+here&rsquo;s a workaround to create a file tree using <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://github.com/jarun/nnn">nnn</a></p>
+
+<p>The idea here is to implement <a href="https://github.com/jarun/nnn/wiki/Advanced-use-cases#cli-only-opener">a custom opener</a> in <code>nnn.</code>
+When navigating to a file, it will be opened using <code>hx</code> in the right pane.
+When opening another file, it checks if there is a running instance of <code>hx</code> in the right pane and <a href="https://wezfurlong.org/wezterm/cli/cli/send-text.html">sends</a> the <code>:open $1\r</code> command to that pane.</p>
+
+
+<p class="text-right">
+  <a href="/posts/2023/08/02/file-tree-workaround-for-helix">Read More...</a>
 </p>
 
 <hr>
