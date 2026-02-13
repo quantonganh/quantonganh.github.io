@@ -79,29 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>How to show all HTTP2 headers using tshark?</h3>
-<p class="text-secondary">2020-05-05</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-  <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
-  
-</p>
-
-<p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
+<article data-pagefind-body>
+  <h3>How to show all HTTP2 headers using tshark?</h3>
+  <p class="text-secondary">2020-05-05</p>
+  <p>After sniffing with tcpdump, how can I show all HTTP2 header using tshark?</p>
 
 <p>First, find the frame number based on method:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>$ tshark -r grpc.pcapng -Y &#39;http2.headers.path contains &#34;getBook&#34;&#39;
@@ -196,6 +187,19 @@
 </span></span><span style="display:flex;"><span>            Representation: Literal Header Field with Incremental Indexing - New Name
 </span></span></code></pre>
 <p>Notice that, in gRPC, all requests are HTTP POST with content-type is <code>application/grpc</code>.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+  <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
+  
+</p>
+
 
 
 <p>

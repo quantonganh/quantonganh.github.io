@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>How to disable ligatures in WezTerm?</h3>
-<p class="text-secondary">2023-08-01</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
-  
-</p>
-
-<p>As you may know, I switched to <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a> a few months ago.</p>
+<article data-pagefind-body>
+  <h3>How to disable ligatures in WezTerm?</h3>
+  <p class="text-secondary">2023-08-01</p>
+  <p>As you may know, I switched to <a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a> and <a href="https://helix-editor.com/">Helix</a> a few months ago.</p>
 
 <p>What surprised me is when I type <code>!=</code> in Helix, it is rendered as <code>≠</code>.
 This behaviour also occurs with other character combinations, for example:</p>
@@ -121,6 +114,17 @@ I do not like this feature because I want everything I type to be rendered exact
 <p>To disable ligatures, add the following line to the <code>~/.wezterm.lua</code>:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>config.harfbuzz_features = { <span style="color:#6a8759">&#39;</span><span style="color:#6a8759">calt=0</span><span style="color:#6a8759">&#39;</span> }
 </span></span></code></pre>
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+  
+</p>
+
+
 
 <p>
   Tags:

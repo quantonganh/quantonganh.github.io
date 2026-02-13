@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Troubleshooting slow network file transfer</h3>
-<p class="text-secondary">2021-06-25</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
-  
-</p>
-
-<p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
+<article data-pagefind-body>
+  <h3>Troubleshooting slow network file transfer</h3>
+  <p class="text-secondary">2021-06-25</p>
+  <p>We have a <a href="https://hadoop.apache.org/">Hadoop</a> data cluster. Recently, my colleague noticed that data transfer between servers was slow. Not all are slow; only half of them have problems.</p>
 
 <p>The first tool that comes to mind is <a href="https://github.com/esnet/iperf">iperf3</a>. After installing, I run <code>iperf3 -s</code> then <code>iperf3 -c</code>. While other servers have bandwidth &gt; 900 Mbits/sec, the slow ones are just:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
@@ -150,6 +143,17 @@
 </span></span><span style="display:flex;"><span>        Port-ID (0x03), value length: <span style="color:#6897bb">15</span> bytes: <span style="color:#6a8759">&#39;FastEthernet0/5&#39;</span>
 </span></span></code></pre>
 <p>Do you see the difference?</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Networking" role="button">Networking</a>
+  
+</p>
+
 
 
 <p>

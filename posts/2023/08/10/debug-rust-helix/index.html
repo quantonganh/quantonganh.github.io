@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>How to debug Rust in Helix?</h3>
-<p class="text-secondary">2023-08-10</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
-  
-</p>
-
-<p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
+<article data-pagefind-body>
+  <h3>How to debug Rust in Helix?</h3>
+  <p class="text-secondary">2023-08-10</p>
+  <p>Helix supports debugging Rust by default using <a href="https://github.com/llvm/llvm-project/tree/main/lldb/tools/lldb-vscode">lldb-vscode</a>.
 However, there is an issue where <a href="https://github.com/helix-editor/helix/issues/7007">string variables are displayed as memory addresses</a> instead of their actual values:</p>
 
 <p><img src="lldb-vscode-string-variables-memory-addresses.png" alt="lldb-vscode - string variables memory addresses" /></p>
@@ -188,6 +181,17 @@ I would like to give it a try.</p>
 <p>After a few seconds, you&rsquo;ll see the actual value of string variables:</p>
 
 <p><img src="codelldb-string-variables-values.png" alt="codelldb - string variables values" /></p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+  
+</p>
+
 
 
 <p>

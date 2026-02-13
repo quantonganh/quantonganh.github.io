@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>database/sql: never ignore errors</h3>
-<p class="text-secondary">2019-10-16</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-  
-</p>
-
-<p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
+<article data-pagefind-body>
+  <h3>database/sql: never ignore errors</h3>
+  <p class="text-secondary">2019-10-16</p>
+  <p>I&rsquo;m reading <a href="https://www.amazon.com/Building-RESTful-Web-services-gracefully-ebook/dp/B072QB8KL10">Building RESTful Web Services with Go</a>. And in chapter 4, there is <a href="https://github.com/narenaryan/gorestful/blob/master/chapter4/sqliteFundamentals.go">an example</a> to play around with SQLite:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>db, err := sql.<span style="color:#ffc66d">Open</span>(<span style="color:#6a8759">&#34;sqlite3&#34;</span>, <span style="color:#6a8759">&#34;./books.db&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#cc7832">if</span> err != <span style="color:#cc7832">nil</span> {
 </span></span><span style="display:flex;"><span>	log.<span style="color:#ffc66d">Fatal</span>(err)
@@ -161,6 +154,17 @@
 </span></span><span style="display:flex;"><span>2019/10/16 10:11:12 Inserted first book into db
 </span></span><span style="display:flex;"><span>2019/10/16 10:11:12 sql: Scan error on column index 0, name &#34;id&#34;: converting NULL to int is unsupported
 </span></span></code></pre>
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
+</p>
+
+
 
 <p>
   Tags:

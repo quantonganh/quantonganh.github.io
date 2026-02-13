@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Docker rootless keeps restarting?</h3>
-<p class="text-secondary">2023-07-12</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-</p>
-
-<p>As some of you may know, this blog is hosted on Raspberry Pi.
+<article data-pagefind-body>
+  <h3>Docker rootless keeps restarting?</h3>
+  <p class="text-secondary">2023-07-12</p>
+  <p>As some of you may know, this blog is hosted on Raspberry Pi.
 To monitor its status, I wrote a script, which you can find <a href="https://github.com/quantonganh/blog/blob/master/scripts/monitor.sh">here</a>.</p>
 
 <p>Recently, I decided to switch the Docker daemon to run in <a href="https://docs.docker.com/engine/security/rootless/">rootless mode</a>.
@@ -158,6 +151,17 @@ Therefore, I enabled lingering for my user:</p>
 </span></span><span style="display:flex;"><span>          Linger: yes
 </span></span></code></pre>
 <p>Enabling lingering ensured that the Docker service would continue running even after my SSH session was closed.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+</p>
+
 
 
 <p>

@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>How to run a pipeline step only when pushing to a new branch?</h3>
-<p class="text-secondary">2021-01-07</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-</p>
-
-<p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
+<article data-pagefind-body>
+  <h3>How to run a pipeline step only when pushing to a new branch?</h3>
+  <p class="text-secondary">2021-01-07</p>
+  <p>GitHub sends push hook when pushing to a new branch and merging a PR. How can we distinguish between them?</p>
 
 <p>We are running <a href="/2020/09/29/integration-test-golang">integration test</a> by triggering a downstream build when a PR is merged into specific branches.
 In the downstream repository, we pull all the docker images which has been built and pushed from upstream.
@@ -141,6 +134,17 @@ Turn out that there is <a href="https://github.com/drone/go-scm/pull/92#issuecom
 </span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">event</span>:
 </span></span><span style="display:flex;"><span>    - push
 </span></span></code></pre>
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+</p>
+
+
 
 <p>
   Tags:

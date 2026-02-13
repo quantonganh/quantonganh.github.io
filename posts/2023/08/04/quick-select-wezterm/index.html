@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>WezTerm: quickly select a command and open it in a new pane</h3>
-<p class="text-secondary">2023-08-04</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
-  
-</p>
-
-<p>In my previous post, <a href="../../07/21/jump-to-build-error-helix">jump to build errors with WezTerm</a>, I demostrated how to navigate to build error using <a href="https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks">hyperlinks</a>.
+<article data-pagefind-body>
+  <h3>WezTerm: quickly select a command and open it in a new pane</h3>
+  <p class="text-secondary">2023-08-04</p>
+  <p>In my previous post, <a href="../../07/21/jump-to-build-error-helix">jump to build errors with WezTerm</a>, I demostrated how to navigate to build error using <a href="https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks">hyperlinks</a>.
 One limitation of that approach is that it requires a mouse click.</p>
 
 <p>In this post, I explore how to achieve the same functionality using a shortcut key in WezTerm,
@@ -192,6 +185,17 @@ therefore, I need to run it as a sub-command using <code>sh -c</code>, like this
 </span></span></code></pre>
 <p>With this setup, whenever I want to explore an error further, I can quickly select the <code>rustc --explain Exxxx</code> command
 and spawn it in a newly created pane or tab.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+  
+</p>
+
 
 
 <p>

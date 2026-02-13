@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Debug Rust in Helix using lldb-vscode: display the contents of local string variables</h3>
-<p class="text-secondary">2023-08-11</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
-  
-</p>
-
-<p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
+<article data-pagefind-body>
+  <h3>Debug Rust in Helix using lldb-vscode: display the contents of local string variables</h3>
+  <p class="text-secondary">2023-08-11</p>
+  <p>In a previous post titled <a href="../10/debug-rust-helix">debugging Rust in Helix</a>,
 I introduced a workaround using <a href="https://github.com/vadimcn/codelldb">codelldb</a> to address the <a href="https://github.com/helix-editor/helix/issues/7007">visualization issue related to string variables</a> within <code>lldb-vscode</code>.</p>
 
 <p>However, the usage of <code>codelldb</code> presents some challenges:</p>
@@ -169,6 +162,17 @@ which impressively manages to display the contents of string variables:</p>
 </ul>
 
 <p><img src="lldb-vscode-string-variables-contents.png" alt="lldb-vscode displays contents of string variables" /></p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Development%20Environment" role="button">Development Environment</a>
+  
+</p>
+
 
 
 <p>

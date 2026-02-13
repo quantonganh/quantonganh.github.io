@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Do not use jq when working with large number</h3>
-<p class="text-secondary">2021-09-07</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-  
-</p>
-
-<p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
+<article data-pagefind-body>
+  <h3>Do not use jq when working with large number</h3>
+  <p class="text-secondary">2021-09-07</p>
+  <p>We use <a href="https://etcd.io/">etcd</a> to store application configuration.
 On production, config is loaded from json file by using <a href="https://pypi.org/project/etcd3/">Python</a>.</p>
 
 <p>I&rsquo;m wondering if we can use <a href="https://github.com/stedolan/jq">jq</a> to do that. So, I tried something like this:</p>
@@ -122,6 +115,17 @@ What is going on?</p>
 </span></span><span style="display:flex;"><span><span style="color:#6897bb">9007199254740991</span>
 </span></span></code></pre>
 <p>Please take a look at <a href="https://github.com/stedolan/jq/wiki/FAQ#numbers">FAQ</a> for more details.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
+</p>
+
 
 
 <p>

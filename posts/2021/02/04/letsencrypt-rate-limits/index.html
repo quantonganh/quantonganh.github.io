@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Let&#39;s Encrypt too many certificates already issued</h3>
-<p class="text-secondary">2021-02-04</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-</p>
-
-<p>Traefik is configured to use Let&rsquo;s Encrypt to generate certificate for my blog (and other services) automatically. One day after restarting, I cannot access to my blog via HTTPS anymore (NET::ERR_CERT_AUTHORITY_INVALID). Why?</p>
+<article data-pagefind-body>
+  <h3>Let&#39;s Encrypt too many certificates already issued</h3>
+  <p class="text-secondary">2021-02-04</p>
+  <p>Traefik is configured to use Let&rsquo;s Encrypt to generate certificate for my blog (and other services) automatically. One day after restarting, I cannot access to my blog via HTTPS anymore (NET::ERR_CERT_AUTHORITY_INVALID). Why?</p>
 
 <p>By looking at the Traefik logs, I found this:</p>
 
@@ -123,6 +116,17 @@ So, it will reissue certificates every time on a restart. That&rsquo;s the reaso
 </span></span><span style="display:flex;"><span>  - traefik.http.routers.blog-secured.tls.domains[0].sans=*.${BLOG_DOMAIN}
 </span></span></code></pre>
 <p>As the docs mentioned, there is no way to reset this limit. Now I have to wait until it expires after a week :D.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+</p>
+
 
 
 <p>

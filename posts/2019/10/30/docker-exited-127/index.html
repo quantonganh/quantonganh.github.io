@@ -79,27 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>Why my golang docker container exits immediately (code 127)?</h3>
-<p class="text-secondary">2019-10-30</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-</p>
-
-<p>To trim the binary size, I used <code>LDFLAGS='-w -s'</code>, pack with <code>upx</code>, then build from scratch. The thing is when starting, it exited immediately with code 127. Why?</p>
+<article data-pagefind-body>
+  <h3>Why my golang docker container exits immediately (code 127)?</h3>
+  <p class="text-secondary">2019-10-30</p>
+  <p>To trim the binary size, I used <code>LDFLAGS='-w -s'</code>, pack with <code>upx</code>, then build from scratch. The thing is when starting, it exited immediately with code 127. Why?</p>
 
 <p>My Dockerfile:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>FROM scratch
@@ -145,6 +138,17 @@
 </span></span><span style="display:flex;"><span>	libc.so.6 =&gt; /lib64/ld-linux-x86-64.so.2 (0x7f1f8b561000)
 </span></span></code></pre>
 <p>These does not exist, so the container exited with code 127 immediately.</p>
+
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+</p>
+
 
 
 <p>

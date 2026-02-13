@@ -79,29 +79,20 @@
           <li>
             <a href="/tags">Tags</a>
           </li>
+          <li>
+            <a href="/search">
+              <i class="bi bi-search"></i> Search
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-        </form>
       </div>
     </header>
     <hr>
     
-<h3>How to perform integration testing in Go?</h3>
-<p class="text-secondary">2020-09-29</p>
-
-<p>
-  Categories:
-  
-  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
-  
-  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
-  
-</p>
-
-<p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
+<article data-pagefind-body>
+  <h3>How to perform integration testing in Go?</h3>
+  <p class="text-secondary">2020-09-29</p>
+  <p>Integration testing can be triggered by using Drone <a href="http://plugins.drone.io/drone-plugins/drone-downstream/">downstream</a> plugin:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">steps</span>:
 </span></span><span style="display:flex;"><span>- <span style="color:#e8bf6a">name</span>: trigger
 </span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">image</span>: plugins/downstream:linux-amd64
@@ -140,6 +131,19 @@
 </span></span><span style="display:flex;"><span>  - <span style="color:#e8bf6a">name</span>: upstream
 </span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">path</span>: /upstream
 </span></span></code></pre>
+</article>
+
+
+<p>
+  Categories:
+  
+  <a class="btn btn-outline-primary" href="/categories/DevOps" role="button">DevOps</a>
+  
+  <a class="btn btn-outline-primary" href="/categories/Programming" role="button">Programming</a>
+  
+</p>
+
+
 
 <p>
   Tags:
