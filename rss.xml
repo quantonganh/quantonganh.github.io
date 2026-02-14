@@ -22,7 +22,7 @@
       <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>Helix as my Golang IDE: powering up with WezTerm and CLI tools</title>
+      <title>My Golang IDE: WezTerm, Helix, and CLI Tools</title>
       <link>http://localhost/posts/2024/10/10/helix-golang-ide</link>
       <description></description>
       <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
@@ -286,14 +286,14 @@
       <pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>URI network-path reference</title>
-      <link>http://localhost/posts/2021/09/23/uri-network-path-reference</link>
+      <title>Side Projects</title>
+      <link>http://localhost/projects</link>
       <description></description>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>Side Projects</title>
-      <link>http://localhost/projects</link>
+      <title>URI network-path reference</title>
+      <link>http://localhost/posts/2021/09/23/uri-network-path-reference</link>
       <description></description>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
     </item>

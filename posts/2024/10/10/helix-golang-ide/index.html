@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Helix as my Golang IDE: powering up with WezTerm and CLI tools</title>
+  <title>My Golang IDE: WezTerm, Helix, and CLI Tools</title>
   <meta name="description"
     content="DevOps - Programming - Travel - Photography">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -90,46 +90,112 @@
     <hr>
     
 <article data-pagefind-body>
-  <h3>Helix as my Golang IDE: powering up with WezTerm and CLI tools</h3>
+  <h3>My Golang IDE: WezTerm, Helix, and CLI Tools</h3>
   <p class="text-secondary">2024-10-10</p>
-  <p>It&rsquo;s has been one year from my last post.
-Today I would like to show you how I use Helix as my Golang IDE.</p>
+  <p>It&rsquo;s has been one year from my <a href="/2023/08/19/turn-helix-into-ide/">last post</a>.
+Today I would like to show how I use Helix as my Golang IDE, powered by <a href="https://wezterm.org/index.html">WezTerm</a> and collection of CLI tools.</p>
 
-<p>Regarding the file explorer workaround in the last post, I show you how to use <code>nnn</code> or <code>broot</code> to open a file tree in the sidebar but actually I&rsquo;m using the PR <a href="https://github.com/helix-editor/helix/pull/5768">#5768</a>. The reason is I would like to have a bottom pane for the terminal, and there is no way to just hide it and keep the sidebar (file explorer) and the main pane (helix).</p>
+<h4>Open Project</h4>
 
-<p>Originated from the <a href="https://github.com/quantonganh/helix-wezterm/issues/9">markstos&rsquo;s ideas</a>, I&rsquo;ve updated my <code>helix-wezterm.sh</code> to make it configurable. You can see the whole script [here]().</p>
+<p>I created a simple fish function to pipe all directories in a specific folder into <code>fzf</code>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">function</span> <span style="color:#ffc66d">fo</span> <span style="color:#9876aa">--description</span> <span style="color:#6a8759">&#39;Fuzzy open directory in Helix&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> <span style="color:#cc7832">set</span> <span style="color:#9876aa">-q</span> argv[<span style="color:#6897bb">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#cc7832">set</span> searchdir $argv[<span style="color:#6897bb">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cc7832">set</span> searchdir $HOME
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">set</span> <span style="color:#9876aa">-l</span> dir (<span style="color:#ffc66d">fd</span> <span style="color:#9876aa">--type</span> d . $searchdir | <span style="color:#ffc66d">fzf</span> <span style="color:#9876aa">--height</span>=<span style="color:#6897bb">50</span>% <span style="color:#9876aa">--preview</span> <span style="color:#6a8759">&#39;eza --tree --level=3 --color=always --icons=always {}&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> <span style="color:#cc7832">test</span> <span style="color:#9876aa">-z</span> <span style="color:#6a8759">&#34;</span>$dir<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span>        commandline <span style="color:#9876aa">-f</span> repaint
+</span></span><span style="display:flex;"><span>        <span style="color:#cc7832">return</span> <span style="color:#6897bb">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">cd</span> <span style="color:#6a8759">&#34;</span>$dir<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span>    $EDITOR .
+</span></span><span style="display:flex;"><span><span style="color:#cc7832">end</span>
+</span></span></code></pre>
+<p>then I bind it to a key in WezTerm:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">local</span> my_keys = {
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		key = <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">o</span><span style="color:#6a8759">&#34;</span>,
+</span></span><span style="display:flex;"><span>		mods = <span style="color:#6a8759">&#34;</span><span style="color:#6a8759">CMD</span><span style="color:#6a8759">&#34;</span>,
+</span></span><span style="display:flex;"><span>		action = act.SpawnCommandInNewTab({
+</span></span><span style="display:flex;"><span>			args = {
+</span></span><span style="display:flex;"><span>				<span style="color:#6a8759">&#34;</span><span style="color:#6a8759">fish</span><span style="color:#6a8759">&#34;</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#6a8759">&#34;</span><span style="color:#6a8759">-c</span><span style="color:#6a8759">&#34;</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#6a8759">&#34;</span><span style="color:#6a8759">fo ~/Code</span><span style="color:#6a8759">&#34;</span>,
+</span></span><span style="display:flex;"><span>			},
+</span></span><span style="display:flex;"><span>		}),
+</span></span><span style="display:flex;"><span>	},
+</span></span></code></pre>
+<p>This allows me to jump into any project directory and open it in Helix almost instantly.</p>
 
-<ol>
-<li>File explorer</li>
-</ol>
+<h4>File explorer</h4>
+
+<p>Updated: Although <a href="https://github.com/helix-editor/helix/pull/11285">file explorer has already been merged</a>, I still prefer <a href="https://github.com/sxyazi/yazi/pull/2461">using Yazi</a> due to its Vim-style keybindings and full file operation (create, rename, move, delete, etc.):</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[keys.normal.<span style="color:#6a8759">&#34;;&#34;</span>]
+</span></span><span style="display:flex;"><span>e = [
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:sh rm -f /tmp/unique-file&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:insert-output echo &#34;\x1b[?1049h\x1b[?2004h&#34; &gt; /dev/tty&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:open %sh{cat /tmp/unique-file}&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:redraw&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>E = [
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:sh rm -f /tmp/unique-file&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:insert-output yazi --chooser-file=/tmp/unique-file&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:insert-output echo &#34;\x1b[?1049h\x1b[?2004h&#34; &gt; /dev/tty&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:open %sh{cat /tmp/unique-file}&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6a8759">&#39;:redraw&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre>
+<hr />
+
+<p>In my previous post, I showed how to use <code>nnn</code> or <code>broot</code> to open a file tree in the sidebar. However, in practice, I now rely on <a href="https://github.com/helix-editor/helix/pull/5768">an earlier PR</a> that led me keep:</p>
+
+<ul>
+<li>the main editor pan</li>
+<li>a bottom terminal</li>
+</ul>
+
+<p>One I familiar with the codebase, I found myself using the file explorer far less. Still, having it available is useful, and as a bonus, it centers the editor instead of pushing code to the left.</p>
 
 <p>To be hornest, once I familiar myself with the codebase, I don&rsquo;t use the file explorer too much.
 However, as a side effect, the file explorer in the sidebar move my code to the center view instead of the left side.</p>
 
-<p>I like the <a href="https://zellij.dev/news/floating-panes-tmux-mode/">floating pane</a> feature from Zellij a lot.
-Actually I attempted to implement a file explorer using this feature.
-However, due to the key binding and one more nested layer, I decided using WezTerm from the beginning.</p>
+<h5>Floating File Explorer</h5>
 
-<p>With a <a href="https://github.com/wez/wezterm/pull/5576">PR</a> recently to create a floating pane in WezTerm, I want to give it a try. Here&rsquo;s my config:</p>
+<p>I really like the <a href="https://zellij.dev/news/floating-panes-tmux-mode/">floating pane</a> feature from Zellij, and initially tried to  implement a file explorer using that approach. However, the extra nesting and keybinding complexity eventually pushed me toward a WezTerm-based solution.</p>
+
+<p>With a recent <a href="https://github.com/wez/wezterm/pull/5576">PR</a> adding floating pane, I decided to give it another try:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">explorer</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">position</span>: floating
 </span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">command</span>: HX_PANE_ID=$WEZTERM_PANE YAZI_CONFIG_HOME=~/.config/yazi/filetree yazi
 </span></span></code></pre>
-<p>Basically, with version 2 of my <code>helix-wezterm.sh</code> script, you can just define and action, the position (left, bottom, floating, &hellip;) and the command to run.
-I &ldquo;steal&rdquo; the idea to setup file tree using <code>yazi</code> from <a href="https://www.reddit.com/r/HelixEditor/comments/1bgsauh/instruction_how_to_setup_file_tree_in_helix_using/">here</a>.</p>
+<p>With version 2 of my <code>helix-wezterm.sh</code> script, you can now define:</p>
 
-<p>My Helix config:</p>
+<ul>
+<li>an action name</li>
+<li>pane position (left, bottom, floating, etc.)</li>
+<li>the command to execute</li>
+</ul>
+
+<p>The idea of using Yai as a file tree was inspired by <a href="https://www.reddit.com/r/HelixEditor/comments/1bgsauh/instruction_how_to_setup_file_tree_in_helix_using/">a Reddit post</a>.</p>
+
+<p>Helix keybinding:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[keys.normal.<span style="color:#6a8759">&#34;;&#34;</span>]
 </span></span><span style="display:flex;"><span>e = <span style="color:#6a8759">&#34;:sh helix-wezterm.sh explorer&#34;</span>
 </span></span></code></pre>
-<p>keymap.toml:</p>
+<p>Yazi keymap:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[[manager.prepend_keymap]]
 </span></span><span style="display:flex;"><span>on = [<span style="color:#6a8759">&#34;l&#34;</span>]
 </span></span><span style="display:flex;"><span>run = <span style="color:#6a8759">&#39;plugin --sync smart-enter&#39;</span>
 </span></span><span style="display:flex;"><span>desc = <span style="color:#6a8759">&#39;Enter the child directory, or open the file&#39;</span>
 </span></span></code></pre>
-<p><code>~/.config/yazi/filetree/plugins/smart-enter.yazi/init.lua</code>:</p>
+<p>Smart-enter plugin <code>~/.config/yazi/filetree/plugins/smart-enter.yazi/init.lua</code>:</p>
 <pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">return</span> {
 </span></span><span style="display:flex;"><span>  entry = <span style="color:#cc7832">function</span>()
 </span></span><span style="display:flex;"><span>    <span style="color:#cc7832">local</span> h = cx.active.current.hovered
@@ -152,32 +218,125 @@ I &ldquo;steal&rdquo; the idea to setup file tree using <code>yazi</code> from <
 </span></span><span style="display:flex;"><span>  <span style="color:#cc7832">end</span>,
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre>
-<p>So, <code>; - e</code> will open a file tree using <code>yazi</code> in the floating pane. Then navigating to the selected file, and press <code>l</code> will open it in the Helix pane.</p>
+<p>Pressing <code>; e</code> opens Yazi in a floating pane. Navigating to a file and pressing <code>l</code> opens it directly in Helix.</p>
+
+<h4>Converting JSON to struct</h4>
+
+<p>Using <a href="https://github.com/glideapps/quicktype">quicktype</a>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[keys.select.<span style="color:#6a8759">&#34;;&#34;</span>]
+</span></span><span style="display:flex;"><span>q = [<span style="color:#6a8759">&#34;yank_to_clipboard&#34;</span>, <span style="color:#6a8759">&#34;collapse_selection&#34;</span>, <span style="color:#6a8759">&#34;:insert-output pbpaste | quicktype -l go&#34;</span>]
+</span></span></code></pre>
+<h4>Database</h4>
 
 <ul>
-<li>WezTerm floating pane</li>
-<li>yazi</li>
-<li>debug go: restful, debug test</li>
-<li>WezTerm Input Selector</li>
-<li>mockery</li>
-<li>gotests</li>
-<li>quicktype</li>
-<li>hurl</li>
-<li>go-enum</li>
-<li>open in gitlab</li>
-<li>golangci-lint</li>
-<li>lazysql</li>
-<li>extract function</li>
-<li>gorm/gen/tools</li>
-<li>mermaid, graph-easy, slides, presenterm</li>
-<li>select json -&gt; pipe to jq</li>
-<li>slumber</li>
+<li><a href="https://github.com/jorgerojas26/lazysql">lazysql</a></li>
+<li><a href="https://www.mycli.net/">mycli</a></li>
+<li><a href="https://github.com/dbcli/pgcli">pgcli</a></li>
 </ul>
 
-<ol>
-<li></li>
-</ol>
+<h4>Linting</h4>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">extensions</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">go</span>: golangci-lint run -v $buffer_name
+</span></span></code></pre>
+<h4>Mocking</h4>
 
+<p>Extract the interface name in <code>~/.local/bin/helix-wezterm.sh</code>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$action<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>  <span style="color:#6a8759">&#34;mock&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$extension<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>      <span style="color:#6a8759">&#34;go&#34;</span>)
+</span></span><span style="display:flex;"><span>        current_line=<span style="color:#cc7832">$(</span>head -$cursor_line $buffer_name | tail -1<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>        export interface_name=<span style="color:#cc7832">$(</span>echo $current_line | sed -n <span style="color:#6a8759">&#39;s/^type \([A-Za-z0-9_]*\) interface {$/\1/p&#39;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>        ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">esac</span>
+</span></span><span style="display:flex;"><span>    ;;
+</span></span></code></pre>
+<p>Then define the mock generator:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">mock</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">description</span>: Generate mocks
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">command</span>: mockery --with-expecter --dir $basedir --name $interface_name
+</span></span></code></pre>
+<h4>Generating tests</h4>
+
+<p>You can generate Go tests using <a href="https://github.com/cweill/gotests">gotests</a>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">generate_tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">description</span>: Generate Go tests for the current file
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">command</span>: gotests -w -all $buffer_name
+</span></span></code></pre>
+<h4>Testing</h4>
+
+<p>Based on cursor position, extract the function name <code>~/.local/bin/helix-wezterm.sh</code>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$action<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>  <span style="color:#6a8759">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$extension<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>      <span style="color:#6a8759">&#34;go&#34;</span>)
+</span></span><span style="display:flex;"><span>        export test_name=<span style="color:#cc7832">$(</span>head -$cursor_line $buffer_name | tail -1 | sed -n <span style="color:#6a8759">&#39;s/func \([^(]*\).*/\1/p&#39;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>        ;;
+</span></span></code></pre>
+<p>Run the test in <code>~/.helix-wezterm.yaml</code>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">extensions</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">go</span>: go test -run=$test_name -v ./$basedir/...
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[keys.normal.<span style="color:#6a8759">&#34;;&#34;</span>]
+</span></span><span style="display:flex;"><span>t = <span style="color:#6a8759">&#34;:sh helix-wezterm.sh test %{buffer_name} %{cursor_line}&#34;</span>
+</span></span></code></pre>
+<p>This lets me run either all tests or a specific test function depending on the cursor position.</p>
+
+<h4>Integration testing with Hurl</h4>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$action<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>  <span style="color:#6a8759">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$extension<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>      <span style="color:#6a8759">&#34;hurl&#34;</span>)
+</span></span><span style="display:flex;"><span>        current_line=<span style="color:#cc7832">$(</span>head -$cursor_line $buffer_name | tail -1<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>        export entry=<span style="color:#cc7832">$(</span>awk -v cur_line=$cursor_line <span style="color:#6a8759">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">          /^(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS)/ { entry_line = NR; entry_num++ }
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">          NR == cur_line { print entry_num }
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">        &#39;</span> <span style="color:#6a8759">&#34;</span>$buffer_name<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>        ;;
+</span></span></code></pre>
+<p><code>~/.helix-wezterm.yaml</code>:</p>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>  <span style="color:#e8bf6a">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">description</span>: Test the current file
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">extensions</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">hurl</span>: &gt;<span style="color:#6a8759">
+</span></span></span><span style="display:flex;"><span><span style="color:#6a8759">        hurl --test --very-verbose --color --to-entry $entry $buffer_name</span>
+</span></span></code></pre>
+<h4>Running code</h4>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#e8bf6a">actions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e8bf6a">run</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e8bf6a">extensions</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#e8bf6a">go</span>: go run $basedir/*.go
+</span></span></code></pre><pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span>[keys.normal.<span style="color:#6a8759">&#34;;&#34;</span>]
+</span></span><span style="display:flex;"><span>r = <span style="color:#6a8759">&#34;:sh helix-wezterm.sh run %{buffer_name} %{cursor_line}&#34;</span>
+</span></span></code></pre>
+<h4>Debugging</h4>
+
+<p><a href="https://overlandandseas.dev/blog/debugging-go-delve-helix/">https://overlandandseas.dev/blog/debugging-go-delve-helix/</a></p>
+
+<h4>Opening current file in GitHub / GitLab</h4>
+<pre style="color:#a9b7c6;background-color:#2b2b2b;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="display:flex;"><span><span style="color:#cc7832">case</span> <span style="color:#6a8759">&#34;</span>$action<span style="color:#6a8759">&#34;</span> in
+</span></span><span style="display:flex;"><span>  <span style="color:#6a8759">&#34;open&#34;</span>)
+</span></span><span style="display:flex;"><span>    remote_url=<span style="color:#cc7832">$(</span>git config remote.origin.url<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>    current_branch=<span style="color:#cc7832">$(</span>git rev-parse --abbrev-ref HEAD<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>    tracking_branch=<span style="color:#cc7832">$(</span>git <span style="color:#cc7832">for</span>-each-ref --format=<span style="color:#6a8759">&#39;%(upstream:short)&#39;</span> refs/heads/$current_branch<span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">if</span> [[ $remote_url == *<span style="color:#6a8759">&#34;github.com&#34;</span>* ]]; <span style="color:#cc7832">then</span>
+</span></span><span style="display:flex;"><span>      tracking_remote=<span style="color:#cc7832">$(</span>cut -d<span style="color:#6a8759">&#39;/&#39;</span> -f1 &lt;&lt;&lt; <span style="color:#6a8759">&#34;</span>$tracking_branch<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>      tracking_branch_name=<span style="color:#cc7832">$(</span>cut -d<span style="color:#6a8759">&#39;/&#39;</span> -f2- &lt;&lt;&lt; <span style="color:#6a8759">&#34;</span>$tracking_branch<span style="color:#6a8759">&#34;</span><span style="color:#cc7832">)</span>
+</span></span><span style="display:flex;"><span>      gh browse <span style="color:#6a8759">&#34;</span>$buffer_name<span style="color:#6a8759">:</span>$cursor_line<span style="color:#6a8759">&#34;</span> --repo <span style="color:#6a8759">&#34;</span><span style="color:#cc7832">$(</span>git config remote.$tracking_remote.url<span style="color:#cc7832">)</span><span style="color:#6a8759">&#34;</span> --branch <span style="color:#6a8759">&#34;</span>$tracking_branch_name<span style="color:#6a8759">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cc7832">if</span> [[ $remote_url == <span style="color:#6a8759">&#34;git@&#34;</span>* ]]; <span style="color:#cc7832">then</span>
+</span></span><span style="display:flex;"><span>        open <span style="color:#cc7832">$(</span>echo $remote_url | sed -e <span style="color:#6a8759">&#39;s|:|/|&#39;</span> -e <span style="color:#6a8759">&#39;s|\.git||&#39;</span> -e <span style="color:#6a8759">&#39;s|git@|https://|&#39;</span><span style="color:#cc7832">)</span>/-/blob/<span style="color:#6a8759">${</span>current_branch<span style="color:#6a8759">}</span>/<span style="color:#6a8759">${</span>buffer_name<span style="color:#6a8759">}</span><span style="color:#808080">#L${cursor_line}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cc7832">else</span>
+</span></span><span style="display:flex;"><span>        open <span style="color:#cc7832">$(</span>echo $remote_url | sed -e <span style="color:#6a8759">&#39;s|\.git||&#39;</span><span style="color:#cc7832">)</span>/-/blob/<span style="color:#6a8759">${</span>current_branch<span style="color:#6a8759">}</span>/<span style="color:#6a8759">${</span>buffer_name<span style="color:#6a8759">}</span><span style="color:#808080">#L${cursor_line}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cc7832">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cc7832">fi</span>
+</span></span><span style="display:flex;"><span>    ;;
+</span></span></code></pre>
 </article>
 
 
